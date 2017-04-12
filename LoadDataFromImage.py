@@ -11,6 +11,7 @@ from extraction import PageDetector
 #img = cv2.imread('api/pagina3_4.png', 0)
 #img = cv2.imread('api/pagina3_5.png', 0)
 #img = cv2.imread('api/pagina3_6.png', 0)
+img = cv2.imread('api/pagina1_1.png', 0)
 
 print("everything is ok")
 
