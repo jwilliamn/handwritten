@@ -1001,11 +1001,18 @@ def extractPageData_number3(img_original, baseL):
             for d in feature:
 
                 if d is not None:
-                    pred_label = engine.predictImage(d)
-                    plt.subplot(len(dat),28,k+ (fila-1)*28)
-                    plt.imshow(d, cmap=plt.cm.gray)
-                    plt.title(chr(pred_label+ord('A')))
-                    plt.axis('off')
+                    if fila < 4:
+                        pred_label = engine.predictImage(d)
+                        plt.subplot(len(dat),28,k+ (fila-1)*28)
+                        plt.imshow(d, cmap=plt.cm.gray)
+                        plt.title(chr(pred_label+ord('A')))
+                        plt.axis('off')
+                    if fila >= 4:
+                        pred_label = engine.predictImage_dig(d)
+                        plt.subplot(len(dat),28,k+ (fila-1)*28)
+                        plt.imshow(d, cmap=plt.cm.gray)
+                        plt.title(chr(pred_label+ord('0')))
+                        plt.axis('off')
 
                 k += 1
             fila += 1
