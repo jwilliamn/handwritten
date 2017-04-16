@@ -2,16 +2,13 @@ import numpy as np
 import cv2
 import random
 from matplotlib import pyplot as plt
-import pickle
-from RawVariableDefinitions import *
-from VariableDefinitions import *
-# from extraction.FormatModel.VariableDefinitions import *
-# from extraction.FormatModel.RawVariableDefinitions import *
-#import GenerateData
-#import PageDetector
+import json
 
+from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
+from extraction.FormatModel.VariableDefinitions import *
+from extraction.FormatModel.RawVariableDefinitions import *
 from modeling import GenerateTrainDataAZ
-from extraction import PageDetector
+
 from api import engine
 
 dx = [-1, 1, 0, 0]
@@ -404,7 +401,7 @@ def filterLetter(letter_original_and_mask):
         imgResult = (imgResult -
                       255.0 / 2) / 255.0
     except Exception as e:
-        print('error filtering: ', e)
+        #print('error filtering: ', e)
         imgResult = None
     #
     # if imgResult is not None:
@@ -838,7 +835,7 @@ def closestNonZero(img, p, maxSize = 21):
             for times in range(0,k):
                 p = (p[0]+dx_step[currentK]), (p[1] + dy_step[currentK])
                 if p[0]>=0 and p[1]>=0 and p[0]< img.shape[0] and p[1]< img.shape[1] and img[p[0], p[1]] > 0:
-                    print('found: ', p)
+                    #print('found: ', p)
                     return p
             currentK = (currentK + 1) % 4
 
@@ -1046,10 +1043,13 @@ def extractPageData_number1(img_original, baseL):
     Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
     edgesToDebug = If.copy()
     edgesToDebug[edgesToDebug>0]=125
-    v = RawValue('w',1)
-    t = Category('we', 'qwe')
-    with open('extraction/pagina1.pkl', 'rb') as input:
-        Page1 = pickle.load(input)
+
+    with open('extraction/FormatModel/pagina1.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
     Page1.describe(True)
     R = Page1.getAllWithValue()
 
@@ -1057,62 +1057,65 @@ def extractPageData_number1(img_original, baseL):
         if category[1].value is not None:
             print(category[0])
             print(category[1].value)
-            if category[1].value.isSimpleImageNumber:
-                pass
-            if category[1].value.isArrayImageNumber:
-                print('es array number')
-                print()
-                pointA = category[1].value.value[0]
-
-                pointY = category[1].value.value[1]
-                pointX = (pointA[0], pointY[1])
-                pointB = (pointY[0], pointA[1])
-
-                pointA = (pointA[1], pointA[0])
-                pointB = (pointB[1], pointB[0])
-                pointX = (pointX[1], pointX[0])
-                pointY = (pointY[1], pointY[0])
-
-                numeros = extractLetters(img, pointA,pointB, pointX, pointY, category[1].value.count, Ifp2, edgesToDebug)
-
-                k = 1
-                for d in numeros:
-
-                    if d is not None:
-                        #pred_label = engine.predictImage(d)
-                        plt.subplot(1, 28, k )
-                        plt.imshow(d, cmap=plt.cm.gray)
-                        #plt.title(chr(pred_label + ord('A')))
-                        plt.axis('off')
-
-                    k += 1
-                plt.show()
-            if category[1].value.isArrayImageChar:
-                print('es array char')
-                print()
-                pointA = category[1].value.value[0]
-
-                pointY = category[1].value.value[1]
-                pointX = (pointA[0], pointY[1])
-                pointB = (pointY[0], pointA[1])
-
-                pointA = (pointA[1], pointA[0])
-                pointB = (pointB[1], pointB[0])
-                pointX = (pointX[1], pointX[0])
-                pointY = (pointY[1], pointY[0])
-
-                letras = extractLetters(img, pointA, pointB, pointX, pointY, category[1].value.count, Ifp2,
-                                         edgesToDebug)
-
-                k = 1
-                for d in letras:
-
-                    if d is not None:
-                        # pred_label = engine.predictImage(d)
-                        plt.subplot(1, 28, k)
-                        plt.imshow(d, cmap=plt.cm.gray)
-                        # plt.title(chr(pred_label + ord('A')))
-                        plt.axis('off')
-
-                    k += 1
-                plt.show()
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
+            #
+            # if category[1].value.isSimpleImageNumber:
+            #     pass
+            # if category[1].value.isArrayImageNumber:
+            #     print('es array number')
+            #     print()
+            #     pointA = category[1].value.value[0]
+            #
+            #     pointY = category[1].value.value[1]
+            #     pointX = (pointA[0], pointY[1])
+            #     pointB = (pointY[0], pointA[1])
+            #
+            #     pointA = (pointA[1], pointA[0])
+            #     pointB = (pointB[1], pointB[0])
+            #     pointX = (pointX[1], pointX[0])
+            #     pointY = (pointY[1], pointY[0])
+            #
+            #     numeros = extractLetters(img, pointA,pointB, pointX, pointY, category[1].value.count, Ifp2, edgesToDebug)
+            #
+            #     k = 1
+            #     for d in numeros:
+            #
+            #         if d is not None:
+            #             #pred_label = engine.predictImage(d)
+            #             plt.subplot(1, 28, k )
+            #             plt.imshow(d, cmap=plt.cm.gray)
+            #             #plt.title(chr(pred_label + ord('A')))
+            #             plt.axis('off')
+            #
+            #         k += 1
+            #     plt.show()
+            # if category[1].value.isArrayImageChar:
+            #     print('es array char')
+            #     print()
+            #     pointA = category[1].value.value[0]
+            #
+            #     pointY = category[1].value.value[1]
+            #     pointX = (pointA[0], pointY[1])
+            #     pointB = (pointY[0], pointA[1])
+            #
+            #     pointA = (pointA[1], pointA[0])
+            #     pointB = (pointB[1], pointB[0])
+            #     pointX = (pointX[1], pointX[0])
+            #     pointY = (pointY[1], pointY[0])
+            #
+            #     letras = extractLetters(img, pointA, pointB, pointX, pointY, category[1].value.count, Ifp2,
+            #                              edgesToDebug)
+            #
+            #     k = 1
+            #     for d in letras:
+            #
+            #         if d is not None:
+            #             # pred_label = engine.predictImage(d)
+            #             plt.subplot(1, 28, k)
+            #             plt.imshow(d, cmap=plt.cm.gray)
+            #             # plt.title(chr(pred_label + ord('A')))
+            #             plt.axis('off')
+            #
+            #         k += 1
+            #     plt.show()
