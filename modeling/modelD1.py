@@ -44,7 +44,7 @@ n_epochs = 3
 # Network params
 input_size = 32
 n_channels = 1 # greyscale
-n_hidden = 1024 # 512 # 1024 # fully connected neurons
+n_hidden = 1024 # 1024 # fully connected neurons
 n_classes = 10  # classes (0-9)
 
 

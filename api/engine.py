@@ -108,7 +108,6 @@ def predictImage(image_data):
 	print('Real image', image_data.shape, type(image_data))
 
 	# Read model parameters ##
-	#param_file = os.path.join(model_path, 'allMNIST_param.pickle')
 	param_file = os.path.join(model_path, 'modeling/modelC1_param.pickle')
 	
 	weights, biases = getModelParams(param_file)
@@ -147,12 +146,12 @@ def predictImage(image_data):
 	
 
 # Prediction of digits ####
-def predictImage_dig(image_data):
+def predictImageDigit(image_data):
 	print('Real digit image', image_data.shape, type(image_data))
 
 	# Read model parameters ##
-	#param_file = os.path.join(model_path, 'allMNIST_param.pickle')
-	param_file = os.path.join(model_path, 'modeling/modelD1_param_.pickle')
+	#param_file = os.path.join(model_path, 'modeling/modelD1_param_.pickle')
+	param_file = os.path.join(model_path, 'modeling/modelD1_param.pickle')
 	
 	weights, biases = getModelParams(param_file)
 

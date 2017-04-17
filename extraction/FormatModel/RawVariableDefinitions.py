@@ -1,6 +1,7 @@
 import cv2
 
 from extraction.FormatModel import UtilFunctionsExtraction
+from api import engine
 
 
 class RawValue:
@@ -63,14 +64,14 @@ class RawValue:
         return 'yes'
 
     def letterPredictor(self, img):
-        # pred_label = engine.predictImage(d)
-        # return chr(pred_label + ord('A'))
-        return 'A'
+        pred_label = engine.predictImage(img)
+        return chr(pred_label + ord('A'))
+        #return 'A'
 
     def digitPredictor(self, img):
-        # pred_label = engine.predictImageDigit(d)
-        # return chr(pred_label + ord('A'))
-        return '0'
+        pred_label = engine.predictImageDigit(img)
+        return chr(pred_label + ord('0'))
+        #return '0'
 
 
 class ArrayImageNumber(RawValue):

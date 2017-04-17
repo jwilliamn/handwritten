@@ -22,18 +22,19 @@ import pickle
 model_path = '/home/williamn/Repository/hand_Written_Character_Recognition'
 
 # Hyperparameters
-depth = 6 # K = 6 number of filters
+depth = 16 # K = 6 number of filters
 patch_size = 5 # F = 5 Size of filters
 S = 1 # stride
 P = 0 # amount of zero padding
 
 # Learning parameters
-learning_rate = 0.001  # 0.0001  # 0.001
-batch_size = 16  # 8  # 16
+learning_rate = 0.001  # 0.001
+adamLr = 1e-4
+batch_size = 16  # 16
 n_epochs = 2
 
 # Network params
-input_size = 48 # 32
+input_size = 32
 n_channels = 1 # greyscale
 n_classes = 26  # classes (A-Z)
 
@@ -73,15 +74,15 @@ X_test = tf.constant(test_dataset)
 # Step 3: create weights and bias ####
 weights = {
 	'w1' : tf.Variable(tf.random_normal(shape=[patch_size, patch_size, n_channels, depth], stddev=0.1)),
-	'w2' : tf.Variable(tf.random_normal(shape=[patch_size, patch_size, depth, 16], stddev=0.1)),
-	'w3' : tf.Variable(tf.random_normal(shape=[patch_size, patch_size, 16, 120], stddev=0.1)),
+	'w2' : tf.Variable(tf.random_normal(shape=[patch_size, patch_size, depth, 2*depth], stddev=0.1)),
+	'w3' : tf.Variable(tf.random_normal(shape=[patch_size, patch_size, 2*depth, 120], stddev=0.1)),
 	'w4' : tf.Variable(tf.random_normal(shape=[input_size // 4 * input_size // 4 *120, 84], stddev=0.1)),
 	'w5' : tf.Variable(tf.random_normal(shape=[84, n_classes], stddev=0.1))
 }
 
 biases = {
 	'b1' : tf.Variable(tf.zeros([depth])),
-	'b2' : tf.Variable(tf.constant(1.0, shape=[16])),
+	'b2' : tf.Variable(tf.constant(1.0, shape=[2*depth])),
 	'b3' : tf.Variable(tf.constant(1.0, shape=[120])),
 	'b4' : tf.Variable(tf.constant(1.0, shape=[84])),
 	'b5' : tf.Variable(tf.constant(1.0, shape=[n_classes]))
@@ -127,7 +128,9 @@ loss = tf.reduce_mean(entropy)
 
 # Step 6: define training op
 # using gradient descent to minimize loss
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(loss)
+#optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(loss)
+trainStepOpt = tf.train.AdamOptimizer(learning_rate = adamLr).minimize(loss)
+
 
 
 # Accuracy function
@@ -158,7 +161,7 @@ with tf.Session() as sess:
 			X_batch = train_dataset[offset:(offset + batch_size),:,:,:]
 			Y_batch = train_labels[offset:(offset + batch_size),:]
 
-			_, loss_batch, preds = sess.run([optimizer, loss, train_pred], feed_dict={X:X_batch, Y:Y_batch})
+			_, loss_batch, preds = sess.run([trainStepOpt, loss, train_pred], feed_dict={X:X_batch, Y:Y_batch})
 
 			total_loss += loss_batch
 			if(j % 1000 == 0):
@@ -177,7 +180,7 @@ with tf.Session() as sess:
 	trained_biases = sess.run(biases)
 
 	# Saving trained parameters for later reuse
-	pickle_file = os.path.join(model_path, 'lenet48x48_param.pickle')
+	pickle_file = os.path.join(model_path, 'modelC2_param.pickle')
 
 	try:
 		f = open(pickle_file, 'wb')
