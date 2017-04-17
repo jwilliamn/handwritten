@@ -1,0 +1,1792 @@
+{
+    "subTypes": [
+        {
+            "subTypes": [
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                66,
+                                                103
+                                            ],
+                                            [
+                                                124,
+                                                138
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Departamento",
+                            "value": null,
+                            "name": "departamento"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                383,
+                                                103
+                                            ],
+                                            [
+                                                443,
+                                                139
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Provincia",
+                            "value": null,
+                            "name": "provincia"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                702,
+                                                103
+                                            ],
+                                            [
+                                                761,
+                                                139
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Distrito",
+                            "value": null,
+                            "name": "distrito"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                66,
+                                                153
+                                            ],
+                                            [
+                                                786,
+                                                190
+                                            ]
+                                        ],
+                                        "countItems": 25,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "letterPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Centro Poblado",
+                            "value": null,
+                            "name": "centro_poblado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                790,
+                                                153
+                                            ],
+                                            [
+                                                908,
+                                                190
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Codigo Centro Poblado",
+                            "value": null,
+                            "name": "codigo_cp"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                911,
+                                                153
+                                            ],
+                                            [
+                                                970,
+                                                189
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Categoria Centro Poblado",
+                            "value": null,
+                            "name": "categoria_cp"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                65,
+                                                204
+                                            ],
+                                            [
+                                                901,
+                                                240
+                                            ]
+                                        ],
+                                        "countItems": 29,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "letterPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Nucleo Urbano",
+                            "value": null,
+                            "name": "nucleo_urbano"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                912,
+                                                204
+                                            ],
+                                            [
+                                                970,
+                                                239
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Categoria Nucleo Urbano",
+                            "value": null,
+                            "name": "categoria_nu"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Ubicacion Geografica",
+                    "value": null,
+                    "name": "ubicacion_geografica"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                65,
+                                                284
+                                            ],
+                                            [
+                                                237,
+                                                321
+                                            ]
+                                        ],
+                                        "countItems": 6,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "CONG. N",
+                            "value": null,
+                            "name": "congN"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                246,
+                                                285
+                                            ],
+                                            [
+                                                332,
+                                                320
+                                            ]
+                                        ],
+                                        "countItems": 3,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_01"
+                                },
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                340,
+                                                285
+                                            ],
+                                            [
+                                                369,
+                                                320
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_02"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Zona. N",
+                            "value": null,
+                            "name": "ZonaN"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                384,
+                                                285
+                                            ],
+                                            [
+                                                469,
+                                                321
+                                            ]
+                                        ],
+                                        "countItems": 3,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_01"
+                                },
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                478,
+                                                285
+                                            ],
+                                            [
+                                                506,
+                                                320
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_02"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Manzana Numero",
+                            "value": null,
+                            "name": "ManzanaN"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                557,
+                                                285
+                                            ],
+                                            [
+                                                614,
+                                                320
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Numero de frente de manzana",
+                            "value": null,
+                            "name": "NFrente"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                626,
+                                                285
+                                            ],
+                                            [
+                                                768,
+                                                322
+                                            ]
+                                        ],
+                                        "countItems": 5,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Vivienda numero",
+                            "value": null,
+                            "name": "ViviendaN"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                856,
+                                                284
+                                            ],
+                                            [
+                                                887,
+                                                321
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Numero de hogares",
+                            "value": null,
+                            "name": "NHogares"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                901,
+                                                285
+                                            ],
+                                            [
+                                                931,
+                                                321
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_01"
+                                },
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                940,
+                                                285
+                                            ],
+                                            [
+                                                970,
+                                                321
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_02"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Hogar Numero",
+                            "value": null,
+                            "name": "HogarN"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                66,
+                                                381
+                                            ],
+                                            [
+                                                901,
+                                                417
+                                            ]
+                                        ],
+                                        "countItems": 29,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "letterPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Apellidos y nombres del informante",
+                            "value": null,
+                            "name": "informante"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                912,
+                                                381
+                                            ],
+                                            [
+                                                970,
+                                                418
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Numero de orden",
+                            "value": null,
+                            "name": "num_orden"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                174,
+                                                432
+                                            ],
+                                            [
+                                                856,
+                                                452
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2Categoric",
+                                        "singleParser": null,
+                                        "parser": {},
+                                        "nameSingleParser": null
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Tipode via",
+                            "value": null,
+                            "name": "tipo_via"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                66,
+                                                465
+                                            ],
+                                            [
+                                                786,
+                                                501
+                                            ]
+                                        ],
+                                        "countItems": 25,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "letterPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Nombre de la via",
+                            "value": null,
+                            "name": "nombre_via"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                814,
+                                                465
+                                            ],
+                                            [
+                                                930,
+                                                501
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_01"
+                                },
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                942,
+                                                465
+                                            ],
+                                            [
+                                                971,
+                                                501
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR_02"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "numero de puerta",
+                            "value": null,
+                            "name": "numero_puerta"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                67,
+                                                517
+                                            ],
+                                            [
+                                                153,
+                                                552
+                                            ]
+                                        ],
+                                        "countItems": 3,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "block",
+                            "value": null,
+                            "name": "block"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                179,
+                                                517
+                                            ],
+                                            [
+                                                237,
+                                                552
+                                            ]
+                                        ],
+                                        "countItems": 2,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "piso",
+                            "value": null,
+                            "name": "piso"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                261,
+                                                517
+                                            ],
+                                            [
+                                                348,
+                                                553
+                                            ]
+                                        ],
+                                        "countItems": 3,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "interior",
+                            "value": null,
+                            "name": "interior"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                373,
+                                                516
+                                            ],
+                                            [
+                                                462,
+                                                554
+                                            ]
+                                        ],
+                                        "countItems": 3,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "manzana",
+                            "value": null,
+                            "name": "manzana"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                487,
+                                                519
+                                            ],
+                                            [
+                                                574,
+                                                551
+                                            ]
+                                        ],
+                                        "countItems": 3,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "lote",
+                            "value": null,
+                            "name": "lote"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                600,
+                                                517
+                                            ],
+                                            [
+                                                716,
+                                                553
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "km",
+                            "value": null,
+                            "name": "km"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                769,
+                                                517
+                                            ],
+                                            [
+                                                972,
+                                                553
+                                            ]
+                                        ],
+                                        "countItems": 7,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "telefono_domicilio",
+                            "value": null,
+                            "name": "telefono_domicilio"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Ubicacion Censal",
+                    "value": null,
+                    "name": "ubicacion_censal"
+                }
+            ],
+            "hasValue": false,
+            "description": "Localizacion de la vivienda I",
+            "value": null,
+            "name": "localizacion_de_la_vivienda"
+        },
+        {
+            "subTypes": [
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [],
+                            "hasValue": true,
+                            "description": "posicion final",
+                            "value": {
+                                "position": [
+                                    [
+                                        740,
+                                        608
+                                    ],
+                                    [
+                                        972,
+                                        644
+                                    ]
+                                ],
+                                "countItems": 8,
+                                "nameParser": "parserImage2ArrayChar",
+                                "singleParser": {},
+                                "parser": {},
+                                "nameSingleParser": "digitPredictor"
+                            },
+                            "name": "pos_TL_BR"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "DNI del empadronador(a)",
+                    "value": null,
+                    "name": "dni_empadronador"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [],
+                            "hasValue": true,
+                            "description": "posicion final",
+                            "value": {
+                                "position": [
+                                    [
+                                        740,
+                                        659
+                                    ],
+                                    [
+                                        971,
+                                        695
+                                    ]
+                                ],
+                                "countItems": 8,
+                                "nameParser": "parserImage2ArrayChar",
+                                "singleParser": {},
+                                "parser": {},
+                                "nameSingleParser": "digitPredictor"
+                            },
+                            "name": "pos_TL_BR"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "DNI del jefe(a) de brigada",
+                    "value": null,
+                    "name": "dni_jefe_brigada"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [],
+                            "hasValue": true,
+                            "description": "posicion final",
+                            "value": {
+                                "position": [
+                                    [
+                                        738,
+                                        709
+                                    ],
+                                    [
+                                        972,
+                                        746
+                                    ]
+                                ],
+                                "countItems": 8,
+                                "nameParser": "parserImage2ArrayChar",
+                                "singleParser": {},
+                                "parser": {},
+                                "nameSingleParser": "digitPredictor"
+                            },
+                            "name": "pos_TL_BR"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "DNI del revisor(a)",
+                    "value": null,
+                    "name": "dni_revisor"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [],
+                            "hasValue": true,
+                            "description": "posicion final",
+                            "value": {
+                                "position": [
+                                    [
+                                        739,
+                                        760
+                                    ],
+                                    [
+                                        971,
+                                        796
+                                    ]
+                                ],
+                                "countItems": 8,
+                                "nameParser": "parserImage2ArrayChar",
+                                "singleParser": {},
+                                "parser": {},
+                                "nameSingleParser": "digitPredictor"
+                            },
+                            "name": "pos_TL_BR"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "DNI del supervisor(a)",
+                    "value": null,
+                    "name": "dni_supervisor"
+                }
+            ],
+            "hasValue": false,
+            "description": "Personal Responsable",
+            "value": null,
+            "name": "personal_responsable"
+        },
+        {
+            "subTypes": [
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                125
+                                            ],
+                                            [
+                                                1230,
+                                                162
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Primera Visita",
+                            "value": null,
+                            "name": "primera"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1286,
+                                                125
+                                            ],
+                                            [
+                                                1315,
+                                                161
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la primera visita",
+                            "value": null,
+                            "name": "primera_resultado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                165
+                                            ],
+                                            [
+                                                1230,
+                                                203
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "segunda Visita",
+                            "value": null,
+                            "name": "segunda"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1286,
+                                                166
+                                            ],
+                                            [
+                                                1316,
+                                                203
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la segunda visita",
+                            "value": null,
+                            "name": "segunda_resultado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                207
+                                            ],
+                                            [
+                                                1230,
+                                                244
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "tercera Visita",
+                            "value": null,
+                            "name": "tercera"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1286,
+                                                207
+                                            ],
+                                            [
+                                                1315,
+                                                243
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la tercera visita",
+                            "value": null,
+                            "name": "tercera_resultado"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Visitas del empadronador",
+                    "value": null,
+                    "name": "empadronador"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                294
+                                            ],
+                                            [
+                                                1229,
+                                                330
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Primera Visita",
+                            "value": null,
+                            "name": "primera"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1287,
+                                                293
+                                            ],
+                                            [
+                                                1315,
+                                                330
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la primera visita",
+                            "value": null,
+                            "name": "primera_resultado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                334
+                                            ],
+                                            [
+                                                1230,
+                                                371
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "segunda Visita",
+                            "value": null,
+                            "name": "segunda"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1285,
+                                                334
+                                            ],
+                                            [
+                                                1316,
+                                                371
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la segunda visita",
+                            "value": null,
+                            "name": "segunda_resultado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                374
+                                            ],
+                                            [
+                                                1230,
+                                                412
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "tercera Visita",
+                            "value": null,
+                            "name": "tercera"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1285,
+                                                375
+                                            ],
+                                            [
+                                                1316,
+                                                412
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la tercera visita",
+                            "value": null,
+                            "name": "tercera_resultado"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Visitas del jefe de brigada",
+                    "value": null,
+                    "name": "jefe_brigada"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                461
+                                            ],
+                                            [
+                                                1230,
+                                                499
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Primera Visita",
+                            "value": null,
+                            "name": "primera"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1264,
+                                                466
+                                            ],
+                                            [
+                                                1333,
+                                                490
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2Categoric",
+                                        "singleParser": null,
+                                        "parser": {},
+                                        "nameSingleParser": null
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la primera visita",
+                            "value": null,
+                            "name": "primera_resultado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                503
+                                            ],
+                                            [
+                                                1230,
+                                                540
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "segunda Visita",
+                            "value": null,
+                            "name": "segunda"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1260,
+                                                504
+                                            ],
+                                            [
+                                                1335,
+                                                534
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2Categoric",
+                                        "singleParser": null,
+                                        "parser": {},
+                                        "nameSingleParser": null
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la segunda visita",
+                            "value": null,
+                            "name": "segunda_resultado"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1113,
+                                                544
+                                            ],
+                                            [
+                                                1230,
+                                                581
+                                            ]
+                                        ],
+                                        "countItems": 4,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "tercera Visita",
+                            "value": null,
+                            "name": "tercera"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1261,
+                                                549
+                                            ],
+                                            [
+                                                1331,
+                                                571
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2Categoric",
+                                        "singleParser": null,
+                                        "parser": {},
+                                        "nameSingleParser": null
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Resultado de la tercera visita",
+                            "value": null,
+                            "name": "tercera_resultado"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Revisor",
+                    "value": null,
+                    "name": "revisor"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1027,
+                                                631
+                                            ],
+                                            [
+                                                1260,
+                                                669
+                                            ]
+                                        ],
+                                        "countItems": 8,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "Fecha del resultado final de empadronamiento",
+                            "value": null,
+                            "name": "fecha"
+                        },
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1308,
+                                                631
+                                            ],
+                                            [
+                                                1339,
+                                                668
+                                            ]
+                                        ],
+                                        "countItems": 1,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "resultado",
+                            "value": null,
+                            "name": "resultado"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Revisor",
+                    "value": null,
+                    "name": "resultado_final_empadronamiento"
+                },
+                {
+                    "subTypes": [
+                        {
+                            "subTypes": [
+                                {
+                                    "subTypes": [],
+                                    "hasValue": true,
+                                    "description": "posicion final",
+                                    "value": {
+                                        "position": [
+                                            [
+                                                1017,
+                                                759
+                                            ],
+                                            [
+                                                1365,
+                                                796
+                                            ]
+                                        ],
+                                        "countItems": 12,
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "singleParser": {},
+                                        "parser": {},
+                                        "nameSingleParser": "digitPredictor"
+                                    },
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "hasValue": false,
+                            "description": "codigo",
+                            "value": null,
+                            "name": "codigo"
+                        }
+                    ],
+                    "hasValue": false,
+                    "description": "Cpdogps de resultado",
+                    "value": null,
+                    "name": "codigo_de_resultado"
+                }
+            ],
+            "hasValue": false,
+            "description": "Entrevista y supervision",
+            "value": null,
+            "name": "entrevista_supervision"
+        }
+    ],
+    "hasValue": false,
+    "description": "pagina 1",
+    "value": null,
+    "name": "page1"
+}

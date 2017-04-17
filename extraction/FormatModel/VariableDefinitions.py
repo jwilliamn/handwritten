@@ -1,10 +1,14 @@
 class Category:
+
     def __init__(self, name, description):
         self.subTypes = []
         self.name = name
         self.description = description
         self.hasValue = False
         self.value = None
+
+    def jsonDefault(object):
+        return object.__dict__
 
     def addSubType(self, subCategory):
         self.subTypes.append(subCategory)
@@ -28,10 +32,13 @@ class Category:
     def getAllWithValue(self, baseName = ''):
         withValue = []
         if self.hasValue:
-            withValue = [(baseName+self.name, self)]
+            withValue = [(baseName+' {'+self.name+'}', self)]
         else:
             for subtype in self.subTypes:
-                subtype_withvalues = subtype.getAllWithValue(baseName+', '+self.name)
+                if baseName == '':
+                    subtype_withvalues = subtype.getAllWithValue('['+self.name+']')
+                else:
+                    subtype_withvalues = subtype.getAllWithValue(baseName+' ['+self.name+']')
                 withValue.extend(subtype_withvalues)
         return withValue
 
@@ -49,6 +56,7 @@ class Variable(Category):
         super().__init__(name, description)
         self.hasValue = True
         self.value = value
-
+    def jsonDefault(object):
+        return object.__dict__
     def getValue(self):
         return self.value

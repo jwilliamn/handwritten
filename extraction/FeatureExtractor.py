@@ -2,16 +2,13 @@ import numpy as np
 import cv2
 import random
 from matplotlib import pyplot as plt
-import pickle
-from RawVariableDefinitions import *
-from VariableDefinitions import *
-# from extraction.FormatModel.VariableDefinitions import *
-# from extraction.FormatModel.RawVariableDefinitions import *
-#import GenerateData
-#import PageDetector
+import json
 
+from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
+from extraction.FormatModel.VariableDefinitions import *
+from extraction.FormatModel.RawVariableDefinitions import *
 from modeling import GenerateTrainDataAZ
-from extraction import PageDetector
+
 from api import engine
 
 dx = [-1, 1, 0, 0]
@@ -190,6 +187,10 @@ def extractPageData(img, pageNumber, baseL = None):
         return extractPageData_number3(img, baseL)
     if(pageNumber == 1):
         return extractPageData_number1(img, baseL)
+    if (pageNumber == 2):
+        return extractPageData_number2(img, baseL)
+    if (pageNumber == 4):
+        return extractPageData_number4(img, baseL)
     raise ValueError('Only implemented for page 3, not for page: '+str(pageNumber))
 
 def addPoint(vertical, P, minX = True):
@@ -404,7 +405,7 @@ def filterLetter(letter_original_and_mask):
         imgResult = (imgResult -
                       255.0 / 2) / 255.0
     except Exception as e:
-        print('error filtering: ', e)
+        #print('error filtering: ', e)
         imgResult = None
     #
     # if imgResult is not None:
@@ -838,7 +839,7 @@ def closestNonZero(img, p, maxSize = 21):
             for times in range(0,k):
                 p = (p[0]+dx_step[currentK]), (p[1] + dy_step[currentK])
                 if p[0]>=0 and p[1]>=0 and p[0]< img.shape[0] and p[1]< img.shape[1] and img[p[0], p[1]] > 0:
-                    print('found: ', p)
+                    #print('found: ', p)
                     return p
             currentK = (currentK + 1) % 4
 
@@ -904,7 +905,7 @@ def getCornersOfNamesAndLastNames(Ioriginal, I_all_base):
 
     return (TL, BL, TR, BR)
 
-def extractPageData_number3(img_original, baseL):
+def extractPageData_number3_old(img_original, baseL):
     paginaBase = cv2.imread('extraction/pag3_1_Template.png', 0)
     img = cv2.resize(img_original, (paginaBase.shape[1],paginaBase.shape[0]))
     ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -1035,6 +1036,7 @@ def extractPageData_number3(img_original, baseL):
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
+
 def extractPageData_number1(img_original, baseL):
     paginaBase = cv2.imread('extraction/pag1_1_Template.png', 0)
     img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
@@ -1053,73 +1055,130 @@ def extractPageData_number1(img_original, baseL):
     Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
     edgesToDebug = If.copy()
     edgesToDebug[edgesToDebug>0]=125
-    v = RawValue('w',1)
-    t = Category('we', 'qwe')
-    with open('extraction/pagina1.pkl', 'rb') as input:
-        Page1 = pickle.load(input)
+
+    with open('extraction/FormatModel/pagina1.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
     Page1.describe(True)
     R = Page1.getAllWithValue()
+
 
     for category in R:
         if category[1].value is not None:
             print(category[0])
             print(category[1].value)
-            if category[1].value.isSimpleImageNumber:
-                pass
-            if category[1].value.isArrayImageNumber:
-                print('es array number')
-                print()
-                pointA = category[1].value.value[0]
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
 
-                pointY = category[1].value.value[1]
-                pointX = (pointA[0], pointY[1])
-                pointB = (pointY[0], pointA[1])
+def extractPageData_number2(img_original, baseL):
+    paginaBase = cv2.imread('extraction/pag2_1_Template.png', 0)
+    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
+    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
-                pointA = (pointA[1], pointA[0])
-                pointB = (pointB[1], pointB[0])
-                pointX = (pointX[1], pointX[0])
-                pointY = (pointY[1], pointY[0])
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
+    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
+    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
 
-                numeros = extractLetters(img, pointA,pointB, pointX, pointY, category[1].value.count, Ifp2, edgesToDebug)
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    NegPaginaBase = cv2.bitwise_not(paginaBase)
+    # print(img.shape, ' <-> ', NegPaginaBase.shape)
+    Ifp2 = cv2.medianBlur(Ifp, 3)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
+    edgesToDebug = If.copy()
+    edgesToDebug[edgesToDebug>0]=125
 
-                k = 1
-                for d in numeros:
+    with open('extraction/FormatModel/pagina2.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
 
-                    if d is not None:
-                        #pred_label = engine.predictImage(d)
-                        plt.subplot(1, 28, k )
-                        plt.imshow(d, cmap=plt.cm.gray)
-                        #plt.title(chr(pred_label + ord('A')))
-                        plt.axis('off')
+    Page1.describe(True)
+    R = Page1.getAllWithValue()
 
-                    k += 1
-                plt.show()
-            if category[1].value.isArrayImageChar:
-                print('es array char')
-                print()
-                pointA = category[1].value.value[0]
 
-                pointY = category[1].value.value[1]
-                pointX = (pointA[0], pointY[1])
-                pointB = (pointY[0], pointA[1])
+    for category in R:
+        if category[1].value is not None:
+            print(category[0])
+            print(category[1].value)
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
 
-                pointA = (pointA[1], pointA[0])
-                pointB = (pointB[1], pointB[0])
-                pointX = (pointX[1], pointX[0])
-                pointY = (pointY[1], pointY[0])
 
-                letras = extractLetters(img, pointA, pointB, pointX, pointY, category[1].value.count, Ifp2,
-                                         edgesToDebug)
+def extractPageData_number3(img_original, baseL):
+    paginaBase = cv2.imread('extraction/pag3_1_Template.png', 0)
+    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
+    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
-                k = 1
-                for d in letras:
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
+    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
+    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
 
-                    if d is not None:
-                        # pred_label = engine.predictImage(d)
-                        plt.subplot(1, 28, k)
-                        plt.imshow(d, cmap=plt.cm.gray)
-                        # plt.title(chr(pred_label + ord('A')))
-                        plt.axis('off')
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    NegPaginaBase = cv2.bitwise_not(paginaBase)
+    # print(img.shape, ' <-> ', NegPaginaBase.shape)
+    Ifp2 = cv2.medianBlur(Ifp, 3)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
+    edgesToDebug = If.copy()
+    edgesToDebug[edgesToDebug>0]=125
 
-                    k += 1
-                plt.show()
+    with open('extraction/FormatModel/pagina3.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
+    Page1.describe(True)
+    R = Page1.getAllWithValue()
+
+
+    for category in R:
+        if category[1].value is not None:
+            print(category[0])
+            print(category[1].value)
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
+
+
+def extractPageData_number4(img_original, baseL):
+    paginaBase = cv2.imread('extraction/pag4_1_Template.png', 0)
+    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
+    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
+    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
+    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
+
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    NegPaginaBase = cv2.bitwise_not(paginaBase)
+    # print(img.shape, ' <-> ', NegPaginaBase.shape)
+    Ifp2 = cv2.medianBlur(Ifp, 3)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
+    edgesToDebug = If.copy()
+    edgesToDebug[edgesToDebug>0]=125
+
+    with open('extraction/FormatModel/pagina4.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
+    Page1.describe(True)
+    R = Page1.getAllWithValue()
+
+
+    for category in R:
+        if category[1].value is not None:
+            print(category[0])
+            print(category[1].value)
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
