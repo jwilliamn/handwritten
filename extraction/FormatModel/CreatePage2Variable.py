@@ -198,7 +198,7 @@ if __name__ == '__main__':
     variable_num_suministro_numero = Variable('pos_TL_BR', 'posicion final', None)
     num_suministro_numero.addSubType(variable_num_suministro_numero)
 
-    num_suministro.addSubType(variable_tipo_suministro)
+    num_suministro.addSubType(tipo_suministro)
     num_suministro.addSubType(num_suministro_numero)
 
     personas_permanentes_hogar = Category('personas_hogar','Cantidad de personas que viven permanentemente en el hogar')

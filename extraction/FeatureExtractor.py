@@ -187,6 +187,10 @@ def extractPageData(img, pageNumber, baseL = None):
         return extractPageData_number3(img, baseL)
     if(pageNumber == 1):
         return extractPageData_number1(img, baseL)
+    if (pageNumber == 2):
+        return extractPageData_number2(img, baseL)
+    if (pageNumber == 4):
+        return extractPageData_number4(img, baseL)
     raise ValueError('Only implemented for page 3, not for page: '+str(pageNumber))
 
 def addPoint(vertical, P, minX = True):
@@ -901,7 +905,7 @@ def getCornersOfNamesAndLastNames(Ioriginal, I_all_base):
 
     return (TL, BL, TR, BR)
 
-def extractPageData_number3(img_original, baseL):
+def extractPageData_number3_old(img_original, baseL):
     paginaBase = cv2.imread('extraction/pag3_1_Template.png', 0)
     img = cv2.resize(img_original, (paginaBase.shape[1],paginaBase.shape[0]))
     ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -1025,6 +1029,7 @@ def extractPageData_number3(img_original, baseL):
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
+
 def extractPageData_number1(img_original, baseL):
     paginaBase = cv2.imread('extraction/pag1_1_Template.png', 0)
     img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
@@ -1053,69 +1058,120 @@ def extractPageData_number1(img_original, baseL):
     Page1.describe(True)
     R = Page1.getAllWithValue()
 
+
     for category in R:
         if category[1].value is not None:
             print(category[0])
             print(category[1].value)
             parsed = category[1].value.parse([img, Ifp2])
             print(parsed)
-            #
-            # if category[1].value.isSimpleImageNumber:
-            #     pass
-            # if category[1].value.isArrayImageNumber:
-            #     print('es array number')
-            #     print()
-            #     pointA = category[1].value.value[0]
-            #
-            #     pointY = category[1].value.value[1]
-            #     pointX = (pointA[0], pointY[1])
-            #     pointB = (pointY[0], pointA[1])
-            #
-            #     pointA = (pointA[1], pointA[0])
-            #     pointB = (pointB[1], pointB[0])
-            #     pointX = (pointX[1], pointX[0])
-            #     pointY = (pointY[1], pointY[0])
-            #
-            #     numeros = extractLetters(img, pointA,pointB, pointX, pointY, category[1].value.count, Ifp2, edgesToDebug)
-            #
-            #     k = 1
-            #     for d in numeros:
-            #
-            #         if d is not None:
-            #             #pred_label = engine.predictImage(d)
-            #             plt.subplot(1, 28, k )
-            #             plt.imshow(d, cmap=plt.cm.gray)
-            #             #plt.title(chr(pred_label + ord('A')))
-            #             plt.axis('off')
-            #
-            #         k += 1
-            #     plt.show()
-            # if category[1].value.isArrayImageChar:
-            #     print('es array char')
-            #     print()
-            #     pointA = category[1].value.value[0]
-            #
-            #     pointY = category[1].value.value[1]
-            #     pointX = (pointA[0], pointY[1])
-            #     pointB = (pointY[0], pointA[1])
-            #
-            #     pointA = (pointA[1], pointA[0])
-            #     pointB = (pointB[1], pointB[0])
-            #     pointX = (pointX[1], pointX[0])
-            #     pointY = (pointY[1], pointY[0])
-            #
-            #     letras = extractLetters(img, pointA, pointB, pointX, pointY, category[1].value.count, Ifp2,
-            #                              edgesToDebug)
-            #
-            #     k = 1
-            #     for d in letras:
-            #
-            #         if d is not None:
-            #             # pred_label = engine.predictImage(d)
-            #             plt.subplot(1, 28, k)
-            #             plt.imshow(d, cmap=plt.cm.gray)
-            #             # plt.title(chr(pred_label + ord('A')))
-            #             plt.axis('off')
-            #
-            #         k += 1
-            #     plt.show()
+
+def extractPageData_number2(img_original, baseL):
+    paginaBase = cv2.imread('extraction/pag2_1_Template.png', 0)
+    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
+    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
+    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
+    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
+
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    NegPaginaBase = cv2.bitwise_not(paginaBase)
+    # print(img.shape, ' <-> ', NegPaginaBase.shape)
+    Ifp2 = cv2.medianBlur(Ifp, 3)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
+    edgesToDebug = If.copy()
+    edgesToDebug[edgesToDebug>0]=125
+
+    with open('extraction/FormatModel/pagina2.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
+    Page1.describe(True)
+    R = Page1.getAllWithValue()
+
+
+    for category in R:
+        if category[1].value is not None:
+            print(category[0])
+            print(category[1].value)
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
+
+
+def extractPageData_number3(img_original, baseL):
+    paginaBase = cv2.imread('extraction/pag3_1_Template.png', 0)
+    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
+    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
+    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
+    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
+
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    NegPaginaBase = cv2.bitwise_not(paginaBase)
+    # print(img.shape, ' <-> ', NegPaginaBase.shape)
+    Ifp2 = cv2.medianBlur(Ifp, 3)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
+    edgesToDebug = If.copy()
+    edgesToDebug[edgesToDebug>0]=125
+
+    with open('extraction/FormatModel/pagina3.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
+    Page1.describe(True)
+    R = Page1.getAllWithValue()
+
+
+    for category in R:
+        if category[1].value is not None:
+            print(category[0])
+            print(category[1].value)
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)
+
+
+def extractPageData_number4(img_original, baseL):
+    paginaBase = cv2.imread('extraction/pag4_1_Template.png', 0)
+    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
+    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
+    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
+    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
+
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    NegPaginaBase = cv2.bitwise_not(paginaBase)
+    # print(img.shape, ' <-> ', NegPaginaBase.shape)
+    Ifp2 = cv2.medianBlur(Ifp, 3)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
+    edgesToDebug = If.copy()
+    edgesToDebug[edgesToDebug>0]=125
+
+    with open('extraction/FormatModel/pagina4.json', 'r') as input:
+        print('INPUT: ', input)
+        dict_Page1 = json.load(input)
+        Page1 = loadCategory(dict_Page1)
+        print(Page1)
+
+    Page1.describe(True)
+    R = Page1.getAllWithValue()
+
+
+    for category in R:
+        if category[1].value is not None:
+            print(category[0])
+            print(category[1].value)
+            parsed = category[1].value.parse([img, Ifp2])
+            print(parsed)

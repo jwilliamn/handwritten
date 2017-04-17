@@ -54,16 +54,22 @@ class RawValue:
                 predicted = ' '
             else:
                 predicted = self.singleParser(singleImage)
+
             arrayResult.append(predicted)
+        UtilFunctionsExtraction.plotImagesWithPrediction(arrayResult,arrayOfImages)
         return arrayResult
 
     def parserImage2Categoric(self,arg):
         return 'yes'
 
     def letterPredictor(self, img):
+        # pred_label = engine.predictImage(d)
+        # return chr(pred_label + ord('A'))
         return 'A'
 
     def digitPredictor(self, img):
+        # pred_label = engine.predictImageDigit(d)
+        # return chr(pred_label + ord('A'))
         return '0'
 
 

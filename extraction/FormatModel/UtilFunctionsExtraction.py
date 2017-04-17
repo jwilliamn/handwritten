@@ -142,7 +142,112 @@ def filterSingleCharacter(letter_original_and_mask):
     #     plt.show()
 
     return imgResult
+def findApropiateTemplate(ratio):
+
+    current_image = None
+    bestRatio = 100
+    for k in range(1,5):
+        img = cv2.imread('extraction/FormatModel/cuadro_template_'+str(k)+'.png', 0)
+        current_ratio = img.shape[0]/img.shape[1]
+
+        if abs(current_ratio-ratio) < abs(bestRatio-ratio):
+            bestRatio = current_ratio
+            current_image = img
+            # print('best ratio: '+str(k))
+    return current_image
+def plotImagesWithPrediction(preditectArray, images):
+    cols = len(images)
+    for k in range(0,cols):
+        if images[k] is not None:
+            plt.subplot(1,cols,k+1), plt.imshow(images[k],'gray'), plt.title(preditectArray[k]), plt.axis('off')
+    plt.show()
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
+    numRows = (BR[0]-TL[0]) / count
+    numCols = BR[1] - TL[1]
+    # print('finding ratio nr/nc : ' + str(numRows)+' / ' + str(numCols)+'  divided by '+ str(count))
+    template = findApropiateTemplate(numRows/numCols)
+    ROI = img[TL[1] - 3:BR[1] + 3, TL[0] - 3:BR[0] + 3]
+    ROI_onlyUserMarks = onlyUserMarks[TL[1] - 3:BR[1] + 3, TL[0] - 3:BR[0] + 3]
+
+    If = cv2.GaussianBlur(ROI, (3, 3), 0)
+    If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
+    If = cv2.bitwise_not(If)
+
+
+
+    leftPart = If[:, 0:(template.shape[1]+5)]
+    rightPart = If[:, -(template.shape[1] + 5):]
+
+    res = cv2.matchTemplate(leftPart,template,cv2.TM_CCORR)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    top_left_L = min_loc
+    bottom_right_L = (top_left_L[0] + template.shape[1], top_left_L[1] + template.shape[0])
+
+    res = cv2.matchTemplate(rightPart, template, cv2.TM_CCORR)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    top_left_R = min_loc
+    bottom_right_R = (top_left_R[0] + template.shape[1], top_left_R[1] + template.shape[0])
+    #
+    # print('bottom_right_R', bottom_right_R)
+
+    bestLeft = leftPart[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
+    bestRight = rightPart[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
+
+    # print('If shape: ', If.shape)
+    # print('template shape: ', template.shape)
+    # print('current top_left_R', top_left_R)
+    top_left_R = (top_left_R[0]+If.shape[1]-(template.shape[1]+5), top_left_R[1])
+    bottom_right_R = (top_left_R[0] + template.shape[1], top_left_R[1] + template.shape[0])
+    # print('after top_left_R', top_left_R)
+    possibleBestLeft = If[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
+    possibleBestRight = If[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
+    # plt.subplot(1,8,1), plt.imshow(If)
+    # plt.subplot(1, 8, 2), plt.imshow(template)
+    # plt.subplot(1, 8, 3), plt.imshow(leftPart)
+    # plt.subplot(1, 8, 4), plt.imshow(rightPart)
+    # plt.subplot(1, 8, 5), plt.imshow(bestLeft)
+    # plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft)
+    # plt.subplot(1, 8, 7), plt.imshow(bestRight)
+    # plt.subplot(1, 8, 8), plt.imshow(possibleBestRight)
+    # plt.show()
+    pointA = (top_left_L[1],top_left_L[0])
+    pointY = (bottom_right_R[1],bottom_right_R[0])
+
+    pointB = (pointY[0],pointA[1])
+    pointX = (pointA[0],pointY[1])
+
+
+    # print(pointA,pointB,pointX,pointY,ROI.shape)
+    ROI_2 = ROI[pointA[0]:pointY[0], pointA[1]:pointY[1]]
+    # plt.subplot(1,2,1), plt.imshow(ROI)
+    # plt.subplot(1, 2, 2), plt.imshow(ROI_2)
+    # plt.show()
+    letters = []
+    for k in range(0,count):
+        upperLeft = getPointProportion(pointA, pointX, k, count - k)
+        bottomLeft = getPointProportion(pointB, pointY, k, count - k )
+        upperRight = getPointProportion(pointA, pointX,  k + 1, count - (k + 1))
+        bottomRight = getPointProportion(pointB, pointY, k + 1, count - (k + 1))
+
+        minX = min(upperLeft[0],bottomLeft[0])+2
+        maxX = max(upperRight[0], bottomRight[0])-2
+
+        minY = min(bottomLeft[1], bottomRight[1])+2
+        maxY = max(upperLeft[1], upperRight[1])-2
+
+        singleCharacter = (ROI[minX:maxX, minY:maxY], ROI_onlyUserMarks[minX:maxX, minY:maxY])
+        letters.append(singleCharacter)
+
+
+    filteredLetters = []
+
+    for letter in letters:
+        singleLetterFiltered = filterSingleCharacter(letter)
+        filteredLetters.append(singleLetterFiltered)
+    return filteredLetters
+
+
+def extractCharacters_old(img, onlyUserMarks, TL, BR, count):
     letters = []
 
     ROI = img[TL[1]-3:BR[1]+3,TL[0]-3:BR[0]+3]

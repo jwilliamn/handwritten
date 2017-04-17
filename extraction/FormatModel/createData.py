@@ -6,7 +6,9 @@ from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
 import pickle
 import cv2
 import json
-image = cv2.imread('../../resources/pag1_1_Template.png')
+pagina = '4'
+fileToEdit = 'pagina'+pagina+'.json'
+image = cv2.imread('../../resources/pag'+pagina+'_1_Template.png')
 
 def click_and_crop(event, x, y, flags, param):
     # grab references to the global variables
@@ -30,12 +32,14 @@ def click_and_crop(event, x, y, flags, param):
         cv2.rectangle(image, refPt[0], refPt[1], (0, 255, 0), 2)
         cv2.imshow("image", image)
 
+
+
 if __name__ == '__main__':
 
     if(image is None):
         print('image not foound')
     img_clone = image.copy()
-    with open('pagina1.json', 'r') as input:
+    with open(fileToEdit, 'r') as input:
         print(input)
         dict_Page1 = json.load(input)
         Page1 = loadCategory(dict_Page1)
@@ -104,6 +108,6 @@ if __name__ == '__main__':
             elif key == ord("c"):
                 break
 
-    with open('pagina1.json', 'w') as output:
+    with open(fileToEdit, 'w') as output:
         json.dump(Page1, output, default=CreatePage1Variable.jsonDefault, indent=4)
 
