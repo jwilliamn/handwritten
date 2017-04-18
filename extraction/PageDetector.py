@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+    App
+    ============================
+    Detect page number and oritentation then setup to extract features
+    properly.
+
+    _copyright_ = 'Copyright (c) 2017 Vm.C.', see AUTHORS for more details
+    _license_ = GNU General Public License, see LICENSE for more details
+"""
+
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -5,6 +18,8 @@ import math
 
 from extraction import FeatureExtractor
 
+
+# Global settings ####
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
@@ -222,16 +237,18 @@ def sortSquareCenters(L):
 
 
 def getSquares(image_original):
-    # plt.hist(image.ravel(), 256, [0, 256]);
-    # plt.show()
-
-    #blur = cv2.GaussianBlur(image_original, (5, 5), 0)
+    """Detecta la orientación de la imagen y la orienta.
+    Args:
+        image_original: Original image.
+    Returns:
+        cosl: ....
+    """
     ret3, th3 = cv2.threshold(image_original, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
     se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (1, 1))
     thIMor = cv2.morphologyEx(th3, cv2.MORPH_CLOSE, se)
 
-    k_left = 5 # componentes >=4
+    k_left = 5 # componentes >= 4
     k_right = 80 # componentes < 4
 
     while k_left + +1 < k_right:
@@ -352,10 +369,16 @@ def getSquares_2(image_original):
 
 
 def enderezarImagen(image):
+    """Detecta la orientación de la imagen y la orienta.
+    Args:
+        image: Original image.
+    Returns:
+        rotatedImg: Rotated image.
+    """
     squaresCenters = getSquares(image)
     if len(squaresCenters) != 4:
-        raise Exception('no 4 centers')
-    print('first squares: ', squaresCenters)
+        raise Exception('There is no 4 centers')
+    print('First squares: ', squaresCenters)
     dI = squaresCenters[2][0] - squaresCenters[0][0]
     dJ = squaresCenters[2][1] - squaresCenters[0][1]
     theta = np.arctan2(dJ, dI)
@@ -370,24 +393,12 @@ def enderezarImagen(image):
     # 1. apply the M transformation on each pixel of the original image
     # 2. save everything that falls within the upper-left "dsize" portion of the resulting image.
 
-    # So I will find the translation that moves the result to the center of that region.
+    # Find the translation that moves the result to the center of that region.
     (tx, ty) = ((newX - oldX) / 2, (newY - oldY) / 2)
     M[0, 2] += tx  # third column of matrix holds translation, which takes effect after rotation.
     M[1, 2] += ty
 
     rotatedImg = cv2.warpAffine(image, M, dsize=(int(newX), int(newY)))
-    #rows, cols = image.shape
-    #pointRotation = min (rows,cols)
-    #M = cv2.getRotationMatrix2D((squaresCenters[3]), thetaDegrees, 1)
-    #dst = cv2.warpAffine(image, M, (rows, cols))
-    #plt.subplot(121), plt.imshow(image), plt.title('Input')
-    #plt.subplot(122), plt.imshow(rotatedImg), plt.title('Output')
-    #plt.show()
-
-    #    squaresCenters = getSquares(dst)
-    #    print('second squares: ', squaresCenters)
-    #    if len(squaresCenters) != 4:
-    #        raise Exception('no 4 centers')
     return rotatedImg
 
 

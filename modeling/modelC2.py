@@ -19,7 +19,7 @@ import pickle
 
 # Global settings ####
 # Path to save model parameters
-model_path = '/home/williamn/Repository/hand_Written_Character_Recognition'
+model_path = '/home/williamn/Repository/handwritten/modeling'
 
 # Hyperparameters
 depth = 16 # K = 6 number of filters
