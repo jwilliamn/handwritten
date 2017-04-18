@@ -6,6 +6,14 @@ class Category:
         self.description = description
         self.hasValue = False
         self.value = None
+    def convert2ParsedValues(self):
+        if self.hasValue:
+            return Variable('value','Valor predicho', self.value.convert2ParsedValues())
+        else:
+            newCategory = Category(self.name,self.description)
+            for st in self.subTypes:
+                newCategory.addSubType(st.convert2ParsedValues())
+            return newCategory
 
     def jsonDefault(object):
         return object.__dict__

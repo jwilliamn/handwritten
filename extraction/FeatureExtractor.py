@@ -1037,26 +1037,28 @@ def extractPageData_number3_old(img_original, baseL):
     #cv2.destroyAllWindows()
 
 
-def extractPageData_number1(img_original, baseL):
-    paginaBase = cv2.imread('extraction/pag1_1_Template.png', 0)
+def jsonDefault(object):
+    return object.__dict__
+def extractPageData_numberX(img_original, baseL,str_number):
+    paginaBase = cv2.imread('extraction/pag'+str_number+'_1_Template.png', 0)
     img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
     ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
-    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
+    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30, 1))
     SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
     opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
     opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
 
-    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
+    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal, opVertical))
     NegPaginaBase = cv2.bitwise_not(paginaBase)
     # print(img.shape, ' <-> ', NegPaginaBase.shape)
     Ifp2 = cv2.medianBlur(Ifp, 3)
     se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
     edgesToDebug = If.copy()
-    edgesToDebug[edgesToDebug>0]=125
+    edgesToDebug[edgesToDebug > 0] = 125
 
-    with open('extraction/FormatModel/pagina1.json', 'r') as input:
+    with open('extraction/FormatModel/pagina'+str_number+'.json', 'r') as input:
         print('INPUT: ', input)
         dict_Page1 = json.load(input)
         Page1 = loadCategory(dict_Page1)
@@ -1065,120 +1067,25 @@ def extractPageData_number1(img_original, baseL):
     Page1.describe(True)
     R = Page1.getAllWithValue()
 
-
     for category in R:
         if category[1].value is not None:
             print(category[0])
             print(category[1].value)
             parsed = category[1].value.parse([img, Ifp2])
             print(parsed)
+
+    Page2_parsed = Page1.convert2ParsedValues()
+    with open('predictedValues_'+str_number+'.json', 'w') as output:
+        json.dump(Page2_parsed, output, default=jsonDefault, indent=4)
+
+def extractPageData_number1(img_original, baseL):
+    extractPageData_numberX(img_original, baseL, '1')
 
 def extractPageData_number2(img_original, baseL):
-    paginaBase = cv2.imread('extraction/pag2_1_Template.png', 0)
-    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
-    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
-    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
-    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
-    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
-
-    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
-    NegPaginaBase = cv2.bitwise_not(paginaBase)
-    # print(img.shape, ' <-> ', NegPaginaBase.shape)
-    Ifp2 = cv2.medianBlur(Ifp, 3)
-    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
-    edgesToDebug = If.copy()
-    edgesToDebug[edgesToDebug>0]=125
-
-    with open('extraction/FormatModel/pagina2.json', 'r') as input:
-        print('INPUT: ', input)
-        dict_Page1 = json.load(input)
-        Page1 = loadCategory(dict_Page1)
-        print(Page1)
-
-    Page1.describe(True)
-    R = Page1.getAllWithValue()
-
-
-    for category in R:
-        if category[1].value is not None:
-            print(category[0])
-            print(category[1].value)
-            parsed = category[1].value.parse([img, Ifp2])
-            print(parsed)
-
+    extractPageData_numberX(img_original, baseL, '2')
 
 def extractPageData_number3(img_original, baseL):
-    paginaBase = cv2.imread('extraction/pag3_1_Template.png', 0)
-    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
-    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
-    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
-    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
-    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
-
-    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
-    NegPaginaBase = cv2.bitwise_not(paginaBase)
-    # print(img.shape, ' <-> ', NegPaginaBase.shape)
-    Ifp2 = cv2.medianBlur(Ifp, 3)
-    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
-    edgesToDebug = If.copy()
-    edgesToDebug[edgesToDebug>0]=125
-
-    with open('extraction/FormatModel/pagina3.json', 'r') as input:
-        print('INPUT: ', input)
-        dict_Page1 = json.load(input)
-        Page1 = loadCategory(dict_Page1)
-        print(Page1)
-
-    Page1.describe(True)
-    R = Page1.getAllWithValue()
-
-
-    for category in R:
-        if category[1].value is not None:
-            print(category[0])
-            print(category[1].value)
-            parsed = category[1].value.parse([img, Ifp2])
-            print(parsed)
-
+    extractPageData_numberX(img_original, baseL, '3')
 
 def extractPageData_number4(img_original, baseL):
-    paginaBase = cv2.imread('extraction/pag4_1_Template.png', 0)
-    img = cv2.resize(img_original, (paginaBase.shape[1], paginaBase.shape[0]))
-    ret3, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-    SEh = cv2.getStructuringElement(cv2.MORPH_RECT, (30,1))
-    SEv = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 30))
-    opHorizontal = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEh)
-    opVertical = cv2.morphologyEx(If, cv2.MORPH_OPEN, SEv)
-
-    Ifp = cv2.bitwise_xor(If, cv2.bitwise_or(opHorizontal,opVertical))
-    NegPaginaBase = cv2.bitwise_not(paginaBase)
-    # print(img.shape, ' <-> ', NegPaginaBase.shape)
-    Ifp2 = cv2.medianBlur(Ifp, 3)
-    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    Ifp2 = cv2.morphologyEx(Ifp2, cv2.MORPH_OPEN, se)
-    edgesToDebug = If.copy()
-    edgesToDebug[edgesToDebug>0]=125
-
-    with open('extraction/FormatModel/pagina4.json', 'r') as input:
-        print('INPUT: ', input)
-        dict_Page1 = json.load(input)
-        Page1 = loadCategory(dict_Page1)
-        print(Page1)
-
-    Page1.describe(True)
-    R = Page1.getAllWithValue()
-
-
-    for category in R:
-        if category[1].value is not None:
-            print(category[0])
-            print(category[1].value)
-            parsed = category[1].value.parse([img, Ifp2])
-            print(parsed)
+    extractPageData_numberX(img_original, baseL, '4')

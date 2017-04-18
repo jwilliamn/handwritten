@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from extraction import FeatureExtractor
 from extraction import PageDetector
 
-#img = cv2.imread('api/pagina3_1.png', 0)
+img = cv2.imread('api/pagina3_1.png', 0)
 #img = cv2.imread('api/pagina3_2.jpeg', 0)
 #img = cv2.imread('api/pagina3_3.jpg', 0)
 #img = cv2.imread('api/pagina3_4.png', 0)
@@ -16,7 +16,7 @@ from extraction import PageDetector
 #img = cv2.imread('api/pagina1_3.png', 0)
 #img = cv2.imread('api/pagina2_1.png', 0)
 #img = cv2.imread('api/pagina2_2.png', 0)
-img = cv2.imread('api/pagina4_1.png', 0)
+#img = cv2.imread('api/pagina4_1.png', 0)
 
 print("everything is ok")
 

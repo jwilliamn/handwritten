@@ -24,3 +24,4 @@ def loadCategory(dict_current):
         r = loadCategory(sub)
         cat.addSubType(r)
     return cat
+

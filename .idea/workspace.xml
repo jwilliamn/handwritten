@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74239201-b460-48e6-b64a-eeaa0b434abd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extraction/FormatModel/CreatePage1Variable.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsExtraction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extraction/FormatModel/createData.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extraction/FormatModel/editPositions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extraction/FormatModel/pagina1_copy.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RawVariableDefinitions.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/VariableDefinitions.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/extraction/FormatModel/__init__.py" afterPath="$PROJECT_DIR$/extraction/FormatModel/CreatePage2Variable.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LoadDataFromImage.py" afterPath="$PROJECT_DIR$/LoadDataFromImage.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/engine.py" afterPath="$PROJECT_DIR$/api/engine.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extraction/FeatureExtractor.py" afterPath="$PROJECT_DIR$/extraction/FeatureExtractor.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py" afterPath="$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py" afterPath="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extraction/FormatModel/VariableDefinitions.py" afterPath="$PROJECT_DIR$/extraction/FormatModel/VariableDefinitions.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,23 +25,20 @@
       <file leaf-file-name="FeatureExtractor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extraction/FeatureExtractor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-83">
-              <caret line="403" column="31" lean-forward="false" selection-start-line="403" selection-start-column="31" selection-end-line="403" selection-end-column="31" />
+            <state relative-caret-position="-890">
+              <caret line="1017" column="39" lean-forward="false" selection-start-line="1017" selection-start-column="39" selection-end-line="1017" selection-end-column="39" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#8071#9130#0" expanded="false" />
-                <element signature="e#29191#31763#0" expanded="false" />
-                <element signature="e#31819#36657#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VariableDefinitions.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="VariableDefinitions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extraction/FormatModel/VariableDefinitions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="34" column="52" lean-forward="false" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
+            <state relative-caret-position="180">
+              <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -57,11 +47,31 @@
       <file leaf-file-name="RawVariableDefinitions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="594">
+              <caret line="38" column="35" lean-forward="false" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#1629#1651#0" expanded="false" />
+                <element signature="e#1684#1709#0" expanded="false" />
+                <element signature="e#1746#1766#0" expanded="false" />
+                <element signature="e#1802#1905#0" expanded="false" />
+                <element signature="e#1948#2163#0" expanded="false" />
+                <element signature="e#2216#2869#0" expanded="false" />
+                <element signature="e#2913#2939#0" expanded="false" />
+                <element signature="e#2990#3054#0" expanded="false" />
+                <element signature="e#3100#3179#0" expanded="false" />
+                <element signature="e#3224#3308#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predictedValues_3.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/predictedValues_3.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,43 +79,31 @@
       <file leaf-file-name="CreatePage1Variable.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extraction/FormatModel/CreatePage1Variable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="11" lean-forward="true" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-              <folding>
-                <element signature="e#1#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreatePage2Variable.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extraction/FormatModel/CreatePage2Variable.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="160" column="68" lean-forward="false" selection-start-line="160" selection-start-column="68" selection-end-line="160" selection-end-column="68" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pagina1.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extraction/FormatModel/pagina1.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="1759" column="42" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1791" selection-end-column="1" />
+            <state relative-caret-position="36">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pagina1_copy.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extraction/FormatModel/pagina1_copy.json">
+      <file leaf-file-name="LoadDataFromImage.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LoadDataFromImage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="1791" column="1" lean-forward="false" selection-start-line="1791" selection-start-column="1" selection-end-line="1791" selection-end-column="1" />
+            <state relative-caret-position="36">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="engine.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/engine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-176">
+              <caret line="21" column="49" lean-forward="false" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
+              <folding>
+                <element signature="e#203#226#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,8 +111,8 @@
       <file leaf-file-name="createData.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extraction/FormatModel/createData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1372">
-              <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+            <state relative-caret-position="18">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -125,8 +123,8 @@
       <file leaf-file-name="editPositions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extraction/FormatModel/editPositions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="33" selection-end-line="106" selection-end-column="33" />
+            <state relative-caret-position="406">
+              <caret line="112" column="83" lean-forward="true" selection-start-line="111" selection-start-column="4" selection-end-line="112" selection-end-column="83" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -134,14 +132,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UtilFunctionsExtraction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsExtraction.py">
+      <file leaf-file-name="UtilFunctionsLoadTemplates.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="468">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -208,18 +204,20 @@
       <list>
         <option value="$PROJECT_DIR$/extraction/FormatModel.py" />
         <option value="$PROJECT_DIR$/RawVariableDefinitions.py" />
-        <option value="$PROJECT_DIR$/LoadDataFromImage.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/__init__.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/TestVariables.py" />
-        <option value="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/createData.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/pagina1.json" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/editPositions.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/pagina1_copy.json" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/CreatePage2Variable.py" />
-        <option value="$PROJECT_DIR$/extraction/FeatureExtractor.py" />
-        <option value="$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsExtraction.py" />
+        <option value="$PROJECT_DIR$/api/engine.py" />
+        <option value="$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py" />
+        <option value="$PROJECT_DIR$/extraction/FormatModel/CreatePage1Variable.py" />
+        <option value="$PROJECT_DIR$/extraction/FeatureExtractor.py" />
+        <option value="$PROJECT_DIR$/LoadDataFromImage.py" />
+        <option value="$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py" />
         <option value="$PROJECT_DIR$/extraction/FormatModel/VariableDefinitions.py" />
       </list>
     </option>
@@ -264,8 +262,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -275,20 +273,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="handwritten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="handwritten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="handwritten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -592,12 +576,12 @@
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17304583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19978166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.8114169" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2400835" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -616,27 +600,27 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LoadDataFromImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="35" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1674">
           <caret line="95" column="92" lean-forward="false" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="92" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1629#1651#0" expanded="false" />
+            <element signature="e#1684#1709#0" expanded="false" />
+            <element signature="e#1746#1766#0" expanded="false" />
+            <element signature="e#1802#1905#0" expanded="false" />
+            <element signature="e#1948#2163#0" expanded="false" />
+            <element signature="e#2216#2869#0" expanded="false" />
+            <element signature="e#2913#2939#0" expanded="false" />
+            <element signature="e#2990#3054#0" expanded="false" />
+            <element signature="e#3100#3179#0" expanded="false" />
+            <element signature="e#3224#3308#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -646,7 +630,7 @@
         <state relative-caret-position="1584">
           <caret line="92" column="37" lean-forward="false" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="37" />
           <folding>
-            <element signature="e#1#14#0" expanded="true" />
+            <element signature="e#1#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -683,9 +667,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="14" column="57" lean-forward="true" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#59#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -693,7 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3618">
           <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -710,9 +691,6 @@
           <caret line="844" column="16" lean-forward="false" selection-start-line="844" selection-start-column="16" selection-end-line="844" selection-end-column="16" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#8071#9130#0" expanded="false" />
-            <element signature="e#29191#31763#0" expanded="false" />
-            <element signature="e#31819#36657#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,9 +708,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,6 +718,16 @@
           <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1629#1651#0" expanded="false" />
+            <element signature="e#1684#1709#0" expanded="false" />
+            <element signature="e#1746#1766#0" expanded="false" />
+            <element signature="e#1802#1905#0" expanded="false" />
+            <element signature="e#1948#2163#0" expanded="false" />
+            <element signature="e#2216#2869#0" expanded="false" />
+            <element signature="e#2913#2939#0" expanded="false" />
+            <element signature="e#2990#3054#0" expanded="false" />
+            <element signature="e#3100#3179#0" expanded="false" />
+            <element signature="e#3224#3308#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -757,7 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4014">
           <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -774,9 +759,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#8071#9130#0" expanded="false" />
-            <element signature="e#29191#31763#0" expanded="false" />
-            <element signature="e#31819#36657#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -794,9 +776,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -806,6 +786,16 @@
           <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1629#1651#0" expanded="false" />
+            <element signature="e#1684#1709#0" expanded="false" />
+            <element signature="e#1746#1766#0" expanded="false" />
+            <element signature="e#1802#1905#0" expanded="false" />
+            <element signature="e#1948#2163#0" expanded="false" />
+            <element signature="e#2216#2869#0" expanded="false" />
+            <element signature="e#2913#2939#0" expanded="false" />
+            <element signature="e#2990#3054#0" expanded="false" />
+            <element signature="e#3100#3179#0" expanded="false" />
+            <element signature="e#3224#3308#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -821,7 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4014">
           <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -838,9 +827,6 @@
           <caret line="1025" column="8" lean-forward="false" selection-start-line="1025" selection-start-column="8" selection-end-line="1025" selection-end-column="8" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#8071#9130#0" expanded="false" />
-            <element signature="e#29191#31763#0" expanded="false" />
-            <element signature="e#31819#36657#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -867,13 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/RawVariableDefinitions.py" />
     <entry file="file://$PROJECT_DIR$/VariableDefinitions.py" />
     <entry file="file://$PROJECT_DIR$/RawVariableDefinitions.py" />
@@ -883,47 +862,16 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LoadDataFromImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="35" lean-forward="false" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extraction/PageDetector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3618">
           <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="57" lean-forward="true" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#59#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/CreatePage1Variable.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="11" lean-forward="true" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding>
-            <element signature="e#1#14#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/pagina1_copy.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
+        <state relative-caret-position="32238">
           <caret line="1791" column="1" lean-forward="false" selection-start-line="1791" selection-start-column="1" selection-end-line="1791" selection-end-column="1" />
           <folding />
         </state>
@@ -931,36 +879,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/pagina1.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="1759" column="42" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1791" selection-end-column="1" />
+        <state relative-caret-position="31662">
+          <caret line="1759" column="42" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1791" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/CreatePage2Variable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
+        <state relative-caret-position="2808">
           <caret line="160" column="68" lean-forward="false" selection-start-line="160" selection-start-column="68" selection-end-line="160" selection-end-column="68" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py">
+    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="-3176">
+          <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/engine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-176">
+          <caret line="21" column="49" lean-forward="false" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
+          <folding>
+            <element signature="e#203#226#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/createData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1372">
-          <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+        <state relative-caret-position="18">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
@@ -969,8 +927,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/editPositions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="33" selection-end-line="106" selection-end-column="33" />
+        <state relative-caret-position="406">
+          <caret line="112" column="83" lean-forward="true" selection-start-line="111" selection-start-column="4" selection-end-line="112" selection-end-column="83" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
@@ -979,31 +937,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FeatureExtractor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-83">
-          <caret line="403" column="31" lean-forward="false" selection-start-line="403" selection-start-column="31" selection-end-line="403" selection-end-column="31" />
+        <state relative-caret-position="-890">
+          <caret line="1017" column="39" lean-forward="false" selection-start-line="1017" selection-start-column="39" selection-end-line="1017" selection-end-column="39" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#8071#9130#0" expanded="false" />
-            <element signature="e#29191#31763#0" expanded="false" />
-            <element signature="e#31819#36657#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsExtraction.py">
+    <entry file="file://$PROJECT_DIR$/LoadDataFromImage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+        <state relative-caret-position="36">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/UtilFunctionsLoadTemplates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/CreatePage1Variable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extraction/FormatModel/RawVariableDefinitions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="38" column="35" lean-forward="false" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1629#1651#0" expanded="false" />
+            <element signature="e#1684#1709#0" expanded="false" />
+            <element signature="e#1746#1766#0" expanded="false" />
+            <element signature="e#1802#1905#0" expanded="false" />
+            <element signature="e#1948#2163#0" expanded="false" />
+            <element signature="e#2216#2869#0" expanded="false" />
+            <element signature="e#2913#2939#0" expanded="false" />
+            <element signature="e#2990#3054#0" expanded="false" />
+            <element signature="e#3100#3179#0" expanded="false" />
+            <element signature="e#3224#3308#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extraction/FormatModel/VariableDefinitions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="34" column="52" lean-forward="false" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
+        <state relative-caret-position="180">
+          <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictedValues_3.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
           <folding />
         </state>
       </provider>
