@@ -194,19 +194,19 @@ def percentPage4Normal(centerZone):
 
 
 def percentPage1Inversa(centerZone):
-    centerZone_Base = cv2.imread('resources/centerZone_page1.png', 0)
+    centerZone_Base = cv2.imread('resources/centerZone_page1inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
 def percentPage2Inversa(centerZone):
-    centerZone_Base = cv2.imread('resources/centerZone_page2.png', 0)
+    centerZone_Base = cv2.imread('resources/centerZone_page2inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
 def percentPage3Inversa(centerZone):
-    centerZone_Base = cv2.imread('resources/centerZone_page3.png', 0)
+    centerZone_Base = cv2.imread('resources/centerZone_page3inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
 def percentPage4Inversa(centerZone):
-    centerZone_Base = cv2.imread('resources/centerZone_page4.png', 0)
+    centerZone_Base = cv2.imread('resources/centerZone_page4inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
 

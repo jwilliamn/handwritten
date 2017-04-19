@@ -32,10 +32,12 @@ from extraction import PageDetector
 #img = cv2.imread('input/pagina3_6.png', 0)
 #img = cv2.imread('input/pagina1_1.png', 0)
 #img = cv2.imread('input/pagina1_2.png', 0)
-img = cv2.imread('input/pagina1_3.png', 0)
+#img = cv2.imread('input/pagina1_3.png', 0)
+#img = cv2.imread('input/pagina1_4.png', 0)
 #img = cv2.imread('input/pagina2_1.png', 0)
 #img = cv2.imread('input/pagina2_2.png', 0)
 #img = cv2.imread('input/pagina4_1.png', 0)
+img = cv2.imread('input/pagina4_2.png', 0)
 
 
 if __name__ == '__main__':
@@ -46,7 +48,7 @@ if __name__ == '__main__':
 
     print('So far, so good!')
     if page is not None:
-        plt.imshow(page[0])
+        plt.imshow(page[0],'gray')
         plt.title('Es la página: '+str(page[1][0]))
         plt.show()
         if page[1][1] == 0: # esta orientado de manera normal
@@ -54,6 +56,8 @@ if __name__ == '__main__':
             print('Still working!')
         else:
             if page[1][1] == 1: #esta al revez
-                raise NotImplementedError('Aún no se hace esto :(')
+                flipped = cv2.flip(page[0],0)
+                flipped = cv2.flip(flipped, 1)
+                FeatureExtractor.extractPageData(flipped, page[1][0])
             else:
                 raise ValueError('Error')
