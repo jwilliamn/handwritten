@@ -57,7 +57,7 @@ def convert_pdf_png(filepdf):
         raise
     imagePath = []
     imagePath = path[0] + '.png'
-    print('imagepath',imagePath)
+    print('imagepath in function',imagePath)
     return imagePath
 
 
@@ -69,7 +69,16 @@ if __name__ == '__main__':
     print("App: I'll try to be helpful :) \nBut I'm still just a robot. Sorry!")    
     
     arg = sys.argv[1]
-    imgPath = convert_pdf_png(arg)
+    print('arg', arg)
+    splitArg = arg.split('.')
+
+    if splitArg[1] == 'png' or splitArg[1] == 'jpeg':
+        print("File is a picture!")
+        imgPath = arg
+    else:
+        print('File is a pdf! (I hope)')
+        imgPath = convert_pdf_png(arg)
+
     img = cv2.imread(imgPath, 0)
 
     img = PageDetector.enderezarImagen(img)
