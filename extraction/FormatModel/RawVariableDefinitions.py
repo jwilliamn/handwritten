@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+    Extraction.RawVariableDefinition
+    =============================
+
+    Classes, .......
+
+    _copyright_ = 'Copyright (c) 2017 Vm.C.', see AUTHORS for more details
+    _license_ = GNU General Public License, see LICENSE for more details
+"""
+
 import cv2
 
 from extraction.FormatModel import UtilFunctionsExtraction
@@ -36,7 +49,7 @@ class RawValue:
         if self.nameSingleParser is not None:
             print(self.nameSingleParser)
         else:
-            print('nameSingleParser is nOne')
+            print('nameSingleParser is None')
         raise Exception('bad arguments or not implemented parser')
 
 

@@ -1,3 +1,17 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+    Extraction.LoadTemplates
+    ============================
+
+    Bunch of tools for feature extraction
+
+    _copyright_ = 'Copyright (c) 2017 Vm.C.', see AUTHORS for more details
+    _license_ = GNU General Public License, see LICENSE for more details
+"""
+
+
 from extraction.FormatModel.RawVariableDefinitions import *
 from extraction.FormatModel.VariableDefinitions import Category
 

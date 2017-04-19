@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+    Extraction.UtilFunctions
+    =============================
+
+    Classes, .......
+
+    _copyright_ = 'Copyright (c) 2017 Vm.C.', see AUTHORS for more details
+    _license_ = GNU General Public License, see LICENSE for more details
+"""
+
 import numpy as np
 import cv2
 import modeling
@@ -34,10 +47,12 @@ def expandOnlyIntersections(BinaryOriginal, globalMask):
                     indxTail += 1
                     V[ni, nj] = True
     return intersectionOfMask
+
 def getPointProportion(A, B, a, b):
     px = (A[0] * b + B[0] * a) / (a + b)
     py = (A[1] * b + B[1] * a) / (a + b)
     return (int(px), int(py))
+
 def closestNonZero(img, p, maxSize = 21):
 
     if img[p[0],p[1]]>0:
@@ -56,8 +71,8 @@ def closestNonZero(img, p, maxSize = 21):
                     #print('found: ', p)
                     return p
             currentK = (currentK + 1) % 4
-
     return copyP
+
 def filterSingleCharacter(letter_original_and_mask):
     # todavia puede tener los bordes
     letter_original = letter_original_and_mask[0]
@@ -132,16 +147,18 @@ def filterSingleCharacter(letter_original_and_mask):
     except Exception as e:
         #print('error filtering: ', e)
         imgResult = None
-    #
-    # if imgResult is not None:
-    #     plt.subplot(1, 4, 1), plt.imshow(img, 'gray'), plt.title('img original')
-    #     plt.subplot(1, 4, 2), plt.imshow(onlyMatch, 'gray'), plt.title('mask')
-    #     plt.subplot(1, 4, 3), plt.imshow(img_copy, 'gray'), plt.title('to pass resize32x32')
-    #     if( imgResult is not None):
-    #         plt.subplot(1, 4, 4), plt.imshow(imgResult, 'gray'), plt.title('imgResult resized to 32x32')
-    #     plt.show()
-
+    
+    
+    #plt.subplot(1, 5, 1), plt.imshow(img, 'gray'), plt.title('img original')
+    #plt.subplot(1, 5, 2), plt.imshow(mask, 'gray'), plt.title('mask from input')
+    #plt.subplot(1, 5, 3), plt.imshow(onlyMatch, 'gray'), plt.title('mask, mezclado')
+    #plt.subplot(1, 5, 4), plt.imshow(img_copy, 'gray'), plt.title('to pass resize32x32')
+    #if( imgResult is not None):
+    #    plt.subplot(1, 5, 5), plt.imshow(imgResult, 'gray'), plt.title('imgResult resized to 32x32')
+    #plt.show()
+    
     return imgResult
+
 def findApropiateTemplate(ratio):
 
     current_image = None
@@ -155,12 +172,14 @@ def findApropiateTemplate(ratio):
             current_image = img
             # print('best ratio: '+str(k))
     return current_image
+
 def plotImagesWithPrediction(preditectArray, images):
     cols = len(images)
     for k in range(0,cols):
         if images[k] is not None:
             plt.subplot(1,cols,k+1), plt.imshow(images[k],'gray'), plt.title(preditectArray[k]), plt.axis('off')
     plt.show()
+
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
     numRows = (BR[0]-TL[0]) / count
     numCols = BR[1] - TL[1]

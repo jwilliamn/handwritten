@@ -27,12 +27,12 @@ from extraction import PageDetector
 #img = cv2.imread('input/pagina3_1.png', 0)
 #img = cv2.imread('input/pagina3_2.jpeg', 0)
 #img = cv2.imread('input/pagina3_3.jpg', 0)
-img = cv2.imread('input/pagina3_4.png', 0)
+#img = cv2.imread('input/pagina3_4.png', 0)
 #img = cv2.imread('input/pagina3_5.png', 0)
 #img = cv2.imread('input/pagina3_6.png', 0)
 #img = cv2.imread('input/pagina1_1.png', 0)
 #img = cv2.imread('input/pagina1_2.png', 0)
-#img = cv2.imread('input/pagina1_3.png', 0)
+img = cv2.imread('input/pagina1_3.png', 0)
 #img = cv2.imread('input/pagina2_1.png', 0)
 #img = cv2.imread('input/pagina2_2.png', 0)
 #img = cv2.imread('input/pagina4_1.png', 0)
@@ -43,12 +43,15 @@ if __name__ == '__main__':
 
     img = PageDetector.enderezarImagen(img)
     page = PageDetector.detectPage(img)
+
+    print('So far, so good!')
     if page is not None:
         plt.imshow(page[0])
         plt.title('Es la página: '+str(page[1][0]))
         plt.show()
         if page[1][1] == 0: # esta orientado de manera normal
             FeatureExtractor.extractPageData(page[0],page[1][0])
+            print('Still working!')
         else:
             if page[1][1] == 1: #esta al revez
                 raise NotImplementedError('Aún no se hace esto :(')

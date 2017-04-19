@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+    Extraction.VariableDefinition
+    =============================
+
+    Classes: category & variable
+
+    _copyright_ = 'Copyright (c) 2017 Vm.C.', see AUTHORS for more details
+    _license_ = GNU General Public License, see LICENSE for more details
+"""
+
 class Category:
 
     def __init__(self, name, description):
@@ -6,9 +19,10 @@ class Category:
         self.description = description
         self.hasValue = False
         self.value = None
+
     def convert2ParsedValues(self):
         if self.hasValue:
-            return Variable('value','Valor predicho', self.value.convert2ParsedValues())
+            return Variable('Value','Valor predicho', self.value.convert2ParsedValues())
         else:
             newCategory = Category(self.name,self.description)
             for st in self.subTypes:
