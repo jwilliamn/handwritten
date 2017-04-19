@@ -89,11 +89,11 @@ def extractPageData_numberX(img_original, baseL, str_number):
     with open('extraction/FormatModel/pagina'+str_number+'.json', 'r') as input:
         print('INPUT: ', input)
         dict_Page1 = json.load(input)
-        Page1 = loadCategory(dict_Page1)
-        print(Page1)
+        Page = loadCategory(dict_Page1)
+        print(Page)
 
-    Page1.describe(True)
-    R = Page1.getAllWithValue()
+    Page.describe(True)
+    R = Page.getAllWithValue()
 
     for category in R:
         if category[1].value is not None:
@@ -102,9 +102,9 @@ def extractPageData_numberX(img_original, baseL, str_number):
             parsed = category[1].value.parse([img, Ifp2])
             print(parsed)
 
-    Page2_parsed = Page1.convert2ParsedValues()
+    Page_parsed = Page.convert2ParsedValues()
     with open('output/predictedValues_'+str_number+'.json', 'w') as output:
-        json.dump(Page2_parsed, output, default=jsonDefault, indent=4)
+        json.dump(Page_parsed, output, default=jsonDefault, indent=4)
 
 
 def extractPageData_number1(img_original, baseL):

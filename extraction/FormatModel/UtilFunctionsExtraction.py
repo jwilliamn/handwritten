@@ -179,6 +179,73 @@ def plotImagesWithPrediction(preditectArray, images):
         if images[k] is not None:
             plt.subplot(1,cols,k+1), plt.imshow(images[k],'gray'), plt.title(preditectArray[k]), plt.axis('off')
     plt.show()
+def findMaxElement(A):
+    currentValue = -1.0
+    currentI = 0
+    currentJ = 0
+    for i in range(A.shape[0]):
+        for j in range(A.shape[1]):
+            if A[i,j] > currentValue:
+                currentValue = A[i,j]
+                currentI = i
+                currentJ = j
+    return (currentI, currentJ)
+
+def getBestRectangle(region):
+    A = range(region.shape[0] - 10, region.shape[0])
+    B = range(region.shape[1] - 10, region.shape[1])
+    copia = region.copy()
+
+    copia[copia >= 0] = 0
+    rows,cols = region.shape
+    print(region.shape)
+    bestValue = -1.0
+    bestA = 0
+    bestB = 0
+    bestPos = (-1,-1)
+    for a in A:
+        for b in B:
+            cum = np.zeros((cols,rows))
+            for i in range(rows):
+                if i+a >= rows:
+                    break
+
+                for j in range(cols):
+                    if j+b >= cols:
+                        break
+                    copia[copia >= 0] = 0
+                    pi = (j, i)
+                    pf = (j+b, i+a)
+                    cv2.rectangle(copia, pi, pf, 255, thickness=1)
+                    copia = cv2.bitwise_and(copia, region)
+                    cantMatch = cv2.countNonZero(copia)
+                    cum[i,j]=cantMatch/(2*(a+b))
+                    # (I,J) = findMaxElement(cum)
+                    # print(I,J)
+                    # print('inicio', i, j)
+                    # print('longitudes', a, b)
+                    # print(cum)
+                    # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
+                    # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+                    # plt.show()
+            (I, J) = findMaxElement(cum)
+            if cum[I,J] > bestValue:
+                bestValue = cum[I,J]
+                bestA = a
+                bestB = b
+                bestPos = (I,J)
+
+    # copia[copia >= 0] = 0
+    # pi = (bestPos[1], bestPos[0])
+    # pf = (bestPos[1] + bestB, bestPos[0] + bestA)
+    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+    # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
+    # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    # plt.show()
+    return bestPos,(bestPos[0]+bestB, bestPos[1]+bestA)
+
+
+
 
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
     numRows = (BR[0]-TL[0]) / count
@@ -197,15 +264,20 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     leftPart = If[:, 0:(template.shape[1]+5)]
     rightPart = If[:, -(template.shape[1] + 5):]
 
-    res = cv2.matchTemplate(leftPart,template,cv2.TM_CCORR)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-    top_left_L = min_loc
-    bottom_right_L = (top_left_L[0] + template.shape[1], top_left_L[1] + template.shape[0])
+    top_left_L,bottom_right_L = getBestRectangle(leftPart)
+    delta_L = (bottom_right_L[0]-top_left_L[0], bottom_right_L[1]-top_left_L[1])
+    # res = cv2.matchTemplate(leftPart,template,cv2.TM_CCORR)
+    # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    # top_left_L = min_loc
+    # bottom_right_L = (top_left_L[0] + template.shape[1], top_left_L[1] + template.shape[0])
 
-    res = cv2.matchTemplate(rightPart, template, cv2.TM_CCORR)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-    top_left_R = min_loc
-    bottom_right_R = (top_left_R[0] + template.shape[1], top_left_R[1] + template.shape[0])
+    top_left_R, bottom_right_R = getBestRectangle(leftPart)
+    delta_R = (bottom_right_R[0] - top_left_R[0], bottom_right_R[1] - top_left_R[1])
+    # res = cv2.matchTemplate(rightPart, template, cv2.TM_CCORR)
+    # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    # top_left_R = min_loc
+    # bottom_right_R = (top_left_R[0] + template.shape[1], top_left_R[1] + template.shape[0])
+    #
     #
     # print('bottom_right_R', bottom_right_R)
 
@@ -216,7 +288,7 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     # print('template shape: ', template.shape)
     # print('current top_left_R', top_left_R)
     top_left_R = (top_left_R[0]+If.shape[1]-(template.shape[1]+5), top_left_R[1])
-    bottom_right_R = (top_left_R[0] + template.shape[1], top_left_R[1] + template.shape[0])
+    bottom_right_R = (top_left_R[0] + delta_R[0], top_left_R[1] + delta_R[1])
     # print('after top_left_R', top_left_R)
     possibleBestLeft = If[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
     possibleBestRight = If[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
@@ -238,8 +310,8 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
 
     # print(pointA,pointB,pointX,pointY,ROI.shape)
     ROI_2 = ROI[pointA[0]:pointY[0], pointA[1]:pointY[1]]
-    # plt.subplot(1,2,1), plt.imshow(ROI)
-    # plt.subplot(1, 2, 2), plt.imshow(ROI_2)
+    # plt.subplot(2,1,1), plt.imshow(ROI)
+    # plt.subplot(2, 1, 2), plt.imshow(ROI_2)
     # plt.show()
     letters = []
     for k in range(0,count):
