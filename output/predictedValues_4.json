@@ -6,11 +6,10 @@
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "M",
                                     "A",
@@ -41,25 +40,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_paterno",
                     "description": "Apellido paterno",
-                    "value": null,
-                    "name": "apellido_paterno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "M",
                                     "E",
@@ -90,25 +89,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_materno",
                     "description": "Apellido materno",
-                    "value": null,
-                    "name": "apellido_materno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "M",
                                     "A",
@@ -139,25 +138,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nombres",
                     "description": "nombres",
-                    "value": null,
-                    "name": "nombres"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "7",
@@ -168,93 +167,93 @@
                                     "5",
                                     "3"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "fecha_nacimiento",
                     "description": "Fecha de nacimiento",
-                    "value": null,
-                    "name": "fecha_nacimiento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "6",
                                     "0"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_anhos",
                     "description": "edad_anios",
-                    "value": null,
-                    "name": "edad_anhos"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_meses",
                     "description": "edad_meses",
-                    "value": null,
-                    "name": "edad_meses"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_documento",
                     "description": "tipo_documento",
-                    "value": null,
-                    "name": "tipo_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "2",
                                     "9",
@@ -265,307 +264,308 @@
                                     "2",
                                     "5"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "numero_documento",
                     "description": "numero_documento",
-                    "value": null,
-                    "name": "numero_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "parentesco_jefe_hogar",
                     "description": "parentesco_jefe_hogar",
-                    "value": null,
-                    "name": "parentesco_jefe_hogar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "num_nucleo_familiar",
                     "description": "num_nucleo_familiar",
-                    "value": null,
-                    "name": "num_nucleo_familiar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sexo",
                     "description": "sexo",
-                    "value": null,
-                    "name": "sexo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "estado_civil",
                     "description": "estado_civil",
-                    "value": null,
-                    "name": "estado_civil"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_seguro",
                     "description": "tipo_seguro",
-                    "value": null,
-                    "name": "tipo_seguro"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "lengua_materna",
                     "description": "lengua_materna",
-                    "value": null,
-                    "name": "lengua_materna"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sabe_leer_escribir",
                     "description": "sabe_leer_escribir",
-                    "value": null,
-                    "name": "sabe_leer_escribir"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nivel_educativo",
                     "description": "nivel_educativo",
-                    "value": null,
-                    "name": "nivel_educativo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_grado_aprobado",
                     "description": "ultimo_grado_aprobado",
-                    "value": null,
-                    "name": "ultimo_grado_aprobado"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_mes_era_un",
                     "description": "ultimo_mes_era_un",
-                    "value": null,
-                    "name": "ultimo_mes_era_un"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sector_desempenho",
                     "description": "sector_desempenho",
-                    "value": null,
-                    "name": "sector_desempenho"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "presenta_discapacidad",
                     "description": "presenta_discapacidad",
-                    "value": null,
-                    "name": "presenta_discapacidad"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "programa_social_beneficiario",
                     "description": "programa_social_beneficiario",
-                    "value": null,
-                    "name": "programa_social_beneficiario"
+                    "hasValue": false,
+                    "value": null
                 }
             ],
-            "hasValue": false,
+            "name": "P06",
             "description": "Persona 06",
-            "value": null,
-            "name": "P06"
+            "hasValue": false,
+            "value": null
         },
         {
             "subTypes": [
@@ -573,11 +573,10 @@
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "V",
                                     "A",
@@ -608,25 +607,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_paterno",
                     "description": "Apellido paterno",
-                    "value": null,
-                    "name": "apellido_paterno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "H",
                                     "U",
@@ -657,25 +656,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_materno",
                     "description": "Apellido materno",
-                    "value": null,
-                    "name": "apellido_materno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "L",
                                     "U",
@@ -706,25 +705,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nombres",
                     "description": "nombres",
-                    "value": null,
-                    "name": "nombres"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2",
@@ -735,93 +734,93 @@
                                     "7",
                                     "8"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "fecha_nacimiento",
                     "description": "Fecha de nacimiento",
-                    "value": null,
-                    "name": "fecha_nacimiento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "9",
                                     "0"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_anhos",
                     "description": "edad_anios",
-                    "value": null,
-                    "name": "edad_anhos"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "3",
                                     "1"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_meses",
                     "description": "edad_meses",
-                    "value": null,
-                    "name": "edad_meses"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_documento",
                     "description": "tipo_documento",
-                    "value": null,
-                    "name": "tipo_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "9",
                                     "8",
@@ -832,307 +831,308 @@
                                     "3",
                                     "2"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "numero_documento",
                     "description": "numero_documento",
-                    "value": null,
-                    "name": "numero_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "parentesco_jefe_hogar",
                     "description": "parentesco_jefe_hogar",
-                    "value": null,
-                    "name": "parentesco_jefe_hogar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "num_nucleo_familiar",
                     "description": "num_nucleo_familiar",
-                    "value": null,
-                    "name": "num_nucleo_familiar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sexo",
                     "description": "sexo",
-                    "value": null,
-                    "name": "sexo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "estado_civil",
                     "description": "estado_civil",
-                    "value": null,
-                    "name": "estado_civil"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_seguro",
                     "description": "tipo_seguro",
-                    "value": null,
-                    "name": "tipo_seguro"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "lengua_materna",
                     "description": "lengua_materna",
-                    "value": null,
-                    "name": "lengua_materna"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sabe_leer_escribir",
                     "description": "sabe_leer_escribir",
-                    "value": null,
-                    "name": "sabe_leer_escribir"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nivel_educativo",
                     "description": "nivel_educativo",
-                    "value": null,
-                    "name": "nivel_educativo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_grado_aprobado",
                     "description": "ultimo_grado_aprobado",
-                    "value": null,
-                    "name": "ultimo_grado_aprobado"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_mes_era_un",
                     "description": "ultimo_mes_era_un",
-                    "value": null,
-                    "name": "ultimo_mes_era_un"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sector_desempenho",
                     "description": "sector_desempenho",
-                    "value": null,
-                    "name": "sector_desempenho"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "presenta_discapacidad",
                     "description": "presenta_discapacidad",
-                    "value": null,
-                    "name": "presenta_discapacidad"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "programa_social_beneficiario",
                     "description": "programa_social_beneficiario",
-                    "value": null,
-                    "name": "programa_social_beneficiario"
+                    "hasValue": false,
+                    "value": null
                 }
             ],
-            "hasValue": false,
+            "name": "P07",
             "description": "Persona 07",
-            "value": null,
-            "name": "P07"
+            "hasValue": false,
+            "value": null
         },
         {
             "subTypes": [
@@ -1140,11 +1140,10 @@
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "A",
                                     "B",
@@ -1175,25 +1174,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_paterno",
                     "description": "Apellido paterno",
-                    "value": null,
-                    "name": "apellido_paterno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "A",
                                     "B",
@@ -1224,25 +1223,25 @@
                                     "E",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_materno",
                     "description": "Apellido materno",
-                    "value": null,
-                    "name": "apellido_materno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "A",
                                     "B",
@@ -1273,25 +1272,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nombres",
                     "description": "nombres",
-                    "value": null,
-                    "name": "nombres"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "9",
                                     "8",
@@ -1302,93 +1301,93 @@
                                     "3",
                                     "2"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "fecha_nacimiento",
                     "description": "Fecha de nacimiento",
-                    "value": null,
-                    "name": "fecha_nacimiento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "0"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_anhos",
                     "description": "edad_anios",
-                    "value": null,
-                    "name": "edad_anhos"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "2",
                                     "3"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_meses",
                     "description": "edad_meses",
-                    "value": null,
-                    "name": "edad_meses"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_documento",
                     "description": "tipo_documento",
-                    "value": null,
-                    "name": "tipo_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "4",
                                     "5",
@@ -1399,307 +1398,308 @@
                                     "0",
                                     "1"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "numero_documento",
                     "description": "numero_documento",
-                    "value": null,
-                    "name": "numero_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "parentesco_jefe_hogar",
                     "description": "parentesco_jefe_hogar",
-                    "value": null,
-                    "name": "parentesco_jefe_hogar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "num_nucleo_familiar",
                     "description": "num_nucleo_familiar",
-                    "value": null,
-                    "name": "num_nucleo_familiar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sexo",
                     "description": "sexo",
-                    "value": null,
-                    "name": "sexo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "estado_civil",
                     "description": "estado_civil",
-                    "value": null,
-                    "name": "estado_civil"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_seguro",
                     "description": "tipo_seguro",
-                    "value": null,
-                    "name": "tipo_seguro"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "lengua_materna",
                     "description": "lengua_materna",
-                    "value": null,
-                    "name": "lengua_materna"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sabe_leer_escribir",
                     "description": "sabe_leer_escribir",
-                    "value": null,
-                    "name": "sabe_leer_escribir"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nivel_educativo",
                     "description": "nivel_educativo",
-                    "value": null,
-                    "name": "nivel_educativo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_grado_aprobado",
                     "description": "ultimo_grado_aprobado",
-                    "value": null,
-                    "name": "ultimo_grado_aprobado"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_mes_era_un",
                     "description": "ultimo_mes_era_un",
-                    "value": null,
-                    "name": "ultimo_mes_era_un"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sector_desempenho",
                     "description": "sector_desempenho",
-                    "value": null,
-                    "name": "sector_desempenho"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "presenta_discapacidad",
                     "description": "presenta_discapacidad",
-                    "value": null,
-                    "name": "presenta_discapacidad"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "programa_social_beneficiario",
                     "description": "programa_social_beneficiario",
-                    "value": null,
-                    "name": "programa_social_beneficiario"
+                    "hasValue": false,
+                    "value": null
                 }
             ],
-            "hasValue": false,
+            "name": "P08",
             "description": "Persona 08",
-            "value": null,
-            "name": "P08"
+            "hasValue": false,
+            "value": null
         },
         {
             "subTypes": [
@@ -1707,11 +1707,10 @@
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "F",
                                     "B",
@@ -1742,25 +1741,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_paterno",
                     "description": "Apellido paterno",
-                    "value": null,
-                    "name": "apellido_paterno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "K",
                                     "B",
@@ -1791,25 +1790,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_materno",
                     "description": "Apellido materno",
-                    "value": null,
-                    "name": "apellido_materno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "A",
                                     "F",
@@ -1840,25 +1839,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nombres",
                     "description": "nombres",
-                    "value": null,
-                    "name": "nombres"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2",
@@ -1869,93 +1868,93 @@
                                     "7",
                                     "8"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "fecha_nacimiento",
                     "description": "Fecha de nacimiento",
-                    "value": null,
-                    "name": "fecha_nacimiento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "9",
                                     "0"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_anhos",
                     "description": "edad_anios",
-                    "value": null,
-                    "name": "edad_anhos"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_meses",
                     "description": "edad_meses",
-                    "value": null,
-                    "name": "edad_meses"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_documento",
                     "description": "tipo_documento",
-                    "value": null,
-                    "name": "tipo_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2",
@@ -1966,307 +1965,308 @@
                                     "2",
                                     "8"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "numero_documento",
                     "description": "numero_documento",
-                    "value": null,
-                    "name": "numero_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "parentesco_jefe_hogar",
                     "description": "parentesco_jefe_hogar",
-                    "value": null,
-                    "name": "parentesco_jefe_hogar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "num_nucleo_familiar",
                     "description": "num_nucleo_familiar",
-                    "value": null,
-                    "name": "num_nucleo_familiar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sexo",
                     "description": "sexo",
-                    "value": null,
-                    "name": "sexo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "estado_civil",
                     "description": "estado_civil",
-                    "value": null,
-                    "name": "estado_civil"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_seguro",
                     "description": "tipo_seguro",
-                    "value": null,
-                    "name": "tipo_seguro"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "lengua_materna",
                     "description": "lengua_materna",
-                    "value": null,
-                    "name": "lengua_materna"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sabe_leer_escribir",
                     "description": "sabe_leer_escribir",
-                    "value": null,
-                    "name": "sabe_leer_escribir"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nivel_educativo",
                     "description": "nivel_educativo",
-                    "value": null,
-                    "name": "nivel_educativo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_grado_aprobado",
                     "description": "ultimo_grado_aprobado",
-                    "value": null,
-                    "name": "ultimo_grado_aprobado"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_mes_era_un",
                     "description": "ultimo_mes_era_un",
-                    "value": null,
-                    "name": "ultimo_mes_era_un"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sector_desempenho",
                     "description": "sector_desempenho",
-                    "value": null,
-                    "name": "sector_desempenho"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "presenta_discapacidad",
                     "description": "presenta_discapacidad",
-                    "value": null,
-                    "name": "presenta_discapacidad"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "programa_social_beneficiario",
                     "description": "programa_social_beneficiario",
-                    "value": null,
-                    "name": "programa_social_beneficiario"
+                    "hasValue": false,
+                    "value": null
                 }
             ],
-            "hasValue": false,
+            "name": "P09",
             "description": "Persona 09",
-            "value": null,
-            "name": "P09"
+            "hasValue": false,
+            "value": null
         },
         {
             "subTypes": [
@@ -2274,11 +2274,10 @@
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "A",
                                     "B",
@@ -2309,25 +2308,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_paterno",
                     "description": "Apellido paterno",
-                    "value": null,
-                    "name": "apellido_paterno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     " ",
                                     " ",
@@ -2358,25 +2357,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "apellido_materno",
                     "description": "Apellido materno",
-                    "value": null,
-                    "name": "apellido_materno"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "letterPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     " ",
                                     " ",
@@ -2407,25 +2406,25 @@
                                     " ",
                                     " "
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nombres",
                     "description": "nombres",
-                    "value": null,
-                    "name": "nombres"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2",
@@ -2436,93 +2435,93 @@
                                     "7",
                                     "8"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "fecha_nacimiento",
                     "description": "Fecha de nacimiento",
-                    "value": null,
-                    "name": "fecha_nacimiento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "9",
                                     "0"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_anhos",
                     "description": "edad_anios",
-                    "value": null,
-                    "name": "edad_anhos"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "edad_meses",
                     "description": "edad_meses",
-                    "value": null,
-                    "name": "edad_meses"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_documento",
                     "description": "tipo_documento",
-                    "value": null,
-                    "name": "tipo_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
                                 "predictedValue": [
                                     "1",
                                     "2",
@@ -2533,311 +2532,312 @@
                                     "2",
                                     "6"
                                 ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "numero_documento",
                     "description": "numero_documento",
-                    "value": null,
-                    "name": "numero_documento"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "parentesco_jefe_hogar",
                     "description": "parentesco_jefe_hogar",
-                    "value": null,
-                    "name": "parentesco_jefe_hogar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "num_nucleo_familiar",
                     "description": "num_nucleo_familiar",
-                    "value": null,
-                    "name": "num_nucleo_familiar"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sexo",
                     "description": "sexo",
-                    "value": null,
-                    "name": "sexo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "estado_civil",
                     "description": "estado_civil",
-                    "value": null,
-                    "name": "estado_civil"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "tipo_seguro",
                     "description": "tipo_seguro",
-                    "value": null,
-                    "name": "tipo_seguro"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "lengua_materna",
                     "description": "lengua_materna",
-                    "value": null,
-                    "name": "lengua_materna"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sabe_leer_escribir",
                     "description": "sabe_leer_escribir",
-                    "value": null,
-                    "name": "sabe_leer_escribir"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "nivel_educativo",
                     "description": "nivel_educativo",
-                    "value": null,
-                    "name": "nivel_educativo"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_grado_aprobado",
                     "description": "ultimo_grado_aprobado",
-                    "value": null,
-                    "name": "ultimo_grado_aprobado"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "ultimo_mes_era_un",
                     "description": "ultimo_mes_era_un",
-                    "value": null,
-                    "name": "ultimo_mes_era_un"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "sector_desempenho",
                     "description": "sector_desempenho",
-                    "value": null,
-                    "name": "sector_desempenho"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "presenta_discapacidad",
                     "description": "presenta_discapacidad",
-                    "value": null,
-                    "name": "presenta_discapacidad"
+                    "hasValue": false,
+                    "value": null
                 },
                 {
                     "subTypes": [
                         {
                             "subTypes": [],
-                            "hasValue": true,
+                            "name": "Value",
                             "description": "Valor predicho",
+                            "hasValue": true,
                             "value": {
-                                "nameSingleParser": null,
-                                "nameParser": "parserImage2Categoric",
                                 "predictedValue": [
                                     "yes"
                                 ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
                                 "countItems": -1
-                            },
-                            "name": "Value"
+                            }
                         }
                     ],
-                    "hasValue": false,
+                    "name": "programa_social_beneficiario",
                     "description": "programa_social_beneficiario",
-                    "value": null,
-                    "name": "programa_social_beneficiario"
+                    "hasValue": false,
+                    "value": null
                 }
             ],
-            "hasValue": false,
+            "name": "P10",
             "description": "Persona 10",
-            "value": null,
-            "name": "P10"
+            "hasValue": false,
+            "value": null
         }
     ],
-    "hasValue": false,
+    "name": "page4",
     "description": "pagina 4",
-    "value": null,
-    "name": "page4"
+    "hasValue": false,
+    "value": null
 }

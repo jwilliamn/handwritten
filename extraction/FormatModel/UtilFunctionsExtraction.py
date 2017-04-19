@@ -114,6 +114,7 @@ def filterSingleCharacter(letter_original_and_mask):
     #            th3[i,j]=255
     #        if shouldClear(th3, (i, j)):
     #            th3[i, j] = 0
+    
     #plt.subplot(1,2,1), plt.imshow(newMask,'gray'), plt.title('newMask (th original)')
     #plt.subplot(1, 2, 2), plt.imshow(th3,'gray'), plt.title('th3, modified')
     #plt.show()
@@ -179,6 +180,7 @@ def plotImagesWithPrediction(preditectArray, images):
         if images[k] is not None:
             plt.subplot(1,cols,k+1), plt.imshow(images[k],'gray'), plt.title(preditectArray[k]), plt.axis('off')
     plt.show()
+    
 def findMaxElement(A):
     currentValue = -1.0
     currentI = 0
@@ -192,8 +194,9 @@ def findMaxElement(A):
     return (currentI, currentJ)
 
 def getBestRectangle(region):
-    A = range(region.shape[0] - 10, region.shape[0])
-    B = range(region.shape[1] - 10, region.shape[1])
+
+    A = range(region.shape[0] - 20, region.shape[0])
+    B = range(region.shape[1] - 20, region.shape[1])
     copia = region.copy()
 
     copia[copia >= 0] = 0
@@ -252,8 +255,11 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     numCols = BR[1] - TL[1]
     # print('finding ratio nr/nc : ' + str(numRows)+' / ' + str(numCols)+'  divided by '+ str(count))
     template = findApropiateTemplate(numRows/numCols)
-    ROI = img[TL[1] - 3:BR[1] + 3, TL[0] - 3:BR[0] + 3]
-    ROI_onlyUserMarks = onlyUserMarks[TL[1] - 3:BR[1] + 3, TL[0] - 3:BR[0] + 3]
+
+    deltaAmpliacion = 5
+
+    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    ROI_onlyUserMarks = onlyUserMarks[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
 
     If = cv2.GaussianBlur(ROI, (3, 3), 0)
     If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
@@ -261,8 +267,10 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
 
 
 
-    leftPart = If[:, 0:(template.shape[1]+5)]
-    rightPart = If[:, -(template.shape[1] + 5):]
+    #leftPart = If[:, 0:(template.shape[1]+5)]
+    #rightPart = If[:, -(template.shape[1] + 5):]
+    leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion*2 - 1))]
+    rightPart = If[:, -(template.shape[1] + (deltaAmpliacion*2 - 1)):]
 
     top_left_L,bottom_right_L = getBestRectangle(leftPart)
     delta_L = (bottom_right_L[0]-top_left_L[0], bottom_right_L[1]-top_left_L[1])
@@ -292,15 +300,17 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     # print('after top_left_R', top_left_R)
     possibleBestLeft = If[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
     possibleBestRight = If[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
-    # plt.subplot(1,8,1), plt.imshow(If)
-    # plt.subplot(1, 8, 2), plt.imshow(template)
-    # plt.subplot(1, 8, 3), plt.imshow(leftPart)
-    # plt.subplot(1, 8, 4), plt.imshow(rightPart)
-    # plt.subplot(1, 8, 5), plt.imshow(bestLeft)
-    # plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft)
-    # plt.subplot(1, 8, 7), plt.imshow(bestRight)
-    # plt.subplot(1, 8, 8), plt.imshow(possibleBestRight)
-    # plt.show()
+    
+    #plt.subplot(1,8,1), plt.imshow(If)
+    #plt.subplot(1, 8, 2), plt.imshow(template)
+    #plt.subplot(1, 8, 3), plt.imshow(leftPart)
+    #plt.subplot(1, 8, 4), plt.imshow(rightPart)
+    #plt.subplot(1, 8, 5), plt.imshow(bestLeft)
+    #plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft)
+    #plt.subplot(1, 8, 7), plt.imshow(bestRight)
+    #plt.subplot(1, 8, 8), plt.imshow(possibleBestRight)
+    #plt.show()
+    
     pointA = (top_left_L[1],top_left_L[0])
     pointY = (bottom_right_R[1],bottom_right_R[0])
 
@@ -310,9 +320,11 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
 
     # print(pointA,pointB,pointX,pointY,ROI.shape)
     ROI_2 = ROI[pointA[0]:pointY[0], pointA[1]:pointY[1]]
-    # plt.subplot(2,1,1), plt.imshow(ROI)
-    # plt.subplot(2, 1, 2), plt.imshow(ROI_2)
-    # plt.show()
+    
+    #plt.subplot(2,1,1), plt.imshow(ROI)
+    #plt.subplot(2, 1, 2), plt.imshow(ROI_2)
+    #plt.show()
+    
     letters = []
     for k in range(0,count):
         upperLeft = getPointProportion(pointA, pointX, k, count - k)
@@ -335,6 +347,11 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     for letter in letters:
         singleLetterFiltered = filterSingleCharacter(letter)
         filteredLetters.append(singleLetterFiltered)
+
+        #if singleLetterFiltered != None:
+        #    plt.imshow(singleLetterFiltered)
+        #    plt.show()
+
     return filteredLetters
 
 

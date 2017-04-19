@@ -11,15 +11,15 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
+                                    "M",
+                                    "A",
                                     "R",
-                                    " ",
-                                    "V",
-                                    "E",
                                     "R",
                                     "O",
-                                    "S",
-                                    " ",
-                                    " ",
+                                    "Q",
+                                    "U",
+                                    "J",
+                                    "N",
                                     " ",
                                     " ",
                                     " ",
@@ -60,14 +60,14 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "L",
+                                    "M",
                                     "E",
-                                    "V",
+                                    "D",
+                                    "I",
+                                    "N",
                                     "A",
-                                    "L",
-                                    "L",
-                                    "O",
-                                    "S",
+                                    " ",
+                                    " ",
                                     " ",
                                     " ",
                                     " ",
@@ -109,23 +109,23 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
+                                    "M",
+                                    "A",
+                                    "R",
                                     "L",
                                     "E",
-                                    "O",
                                     "N",
+                                    "Y",
                                     " ",
-                                    "A",
+                                    "E",
                                     "L",
-                                    "F",
-                                    "O",
-                                    "N",
-                                    "S",
-                                    "O",
-                                    " ",
-                                    " ",
-                                    " ",
-                                    " ",
-                                    " ",
+                                    "I",
+                                    "Z",
+                                    "A",
+                                    "B",
+                                    "E",
+                                    "T",
+                                    "H",
                                     " ",
                                     " ",
                                     " ",
@@ -158,14 +158,14 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
+                                    "1",
                                     "7",
                                     "0",
-                                    "0",
-                                    "2",
+                                    "3",
                                     "1",
                                     "9",
-                                    "3",
-                                    "6"
+                                    "5",
+                                    "3"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -187,8 +187,8 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "7",
-                                    "7"
+                                    "6",
+                                    "0"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -258,11 +258,11 @@
                                     "2",
                                     "9",
                                     "4",
+                                    "3",
+                                    "7",
+                                    "1",
                                     "2",
-                                    "6",
-                                    "4",
-                                    "2",
-                                    "0"
+                                    "5"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -578,12 +578,12 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "R",
-                                    "I",
-                                    "V",
-                                    "E",
-                                    "R",
-                                    "A",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
                                     " ",
                                     " ",
                                     " ",
@@ -627,12 +627,12 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "F",
-                                    "L",
-                                    "O",
-                                    "R",
-                                    "E",
-                                    "S",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
                                     " ",
                                     " ",
                                     " ",
@@ -676,18 +676,18 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "G",
-                                    "L",
-                                    "A",
-                                    "D",
-                                    "Y",
-                                    "S",
                                     " ",
-                                    "W",
-                                    "I",
-                                    "L",
-                                    "M",
-                                    "D",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
                                     " ",
                                     " ",
                                     " ",
@@ -725,14 +725,14 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
                                     "1",
-                                    "2",
-                                    "0",
-                                    "6",
-                                    "1",
-                                    "9",
-                                    "7",
-                                    "8"
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -754,8 +754,8 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "3",
-                                    "4"
+                                    " ",
+                                    "1"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -822,14 +822,14 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    "2",
-                                    "9",
-                                    "7",
-                                    "3",
-                                    "5",
-                                    "2",
-                                    "5",
-                                    "5"
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -1295,7 +1295,7 @@
                                     " ",
                                     " ",
                                     " ",
-                                    " ",
+                                    "4",
                                     " ",
                                     " ",
                                     " ",
@@ -1321,8 +1321,8 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    " ",
-                                    " "
+                                    "4",
+                                    "7"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -1860,9 +1860,9 @@
                             "value": {
                                 "predictedValue": [
                                     " ",
+                                    "9",
                                     " ",
-                                    " ",
-                                    " ",
+                                    "8",
                                     " ",
                                     " ",
                                     " ",
@@ -1889,7 +1889,7 @@
                             "value": {
                                 "predictedValue": [
                                     " ",
-                                    " "
+                                    "8"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
@@ -2426,10 +2426,10 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
+                                    "4",
                                     " ",
                                     " ",
-                                    " ",
-                                    " ",
+                                    "4",
                                     " ",
                                     " ",
                                     " ",
@@ -2455,8 +2455,8 @@
                             "hasValue": true,
                             "value": {
                                 "predictedValue": [
-                                    " ",
-                                    " "
+                                    "4",
+                                    "7"
                                 ],
                                 "nameParser": "parserImage2ArrayChar",
                                 "nameSingleParser": "digitPredictor",
