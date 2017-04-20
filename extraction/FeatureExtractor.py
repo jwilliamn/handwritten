@@ -103,7 +103,7 @@ def extractPageData_numberX(img_original, baseL, str_number):
             print(parsed)
 
     Page_parsed = Page.convert2ParsedValues()
-    with open('output/predictedValues_'+str_number+'.json', 'w') as output:
+    with open('output/predictedValues_pag'+str_number+'.json', 'w') as output:
         json.dump(Page_parsed, output, default=jsonDefault, indent=4)
 
 
