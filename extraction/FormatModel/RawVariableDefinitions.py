@@ -31,6 +31,7 @@ class RawValue:
             self.nameParser = nameParser
             self.nameSingleParser = nameSingleParser
             self.predictedValue = None
+            self.arrayOfImages = None
         else:
             self.predictedValue = value
             self.nameParser = nameParser
@@ -51,7 +52,6 @@ class RawValue:
         else:
             print('nameSingleParser is None')
         raise Exception('bad arguments or not implemented parser')
-
 
     def jsonDefault(object):
         return object.__dict__
@@ -95,22 +95,26 @@ class RawValue:
             arrayResult.append(predicted)
         #UtilFunctionsExtraction.plotImagesWithPrediction(arrayResult,arrayOfImages)
         self.predictedValue = arrayResult
+        self.arrayOfImages = arrayOfImages
         return self.predictedValue
 
     def getFinalValue(self, arg):
         return self.predictedValue
 
     def parserImage2Categoric(self,arg):
+        self.arrayOfImages = None
         self.predictedValue = ['yes']
         return self.predictedValue
 
     def letterPredictor(self, img):
-        pred_label = engine.predictImage(img)
-        return chr(pred_label + ord('A'))
+        #pred_label = engine.predictImage(img)
+        #return chr(pred_label + ord('A'))
+        return 'A'
 
     def digitPredictor(self, img):
-        pred_label = engine.predictImageDigit(img)
-        return chr(pred_label + ord('0'))
+        #pred_label = engine.predictImageDigit(img)
+        #return chr(pred_label + ord('0'))
+        return '0'
 
 class ArrayImageNumber(RawValue):
     def __init__(self, position, count):
