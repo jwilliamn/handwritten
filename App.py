@@ -19,9 +19,12 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 import sys
+import os
 
 from wand.image import Image
 from wand.color import Color
+from PyPDF2 import PdfFileWriter, PdfFileReader
+
 
 from extraction import FeatureExtractor
 from extraction import PageDetector
@@ -42,11 +45,26 @@ from extraction import PageDetector
 #img = cv2.imread('input/pagina2_2.png', 0)
 #img = cv2.imread('input/pagina4_1.png', 0)
 #img = cv2.imread('input/pagina4_2.png', 0)
+def processPdf(originalPdf):
+    inputPdf = PdfFileReader(open(originalPdf, 'rb'))
+    
+    if not os.path.exists('input/tmp/'):
+        os.makedirs('input/tmp/')
+
+    for i in range(inputPdf.getNumPages()):
+        p = inputPdf.getPage(i)
+        outputPdf = PdfFileWriter()
+        outputPdf.addPage(p)
+
+        with open('input/tmp/page_%1d.pdf' % (i +1), 'wb') as f:
+            outputPdf.write(f)
+    return inputPdf.getNumPages()
+
 
 def convert_pdf_png(filepdf):
     path = filepdf
     path = path.split('.')
-    #print('path', path)
+
     try:
         with Image(filename=filepdf, resolution=300) as img:
             with Image(width=img.width, height=img.height, background=Color('white')) as bg:
@@ -77,7 +95,13 @@ if __name__ == '__main__':
         imgPath = arg
     else:
         print('File is a pdf! (I hope)')
-        imgPath = convert_pdf_png(arg)
+        numPag = processPdf(arg)
+        if numPag > 1:
+            print('Pdf has multiple pages, I\'ll process all of them though.')
+            imgPath = convert_pdf_png('input/tmp/page_1.pdf')
+        else:
+            imgPath = convert_pdf_png(arg)
+
 
     img = cv2.imread(imgPath, 0)
 
