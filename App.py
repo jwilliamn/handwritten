@@ -98,13 +98,14 @@ if __name__ == '__main__':
         numPag = processPdf(arg)
         if numPag > 1:
             print('Pdf has multiple pages, I\'ll process all of them though.')
-            imgPath = convert_pdf_png('input/tmp/page_1.pdf')
+            imgPath = convert_pdf_png(sys.argv[1])
         else:
             imgPath = convert_pdf_png(arg)
 
 
     img = cv2.imread(imgPath, 0)
-
+    plt.imshow(img,'gray')
+    plt.show()
     img = PageDetector.enderezarImagen(img)
     page = PageDetector.detectPage(img)
 

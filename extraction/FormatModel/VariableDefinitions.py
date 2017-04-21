@@ -22,7 +22,7 @@ class Category:
 
     def convert2ParsedValues(self):
         if self.hasValue:
-            return Variable('Value','Valor predicho', self.value.convert2ParsedValues())
+            return Variable(self.name,'Valor predicho', self.value.convert2ParsedValues())
         else:
             newCategory = Category(self.name,self.description)
             for st in self.subTypes:
