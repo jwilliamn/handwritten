@@ -102,10 +102,7 @@ if __name__ == '__main__':
         else:
             imgPath = convert_pdf_png(arg)
 
-
     img = cv2.imread(imgPath, 0)
-    plt.imshow(img,'gray')
-    plt.show()
     img = PageDetector.enderezarImagen(img)
     page = PageDetector.detectPage(img)
 

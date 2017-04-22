@@ -238,14 +238,16 @@ def getBestRectangle(region):
                 bestB = b
                 bestPos = (I,J)
 
-    # copia[copia >= 0] = 0
-    # pi = (bestPos[1], bestPos[0])
-    # pf = (bestPos[1] + bestB, bestPos[0] + bestA)
+    copia[copia >= 0] = 0
+    pi = (bestPos[1], bestPos[0])
+    pf = (bestPos[1] + bestB, bestPos[0] + bestA)
     # cv2.rectangle(copia, pi, pf, 255, thickness=1)
-    # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
-    # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    # section = region[pi[1]:pf[1], pi[0]:pf[0]]
+    # plt.subplot(1, 3, 1), plt.imshow(region, 'gray'), plt.title('region')
+    # plt.subplot(1, 3, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    # plt.subplot(1, 3, 3), plt.imshow(section, 'gray'), plt.title('best mark')
     # plt.show()
-    return bestPos,(bestPos[0]+bestB, bestPos[1]+bestA)
+    return pi, pf
 
 
 
@@ -267,27 +269,15 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
 
 
 
-    #leftPart = If[:, 0:(template.shape[1]+5)]
-    #rightPart = If[:, -(template.shape[1] + 5):]
     leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion*2 - 1))]
     rightPart = If[:, -(template.shape[1] + (deltaAmpliacion*2 - 1)):]
 
     top_left_L,bottom_right_L = getBestRectangle(leftPart)
     delta_L = (bottom_right_L[0]-top_left_L[0], bottom_right_L[1]-top_left_L[1])
-    # res = cv2.matchTemplate(leftPart,template,cv2.TM_CCORR)
-    # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-    # top_left_L = min_loc
-    # bottom_right_L = (top_left_L[0] + template.shape[1], top_left_L[1] + template.shape[0])
 
-    top_left_R, bottom_right_R = getBestRectangle(leftPart)
+
+    top_left_R, bottom_right_R = getBestRectangle(rightPart)
     delta_R = (bottom_right_R[0] - top_left_R[0], bottom_right_R[1] - top_left_R[1])
-    # res = cv2.matchTemplate(rightPart, template, cv2.TM_CCORR)
-    # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-    # top_left_R = min_loc
-    # bottom_right_R = (top_left_R[0] + template.shape[1], top_left_R[1] + template.shape[0])
-    #
-    #
-    # print('bottom_right_R', bottom_right_R)
 
     bestLeft = leftPart[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
     bestRight = rightPart[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
@@ -295,21 +285,21 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     # print('If shape: ', If.shape)
     # print('template shape: ', template.shape)
     # print('current top_left_R', top_left_R)
-    top_left_R = (top_left_R[0]+If.shape[1]-(template.shape[1]+5), top_left_R[1])
+    top_left_R = (top_left_R[0]+If.shape[1]-(template.shape[1]+((deltaAmpliacion*2 - 1))), top_left_R[1])
     bottom_right_R = (top_left_R[0] + delta_R[0], top_left_R[1] + delta_R[1])
     # print('after top_left_R', top_left_R)
     possibleBestLeft = If[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
     possibleBestRight = If[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
     
-    #plt.subplot(1,8,1), plt.imshow(If)
-    #plt.subplot(1, 8, 2), plt.imshow(template)
-    #plt.subplot(1, 8, 3), plt.imshow(leftPart)
-    #plt.subplot(1, 8, 4), plt.imshow(rightPart)
-    #plt.subplot(1, 8, 5), plt.imshow(bestLeft)
-    #plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft)
-    #plt.subplot(1, 8, 7), plt.imshow(bestRight)
-    #plt.subplot(1, 8, 8), plt.imshow(possibleBestRight)
-    #plt.show()
+    # plt.subplot(1,8,1), plt.imshow(If)
+    # plt.subplot(1, 8, 2), plt.imshow(template)
+    # plt.subplot(1, 8, 3), plt.imshow(leftPart)
+    # plt.subplot(1, 8, 4), plt.imshow(rightPart)
+    # plt.subplot(1, 8, 5), plt.imshow(bestLeft)
+    # plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft)
+    # plt.subplot(1, 8, 7), plt.imshow(bestRight)
+    # plt.subplot(1, 8, 8), plt.imshow(possibleBestRight)
+    # plt.show()
     
     pointA = (top_left_L[1],top_left_L[0])
     pointY = (bottom_right_R[1],bottom_right_R[0])

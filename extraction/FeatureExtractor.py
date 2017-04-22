@@ -106,7 +106,7 @@ def extractPageData_numberX(img_original, baseL, str_number):
     Page_parsed = Page.convert2ParsedValues()
     if Page_parsed is not None or Page is not None:
         plotearCategoriasPosicionesImagenes(img, Page, Page_parsed)
-
+    cv2.imwrite('resultImage.png', img)
     with open('output/predictedValues_pag'+str_number+'.json', 'w') as output:
         json.dump(Page_parsed, output, default=jsonDefault, indent=4)
 
