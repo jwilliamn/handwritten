@@ -112,12 +112,12 @@ if __name__ == '__main__':
         plt.title('Es la página: '+str(page[1][0]))
         plt.show()
         if page[1][1] == 0: # esta orientado de manera normal
-            FeatureExtractor.extractPageData(page[0],page[1][0])
+            FeatureExtractor.extractPageData(page[0],page[1][0],None,os.path.basename(imgPath))
             print('Still working!')
         else:
             if page[1][1] == 1: #esta al revez
                 flipped = cv2.flip(page[0],0)
                 flipped = cv2.flip(flipped, 1)
-                FeatureExtractor.extractPageData(flipped, page[1][0])
+                FeatureExtractor.extractPageData(flipped, page[1][0],None,os.path.basename(imgPath))
             else:
                 raise ValueError('Error')

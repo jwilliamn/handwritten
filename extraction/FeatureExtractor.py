@@ -36,7 +36,7 @@ dy = [0, 0, -1, 1]
 
 # Function definitions ####
 # Very important function ####
-def extractPageData(img, pageNumber, baseL = None):
+def extractPageData(img, pageNumber, baseL = None, page_name = 'pagina'):
     """Detecta la orientación de la imagen y la orienta.
     Args:
         img: Original image.
@@ -45,14 +45,15 @@ def extractPageData(img, pageNumber, baseL = None):
     Returns:
         __
     """
+    print('Extracting for page: ', page_name)
     if(pageNumber == 3):
-        return extractPageData_number3(img, baseL)
+        return extractPageData_number3(img, baseL, page_name)
     if(pageNumber == 1):
-        return extractPageData_number1(img, baseL)
+        return extractPageData_number1(img, baseL, page_name)
     if (pageNumber == 2):
-        return extractPageData_number2(img, baseL)
+        return extractPageData_number2(img, baseL, page_name)
     if (pageNumber == 4):
-        return extractPageData_number4(img, baseL)
+        return extractPageData_number4(img, baseL, page_name)
     raise ValueError('Only implemented for page 1, 2, 3 & 4 of FSU, not for page: '+ str(pageNumber))
 
 
@@ -60,7 +61,7 @@ def extractPageData(img, pageNumber, baseL = None):
 def jsonDefault(object):
     return object.__dict__
 
-def extractPageData_numberX(img_original, baseL, str_number):
+def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_unknow'):
     """Detecta la orientación de la imagen y la orienta.
     Args:
         image_original: Original image.
@@ -106,19 +107,19 @@ def extractPageData_numberX(img_original, baseL, str_number):
     Page_parsed = Page.convert2ParsedValues()
     if Page_parsed is not None or Page is not None:
         plotearCategoriasPosicionesImagenes(img, Page, Page_parsed)
-    cv2.imwrite('resultImage.png', img)
+    cv2.imwrite('output/'+page_name+'_resultImage.png', img)
     with open('output/predictedValues_pag'+str_number+'.json', 'w') as output:
         json.dump(Page_parsed, output, default=jsonDefault, indent=4)
 
 
-def extractPageData_number1(img_original, baseL):
-    extractPageData_numberX(img_original, baseL, '1')
+def extractPageData_number1(img_original, baseL, page_name = 'pagina_1'):
+    extractPageData_numberX(img_original, baseL, '1', page_name)
 
-def extractPageData_number2(img_original, baseL):
-    extractPageData_numberX(img_original, baseL, '2')
+def extractPageData_number2(img_original, baseL, page_name = 'pagina_2'):
+    extractPageData_numberX(img_original, baseL, '2', page_name)
 
-def extractPageData_number3(img_original, baseL):
-    extractPageData_numberX(img_original, baseL, '3')
+def extractPageData_number3(img_original, baseL, page_name = 'pagina_3'):
+    extractPageData_numberX(img_original, baseL, '3', page_name)
 
-def extractPageData_number4(img_original, baseL):
-    extractPageData_numberX(img_original, baseL, '4')
+def extractPageData_number4(img_original, baseL, page_name = 'pagina_4'):
+    extractPageData_numberX(img_original, baseL, '4', page_name)
