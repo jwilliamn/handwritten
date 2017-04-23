@@ -50,6 +50,8 @@ def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
                 # plt.show()
                 img[pixel_y:(pixel_y + resized.shape[0]), pixel_x:(pixel_x + resized.shape[1])] = resized
                 cv2.rectangle(img, (pixel_x-1, pixel_y-1), (pixel_x+20, pixel_y+20), color=0, thickness=1)
+                cv2.putText(img, str(arrayPredictedValues[k]), (pixel_x, pixel_y), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                            fontScale=1, color=0, thickness=2)
                 # plt.subplot(3, 1, 1), plt.imshow(img, 'gray')
                 # plt.subplot(3, 1, 2), plt.imshow(img32x32, 'gray')
                 #

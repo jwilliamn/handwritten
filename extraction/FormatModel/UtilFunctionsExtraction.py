@@ -296,9 +296,26 @@ def findMaxElement(A):
                 currentI = i
                 currentJ = j
     return (currentI, currentJ)
+def countNonZerosRows(sumRows, I, j1, j2):
+    if j1 <= 0:
+        return sumRows[I,j2]
+    else:
+        return sumRows[I,j2]-sumRows[I,(j1-1)]
 
+def countNonZerosCols(sumCols, J, i1, i2):
+    if i1 <= 0:
+        return sumCols[i2,J]
+    else:
+        return sumCols[i2,J]-sumCols[(i1-1),J]
 
+def countNonZeros(sumRows, sumCols, pi, pf):
+    top = countNonZerosRows(sumRows, pi[0], pi[1], pf[1])
+    bottom = countNonZerosRows(sumRows, pf[0], pi[1], pf[1])
+    left = countNonZerosCols(sumCols, pi[1], pi[0]+1, pf[0]-1)
+    right = countNonZerosCols(sumCols, pf[1], pi[0]+1, pf[0]-1)
+    return top + bottom + left + right
 def getBestRectangle(region):
+
     B = range(region.shape[1] - 20, region.shape[1])
     copia = region.copy()
 
@@ -309,25 +326,47 @@ def getBestRectangle(region):
     bestA = 0
     bestB = 0
     bestPos = (-1, -1)
+
+    sumRows = np.zeros((rows, cols))
+    sumCols = np.zeros((rows, cols))
+    for i in range(rows):
+        for j in range(cols):
+            if j == 0:
+                sumRows[i,j] = (1 if region[i,j]>0 else 0)
+            else:
+                sumRows[i, j] = (1 if region[i, j] > 0 else 0) + sumRows[i, j - 1]
+
+            if i == 0:
+                sumCols[i, j] = (1 if region[i, j] > 0 else 0)
+            else:
+                sumCols[i, j] = (1 if region[i, j] > 0 else 0) + sumCols[i - 1, j]
+    # print(region)
+    # print(sumRows)
+    # print(sumCols)
+
+
     for b in B:
-        for a in range(b,2*b):
+        minA = int(round(10*b/9))
+        maxA = int(round(10*b/7))
+        for a in range(minA,maxA):
             cum = np.zeros((cols, rows))
             for i in range(rows):
                 if i + a >= rows:
                     break
-
                 for j in range(cols):
                     if j + b >= cols:
                         break
                     #copia[copia >= 0] = 0
-                    pi = (j, i)
-                    pf = (j + b, i + a)
-                    cv2.rectangle(copia, pi, pf, 255, thickness=1)
-                    copia = cv2.bitwise_and(copia, region)
-                    cantMatch = cv2.countNonZero(copia)
-                    cum[i, j] = cantMatch / (2 * (a + b))
-                    cv2.rectangle(copia, pi, pf, 0, thickness=1)
-                    # (I,J) = findMaxElement(cum)
+                    # pi = (j, i)
+                    # pf = (j + b, i + a)
+                    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+                    # copia = cv2.bitwise_and(copia, region)
+                    # cantMatch = cv2.countNonZero(copia)
+                    # print('cant match: ', cantMatch)
+                    myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i+a, j+b))
+                    # print('cant mAtch: ', myCantMatch)
+                    cum[i, j] = myCantMatch / (2 * (a + b))
+                    # (I, J) = findMaxElement(cum)
                     # print(I,J)
                     # print('inicio', i, j)
                     # print('longitudes', a, b)
@@ -335,6 +374,9 @@ def getBestRectangle(region):
                     # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
                     # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
                     # plt.show()
+                    # cv2.rectangle(copia, pi, pf, 0, thickness=1)
+
+
             (I, J) = findMaxElement(cum)
             if cum[I, J] > bestValue:
                 bestValue = cum[I, J]
