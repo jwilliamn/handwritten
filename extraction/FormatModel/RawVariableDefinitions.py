@@ -102,7 +102,10 @@ class RawValue:
         return self.predictedValue
 
     def parserImage2Categoric(self,arg):
-        self.arrayOfImages = None
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_Test(img, TL, BR)
         self.predictedValue = ['yes']
         return self.predictedValue
 

@@ -314,9 +314,76 @@ def countNonZeros(sumRows, sumCols, pi, pf):
     left = countNonZerosCols(sumCols, pi[1], pi[0]+1, pf[0]-1)
     right = countNonZerosCols(sumCols, pf[1], pi[0]+1, pf[0]-1)
     return top + bottom + left + right
-def getBestRectangle(region):
+def getBestRectangle_big(region, ratio_cols_over_rows):
 
-    B = range(region.shape[1] - 20, region.shape[1])
+    B = range(max(0,region.shape[1] - 30), region.shape[1])
+    copia = region.copy()
+
+    copia[copia >= 0] = 0
+    rows, cols = region.shape
+    print(region.shape)
+    bestValue = -1.0
+    bestA = 0
+    bestB = 0
+    bestPos = (-1, -1)
+
+    sumRows = np.sum(region,1)
+    sumCols = np.sum(region,0)
+
+
+
+    for b in B:
+        minA = int(round(b/(ratio_cols_over_rows+0.1)))
+        maxA = int(round(b/(ratio_cols_over_rows-0.1)))
+        for a in range(minA,maxA):
+            cum = np.zeros((rows, cols))
+            for i in range(rows):
+                if i + a >= rows:
+                    break
+                for j in range(cols):
+                    if j + b >= cols:
+                        break
+                    #copia[copia >= 0] = 0
+                    # pi = (j, i)
+                    # pf = (j + b, i + a)
+                    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+                    # copia = cv2.bitwise_and(copia, region)
+                    # cantMatch = cv2.countNonZero(copia)
+                    # print('cant match: ', cantMatch)
+                    myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i+a, j+b))
+                    # print('cant mAtch: ', myCantMatch)
+                    cum[i, j] = myCantMatch / (2 * (a + b))
+                    # (I, J) = findMaxElement(cum)
+                    # print(I,J)
+                    # print('inicio', i, j)
+                    # print('longitudes', a, b)
+                    # print(cum)
+                    # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
+                    # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+                    # plt.show()
+                    # cv2.rectangle(copia, pi, pf, 0, thickness=1)
+
+
+            (I, J) = findMaxElement(cum)
+            if cum[I, J] > bestValue:
+                bestValue = cum[I, J]
+                bestA = a
+                bestB = b
+                bestPos = (I, J)
+
+    copia[copia >= 0] = 0
+    pi = (bestPos[1], bestPos[0])
+    pf = (bestPos[1] + bestB, bestPos[0] + bestA)
+    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+    # section = region[pi[1]:pf[1], pi[0]:pf[0]]
+    # plt.subplot(1, 3, 1), plt.imshow(region, 'gray'), plt.title('region')
+    # plt.subplot(1, 3, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    # plt.subplot(1, 3, 3), plt.imshow(section, 'gray'), plt.title('best mark')
+    # plt.show()
+    return pi, pf
+def getBestRectangle(region, ratio_cols_over_rows):
+
+    B = range(max(0,region.shape[1] - 20), region.shape[1])
     copia = region.copy()
 
     copia[copia >= 0] = 0
@@ -346,10 +413,10 @@ def getBestRectangle(region):
 
 
     for b in B:
-        minA = int(round(10*b/9))
-        maxA = int(round(10*b/7))
+        minA = int(round(b/(ratio_cols_over_rows+0.1)))
+        maxA = int(round(b/(ratio_cols_over_rows-0.1)))
         for a in range(minA,maxA):
-            cum = np.zeros((cols, rows))
+            cum = np.zeros((rows, cols))
             for i in range(rows):
                 if i + a >= rows:
                     break
@@ -395,6 +462,29 @@ def getBestRectangle(region):
     # plt.show()
     return pi, pf
 
+def extractCategory_Test(img, TL, BR):
+    deltaAmpliacion = 10
+    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    #If = cv2.GaussianBlur(ROI, (3, 3), 0)
+    ret, If = cv2.threshold(ROI,0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+    #ret, If = cv2.threshold(ROI, int(round(ret+5)), 255, cv2.THRESH_BINARY)
+    print(ret)
+    If = cv2.bitwise_not(If)
+    top_left, bottom_right = getBestRectangle(If,0.4)
+    bestRectangle = If[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
+    canny = cv2.Canny(If, 50, 240)
+    #kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
+
+    plt.subplot(1, 4, 1), plt.imshow(ROI), plt.title('original')
+    plt.subplot(1, 4, 2), plt.imshow(If), plt.title('If')
+    plt.subplot(1, 4, 3), plt.imshow(canny), plt.title('canny on If')
+    plt.subplot(1, 4, 4), plt.imshow(bestRectangle), plt.title('bestRectangle')
+
+    plt.show()
+
+
+    return None
 
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
     numRows = (BR[0] - TL[0]) / count
@@ -415,10 +505,10 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
     rightPart = If[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
 
-    top_left_L, bottom_right_L = getBestRectangle(leftPart)
+    top_left_L, bottom_right_L = getBestRectangle(leftPart, 0.8)
     delta_L = (bottom_right_L[0] - top_left_L[0], bottom_right_L[1] - top_left_L[1])
 
-    top_left_R, bottom_right_R = getBestRectangle(rightPart)
+    top_left_R, bottom_right_R = getBestRectangle(rightPart, 0.8)
     delta_R = (bottom_right_R[0] - top_left_R[0], bottom_right_R[1] - top_left_R[1])
 
     bestLeft = leftPart[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
