@@ -146,7 +146,6 @@ weights = {
 }
 
 biases = {
-	#'b1' : tf.Variable(tf.zeros([depth])),
 	'b1' : tf.Variable(tf.zeros([D1])),
 	#'b1' : tf.Variable(tf.constant(0.1, tf.float32, shape=[D1])),
 	'b2' : tf.Variable(tf.constant(0.1, tf.float32, shape=[D2])),
@@ -214,6 +213,7 @@ def accuracy2(predictions, labels):
 #correct_prediction = tf.equal(tf.argmax(train_pred, 1), tf.argmax(Y, 1))
 #accuracy3 = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
+# Learning rate decay
 def learning_rate(step):
 	max_lr = 0.003
 	min_lr = 0.0001
@@ -225,6 +225,7 @@ def learning_rate(step):
 valid_pred = tf.nn.softmax(convnet_model(X_val, weights, biases, keep_prob = 1.0))
 test_pred = tf.nn.softmax(convnet_model(X_test, weights, biases, keep_prob = 1.0))
 
+# Visualize learning parameters
 with tf.name_scope("Summaries"):
 	#tf.summary.histogram("weights", [weights['w1'], weights['w2']])
 	tf.summary.histogram("weights", weights['w1'])
@@ -272,7 +273,7 @@ with tf.Session() as sess:
 	print('Test accuracy: %.1f%%' % accuracy(test_pred.eval(), test_labels))
 	print('Total time: {0} seconds'.format(time.time() - start_time))
 	
-	print('Optimization Finished!') # should be around 0.35 after 25 epochs
+	print('Optimization Finished!')
 	####print('Parameters: ', sess.run(weights), sess.run(biases))
 
 	trained_weights = sess.run(weights)
