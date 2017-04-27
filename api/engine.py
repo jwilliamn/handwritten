@@ -59,8 +59,9 @@ def reformat(dataset, labels=None):
 
 
 
-# Step 4: trained model ####
-def convnet_model(X, weights, biases):
+# Trained models ####
+# Characters
+def convnet_model_old(X, weights, biases): # 95.4% ModelC1
 	# 1st Convolution layer
 	conv = tf.nn.conv2d(X, weights['w1'], [1, 1, 1, 1], padding='SAME')
 	hidden = tf.nn.relu(conv + biases['b1'])
@@ -80,7 +81,35 @@ def convnet_model(X, weights, biases):
 	o_layer = tf.matmul(hidden, weights['w4']) + biases['b4']
 	return o_layer
 
-def convnet_model_d_old(X, weights, biases, keep_prob):
+def convnet_model(X, weights, biases, keep_prob):  # 96.8% ModelC3
+	# 1st Convolutional layer
+	conv1 = tf.nn.conv2d(X, weights['w1'], [1, 1, 1, 1], padding='SAME')
+	h_conv1 = tf.nn.relu(conv1 + biases['b1'])
+	
+	# 2nd Convolutional layer
+	conv2 = tf.nn.conv2d(h_conv1, weights['w2'], [1, 2, 2, 1], padding='SAME')
+	h_conv2 = tf.nn.relu(conv2 + biases['b2'])
+	
+	# 3rd Convolutional layer
+	conv3 = tf.nn.conv2d(h_conv2, weights['w3'], [1, 2, 2, 1], padding='SAME')
+	h_conv3 = tf.nn.relu(conv3 + biases['b3'])
+
+	# Fully connected layer
+	shape = h_conv3.get_shape().as_list()
+	h_conv3_flat = tf.reshape(h_conv3, [shape[0], shape[1]*shape[2]*shape[3]])
+	h_fllc1 = tf.nn.relu(tf.matmul(h_conv3_flat, weights['w4']) + biases['b4'])
+
+	# Dropout
+	h_fllc1_drop = tf.nn.dropout(h_fllc1, keep_prob)
+
+	# ReadOut layer
+	o_layer = tf.matmul(h_fllc1_drop, weights['w5']) + biases['b5']
+	return o_layer
+
+
+
+# Digits
+def convnet_model_d_old(X, weights, biases, keep_prob): # ModelD1 97.4%
 	# 1st Convolution layer
 	conv1 = tf.nn.conv2d(X, weights['w1'], [1, 1, 1, 1], padding='SAME')
 	h_conv1 = tf.nn.relu(conv1 + biases['b1'])
@@ -103,7 +132,7 @@ def convnet_model_d_old(X, weights, biases, keep_prob):
 	o_layer = tf.matmul(h_fllc1_drop, weights['w4']) + biases['b4']
 	return o_layer
 
-def convnet_model_d(X, weights, biases, keep_prob):
+def convnet_model_d(X, weights, biases, keep_prob): #98.2% modelD2
 	# 1st Convolutional layer
 	conv1 = tf.nn.conv2d(X, weights['w1'], [1, 1, 1, 1], padding='SAME')
 	h_conv1 = tf.nn.relu(conv1 + biases['b1'])
@@ -135,7 +164,8 @@ def predictImage(image_data):
 	print('Real image', image_data.shape, type(image_data))
 
 	# Read model parameters ##
-	param_file = os.path.join(model_path, 'modeling/modelC1_param.pickle')
+	#param_file = os.path.join(model_path, 'modeling/modelC1_param.pickle')
+	param_file = os.path.join(model_path, 'modeling/modelC3_param.pickle')
 	
 	weights, biases = getModelParams(param_file)
 
@@ -146,7 +176,8 @@ def predictImage(image_data):
 	X = tf.constant(image_dataset)
 
 	# Pred run
-	image_pred = tf.nn.softmax(convnet_model(X, weights, biases))
+	#image_pred = tf.nn.softmax(convnet_model(X, weights, biases))
+	image_pred = tf.nn.softmax(convnet_model(X, weights, biases, keep_prob=1.0))
 
 	with tf.Session() as sess:
 		start_time = time.time()
