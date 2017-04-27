@@ -2,7 +2,7 @@
 # coding: utf-8
 
 """
-    App
+    mindisApp
     ============================
 
     Handwritten characters and digits recognition application
@@ -20,6 +20,7 @@ import cv2
 from matplotlib import pyplot as plt
 import sys
 import os
+import time
 
 from wand.image import Image
 from wand.color import Color
@@ -45,12 +46,14 @@ from extraction import PageDetector
 #img = cv2.imread('input/pagina2_2.png', 0)
 #img = cv2.imread('input/pagina4_1.png', 0)
 #img = cv2.imread('input/pagina4_2.png', 0)
+
 def processPdf(originalPdf):
     inputPdf = PdfFileReader(open(originalPdf, 'rb'))
     
     if not os.path.exists('input/tmp/'):
         os.makedirs('input/tmp/')
 
+    outputPath = []
     for i in range(inputPdf.getNumPages()):
         p = inputPdf.getPage(i)
         outputPdf = PdfFileWriter()
@@ -58,33 +61,39 @@ def processPdf(originalPdf):
 
         with open('input/tmp/page_%1d.pdf' % (i +1), 'wb') as f:
             outputPdf.write(f)
-    return inputPdf.getNumPages()
+            outputPath.append(f.name)
+    
+    outputPath = np.array(outputPath)
+    #print('outputPdf', type(outputPath), outputPath)
+    return outputPath, inputPdf.getNumPages()
 
 
-def convert_pdf_png(filepdf):
-    path = filepdf
-    path = path.split('.')
-
-    try:
-        with Image(filename=filepdf, resolution=300) as img:
-            with Image(width=img.width, height=img.height, background=Color('white')) as bg:
-                bg.composite(img, 0, 0)
-                bg.save(filename=path[0] + '.png')
-    except Exception as e:
-        print('Unable to convert pdf file', e)
-        raise
+def convert_pdf_png(filePath, numPages):
     imagePath = []
-    imagePath = path[0] + '.png'
-    print('imagepath in function',imagePath)
+    for i in range(numPages):
+        path = filePath[i]
+        pathName = path.split('.')
+
+        try:
+            with Image(filename=path, resolution=600) as img:
+                with Image(width=img.width, height=img.height, background=Color('white')) as bg:
+                    bg.composite(img, 0, 0)
+                    bg.save(filename=pathName[0] + '.png')
+        except Exception as e:
+            print('Unable to convert pdf file', e)
+            raise
+
+        imagePath.append(pathName[0] + '.png')
+        print('Converting page %d' % (i + 1))
+    imagePath = np.array(imagePath)
     return imagePath
 
 
 
-#img = cv2.imread('input/pagina51.png', 0)
 
-
+# Main function
 if __name__ == '__main__':
-    print("App: I'll try to be helpful :) \nBut I'm still just a robot. Sorry!")    
+    print("Hi there, its mindisApp I'll try to be helpful :) \nBut I'm still just a robot. Sorry!")    
     
     arg = sys.argv[1]
     print('arg', arg)
@@ -92,32 +101,38 @@ if __name__ == '__main__':
 
     if splitArg[1] == 'png' or splitArg[1] == 'jpeg' or splitArg[1] == 'jpg':
         print("File is a picture!")
-        imgPath = arg
+        imgPath = np.array([arg])
     else:
-        print('File is a pdf! (I hope)')
-        numPag = processPdf(arg)
-        if numPag > 1:
-            print('Pdf has multiple pages, I\'ll process all of them though.')
-            imgPath = convert_pdf_png('input/tmp/page_1.pdf')
-        else:
-            imgPath = convert_pdf_png(arg)
+        if splitArg[1] == 'pdf' or splitArg[1] == 'PDF':
+            print('File is a pdf!')
+            pdfPath, numPag = processPdf(arg)
+            imgPath = convert_pdf_png(pdfPath, numPag)
 
-    img = cv2.imread(imgPath, 0)
-    img = PageDetector.enderezarImagen(img)
-    page = PageDetector.detectPage(img)
-
-    print('So far, so good!')
-    if page is not None:
-        plt.imshow(page[0],'gray')
-        plt.title('Es la página: '+str(page[1][0]))
-        plt.show()
-        if page[1][1] == 0: # esta orientado de manera normal
-            FeatureExtractor.extractPageData(page[0],page[1][0],None,os.path.basename(imgPath))
-            print('Still working!')
+            #print('imgPath__', type(imgPath), imgPath)
         else:
-            if page[1][1] == 1: #esta al revez
-                flipped = cv2.flip(page[0],0)
-                flipped = cv2.flip(flipped, 1)
-                FeatureExtractor.extractPageData(flipped, page[1][0],None,os.path.basename(imgPath))
+            raise ValueError(splitArg[1] + ' File format cannot be processed :(!')
+
+    #print('imgPath for cv2', type(imgPath), len(imgPath))
+    for i in range(len(imgPath)):
+        print('***** IMAGE ' + str(i + 1) + ' PROCESSING *****')
+        start_time = time.time()
+        img = cv2.imread(imgPath[i], 0)
+        img = PageDetector.enderezarImagen(img)
+        page = PageDetector.detectPage(img)
+
+        if page is not None:
+            plt.imshow(page[0],'gray')
+            plt.title(' Es la página: '+str(page[1][0]))
+            plt.show()
+            print(' This image can be processed')
+            if page[1][1] == 0: # esta orientado de manera normal
+                FeatureExtractor.extractPageData(page[0],page[1][0],None,os.path.basename(imgPath[i]))
+                print('Total time: {0} seconds'.format(time.time() - start_time))
             else:
-                raise ValueError('Error')
+                if page[1][1] == 1: #esta al revez
+                    flipped = cv2.flip(page[0],0)
+                    flipped = cv2.flip(flipped, 1)
+                    FeatureExtractor.extractPageData(flipped, page[1][0],None,os.path.basename(imgPath[i]))
+                    print('Total time: {0} seconds'.format(time.time() - start_time))
+                else:
+                    raise ValueError('Image cannot be processed, Check its quality\nUse a different scanner and try again')

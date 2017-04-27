@@ -32,9 +32,9 @@ Table below shows performance of several convNet models we've built:
 
 Project consist of three main directories:
 
-* Extraction / Contain the scripts that extract individual characters of the survey form
+* Extraction - Contain the scripts that extract individual characters of the survey form.
 	** Detect page,
 	** Feature extractor
-* Modeling / Contains convnet models designed
-* Api / Script that integrates the above.
+* Modeling - Contains convnet models designed.
+* Api - Script that integrates the above.
 	** Engine
