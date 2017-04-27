@@ -91,8 +91,19 @@ def convert_pdf_png(filePath, numPages):
 
 
 
-# Main function
+# Main function ####
 if __name__ == '__main__':
+    """ .........
+    To run the app, execute the following in terminal:
+
+    [terminal_prompt]$ python App.py path/to/image.pdf
+
+    Currently the app supports images in the following formats: 
+        .png
+        .jpeg
+        .jpg
+        .pdf
+    """
     print("Hi there, its mindisApp I'll try to be helpful :) \nBut I'm still just a robot. Sorry!")    
     
     arg = sys.argv[1]
