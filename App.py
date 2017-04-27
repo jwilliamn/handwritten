@@ -90,7 +90,7 @@ if __name__ == '__main__':
     print('arg', arg)
     splitArg = arg.split('.')
 
-    if splitArg[1] == 'png' or splitArg[1] == 'jpeg':
+    if splitArg[1] == 'png' or splitArg[1] == 'jpeg' or splitArg[1] == 'jpg':
         print("File is a picture!")
         imgPath = arg
     else:
@@ -98,7 +98,7 @@ if __name__ == '__main__':
         numPag = processPdf(arg)
         if numPag > 1:
             print('Pdf has multiple pages, I\'ll process all of them though.')
-            imgPath = convert_pdf_png(sys.argv[1])
+            imgPath = convert_pdf_png('input/tmp/page_1.pdf')
         else:
             imgPath = convert_pdf_png(arg)
 

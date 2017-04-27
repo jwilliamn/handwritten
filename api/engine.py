@@ -19,22 +19,22 @@ import pickle
 
 # Global settings ####
 # Path to saved model parameters
-#model_path = '/home/williamn/Repository/handwritten'
-model_path = '/home/vmchura/Documents/handwritten'
+model_path = '/home/williamn/Repository/handwritten'
+#model_path = '/home/vmchura/Documents/handwritten'
 
 # Parameters model
-learning_rate = 0.05
-batch_size = 16  # 100
-patch_size = 5
-n_epochs = 2 # 15
+#learning_rate = 0.05
+#batch_size = 16  # 100
+#patch_size = 5
+#n_epochs = 2 # 15
 
 # Network Parameters
 image_size = 32
-n_input = 1024  # input nodes
-depth = 16
+#n_input = 1024  # input nodes
+#depth = 16
 n_channels = 1 # grayscale
-n_hidden = 64  # hidden layer nodes
-n_classes = 26  # total classes (A - Z)
+#n_hidden = 64  # hidden layer nodes
+#n_classes = 26  # total classes (A - Z)
 
 
 # Step 1: Read in params ####
@@ -80,7 +80,7 @@ def convnet_model(X, weights, biases):
 	o_layer = tf.matmul(hidden, weights['w4']) + biases['b4']
 	return o_layer
 
-def convnet_model_d(X, weights, biases, keep_prob):
+def convnet_model_d_old(X, weights, biases, keep_prob):
 	# 1st Convolution layer
 	conv1 = tf.nn.conv2d(X, weights['w1'], [1, 1, 1, 1], padding='SAME')
 	h_conv1 = tf.nn.relu(conv1 + biases['b1'])
@@ -102,6 +102,32 @@ def convnet_model_d(X, weights, biases, keep_prob):
 	# ReadOut layer
 	o_layer = tf.matmul(h_fllc1_drop, weights['w4']) + biases['b4']
 	return o_layer
+
+def convnet_model_d(X, weights, biases, keep_prob):
+	# 1st Convolutional layer
+	conv1 = tf.nn.conv2d(X, weights['w1'], [1, 1, 1, 1], padding='SAME')
+	h_conv1 = tf.nn.relu(conv1 + biases['b1'])
+	
+	# 2nd Convolutional layer
+	conv2 = tf.nn.conv2d(h_conv1, weights['w2'], [1, 2, 2, 1], padding='SAME')
+	h_conv2 = tf.nn.relu(conv2 + biases['b2'])
+	
+	# 3rd Convolutional layer
+	conv3 = tf.nn.conv2d(h_conv2, weights['w3'], [1, 2, 2, 1], padding='SAME')
+	h_conv3 = tf.nn.relu(conv3 + biases['b3'])
+
+	# Fully connected layer
+	shape = h_conv3.get_shape().as_list()
+	h_conv3_flat = tf.reshape(h_conv3, [shape[0], shape[1]*shape[2]*shape[3]])
+	h_fllc1 = tf.nn.relu(tf.matmul(h_conv3_flat, weights['w4']) + biases['b4'])
+
+	# Dropout
+	h_fllc1_drop = tf.nn.dropout(h_fllc1, keep_prob)
+
+	# ReadOut layer
+	o_layer = tf.matmul(h_fllc1_drop, weights['w5']) + biases['b5']
+	return o_layer
+
 
 
 # Prediction of characters ####
@@ -152,7 +178,8 @@ def predictImageDigit(image_data):
 
 	# Read model parameters ##
 	#param_file = os.path.join(model_path, 'modeling/modelD1_param_.pickle')
-	param_file = os.path.join(model_path, 'modeling/modelD1_param.pickle')
+	#param_file = os.path.join(model_path, 'modeling/modelD1_param.pickle')
+	param_file = os.path.join(model_path, 'modeling/modelD2_param.pickle')
 	
 	weights, biases = getModelParams(param_file)
 
