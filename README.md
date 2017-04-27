@@ -1,89 +1,29 @@
-# handwritten
-Hand written character and digit recognition
+# Convolutinal Neural Network for Digit and Character Recognition using Tensor Flow
 
-modelD1_param_ = 97.4%
+Project consist in the development of an AI model that
+can be able to recognize handwritten digits and characters 
+of a socioeconomic survey [Link]().
 
-modelD1_param = 97.8%
+In order to achive the highest possible accuracy, we use
+a convolutional neural network and we take advantage of shape
+detection.
 
----
-temp params:
-
-pageDetector/
-	getSquares
-	
-	k_left = 5 # componentes >= 4
-	
-	k_right = 80 # componentes < 4
-	
-
-getSquares_2, no funciona?
-detectFranja, ?
-fill, no return?
-get4CenterOfSquare, ?
-
-
----
-eliminadas
-
-getPageNumber,
-completeWithOnlyMeans,
-distPoints,
-isSquare,
-findDistancesOfSquares,
-findSquares,
-dfs,
-get4CenterOfSquare,
-getSquares_2,
-
-fillWithCorrectValue,
-getLengthm,
-areClose,
-countTrueValues,
-logoStartsHere,
-fill,
-isSquaredFull,
-detectFranja,
-isSquaredFull
-
-
----
-candidatos a eliminar de featureExtractor
-
-extractPageData_number3_old,
-enhance,
-extractPageData_number3_feature5,
-extractPageData_number3_feature5_Row,
-extractLetters,
-getCornersOfNamesAndLastNames,
-closestNonZero,,
-extractLetters,
-getCross,
-getMaxL,
-getPercent,
-calcPercent,
-getPointProportion,
-fillAround,
-detectRectangles,
-addPoint,
-getFeaturePage3Feature5_points,
-filterByMaxCountDistances,
-fillWithMeans,
-completeWithOnlyMeans,
-rotate,
-draw_circle,
-getFeature,
-match,
-rotatePattern,
-matchAnyRotation,
-getDk,
-expandOnlyIntersections,
-getFeaturePage3Feature5,
+We've implemented using [Tensor Flow](https://www.tensorflow.org/) framework
+in python
 
 
 
+Table below shows performance of several convNet models we've built:
+
+| Model							| Accuracy | Comments |
+|-------------------------------|----------|----------|
+| Model C1						| 0.953    |          |
+| Model C2                      | 0.942    |     	  |
+| Model C3                      | 0.968    |     	  |
+|                               |          |     	  |
+| Model D1                      | 0.974    |     	  |
+| Model D2_                     | 0.978    | Slow     |
+| Model D2                      | 0.981    | Fast     |
 
 
-
-
-
-
+## How the project is organised:
