@@ -132,9 +132,9 @@ if __name__ == '__main__':
         page = PageDetector.detectPage(img)
 
         if page is not None:
-            plt.imshow(page[0],'gray')
-            plt.title(' Es la página: '+str(page[1][0]))
-            plt.show()
+            #plt.imshow(page[0],'gray')
+            #plt.title(' Es la página: '+str(page[1][0]))
+            #plt.show()
             print(' This image can be processed')
             if page[1][1] == 0: # esta orientado de manera normal
                 FeatureExtractor.extractPageData(page[0],page[1][0],None,os.path.basename(imgPath[i]))

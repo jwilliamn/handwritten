@@ -19,7 +19,8 @@ import pickle
 
 # Global settings ####
 # Path to saved model parameters
-model_path = '/home/williamn/Repository/handwritten'
+#model_path = '/home/williamn/Repository/handwritten'
+model_path = ''
 #model_path = '/home/vmchura/Documents/handwritten'
 
 # Parameters model
