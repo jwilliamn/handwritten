@@ -321,6 +321,7 @@ def countNonZeros(sumRows, sumCols, pi, pf):
 
 def getFirstGroupLargerThan(a, L):
     b = np.zeros(a.shape)
+
     for i in range(1, len(b)):
         if a[i] > 0:
             b[i] = b[i - 1] + 1
@@ -519,8 +520,15 @@ def getBestRectangle(region, ratio_cols_over_rows):
     return pi, pf
 
 
+def predictCategoric_simple_column_squared(column, labels, sz=12):
+    sumRows = np.asarray(np.sum(column, 1) // 255)
+    resp = extractLabelsBySquares(column, sumRows, labels)
+    return resp
+
+
 def predictCategoric_simple_column(column, labels, sz=12):
     sumRows = np.asarray(np.sum(column, 1) // 255)
+
     rows = len(sumRows)
     sumRows = sumRows - int(min(sumRows))
     sumRows = dropMinsTo0(sumRows, 9)
@@ -547,7 +555,7 @@ def predictCategoric_simple_column(column, labels, sz=12):
         if right - left > 0 and results is not None:
             marca = sumRows[left:right]
             sortedMarca = np.sort(marca)
-            if sortedMarca[len(sortedMarca) // 2] > 12:
+            if sortedMarca[len(sortedMarca) // 2] > 15:
                 if len(results) > 0:
                     results = results + ';' + labels[i]
                 else:
@@ -567,8 +575,9 @@ def predictCategoric_simple_column(column, labels, sz=12):
     # plt.subplot(1, 3, 2), plt.bar(range(len(sr)), sr, 1)
     # plt.subplot(1, 3, 3), plt.bar(range(len(sr_c)), sr_c, 1)
     # plt.show()
-
+    print(results)
     return results
+    #return results
 
 
 def predictValuesCategory_simple(arrayOfImages, array_labels, sz=12):
@@ -580,7 +589,10 @@ def predictValuesCategory_simple(arrayOfImages, array_labels, sz=12):
     for indx, img in enumerate(arrayOfImages):
         if img is not None:
             labels = array_labels[indx]
-            predictions = predictCategoric_simple_column(img, labels, sz)
+            if sz <= 7:
+                predictions = predictCategoric_simple_column(img, labels, sz)
+            else:
+                predictions = predictCategoric_simple_column_squared(img, labels, sz)
             if predictions is not None and result is not None:
                 result.append(predictions)
             else:
@@ -603,6 +615,8 @@ def countBlocks(a, sz):
         count += 1
         print(left, right)
         a[left:right] = 0
+        if left == right:
+            a[left] = 0
 
 
 def calcMeans(a, limit, iterations=1):
@@ -645,6 +659,126 @@ def dropMinsTo0(a, limit):
                 medias[j] = val
 
     return medias
+def extractLabelsBySquares(column, sumRows, labels):
+    cantRows = len(labels)
+
+    sumRows = sumRows.copy()
+    originalRows = sumRows.copy()
+    sumRows[sumRows < int(max(sumRows))] = 0
+    center = []
+    sc = sumRows.copy()
+    while True:
+        left, right = getFirstGroupLargerThan(sumRows, 1)
+
+        if left + right < 0:
+            break
+        sumRows[left:right] = 0
+        if left == right:
+            sumRows[left] = 0
+
+        center.append((left + right) // 2)
+
+    if len(center)<2 or center[0]+150 > center[-1]:
+        return '?'
+    i = center[0] + 17
+
+    results = ''
+    for k in range(cantRows):
+        j = i + 19*k
+        marca = originalRows[(j-3):(j+3)]
+        sortedMarca = np.sort(marca)
+        if min(marca) > 12:
+            if len(results) > 0:
+                results = results + ';' + labels[k]
+            else:
+                results = labels[k]
+
+    if len(results) == 0:
+        results = '?'
+    return results
+    # print(labels)
+    # print(results)
+    # plt.subplot(1,2,1), plt.imshow(column,'gray')
+    # plt.subplot(1,2,2), plt.bar(range(len(originalRows)),originalRows, 1)
+    # plt.show()
+
+
+
+
+
+def extractColumnsBySquares(If, cantColumns):
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2,2))
+    If = cv2.dilate(If, kernel)
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    sumCols = sumCols.copy()
+
+    sumCols = sumCols - int(min(sumCols))
+    sumCols = dropMinsTo0(sumCols, 3)
+    left = 0
+    right = max(sumCols)
+    if cantColumns == 2:
+        delta = 60
+    else:
+        delta = 45
+
+    sumCols[sumCols < 125] = 0
+    sc = sumCols.copy()
+    blocks = countBlocks(sumCols, 1)
+    arrayResult = []
+    if blocks == 2:
+
+
+        sumCols = sc.copy()
+        returnNone = False
+
+        center = []
+        for k in range(0, 2):
+            left, right = getFirstGroupLargerThan(sumCols, 1)
+            print('LR', left, right)
+            if left + right < 0:
+                print('this shouldn be happening')
+                returnNone = True
+                continue
+            sumCols[left:right] = 0
+            if left == right:
+                sumCols[left] = 0
+
+            center.append((left+right)//2)
+
+            #importanColum = If[:, left:right]
+            #arrayResult.append(importanColum)
+
+
+        if returnNone or len(center) < 2:
+            return [None] * cantColumns
+
+        if cantColumns == 2:
+            i  = getPointProportion((center[0],0),(center[1],0), 20,47)[0]
+            j = getPointProportion((center[0], 0), (center[1], 0), 47, 20)[0]
+            importanColum_I = If[:, (i-11):(i+11)]
+            importanColum_J = If[:, (j - 11):(j + 11)]
+            arrayResult.append(importanColum_I)
+            arrayResult.append(importanColum_J)
+            # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
+            # plt.subplot(1, 3, 2), plt.bar(range(len(sumCols)), sumCols, 1),plt.title('SumCols')
+            # plt.subplot(1, 3, 3), plt.imshow(importanColum_I), plt.title('FIrst Column')
+            # plt.show()
+
+        else:
+            i = (center[0]+center[1])//2
+            importanColum_I = If[:, (i - 11):(i + 11)]
+            # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
+            # plt.subplot(1, 3, 2), plt.imshow(importanColum_I), plt.title('Column')
+            # plt.show()
+            arrayResult.append(importanColum_I)
+
+        return arrayResult
+
+    else:
+        return [None]*cantColumns
+
+
+
 
 
 def extractCategory_simpleImages(img, TL, BR, cantColumns):
@@ -652,9 +786,12 @@ def extractCategory_simpleImages(img, TL, BR, cantColumns):
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
     # If = cv2.GaussianBlur(ROI, (3, 3), 0)
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-
     If = cv2.bitwise_not(If)
     rows, cols = If.shape
+
+
+    resp = extractColumnsBySquares(If, cantColumns)
+
     sumCols = np.asarray(np.sum(If, 0) // 255)
     sumCols = dropMinsTo0(sumCols, 11)
 
@@ -685,10 +822,12 @@ def extractCategory_simpleImages(img, TL, BR, cantColumns):
     sumCols[sumCols < toCut] = 0
 
     arrayResult = []
+    arResultOk = True
     for k in range(0, cantColumns):
         left, right = getFirstGroupLargerThan(sumCols, 15)
         if left + right < 0:
             arrayResult.append(None)
+            arResultOk = False
             continue
 
         sumCols[left:right] = 0
@@ -699,22 +838,23 @@ def extractCategory_simpleImages(img, TL, BR, cantColumns):
     for I in arrayResult:
         if I is None:
             toPrint = False
-
+    # if arResultOk == False:
+    #     arrayResult = resp
     if toPrint:
 
         sumCols = np.asarray(np.sum(If, 0) // 255)
         plt.subplot(3, 2, 1), plt.imshow(If, 'gray')
         plt.subplot(3, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
-        if len(arrayResult) > 0 and arrayResult[0] is not None:
-            plt.subplot(3, 2, 3), plt.imshow(arrayResult[0], 'gray')
-            sumRows = np.asarray(np.sum(arrayResult[0], 1) // 255)
+        if resp is not None and len(resp) > 0 and resp[0] is not None:
+            plt.subplot(3, 2, 3), plt.imshow(resp[0], 'gray')
+            sumRows = np.asarray(np.sum(resp[0], 1) // 255)
             plt.subplot(3, 2, 4), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
-        if len(arrayResult) > 1 and arrayResult[1] is not None:
-            plt.subplot(3, 2, 5), plt.imshow(arrayResult[1], 'gray')
-            sumRows = np.asarray(np.sum(arrayResult[1], 1) // 255)
+        if resp is not None and len(resp) > 1 and resp[1] is not None:
+            plt.subplot(3, 2, 5), plt.imshow(resp[1], 'gray')
+            sumRows = np.asarray(np.sum(resp[1], 1) // 255)
             plt.subplot(3, 2, 6), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
         plt.show()
-    return arrayResult
+    return resp
 
 
 def extractCategory_singleColumn(img, TL, BR, cantColumns):

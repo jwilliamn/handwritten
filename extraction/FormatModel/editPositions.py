@@ -6,7 +6,7 @@ from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
 import pickle
 import cv2
 import json
-pagina = '2'
+pagina = '3'
 fileToEdit = 'pagina'+pagina+'.json'
 image = cv2.imread('../../resources/pag'+pagina+'_1_Template.png')
 
