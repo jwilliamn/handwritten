@@ -102,11 +102,37 @@ class RawValue:
         return self.predictedValue
 
     def parserImage2Categoric(self,arg):
+        if self.singleParser is not None:
+            return self.singleParser(arg)
+        else:
+            self.arrayOfImages = None
+            self.predictedValue = ['unknow']
+            return self.predictedValue
+
+
+    def parserCategoricSimpleSelection(self, arg):
         img = arg[0]
         TL = self.position[0]
         BR = self.position[1]
-        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_Test(img, TL, BR)
-        self.predictedValue = ['yes']
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_simpleImages(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_simple(self.arrayOfImages, labels)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
+        return self.predictedValue
+    def parserCategoricSimpleColumn(self, arg):
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_singleColumn(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_simple(self.arrayOfImages, labels, sz=5)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
         return self.predictedValue
 
     def letterPredictor(self, img):
@@ -143,6 +169,27 @@ class ImageCategoric(RawValue):
     def __str__(self):
         return 'ImageCategoric  : ' + str(self.countItems)
 
+class ImageCategoricSimpleSelection(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric', self.parserCategoricSimpleSelection, 'parserCategoricSimpleSelection')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
+
+
+
+class ImageCategoricSingleColumn(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricSimpleColumn, 'parserCategoricSimpleColumn')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
 class ArrayPredictedNumber(RawValue):
     def __init__(self, value):
         super().__init__(value, -1, None, 'parserImage2ArrayChar',None, 'digitPredictor')

@@ -26,7 +26,14 @@ def loadValue(dict_current):
         if dict_current['nameSingleParser'] == 'digitPredictor':
             return ArrayImageNumber(dict_current['position'], dict_current['countItems'])
     elif dict_current['nameParser'] == 'parserImage2Categoric':
-        return ImageCategoric(dict_current['position'],1)
+        if dict_current['nameSingleParser'] is None:
+            return ImageCategoric(dict_current['position'],1)
+
+        if dict_current['nameSingleParser'] == 'parserCategoricSimpleSelection':
+
+            return ImageCategoricSimpleSelection(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricSimpleColumn':
+            return ImageCategoricSingleColumn(dict_current['position'],1)
     return None
 
 def loadCategory(dict_current):

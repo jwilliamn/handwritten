@@ -32,19 +32,31 @@ def plotearCategoriasPosicionesImagenes(img, cat_pos, cat_img):
 def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
     #arg = sys.argv[1]
     #background = Image.open(arg)
+    if arrayOfImages is None or arrayPredictedValues is None:
+        return
+
+    if countItems != len(arrayOfImages) or countItems != len(arrayPredictedValues):
+        return
+
     if arrayOfImages is not None:
         for k in range(countItems):
             pixel_y = int(round(position[0][1]))
             pixel_x = int(round((position[0][0]*(countItems-k) + position[1][0]*k)/ countItems))
+
             print('ploteando la imagen ',k, ' en ', position, ' valor predicho: ', arrayPredictedValues[k])
             if arrayOfImages[k] is not None:
 
-                print(arrayOfImages[k].dtype)
-                print(img.dtype)
-                img32x32 = arrayOfImages[k]*255.0+255.0/2.0
-                print(img32x32.dtype)
-                img32x32 = (img32x32.astype(img.dtype))
-                resized = cv2.resize(img32x32, (20,20))
+                #print(arrayOfImages[k].dtype)
+                #print(img.dtype)
+                if len(position)==2:
+                    img32x32 = arrayOfImages[k]*255.0+255.0/2.0
+                    print(img32x32.dtype)
+                    img32x32 = (img32x32.astype(img.dtype))
+
+                    resized = cv2.resize(img32x32, (20,20))
+                else:
+                    resized = cv2.resize(arrayOfImages[k], (0,0), fx=0.8, fy=0.8)
+                    resized = cv2.bitwise_not(resized)
                 # plt.subplot(2,1,1), plt.imshow(arrayOfImages[k], 'gray')
                 # plt.subplot(2, 1, 2), plt.imshow(img32x32, 'gray')
                 # plt.show()

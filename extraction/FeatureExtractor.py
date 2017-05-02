@@ -89,7 +89,7 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     edgesToDebug[edgesToDebug > 0] = 125
 
     with open('extraction/FormatModel/pagina'+str_number+'.json', 'r') as input:
-        print('INPUT: ', input)
+
         dict_Page1 = json.load(input)
         Page = loadCategory(dict_Page1)
         print(Page)

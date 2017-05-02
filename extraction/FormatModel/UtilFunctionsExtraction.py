@@ -10,6 +10,7 @@
     _copyright_ = 'Copyright (c) 2017 Vm.C.', see AUTHORS for more details
     _license_ = GNU General Public License, see LICENSE for more details
 """
+import statistics
 
 import numpy as np
 import cv2
@@ -79,24 +80,24 @@ def filterSingleCharacter_new(letter_original_and_mask):
     letter_original = letter_original_and_mask[0]
     mask = letter_original_and_mask[1]
     img = letter_original.copy()
-    img[img>230]=255
+    img[img > 230] = 255
     ret3, resaltado = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
     rows, cols = resaltado.shape
 
     # creating border
     borde = resaltado.copy()
     borde[borde >= 0] = 255
-    gb = 2 # grosor del borde
-    borde[gb:borde.shape[0]-gb,gb:borde.shape[1]-gb] = 0
+    gb = 2  # grosor del borde
+    borde[gb:borde.shape[0] - gb, gb:borde.shape[1] - gb] = 0
 
-    pppb = cv2.bitwise_and(resaltado,borde) # posible_pre_printed_borders
-    wob = cv2.bitwise_and(resaltado, cv2.bitwise_not(borde)) # sin borders
-    dilatado = cv2.dilate(wob, cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3)), iterations=1)
-    pdof = cv2.bitwise_and(dilatado, pppb) # parte de la letra borrada
+    pppb = cv2.bitwise_and(resaltado, borde)  # posible_pre_printed_borders
+    wob = cv2.bitwise_and(resaltado, cv2.bitwise_not(borde))  # sin borders
+    dilatado = cv2.dilate(wob, cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3)), iterations=1)
+    pdof = cv2.bitwise_and(dilatado, pppb)  # parte de la letra borrada
     result = cv2.bitwise_or(wob, pdof)
 
-    onlyMatch = cv2.morphologyEx(result, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (2,2)))
-    #onlyMatch = expandOnlyIntersections(result, mask)
+    onlyMatch = cv2.morphologyEx(result, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2)))
+    # onlyMatch = expandOnlyIntersections(result, mask)
     onlyMatch = result
 
     stats = cv2.connectedComponentsWithStats(onlyMatch, connectivity=8)
@@ -114,12 +115,12 @@ def filterSingleCharacter_new(letter_original_and_mask):
         Width = labelStats[label, cv2.CC_STAT_WIDTH]
         Height = labelStats[label, cv2.CC_STAT_HEIGHT]
         area = labelStats[label, cv2.CC_STAT_AREA]
-        #print(area, connectedCompoentHeight * connectedCompoentHeight, connectedCompoentHeight, connectedCompoentWidth)
+        # print(area, connectedCompoentHeight * connectedCompoentHeight, connectedCompoentHeight, connectedCompoentWidth)
         deleteGroup = False
-        if centroides[label][0] < 0.1*onlyMatch.shape[1] or \
-                        centroides[label][1] < 0.1*onlyMatch.shape[0] or \
-                        centroides[label][0] > 0.9*onlyMatch.shape[1] or \
-                        centroides[label][1] > 0.9*onlyMatch.shape[0]:
+        if centroides[label][0] < 0.1 * onlyMatch.shape[1] or \
+                        centroides[label][1] < 0.1 * onlyMatch.shape[0] or \
+                        centroides[label][0] > 0.9 * onlyMatch.shape[1] or \
+                        centroides[label][1] > 0.9 * onlyMatch.shape[0]:
             if Width * Height * 0.5 < area:
                 deleteGroup = True
 
@@ -135,12 +136,10 @@ def filterSingleCharacter_new(letter_original_and_mask):
             debugThisCharacter = False
             print('centroide: ', centroides[label])
 
-
-
     img_copy = img.copy()
 
-    img_copy[onlyMatch < 125] = 255     # lo que es negro en only match, ahora sera blanco en img_copy
-    img_copy[onlyMatch >= 125] = 0      # to_do lo que no es absolutamente blanco, pasa a ser negro
+    img_copy[onlyMatch < 125] = 255  # lo que es negro en only match, ahora sera blanco en img_copy
+    img_copy[onlyMatch >= 125] = 0  # to_do lo que no es absolutamente blanco, pasa a ser negro
 
     if cv2.countNonZero(onlyMatch) == 0:
         img_copy[mask >= 0] = 255
@@ -296,27 +295,44 @@ def findMaxElement(A):
                 currentI = i
                 currentJ = j
     return (currentI, currentJ)
+
+
 def countNonZerosRows(sumRows, I, j1, j2):
     if j1 <= 0:
-        return sumRows[I,j2]
+        return sumRows[I, j2]
     else:
-        return sumRows[I,j2]-sumRows[I,(j1-1)]
+        return sumRows[I, j2] - sumRows[I, (j1 - 1)]
+
 
 def countNonZerosCols(sumCols, J, i1, i2):
     if i1 <= 0:
-        return sumCols[i2,J]
+        return sumCols[i2, J]
     else:
-        return sumCols[i2,J]-sumCols[(i1-1),J]
+        return sumCols[i2, J] - sumCols[(i1 - 1), J]
+
 
 def countNonZeros(sumRows, sumCols, pi, pf):
     top = countNonZerosRows(sumRows, pi[0], pi[1], pf[1])
     bottom = countNonZerosRows(sumRows, pf[0], pi[1], pf[1])
-    left = countNonZerosCols(sumCols, pi[1], pi[0]+1, pf[0]-1)
-    right = countNonZerosCols(sumCols, pf[1], pi[0]+1, pf[0]-1)
+    left = countNonZerosCols(sumCols, pi[1], pi[0] + 1, pf[0] - 1)
+    right = countNonZerosCols(sumCols, pf[1], pi[0] + 1, pf[0] - 1)
     return top + bottom + left + right
-def getBestRectangle_big(region, ratio_cols_over_rows):
 
-    B = range(max(0,region.shape[1] - 30), region.shape[1])
+
+def getFirstGroupLargerThan(a, L):
+    b = np.zeros(a.shape)
+    for i in range(1, len(b)):
+        if a[i] > 0:
+            b[i] = b[i - 1] + 1
+        else:
+            if b[i - 1] >= L:
+                # print(b,' - ', i)
+                return int(round(i - b[i - 1])), int(i)
+    return -1, -1
+
+
+def getBestRectangle_big(region, ratio_cols_over_rows):
+    B = range(max(0, region.shape[1] - 30), region.shape[1])
     copia = region.copy()
 
     copia[copia >= 0] = 0
@@ -327,63 +343,104 @@ def getBestRectangle_big(region, ratio_cols_over_rows):
     bestB = 0
     bestPos = (-1, -1)
 
-    sumRows = np.sum(region,1)
-    sumCols = np.sum(region,0)
+    sumCols = np.asarray(np.sum(region, 0) / 255.0)
+    diffSumCols = np.ediff1d(sumCols)
+    sortedCols = np.sort(sumCols)
+    indexToCutCols = (cols - 2 * 22) // 2
+    toCut = 2 * sortedCols[indexToCutCols] + 2
+    sumCols[sumCols < toCut] = 0
+    left, right = getFirstGroupLargerThan(sumCols, 15)
+    if left + right < 0:
+        return (0, 0), (20, 20)
+    sumCols[:left] = 0
+    sumCols[(right + 1):] = 0
+    print(left, right)
+    importanColum = region[:, left:right]
+    sumRows = np.asarray(np.sum(importanColum, 1) / 255.0)
+    diffSumRows = np.ediff1d(sumRows)
+    sortedRows = np.sort(sumRows)
+    indexToCutRows = (rows - 7 * 16) // 2
+    valueToCut = 2 * sortedRows[indexToCutRows] + 2
+    sumRows[sumRows < valueToCut] = 0
 
+    for i in range(0, 7):
+        left, right = getFirstGroupLargerThan(sumRows, 10)
+        if right - left > 0:
+            marca = sumRows[left:right]
+            sortedMarca = np.sort(marca)
+            print(i, ' : ', sortedMarca[len(sortedMarca) // 2])
+            sumRows[left:right] = 0
 
+    width = 1
 
-    for b in B:
-        minA = int(round(b/(ratio_cols_over_rows+0.1)))
-        maxA = int(round(b/(ratio_cols_over_rows-0.1)))
-        for a in range(minA,maxA):
-            cum = np.zeros((rows, cols))
-            for i in range(rows):
-                if i + a >= rows:
-                    break
-                for j in range(cols):
-                    if j + b >= cols:
-                        break
-                    #copia[copia >= 0] = 0
-                    # pi = (j, i)
-                    # pf = (j + b, i + a)
-                    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
-                    # copia = cv2.bitwise_and(copia, region)
-                    # cantMatch = cv2.countNonZero(copia)
-                    # print('cant match: ', cantMatch)
-                    myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i+a, j+b))
-                    # print('cant mAtch: ', myCantMatch)
-                    cum[i, j] = myCantMatch / (2 * (a + b))
-                    # (I, J) = findMaxElement(cum)
-                    # print(I,J)
-                    # print('inicio', i, j)
-                    # print('longitudes', a, b)
-                    # print(cum)
-                    # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
-                    # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
-                    # plt.show()
-                    # cv2.rectangle(copia, pi, pf, 0, thickness=1)
-
-
-            (I, J) = findMaxElement(cum)
-            if cum[I, J] > bestValue:
-                bestValue = cum[I, J]
-                bestA = a
-                bestB = b
-                bestPos = (I, J)
-
-    copia[copia >= 0] = 0
-    pi = (bestPos[1], bestPos[0])
-    pf = (bestPos[1] + bestB, bestPos[0] + bestA)
+    #
+    #
+    # max_indx_row, max_value_row = max(enumerate(sumRows), key=lambda p: p[1])
+    # max_indx_col, max_value_col = max(enumerate(sumCols), key=lambda p: p[1])
+    #
+    # for b in B:
+    #     minA = int(round(b/(ratio_cols_over_rows+0.1)))
+    #     maxA = int(round(b/(ratio_cols_over_rows-0.1)))
+    #     for a in range(minA,maxA):
+    #         cum = np.zeros((rows, cols))
+    #         for i in range(rows):
+    #             if i + a >= rows:
+    #                 break
+    #             for j in range(cols):
+    #                 if j + b >= cols:
+    #                     break
+    #                 #copia[copia >= 0] = 0
+    #                 # pi = (j, i)
+    #                 # pf = (j + b, i + a)
+    #                 # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+    #                 # copia = cv2.bitwise_and(copia, region)
+    #                 # cantMatch = cv2.countNonZero(copia)
+    #                 # print('cant match: ', cantMatch)
+    #                 myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i+a, j+b))
+    #                 # print('cant mAtch: ', myCantMatch)
+    #                 cum[i, j] = myCantMatch / (2 * (a + b))
+    #                 # (I, J) = findMaxElement(cum)
+    #                 # print(I,J)
+    #                 # print('inicio', i, j)
+    #                 # print('longitudes', a, b)
+    #                 # print(cum)
+    #                 # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
+    #                 # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    #                 # plt.show()
+    #                 # cv2.rectangle(copia, pi, pf, 0, thickness=1)
+    #
+    #
+    #         (I, J) = findMaxElement(cum)
+    #         if cum[I, J] > bestValue:
+    #             bestValue = cum[I, J]
+    #             bestA = a
+    #             bestB = b
+    #             bestPos = (I, J)
+    #
+    # copia[copia >= 0] = 0
+    # pi = (bestPos[1], bestPos[0])
+    # pf = (bestPos[1] + bestB, bestPos[0] + bestA)
     # cv2.rectangle(copia, pi, pf, 255, thickness=1)
     # section = region[pi[1]:pf[1], pi[0]:pf[0]]
     # plt.subplot(1, 3, 1), plt.imshow(region, 'gray'), plt.title('region')
     # plt.subplot(1, 3, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
     # plt.subplot(1, 3, 3), plt.imshow(section, 'gray'), plt.title('best mark')
-    # plt.show()
-    return pi, pf
-def getBestRectangle(region, ratio_cols_over_rows):
+    plt.subplot(4, 2, 1), plt.imshow(region, 'gray')
+    plt.subplot(4, 2, 2), plt.imshow(importanColum, 'gray')
 
-    B = range(max(0,region.shape[1] - 20), region.shape[1])
+    plt.subplot(4, 2, 3), plt.bar(range(len(sumRows)), sumRows, width, color="blue")
+    plt.subplot(4, 2, 4), plt.bar(range(len(sumCols)), sumCols, width, color="blue")
+    plt.subplot(4, 2, 5), plt.bar(range(len(diffSumRows)), diffSumRows, width, color="blue")
+    plt.subplot(4, 2, 6), plt.bar(range(len(diffSumCols)), diffSumCols, width, color="blue")
+    plt.subplot(4, 2, 7), plt.bar(range(len(sortedRows)), sortedRows, width, color="blue")
+    plt.subplot(4, 2, 8), plt.bar(range(len(sortedCols)), sortedCols, width, color="blue")
+
+    plt.show()
+    return (0, 0), (20, 20)
+
+
+def getBestRectangle(region, ratio_cols_over_rows):
+    B = range(max(0, region.shape[1] - 20), region.shape[1])
     copia = region.copy()
 
     copia[copia >= 0] = 0
@@ -399,7 +456,7 @@ def getBestRectangle(region, ratio_cols_over_rows):
     for i in range(rows):
         for j in range(cols):
             if j == 0:
-                sumRows[i,j] = (1 if region[i,j]>0 else 0)
+                sumRows[i, j] = (1 if region[i, j] > 0 else 0)
             else:
                 sumRows[i, j] = (1 if region[i, j] > 0 else 0) + sumRows[i, j - 1]
 
@@ -413,9 +470,9 @@ def getBestRectangle(region, ratio_cols_over_rows):
 
 
     for b in B:
-        minA = int(round(b/(ratio_cols_over_rows+0.1)))
-        maxA = int(round(b/(ratio_cols_over_rows-0.1)))
-        for a in range(minA,maxA):
+        minA = int(round(b / (ratio_cols_over_rows + 0.1)))
+        maxA = int(round(b / (ratio_cols_over_rows - 0.1)))
+        for a in range(minA, maxA):
             cum = np.zeros((rows, cols))
             for i in range(rows):
                 if i + a >= rows:
@@ -423,14 +480,14 @@ def getBestRectangle(region, ratio_cols_over_rows):
                 for j in range(cols):
                     if j + b >= cols:
                         break
-                    #copia[copia >= 0] = 0
+                    # copia[copia >= 0] = 0
                     # pi = (j, i)
                     # pf = (j + b, i + a)
                     # cv2.rectangle(copia, pi, pf, 255, thickness=1)
                     # copia = cv2.bitwise_and(copia, region)
                     # cantMatch = cv2.countNonZero(copia)
                     # print('cant match: ', cantMatch)
-                    myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i+a, j+b))
+                    myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i + a, j + b))
                     # print('cant mAtch: ', myCantMatch)
                     cum[i, j] = myCantMatch / (2 * (a + b))
                     # (I, J) = findMaxElement(cum)
@@ -442,7 +499,6 @@ def getBestRectangle(region, ratio_cols_over_rows):
                     # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
                     # plt.show()
                     # cv2.rectangle(copia, pi, pf, 0, thickness=1)
-
 
             (I, J) = findMaxElement(cum)
             if cum[I, J] > bestValue:
@@ -462,19 +518,229 @@ def getBestRectangle(region, ratio_cols_over_rows):
     # plt.show()
     return pi, pf
 
+
+def predictCategoric_simple_column(column, labels, sz=12):
+    sumRows = np.asarray(np.sum(column, 1) // 255)
+    rows = len(sumRows)
+    sumRows = sumRows - int(min(sumRows))
+    sumRows = dropMinsTo0(sumRows, 9)
+    sr = sumRows.copy()
+    left = 0
+    right = max(sumRows)
+
+    toCut = -1
+    for i in range(left, right):
+        sc = sumRows.copy()
+        sc[sc < i] = 0
+        print('testing with ', i)
+        numBlocks = countBlocks(sc, sz)
+
+        if numBlocks == len(labels):
+            toCut = i
+            break
+
+    sumRows[sumRows < toCut] = 0
+    sr_c = sumRows.copy()
+    results = ''
+    for i in range(0, len(labels)):
+        left, right = getFirstGroupLargerThan(sumRows, sz-2)
+        if right - left > 0 and results is not None:
+            marca = sumRows[left:right]
+            sortedMarca = np.sort(marca)
+            if sortedMarca[len(sortedMarca) // 2] > 12:
+                if len(results) > 0:
+                    results = results + ';' + labels[i]
+                else:
+                    results = labels[i]
+
+            sumRows[left:right] = 0
+        else:
+            results = None
+
+    if results is None or len(results) == 0:
+        results = '?'
+
+    # print(labels)
+    # print(results)
+    #
+    # plt.subplot(1, 3, 1), plt.imshow(column)
+    # plt.subplot(1, 3, 2), plt.bar(range(len(sr)), sr, 1)
+    # plt.subplot(1, 3, 3), plt.bar(range(len(sr_c)), sr_c, 1)
+    # plt.show()
+
+    return results
+
+
+def predictValuesCategory_simple(arrayOfImages, array_labels, sz=12):
+    if len(arrayOfImages) != len(array_labels):
+        print('error: sz arrayOfImages != sz arrayLabels')
+        return ['None'] * len(array_labels)
+
+    result = []
+    for indx, img in enumerate(arrayOfImages):
+        if img is not None:
+            labels = array_labels[indx]
+            predictions = predictCategoric_simple_column(img, labels, sz)
+            if predictions is not None and result is not None:
+                result.append(predictions)
+            else:
+                result = None
+        else:
+            print('wtf is none')
+
+    if result is None:
+        result = ['Unknow'] * len(arrayOfImages)
+    print('Returning:', result)
+    return result
+
+
+def countBlocks(a, sz):
+    count = 0
+    while True:
+        left, right = getFirstGroupLargerThan(a, sz)
+        if left + right < 0:
+            return count
+        count += 1
+        print(left, right)
+        a[left:right] = 0
+
+
+def calcMeans(a, limit, iterations=1):
+    n = len(a)
+    medias = np.zeros(n)
+    count_items = 0
+    acum = []
+
+    for i in range(n):
+        acum.append(a[i])
+        count_items += 1
+        if count_items > limit:
+            acum = acum[1:]
+            count_items -= 1
+        if count_items == limit:
+            medias[i - limit // 2] = statistics.median(acum)
+    if iterations > 1:
+        return calcMeans(medias, limit, iterations - 1)
+    return medias
+
+
+def dropMinsTo0(a, limit):
+    n = len(a)
+    medias = np.zeros(n, dtype=np.int32)
+    count_items = 0
+    acum = []
+
+    for i in range(n):
+        acum.append(a[i])
+        count_items += 1
+        if count_items > limit:
+            acum = acum[1:]
+            count_items -= 1
+        if count_items == limit:
+            j = i - limit // 2
+            val = a[j]
+            if abs(val - min(acum)) < 2 and val * 3 < max(acum[0:2]) and val * 3 < max(acum[-2:]):
+                medias[j] = 0
+            else:
+                medias[j] = val
+
+    return medias
+
+
+def extractCategory_simpleImages(img, TL, BR, cantColumns):
+    deltaAmpliacion = 10
+    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    # If = cv2.GaussianBlur(ROI, (3, 3), 0)
+    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    If = cv2.bitwise_not(If)
+    rows, cols = If.shape
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    sumCols = dropMinsTo0(sumCols, 11)
+
+    left = 0
+    right = max(sumCols)
+
+    toCut = -1
+    for i in range(left, right):
+        sc = sumCols.copy()
+        sc[sc < i] = 0
+        print('testing with ', i)
+        numBlocks = countBlocks(sc, 20)
+
+        if numBlocks == cantColumns:
+            toCut = i
+            break
+    #
+    # media_21 = calcMeans(sumCols, 3,3)
+    # with0 = dropMinsTo0(sumCols, 11)
+    # sum_medias = np.zeros(len(media_21))
+    # for i in range(len(sum_medias)):
+    #     sum_medias[i] = with0[i]+media_21[i]
+    # plt.subplot(2, 2, 1), plt.imshow(If, 'gray')
+    # plt.subplot(2, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
+    # plt.subplot(2, 2, 3), plt.bar(range(len(media_21)), media_21, 1, color="blue")
+    # plt.subplot(2, 2, 4), plt.bar(range(len(with0)), with0, 1, color="blue")
+    # plt.show()
+    sumCols[sumCols < toCut] = 0
+
+    arrayResult = []
+    for k in range(0, cantColumns):
+        left, right = getFirstGroupLargerThan(sumCols, 15)
+        if left + right < 0:
+            arrayResult.append(None)
+            continue
+
+        sumCols[left:right] = 0
+        importanColum = If[:, left:right]
+        arrayResult.append(importanColum)
+    print('Returning images A')
+    toPrint = False
+    for I in arrayResult:
+        if I is None:
+            toPrint = False
+
+    if toPrint:
+
+        sumCols = np.asarray(np.sum(If, 0) // 255)
+        plt.subplot(3, 2, 1), plt.imshow(If, 'gray')
+        plt.subplot(3, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
+        if len(arrayResult) > 0 and arrayResult[0] is not None:
+            plt.subplot(3, 2, 3), plt.imshow(arrayResult[0], 'gray')
+            sumRows = np.asarray(np.sum(arrayResult[0], 1) // 255)
+            plt.subplot(3, 2, 4), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
+        if len(arrayResult) > 1 and arrayResult[1] is not None:
+            plt.subplot(3, 2, 5), plt.imshow(arrayResult[1], 'gray')
+            sumRows = np.asarray(np.sum(arrayResult[1], 1) // 255)
+            plt.subplot(3, 2, 6), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
+        plt.show()
+    return arrayResult
+
+
+def extractCategory_singleColumn(img, TL, BR, cantColumns):
+    deltaAmpliacion = 10
+    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    # If = cv2.GaussianBlur(ROI, (3, 3), 0)
+    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    If = cv2.bitwise_not(If)
+    arrayResult = []
+    arrayResult.append(If)
+
+    return arrayResult
+
+
 def extractCategory_Test(img, TL, BR):
     deltaAmpliacion = 10
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
-    #If = cv2.GaussianBlur(ROI, (3, 3), 0)
-    ret, If = cv2.threshold(ROI,0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    # If = cv2.GaussianBlur(ROI, (3, 3), 0)
+    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-    #ret, If = cv2.threshold(ROI, int(round(ret+5)), 255, cv2.THRESH_BINARY)
-    print(ret)
     If = cv2.bitwise_not(If)
-    top_left, bottom_right = getBestRectangle(If,0.4)
+    top_left, bottom_right = getBestRectangle_big(If, 0.4)
     bestRectangle = If[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
     canny = cv2.Canny(If, 50, 240)
-    #kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
+    # kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
 
     plt.subplot(1, 4, 1), plt.imshow(ROI), plt.title('original')
     plt.subplot(1, 4, 2), plt.imshow(If), plt.title('If')
@@ -483,8 +749,8 @@ def extractCategory_Test(img, TL, BR):
 
     plt.show()
 
-
     return None
+
 
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
     numRows = (BR[0] - TL[0]) / count
