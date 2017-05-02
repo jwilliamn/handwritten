@@ -6,7 +6,7 @@ from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
 import pickle
 import cv2
 import json
-pagina = '4'
+pagina = '3'
 fileToEdit = 'pagina'+pagina+'.json'
 image = cv2.imread('../../resources/pag'+pagina+'_1_Template.png')
 
@@ -94,21 +94,38 @@ if __name__ == '__main__':
             A = refPt[0]
             B = refPt[1]
             break
+    #
+    # P01 = Page['P06']
+    # P02 = Page['P07']
+    # T = UtilFunctionsExtraction.getPointProportion(A, B, 1, 3)
+    # updateValues(P01, P02, A, T)
+    #
+    # P03 = Page['P08']
+    # T = UtilFunctionsExtraction.getPointProportion(A, B, 1, 1)
+    # updateValues(P01, P03, A, T)
+    #
+    # P04 = Page['P09']
+    # T = UtilFunctionsExtraction.getPointProportion(A, B, 3, 1)
+    # updateValues(P01, P04, A, T)
+    #
+    # P05 = Page['P10']
+    # T = UtilFunctionsExtraction.getPointProportion(A, B, 4, 0)
+    # updateValues(P01, P05, A, T)
 
-    P01 = Page['P06']
-    P02 = Page['P07']
+    P01 = Page['P01']
+    P02 = Page['P02']
     T = UtilFunctionsExtraction.getPointProportion(A, B, 1, 3)
     updateValues(P01, P02, A, T)
 
-    P03 = Page['P08']
+    P03 = Page['P03']
     T = UtilFunctionsExtraction.getPointProportion(A, B, 1, 1)
     updateValues(P01, P03, A, T)
 
-    P04 = Page['P09']
+    P04 = Page['P04']
     T = UtilFunctionsExtraction.getPointProportion(A, B, 3, 1)
     updateValues(P01, P04, A, T)
 
-    P05 = Page['P10']
+    P05 = Page['P05']
     T = UtilFunctionsExtraction.getPointProportion(A, B, 4, 0)
     updateValues(P01, P05, A, T)
 
