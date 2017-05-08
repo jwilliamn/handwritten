@@ -29,6 +29,16 @@ def plotearCategoriasPosicionesImagenes(img, cat_pos, cat_img):
 
             plotearCategoriasPosicionesImagenes(img, st, cat_img[st.name])
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
     #arg = sys.argv[1]
     #background = Image.open(arg)

@@ -110,26 +110,76 @@ class RawValue:
             return self.predictedValue
 
 
-    def parserCategoricSimpleSelection(self, arg):
+    def parserCategoricLabelsInside(self, arg):
         img = arg[0]
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
         self.countItems = len(labels)
-        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_simpleImages(img, TL, BR, len(labels))
-        results = UtilFunctionsExtraction.predictValuesCategory_simple(self.arrayOfImages, labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsInside(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsInside(self.arrayOfImages, labels)
         self.predictedValue = []
         for r in results:
             self.predictedValue.append(r)
         return self.predictedValue
-    def parserCategoricSimpleColumn(self, arg):
+    def parserCategoricLabelsLeft(self, arg):
         img = arg[0]
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
         self.countItems = len(labels)
-        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_singleColumn(img, TL, BR, len(labels))
-        results = UtilFunctionsExtraction.predictValuesCategory_simple(self.arrayOfImages, labels, sz=5)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsLeft(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsLeft(self.arrayOfImages, labels)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
+        return self.predictedValue
+    def parserCategoricLabelsSex(self, arg):
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsSex(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsSex(self.arrayOfImages, labels)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
+        return self.predictedValue
+
+    def parserCategoricLabelsDocumento(self, arg):
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsDocumento(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsDocumento(self.arrayOfImages, labels)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
+        return self.predictedValue
+    def parserCategoricLabelsTipoSuministro(self, arg):
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsTipoSuministro(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsSingleButtons(self.arrayOfImages, labels)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
+        return self.predictedValue
+
+    def parserCategoricLabelsTipoVia(self, arg):
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsTipoVia(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsSingleButtons(self.arrayOfImages, labels)
         self.predictedValue = []
         for r in results:
             self.predictedValue.append(r)
@@ -169,22 +219,63 @@ class ImageCategoric(RawValue):
     def __str__(self):
         return 'ImageCategoric  : ' + str(self.countItems)
 
-class ImageCategoricSimpleSelection(RawValue):
+class ImageCategoricLabelsInside(RawValue):
     def __init__(self, position, count):
         if count == 1:
-            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric', self.parserCategoricSimpleSelection, 'parserCategoricSimpleSelection')
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricLabelsInside, 'parserCategoricLabelsInside')
         else:
             raise Exception('Categoric values always should have count = 1')
     def __str__(self):
         return 'ImageCategoric  : ' + str(self.countItems)
-
-
-
-class ImageCategoricSingleColumn(RawValue):
+class ImageCategoricLabelsLeft(RawValue):
     def __init__(self, position, count):
         if count == 1:
             super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
-                             self.parserCategoricSimpleColumn, 'parserCategoricSimpleColumn')
+                             self.parserCategoricLabelsLeft, 'parserCategoricLabelsLeft')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
+
+class ImageCategoricLabelsSex(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricLabelsSex, 'parserCategoricLabelsSex')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
+
+class ImageCategoricLabelsTipoVia(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricLabelsTipoVia, 'parserCategoricLabelsTipoVia')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
+
+class ImageCategoricLabelsDocumento(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricLabelsDocumento, 'parserCategoricLabelsDocumento')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
+class ImageCategoricLabelsTipoSuministro(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricLabelsTipoSuministro, 'parserCategoricLabelsTipoSuministro')
         else:
             raise Exception('Categoric values always should have count = 1')
 

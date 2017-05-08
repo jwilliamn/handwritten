@@ -29,11 +29,19 @@ def loadValue(dict_current):
         if dict_current['nameSingleParser'] is None:
             return ImageCategoric(dict_current['position'],1)
 
-        if dict_current['nameSingleParser'] == 'parserCategoricSimpleSelection':
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsInside':
+            return ImageCategoricLabelsInside(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsLeft':
+            return ImageCategoricLabelsLeft(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsSex':
+            return ImageCategoricLabelsSex(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsDocumento':
+            return ImageCategoricLabelsDocumento(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsTipoSuministro':
+            return ImageCategoricLabelsTipoSuministro(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsTipoVia':
+            return ImageCategoricLabelsTipoVia(dict_current['position'],1)
 
-            return ImageCategoricSimpleSelection(dict_current['position'],1)
-        if dict_current['nameSingleParser'] == 'parserCategoricSimpleColumn':
-            return ImageCategoricSingleColumn(dict_current['position'],1)
     return None
 
 def loadCategory(dict_current):

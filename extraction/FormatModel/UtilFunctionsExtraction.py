@@ -17,6 +17,8 @@ import cv2
 import modeling
 from matplotlib import pyplot as plt
 
+from extraction.FormatModel import UtilDebug
+
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
@@ -520,67 +522,108 @@ def getBestRectangle(region, ratio_cols_over_rows):
     return pi, pf
 
 
-def predictCategoric_simple_column_squared(column, labels, sz=12):
+def predictCategoric_column_labels_inside(column, labels):
     sumRows = np.asarray(np.sum(column, 1) // 255)
     resp = extractLabelsBySquares(column, sumRows, labels)
     return resp
 
 
-def predictCategoric_simple_column(column, labels, sz=12):
+def predictCategoric_column_labels_sex(column, labels):
+    # plt.imshow(column,'gray')
+    # plt.show()
     sumRows = np.asarray(np.sum(column, 1) // 255)
+    resp = extractLabelsBySquaresSex(column, sumRows, labels)
+    return resp
 
+
+def predictCategoric_column_labels_documento(column, labels):
+    sumRows = np.asarray(np.sum(column, 1) // 255)
+    resp = extractLabelsBySquaresDocument(column, sumRows, labels)
+    return resp
+
+
+def predictCategoric_column_labels_SingleButton(column, labels):
+    sumRows = np.asarray(np.sum(column, 1) // 255)
+    if len(labels) != 1:
+        raise Exception("expected len(labels) = 1 on: " + str(labels))
+    width = column.shape[1]
+    button_height = column.shape[0]
+    i = column.shape[0] // 2
+
+    if isOn(i, img=None, width=width, buttonHeight=button_height, sumRows=sumRows):
+        resp = labels[0]
+    else:
+        resp = '?'
+    # print(resp)
+    # plt.subplot(1,2,1),plt.bar(range(len(sumRows)),sumRows, 1)
+    # plt.subplot(1, 2, 2), plt.imshow(column)
+    # plt.show()
+    return resp
+
+
+def predictCategoric_column_labels_left(column, labels):
+    onlyLeftMarks = column[:, :-24]
+    sumRows = np.asarray(np.sum(onlyLeftMarks, 1) // 255)
     rows = len(sumRows)
     sumRows = sumRows - int(min(sumRows))
-    sumRows = dropMinsTo0(sumRows, 9)
-    sr = sumRows.copy()
-    left = 0
-    right = max(sumRows)
+    acumBy7 = sumRows.copy()
+    for i in range(len(acumBy7)):
+        if i > 0:
+            acumBy7[i] += acumBy7[i - 1]
+        if i >= 7:
+            acumBy7[i] -= sumRows[i - 7]
 
-    toCut = -1
-    for i in range(left, right):
-        sc = sumRows.copy()
-        sc[sc < i] = 0
-        print('testing with ', i)
-        numBlocks = countBlocks(sc, sz)
+    acumBy7[0:7] = 0
+    max_i_2 = 0
+    max_val_i = 0
+    cantLabels = len(labels)
+    valid = False
+    for i in range(len(acumBy7)):
+        val = 0
+        local_valid = True
+        for k in range(cantLabels):
+            j = i + k * 21
+            if j < len(acumBy7):
+                val += acumBy7[j]
+            else:
+                local_valid = False
 
-        if numBlocks == len(labels):
-            toCut = i
-            break
+        if val > max_val_i and local_valid:
+            max_val_i = val
+            valid = True
+            max_i_2 = i
 
-    sumRows[sumRows < toCut] = 0
-    sr_c = sumRows.copy()
+    if not valid:
+        return '?'
+
+    onlyGlobles = column[:, -24:-4]
+    sumRowsGlobes = np.asarray(np.sum(onlyGlobles, 1) // 255)
     results = ''
-    for i in range(0, len(labels)):
-        left, right = getFirstGroupLargerThan(sumRows, sz-2)
-        if right - left > 0 and results is not None:
-            marca = sumRows[left:right]
-            sortedMarca = np.sort(marca)
-            if sortedMarca[len(sortedMarca) // 2] > 15:
-                if len(results) > 0:
-                    results = results + ';' + labels[i]
-                else:
-                    results = labels[i]
-
-            sumRows[left:right] = 0
-        else:
-            results = None
+    for k in range(cantLabels):
+        j = max_i_2 - 3 + k * 21
+        if isOn(j, width=20, buttonHeight=6, sumRows=sumRowsGlobes):
+            if len(results) > 0:
+                results = results + ';' + labels[k]
+            else:
+                results = labels[k]
 
     if results is None or len(results) == 0:
         results = '?'
 
+    # print(max_i_2)
     # print(labels)
     # print(results)
     #
     # plt.subplot(1, 3, 1), plt.imshow(column)
-    # plt.subplot(1, 3, 2), plt.bar(range(len(sr)), sr, 1)
-    # plt.subplot(1, 3, 3), plt.bar(range(len(sr_c)), sr_c, 1)
+    # plt.subplot(1, 3, 2), plt.imshow(onlyGlobles,'gray')
+    # plt.subplot(1, 3, 3), plt.bar(range(len(sumRowsGlobes)), sumRowsGlobes, 1)
     # plt.show()
-    print(results)
+    # print(results)
     return results
-    #return results
+    # return results
 
 
-def predictValuesCategory_simple(arrayOfImages, array_labels, sz=12):
+def predictValuesCategory(arrayOfImages, array_labels, func):
     if len(arrayOfImages) != len(array_labels):
         print('error: sz arrayOfImages != sz arrayLabels')
         return ['None'] * len(array_labels)
@@ -589,10 +632,7 @@ def predictValuesCategory_simple(arrayOfImages, array_labels, sz=12):
     for indx, img in enumerate(arrayOfImages):
         if img is not None:
             labels = array_labels[indx]
-            if sz <= 7:
-                predictions = predictCategoric_simple_column(img, labels, sz)
-            else:
-                predictions = predictCategoric_simple_column_squared(img, labels, sz)
+            predictions = func(img, labels)
             if predictions is not None and result is not None:
                 result.append(predictions)
             else:
@@ -604,6 +644,26 @@ def predictValuesCategory_simple(arrayOfImages, array_labels, sz=12):
         result = ['Unknow'] * len(arrayOfImages)
     print('Returning:', result)
     return result
+
+
+def predictValuesCategory_labelsLeft(arrayOfImages, array_labels):
+    return predictValuesCategory(arrayOfImages, array_labels, func=predictCategoric_column_labels_left)
+
+
+def predictValuesCategory_labelsInside(arrayOfImages, array_labels):
+    return predictValuesCategory(arrayOfImages, array_labels, func=predictCategoric_column_labels_inside)
+
+
+def predictValuesCategory_labelsSex(arrayOfImages, array_labels):
+    return predictValuesCategory(arrayOfImages, array_labels, func=predictCategoric_column_labels_sex)
+
+
+def predictValuesCategory_labelsDocumento(arrayOfImages, array_labels):
+    return predictValuesCategory(arrayOfImages, array_labels, func=predictCategoric_column_labels_documento)
+
+
+def predictValuesCategory_labelsSingleButtons(arrayOfImages, array_labels):
+    return predictValuesCategory(arrayOfImages, array_labels, func=predictCategoric_column_labels_SingleButton)
 
 
 def countBlocks(a, sz):
@@ -659,6 +719,24 @@ def dropMinsTo0(a, limit):
                 medias[j] = val
 
     return medias
+
+
+def isOn(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
+    if img is None:
+        if width is None or sumRows is None or buttonHeight is None:
+            raise Exception('img is None but widht or sumRows or buttonHeight are not defined')
+
+        r = sum(sumRows[row_i - buttonHeight // 2:row_i + buttonHeight // 2])
+        print(UtilDebug.bcolors.OKBLUE + "Recieving data w: " + str(width) + " buttonHeight:" + str(buttonHeight) +
+              " r: " + str(r) + " " + str(r * 100.0 / (buttonHeight * width)) + "% " + UtilDebug.bcolors.ENDC)
+        return 0.6 * buttonHeight * width < r
+    else:
+        width = img.shape[1]
+        sumRows = np.asarray(np.sum(img, 1) / 255.0)
+        print(UtilDebug.bcolors.OKBLUE + "Recieving data img.shape " + str(img.shape) + UtilDebug.bcolors.ENDC)
+        return isOn(row_i, width=width, sumRows=sumRows, img=None, buttonHeight=buttonHeight)
+
+
 def extractLabelsBySquares(column, sumRows, labels):
     cantRows = len(labels)
 
@@ -678,16 +756,15 @@ def extractLabelsBySquares(column, sumRows, labels):
 
         center.append((left + right) // 2)
 
-    if len(center)<2 or center[0]+150 > center[-1]:
+    if len(center) < 2 or center[0] + 150 > center[-1]:
         return '?'
     i = center[0] + 17
 
     results = ''
+    widthColumn = column.shape[1]
     for k in range(cantRows):
-        j = i + 19*k
-        marca = originalRows[(j-3):(j+3)]
-        sortedMarca = np.sort(marca)
-        if min(marca) > 12:
+        j = i + 19 * k
+        if isOn(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
@@ -703,11 +780,78 @@ def extractLabelsBySquares(column, sumRows, labels):
     # plt.show()
 
 
+def extractLabelsBySquaresDocument(column, sumRows, labels):
+    cantRows = len(labels)
 
+    sumRows = sumRows.copy()
+    originalRows = sumRows.copy()
+
+    results = ''
+    widthColumn = column.shape[1]
+    for k, j in enumerate([4, 20]):
+
+        if isOn(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=6):
+            if len(results) > 0:
+                results = results + ';' + labels[k]
+            else:
+                results = labels[k]
+
+    if len(results) == 0:
+        results = '?'
+
+    # print(labels)
+    # print(results)
+    # plt.subplot(1,2,1), plt.imshow(column,'gray')
+    # plt.subplot(1,2,2), plt.bar(range(len(originalRows)),originalRows, 1)
+    # plt.show()
+    return results
+
+
+def extractLabelsBySquaresSex(column, sumRows, labels):
+    cantRows = len(labels)
+
+    sumRows = sumRows.copy()
+    originalRows = sumRows.copy()
+    sumRows[sumRows < int(max(sumRows))] = 0
+    center = []
+    sc = sumRows.copy()
+    while True:
+        left, right = getFirstGroupLargerThan(sumRows, 1)
+
+        if left + right < 0:
+            break
+        sumRows[left:right] = 0
+        if left == right:
+            sumRows[left] = 0
+
+        center.append((left + right) // 2)
+
+    if len(center) < 2 or center[0] + 150 > center[-1]:
+        return '?'
+    i = center[0]
+
+    results = ''
+    widthColumn = column.shape[1]
+    for k, addJ in enumerate([18, 38, 116, 136]):
+        j = i + addJ
+        if isOn(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
+            if len(results) > 0:
+                results = results + ';' + labels[k]
+            else:
+                results = labels[k]
+
+    if len(results) == 0:
+        results = '?'
+    return results
+    # print(labels)
+    # print(results)
+    # plt.subplot(1,2,1), plt.imshow(column,'gray')
+    # plt.subplot(1,2,2), plt.bar(range(len(originalRows)),originalRows, 1)
+    # plt.show()
 
 
 def extractColumnsBySquares(If, cantColumns):
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2,2))
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
     If = cv2.dilate(If, kernel)
     sumCols = np.asarray(np.sum(If, 0) // 255)
     sumCols = sumCols.copy()
@@ -727,7 +871,6 @@ def extractColumnsBySquares(If, cantColumns):
     arrayResult = []
     if blocks == 2:
 
-
         sumCols = sc.copy()
         returnNone = False
 
@@ -743,19 +886,18 @@ def extractColumnsBySquares(If, cantColumns):
             if left == right:
                 sumCols[left] = 0
 
-            center.append((left+right)//2)
+            center.append((left + right) // 2)
 
-            #importanColum = If[:, left:right]
-            #arrayResult.append(importanColum)
-
+            # importanColum = If[:, left:right]
+            # arrayResult.append(importanColum)
 
         if returnNone or len(center) < 2:
             return [None] * cantColumns
 
         if cantColumns == 2:
-            i  = getPointProportion((center[0],0),(center[1],0), 20,47)[0]
+            i = getPointProportion((center[0], 0), (center[1], 0), 20, 47)[0]
             j = getPointProportion((center[0], 0), (center[1], 0), 47, 20)[0]
-            importanColum_I = If[:, (i-11):(i+11)]
+            importanColum_I = If[:, (i - 11):(i + 11)]
             importanColum_J = If[:, (j - 11):(j + 11)]
             arrayResult.append(importanColum_I)
             arrayResult.append(importanColum_J)
@@ -765,7 +907,7 @@ def extractColumnsBySquares(If, cantColumns):
             # plt.show()
 
         else:
-            i = (center[0]+center[1])//2
+            i = (center[0] + center[1]) // 2
             importanColum_I = If[:, (i - 11):(i + 11)]
             # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
             # plt.subplot(1, 3, 2), plt.imshow(importanColum_I), plt.title('Column')
@@ -775,13 +917,192 @@ def extractColumnsBySquares(If, cantColumns):
         return arrayResult
 
     else:
-        return [None]*cantColumns
+        return [None] * cantColumns
+
+
+def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
+    deltaAmpliacion = 5
+    ROI_base = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    ROI = ROI_base.copy()
+    #
 
 
 
+    If = cv2.adaptiveThreshold(ROI, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
+    If = cv2.bitwise_not(If)
+
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    left = sumCols[:(len(sumCols) // 2)]
+    right = sumCols[(len(sumCols) // 2):]
+    max_indx_left, max_value_row = max(enumerate(left), key=lambda p: p[1])
+    max_indx_right, max_value_col = max(enumerate(right), key=lambda p: p[1])
+
+    i = max_indx_left
+    j = len(sumCols) // 2 + max_indx_right
+
+    ROI = ROI_base[:, i:(j + 1)]
+
+    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    If = cv2.bitwise_not(If)
+    sumRows = np.asarray(np.sum(If, 1) // 255)
+    sumRows[sumRows > 0.9 * ROI.shape[1]] = 0
+    acumBy5 = sumRows.copy()
+    for i in range(len(acumBy5)):
+        if i > 0:
+            acumBy5[i] += acumBy5[i - 1]
+        if i >= 5:
+            acumBy5[i] -= sumRows[i - 5]
+
+    print(sumRows)
+    print(acumBy5)
+    max_i_2 = 0
+    max_val_i = 0
+    for i in range(len(acumBy5)):
+        if i + 16 >= len(acumBy5):
+            break
+        val = acumBy5[i] + acumBy5[i + 16]
+        if val > max_val_i:
+            max_val_i = val
+            max_i_2 = i
+    i_1 = max_i_2 - 7
+    j_2 = max_i_2 + 18
+
+    left = If[i_1:j_2, 4:22]
+    right = If[i_1:j_2, 88:105]
+
+    # plt.subplot(2,2,1),plt.imshow(ROI_base,'gray'), plt.title('img')
+    # plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
+    # plt.subplot(2, 2, 3), plt.imshow(left, 'gray'), plt.title('top')
+    # plt.subplot(2, 2, 4), plt.imshow(right, 'gray'), plt.title('bot')
+    # plt.show()
+    arrayResult = []
+    arrayResult.append(left)
+    arrayResult.append(right)
+
+    return arrayResult
 
 
-def extractCategory_simpleImages(img, TL, BR, cantColumns):
+def extractCategory_extractColumnLabelsTipoSuministro(img, TL, BR, cantColumns):
+    deltaAmpliacion = 5
+    ROI_base = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    ROI = ROI_base.copy()
+    #
+
+
+
+    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    If = cv2.bitwise_not(If)
+    # NO_TIENE = If[14:25, 222:277]
+    # cv2.imwrite('NO_TIENE.png',NO_TIENE)
+
+    sumRows = np.asarray(np.sum(If, 1) // 255)
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    NO_TIENE = cv2.imread('NO_TIENE.png', 0)
+    neg_NO_TIENE = cv2.bitwise_not(NO_TIENE)
+    rows, cols = NO_TIENE.shape
+    ROWS, COLS = If.shape
+    I_J = None
+    val = 0
+    for i in range(ROWS):
+        for j in range(COLS):
+            i_2 = i + rows
+            j_2 = j + cols
+            if i_2 >= ROWS or j_2 >= COLS:
+                break
+            pos_no_tiene = If[i:i_2, j:j_2]
+
+            c1 = cv2.countNonZero(cv2.bitwise_and(NO_TIENE, pos_no_tiene))
+            c2 = cv2.countNonZero(cv2.bitwise_and(neg_NO_TIENE, pos_no_tiene))
+            v = c1 - c2
+            if v > val:
+                val = v
+                I_J = (i, j)
+
+    if I_J is None or I_J[1] <= 199:
+        return [None] * 3
+    arrayResult = []
+    d_j = 8
+    d_i = 3
+    for k in [-199, -105, -13]:
+        j = I_J[1] + k
+        i = I_J[0] + 5
+        globe = If[(i - d_i):(i + d_i), (j - d_j):(j + d_j)]
+        arrayResult.append(globe)
+
+
+
+    print(I_J)
+    plt.subplot(2, 2, 1), plt.imshow(ROI_base, 'gray'), plt.title('img')
+    plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
+    plt.subplot(2, 2, 3), plt.bar(range(len(sumRows)), sumRows, width=1), plt.title('sumRows')
+    plt.subplot(2, 2, 4), plt.bar(range(len(sumCols)), sumCols, width=1), plt.title('sumCols')
+    # plt.subplot(2, 2, 4), plt.imshow(right, 'gray'), plt.title('bot')
+    plt.show()
+
+    return arrayResult
+
+
+def extractCategory_extractColumnLabelsTipoVia(img, TL, BR, cantColumns):
+    deltaAmpliacion = 5
+    ROI_base = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    ROI = ROI_base.copy()
+    #
+
+
+
+    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    If = cv2.bitwise_not(If)
+
+
+    # CARRETERA = If[8:19, 523:589]
+    # cv2.imwrite('CARRETERA.png',CARRETERA)
+    #
+    sumRows = np.asarray(np.sum(If, 1) // 255)
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    CARRETERA = cv2.imread('CARRETERA.png', 0)
+    neg_CARRETERA = cv2.bitwise_not(CARRETERA)
+    rows, cols = CARRETERA.shape
+    ROWS, COLS = If.shape
+    I_J = None
+    val = 0
+    for i in range(ROWS):
+        for j in range(COLS):
+            i_2 = i + rows
+            j_2 = j + cols
+            if i_2 >= ROWS or j_2 >= COLS:
+                break
+            pos_no_tiene = If[i:i_2, j:j_2]
+
+            c1 = cv2.countNonZero(cv2.bitwise_and(CARRETERA, pos_no_tiene))
+            c2 = cv2.countNonZero(cv2.bitwise_and(neg_CARRETERA, pos_no_tiene))
+            v = c1 - c2
+            if v > val:
+                val = v
+                I_J = (i, j)
+
+    if I_J is None or I_J[1] <= 500:
+        return [None] * 6
+    arrayResult = []
+    d_j = 8
+    d_i = 3
+    for k in range(6):
+        j = I_J[1] - 500 + 122*k
+        i = I_J[0] + 4
+        globe = If[(i - d_i):(i + d_i), (j - d_j):(j + d_j)]
+        arrayResult.append(globe)
+
+    #
+    # print(I_J)
+    # plt.subplot(2, 2, 1), plt.imshow(ROI_base, 'gray'), plt.title('img')
+    # plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
+    # # plt.subplot(2, 2, 3), plt.bar(range(len(sumRows)), sumRows, width=1), plt.title('sumRows')
+    # # plt.subplot(2, 2, 4), plt.bar(range(len(sumCols)), sumCols, width=1), plt.title('sumCols')
+    # # plt.subplot(2, 2, 4), plt.imshow(right, 'gray'), plt.title('bot')
+    # plt.show()
+    return arrayResult
+
+
+def extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns):
     deltaAmpliacion = 10
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
     # If = cv2.GaussianBlur(ROI, (3, 3), 0)
@@ -789,107 +1110,103 @@ def extractCategory_simpleImages(img, TL, BR, cantColumns):
     If = cv2.bitwise_not(If)
     rows, cols = If.shape
 
-
     resp = extractColumnsBySquares(If, cantColumns)
-
-    sumCols = np.asarray(np.sum(If, 0) // 255)
-    sumCols = dropMinsTo0(sumCols, 11)
-
-    left = 0
-    right = max(sumCols)
-
-    toCut = -1
-    for i in range(left, right):
-        sc = sumCols.copy()
-        sc[sc < i] = 0
-        print('testing with ', i)
-        numBlocks = countBlocks(sc, 20)
-
-        if numBlocks == cantColumns:
-            toCut = i
-            break
     #
-    # media_21 = calcMeans(sumCols, 3,3)
-    # with0 = dropMinsTo0(sumCols, 11)
-    # sum_medias = np.zeros(len(media_21))
-    # for i in range(len(sum_medias)):
-    #     sum_medias[i] = with0[i]+media_21[i]
-    # plt.subplot(2, 2, 1), plt.imshow(If, 'gray')
-    # plt.subplot(2, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
-    # plt.subplot(2, 2, 3), plt.bar(range(len(media_21)), media_21, 1, color="blue")
-    # plt.subplot(2, 2, 4), plt.bar(range(len(with0)), with0, 1, color="blue")
-    # plt.show()
-    sumCols[sumCols < toCut] = 0
-
-    arrayResult = []
-    arResultOk = True
-    for k in range(0, cantColumns):
-        left, right = getFirstGroupLargerThan(sumCols, 15)
-        if left + right < 0:
-            arrayResult.append(None)
-            arResultOk = False
-            continue
-
-        sumCols[left:right] = 0
-        importanColum = If[:, left:right]
-        arrayResult.append(importanColum)
-    print('Returning images A')
-    toPrint = False
-    for I in arrayResult:
-        if I is None:
-            toPrint = False
-    # if arResultOk == False:
-    #     arrayResult = resp
-    if toPrint:
-
-        sumCols = np.asarray(np.sum(If, 0) // 255)
-        plt.subplot(3, 2, 1), plt.imshow(If, 'gray')
-        plt.subplot(3, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
-        if resp is not None and len(resp) > 0 and resp[0] is not None:
-            plt.subplot(3, 2, 3), plt.imshow(resp[0], 'gray')
-            sumRows = np.asarray(np.sum(resp[0], 1) // 255)
-            plt.subplot(3, 2, 4), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
-        if resp is not None and len(resp) > 1 and resp[1] is not None:
-            plt.subplot(3, 2, 5), plt.imshow(resp[1], 'gray')
-            sumRows = np.asarray(np.sum(resp[1], 1) // 255)
-            plt.subplot(3, 2, 6), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
-        plt.show()
+    # sumCols = np.asarray(np.sum(If, 0) // 255)
+    # sumCols = dropMinsTo0(sumCols, 11)
+    #
+    # left = 0
+    # right = max(sumCols)
+    #
+    # toCut = -1
+    # for i in range(left, right):
+    #     sc = sumCols.copy()
+    #     sc[sc < i] = 0
+    #     print('testing with ', i)
+    #     numBlocks = countBlocks(sc, 20)
+    #
+    #     if numBlocks == cantColumns:
+    #         toCut = i
+    #         break
+    # #
+    # # media_21 = calcMeans(sumCols, 3,3)
+    # # with0 = dropMinsTo0(sumCols, 11)
+    # # sum_medias = np.zeros(len(media_21))
+    # # for i in range(len(sum_medias)):
+    # #     sum_medias[i] = with0[i]+media_21[i]
+    # # plt.subplot(2, 2, 1), plt.imshow(If, 'gray')
+    # # plt.subplot(2, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
+    # # plt.subplot(2, 2, 3), plt.bar(range(len(media_21)), media_21, 1, color="blue")
+    # # plt.subplot(2, 2, 4), plt.bar(range(len(with0)), with0, 1, color="blue")
+    # # plt.show()
+    # sumCols[sumCols < toCut] = 0
+    #
+    # arrayResult = []
+    # arResultOk = True
+    # for k in range(0, cantColumns):
+    #     left, right = getFirstGroupLargerThan(sumCols, 15)
+    #     if left + right < 0:
+    #         arrayResult.append(None)
+    #         arResultOk = False
+    #         continue
+    #
+    #     sumCols[left:right] = 0
+    #     importanColum = If[:, left:right]
+    #     arrayResult.append(importanColum)
+    # print('Returning images A')
+    # toPrint = False
+    # for I in arrayResult:
+    #     if I is None:
+    #         toPrint = False
+    # # if arResultOk == False:
+    # #     arrayResult = resp
+    # if toPrint:
+    #
+    #     sumCols = np.asarray(np.sum(If, 0) // 255)
+    #     plt.subplot(3, 2, 1), plt.imshow(If, 'gray')
+    #     plt.subplot(3, 2, 2), plt.bar(range(len(sumCols)), sumCols, 1, color="blue")
+    #     if resp is not None and len(resp) > 0 and resp[0] is not None:
+    #         plt.subplot(3, 2, 3), plt.imshow(resp[0], 'gray')
+    #         sumRows = np.asarray(np.sum(resp[0], 1) // 255)
+    #         plt.subplot(3, 2, 4), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
+    #     if resp is not None and len(resp) > 1 and resp[1] is not None:
+    #         plt.subplot(3, 2, 5), plt.imshow(resp[1], 'gray')
+    #         sumRows = np.asarray(np.sum(resp[1], 1) // 255)
+    #         plt.subplot(3, 2, 6), plt.bar(range(len(sumRows)), sumRows, 1, color="blue")
+    #     plt.show()
     return resp
 
 
-def extractCategory_singleColumn(img, TL, BR, cantColumns):
+def extractCategory_extractColumnLabelsLeft(img, TL, BR, cantColumns):
     deltaAmpliacion = 10
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
     # If = cv2.GaussianBlur(ROI, (3, 3), 0)
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
     If = cv2.bitwise_not(If)
-    arrayResult = []
-    arrayResult.append(If)
 
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    compCols = (sumCols * (-1)) + If.shape[0]
+    max_j = 0
+    max_value_j = 0
+    for j in range(0, len(sumCols) // 2):
+        val = sumCols[j] + compCols[j + 4]
+        if val > max_value_j:
+            max_value_j = val
+            max_j = j
+
+    If2 = If[:, 0:max_j + 30]
+    arrayResult = []
+    arrayResult.append(If2)
+    # plt.subplot(2,2,1), plt.imshow(If,'gray')
+    # plt.subplot(2,2,2), plt.bar(range(len(sumCols)),sumCols,width=1)
+    # plt.subplot(2, 2, 3), plt.imshow(If2,'gray')
+    # plt.show()
     return arrayResult
 
 
-def extractCategory_Test(img, TL, BR):
-    deltaAmpliacion = 10
-    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
-    # If = cv2.GaussianBlur(ROI, (3, 3), 0)
-    ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-
-    If = cv2.bitwise_not(If)
-    top_left, bottom_right = getBestRectangle_big(If, 0.4)
-    bestRectangle = If[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
-    canny = cv2.Canny(If, 50, 240)
-    # kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
-
-    plt.subplot(1, 4, 1), plt.imshow(ROI), plt.title('original')
-    plt.subplot(1, 4, 2), plt.imshow(If), plt.title('If')
-    plt.subplot(1, 4, 3), plt.imshow(canny), plt.title('canny on If')
-    plt.subplot(1, 4, 4), plt.imshow(bestRectangle), plt.title('bestRectangle')
-
-    plt.show()
-
-    return None
+def extractCategory_extractColumnLabelsSex(img, TL, BR, cantColumns):
+    return extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns)
 
 
 def extractCharacters(img, onlyUserMarks, TL, BR, count):

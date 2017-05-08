@@ -25,7 +25,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -111,7 +111,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -196,7 +196,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -282,7 +282,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -368,7 +368,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -453,7 +453,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -528,7 +528,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -574,7 +574,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -659,7 +659,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -743,7 +743,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -831,7 +831,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -908,7 +908,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -954,7 +954,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": "parserCategoricSimpleColumn",
+                                        "nameSingleParser": "parserCategoricLabelsLeft",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -1014,7 +1014,7 @@
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
-                                        "nameSingleParser": null,
+                                        "nameSingleParser": "parserCategoricLabelsTipoSuministro",
                                         "nameParser": "parserImage2Categoric",
                                         "countItems": 1,
                                         "position": [
@@ -1025,11 +1025,11 @@
                                             [
                                                 1494,
                                                 524
-                                            ]
+                                            ], [["1"],["2"],["3"]]
                                         ],
                                         "arrayOfImages": null,
                                         "parser": {},
-                                        "singleParser": null,
+                                        "singleParser": {},
                                         "predictedValue": null
                                     },
                                     "description": "posicion final",

@@ -75,6 +75,8 @@ def getLabels(name_cat):
         return [["8"]]
     elif name_cat == 'su_hogar_tiene':
         return [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]]
+    elif name_cat == 'tipo_documento':
+        return [["1","2"],["3","4"]]
     else:
         return ['']
 
@@ -86,23 +88,26 @@ def loadImageCategoricSimple(dict_current, cat_parent, cat_grand_parent):
     position = dict_current['position']
     position = position[0:2]
     parent_registered = False
-    registered_page2_categoric = ['tipo_vivienda', 'vivienda_es', 'material_predominante_paredes', 'material_predominante_techos',
+    registered_categoric = ['tipo_vivienda', 'vivienda_es', 'material_predominante_paredes', 'material_predominante_techos',
                         'material_predominante_pisos', 'alumbrado_vivienda', 'alumbrado_vivienda_no_tiene',
                         'abastecimiento_agua', 'servicio_higienico', 'mas24_vive_capital', 'combustible_cocinar',
-                        'combustible_cocinar_no_cocina', 'su_hogar_tiene']
+                        'combustible_cocinar_no_cocina', 'su_hogar_tiene','parentesco_jefe_hogar', 'num_nucleo_familiar', 'estado_civil', 'tipo_seguro', 'lengua_materna',
+                    'sabe_leer_escribir', 'nivel_educativo', 'ultimo_grado_aprobado', 'ultimo_mes_era_un',
+                    'sector_desempenho', 'presenta_discapacidad', 'programa_social_beneficiario','sexo','tipo_documento']
+
 
     cat_name = cat_parent.name
 
-    if cat_name in registered_page2_categoric:
+    if cat_name in registered_categoric:
         parent_registered = True
 
     grand_parent_registered = False
     grand_parent_name = ''
-    if cat_grand_parent is not None and cat_grand_parent.name in registered_page2_categoric:
+    if cat_grand_parent is not None and cat_grand_parent.name in registered_categoric:
         grand_parent_registered = True
         grand_parent_name = cat_grand_parent.name
 
-    if parent_registered :
+    if parent_registered:
         position.append(getLabels(cat_name))
     elif grand_parent_registered:
         position.append(getLabels(grand_parent_name))
@@ -112,14 +117,20 @@ def loadImageCategoricSimple(dict_current, cat_parent, cat_grand_parent):
     if cat_name in ['parentesco_jefe_hogar', 'num_nucleo_familiar', 'estado_civil', 'tipo_seguro', 'lengua_materna',
                     'sabe_leer_escribir', 'nivel_educativo', 'ultimo_grado_aprobado', 'ultimo_mes_era_un',
                     'sector_desempenho', 'presenta_discapacidad', 'programa_social_beneficiario']:
-        return ImageCategoricSimpleSelection(position, 1)
+        return ImageCategoricLabelsInside(position, 1)
     else:
-        if parent_registered or grand_parent_registered:
+        if cat_name in ['sexo']:
+            return ImageCategoricLabelsSex(position,1)
+        else:
+            if cat_name in ['tipo_documento']:
+                return ImageCategoricLabelsDocumento(position,1)
+            else:
+                if parent_registered or grand_parent_registered:
 
-            return ImageCategoricSingleColumn(position, 1)
+                    return ImageCategoricLabelsLeft(position, 1)
 
-        print(cat_name)
-        return ImageCategoric(dict_current['position'], 1)
+                print(cat_name)
+                return ImageCategoric(dict_current['position'], 1)
 
 
 def loadCategory(dict_current, cat_parent=None, cat_grand_parent = None):
@@ -137,7 +148,7 @@ def jsonDefault(object):
 
 
 if __name__ == '__main__':
-    str_number = '2'
+    str_number = '4'
     str_file = '../pagina' + str_number + '.json'
     str_file_output = '../pagina' + str_number + '_test.json'
     with open(str_file, 'r') as input:
