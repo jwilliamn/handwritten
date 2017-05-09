@@ -1059,7 +1059,7 @@ def extractCategory_extractColumnLabelsTipoVia(img, TL, BR, cantColumns):
     #
     sumRows = np.asarray(np.sum(If, 1) // 255)
     sumCols = np.asarray(np.sum(If, 0) // 255)
-    CARRETERA = cv2.imread('CARRETERA.png', 0)
+    CARRETERA = cv2.imread('resources/CARRETERA.png', 0)
     neg_CARRETERA = cv2.bitwise_not(CARRETERA)
     rows, cols = CARRETERA.shape
     ROWS, COLS = If.shape

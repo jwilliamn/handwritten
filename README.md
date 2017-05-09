@@ -35,6 +35,8 @@ Project consist of three main directories:
 * Extraction - Contain the scripts that extract individual characters of the survey form.
 	** Detect page,
 	** Feature extractor
+	
 * Modeling - Contains convnet models designed.
+
 * Api - Script that integrates the above.
 	** Engine
