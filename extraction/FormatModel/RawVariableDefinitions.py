@@ -185,6 +185,19 @@ class RawValue:
             self.predictedValue.append(r)
         return self.predictedValue
 
+    def parserCategoricLabelsSiNo(self, arg):
+        img = arg[0]
+        TL = self.position[0]
+        BR = self.position[1]
+        labels = self.position[2]
+        self.countItems = len(labels)
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsTipoSiNo(img, TL, BR, len(labels))
+        results = UtilFunctionsExtraction.predictValuesCategory_labelsSingleButtons(self.arrayOfImages, labels)
+        self.predictedValue = []
+        for r in results:
+            self.predictedValue.append(r)
+        return self.predictedValue
+
     def letterPredictor(self, img):
         pred_label = engine.predictImage(img)
         return chr(pred_label + ord('A'))
@@ -244,6 +257,17 @@ class ImageCategoricLabelsSex(RawValue):
         if count == 1:
             super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
                              self.parserCategoricLabelsSex, 'parserCategoricLabelsSex')
+        else:
+            raise Exception('Categoric values always should have count = 1')
+
+    def __str__(self):
+        return 'ImageCategoric  : ' + str(self.countItems)
+
+class ImageCategoricLabelsSiNo(RawValue):
+    def __init__(self, position, count):
+        if count == 1:
+            super().__init__(position, 1, self.parserImage2Categoric, 'parserImage2Categoric',
+                             self.parserCategoricLabelsSiNo, 'parserCategoricLabelsSiNo')
         else:
             raise Exception('Categoric values always should have count = 1')
 

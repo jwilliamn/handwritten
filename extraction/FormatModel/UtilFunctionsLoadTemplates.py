@@ -41,6 +41,8 @@ def loadValue(dict_current):
             return ImageCategoricLabelsTipoSuministro(dict_current['position'],1)
         if dict_current['nameSingleParser'] == 'parserCategoricLabelsTipoVia':
             return ImageCategoricLabelsTipoVia(dict_current['position'],1)
+        if dict_current['nameSingleParser'] == 'parserCategoricLabelsSiNo':
+            return ImageCategoricLabelsSiNo(dict_current['position'],1)
 
     return None
 

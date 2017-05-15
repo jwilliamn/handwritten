@@ -542,6 +542,7 @@ def predictCategoric_column_labels_documento(column, labels):
     return resp
 
 
+
 def predictCategoric_column_labels_SingleButton(column, labels):
     sumRows = np.asarray(np.sum(column, 1) // 255)
     if len(labels) != 1:
@@ -919,6 +920,46 @@ def extractColumnsBySquares(If, cantColumns):
     else:
         return [None] * cantColumns
 
+def extractSimpleButton(img):
+    ret, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    If = cv2.bitwise_not(If)
+    sumRows = np.asarray(np.sum(If, 1) // 255)
+    sumCols = np.asarray(np.sum(If, 0) // 255)
+    acumBy12 = sumRows.copy()
+    for i in range(len(acumBy12)):
+        if i > 0:
+            acumBy12[i] += acumBy12[i - 1]
+        if i >= 12:
+            acumBy12[i] -= sumRows[i - 12]
+
+    acumBy19 = sumCols.copy()
+    for i in range(len(acumBy19)):
+        if i > 0:
+            acumBy19[i] += acumBy19[i - 1]
+        if i >= 19:
+            acumBy19[i] -= sumCols[i - 19]
+
+    max_indx_12, max_value_12 = max(enumerate(acumBy12), key=lambda p: p[1])
+    max_indx_19, max_value_19 = max(enumerate(acumBy19), key=lambda p: p[1])
+
+    return If[max_indx_12-11:max_indx_12+1,max_indx_19-18:max_indx_19+1]
+
+def extractCategory_extractColumnLabelsTipoSiNo(img, TL, BR, cantColumns):
+    deltaAmpliacion = 5
+    ROI_base = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    cols = ROI_base.shape[1]
+    left = extractSimpleButton(ROI_base[:, :cols//2])
+    right = extractSimpleButton(ROI_base[:, cols // 2 :])
+    # plt.subplot(3, 1, 1), plt.imshow(ROI_base, 'gray'), plt.title('ROIS')
+    # plt.subplot(3, 1, 2), plt.imshow(left, 'gray'), plt.title('left')
+    # plt.subplot(3, 1, 3), plt.imshow(right, 'gray'), plt.title('right')
+
+    # plt.show()
+    arrayResult = []
+    arrayResult.append(left)
+    arrayResult.append(right)
+    return arrayResult
+
 
 def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
     deltaAmpliacion = 5
@@ -997,7 +1038,7 @@ def extractCategory_extractColumnLabelsTipoSuministro(img, TL, BR, cantColumns):
 
     sumRows = np.asarray(np.sum(If, 1) // 255)
     sumCols = np.asarray(np.sum(If, 0) // 255)
-    NO_TIENE = cv2.imread('NO_TIENE.png', 0)
+    NO_TIENE = cv2.imread('resources/NO_TIENE.png', 0)
     neg_NO_TIENE = cv2.bitwise_not(NO_TIENE)
     rows, cols = NO_TIENE.shape
     ROWS, COLS = If.shape

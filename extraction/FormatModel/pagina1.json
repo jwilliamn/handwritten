@@ -1523,13 +1523,14 @@
                                             [
                                                 1333,
                                                 490
-                                            ]
+                                            ],
+                                            [["Si"],["No"]]
                                         ],
                                         "countItems": 1,
                                         "nameParser": "parserImage2Categoric",
-                                        "singleParser": null,
+                                        "singleParser": {},
                                         "parser": {},
-                                        "nameSingleParser": null
+                                        "nameSingleParser": "parserCategoricLabelsSiNo"
                                     },
                                     "name": "pos_TL_BR"
                                 }
@@ -1585,13 +1586,14 @@
                                             [
                                                 1335,
                                                 534
-                                            ]
+                                            ],
+                                            [["Si"],["No"]]
                                         ],
                                         "countItems": 1,
                                         "nameParser": "parserImage2Categoric",
-                                        "singleParser": null,
+                                        "singleParser": {},
                                         "parser": {},
-                                        "nameSingleParser": null
+                                        "nameSingleParser": "parserCategoricLabelsSiNo"
                                     },
                                     "name": "pos_TL_BR"
                                 }
@@ -1647,13 +1649,14 @@
                                             [
                                                 1331,
                                                 571
-                                            ]
+                                            ],
+                                            [["Si"],["No"]]
                                         ],
                                         "countItems": 1,
                                         "nameParser": "parserImage2Categoric",
-                                        "singleParser": null,
+                                        "singleParser": {},
                                         "parser": {},
-                                        "nameSingleParser": null
+                                        "nameSingleParser": "parserCategoricLabelsSiNo"
                                     },
                                     "name": "pos_TL_BR"
                                 }
