@@ -23,7 +23,7 @@ import modeling
 def plotearCategoriasPosicionesImagenes(img, cat_pos, cat_img):
     if cat_pos.hasValue:
         plotear(img, cat_pos.value.position, cat_pos.value.arrayOfImages, cat_pos.value.countItems,
-                cat_pos.value.predictedValue)
+                cat_img.value.predictedValue)
     else:
         for st in cat_pos.subTypes:
 

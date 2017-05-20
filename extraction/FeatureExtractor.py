@@ -104,6 +104,11 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
             parsed = category[1].value.parse([img, Ifp2])
             print(parsed)
 
+    DigitPredictor = engine.UniqueEngineDigit()
+    LetterPredictor = engine.UniqueEngineLetter()
+    DigitPredictor.runEngine()
+    LetterPredictor.runEngine()
+
     Page_parsed = Page.convert2ParsedValues()
     if Page_parsed is not None or Page is not None:
         plotearCategoriasPosicionesImagenes(img, Page, Page_parsed)

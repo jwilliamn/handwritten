@@ -15,7 +15,7 @@ import os
 import matplotlib.pyplot as plt
 import random as ran
 import pickle
-
+import time
 
 # Global settings ####
 # Path to saved model parameters
@@ -56,9 +56,152 @@ def reformat(dataset, labels=None):
 	return dataset, labels
 
 
+class UniqueEngineDigit(object):
+	class __UniqueEngineDigit:
+		def __init__(self, arg):
+			param_file = os.path.join(arg, 'modeling/modelD2_param.pickle')
+			weights, biases = getModelParams(param_file)
+			print('opens it')
+			self.weights = weights
+			self.biases = biases
+			self.data = []
+			self.pred = []
+		def push(self, imageData):
+			self.data.append(imageData)
+			return len(self.data) - 1
+		def runEngine(self):
+			print('N Data: ',len(self.data))
+			weights = self.weights
+			biases = self.biases
+			# print("loading Weigths and Biases %s seconds ---" % (time.time() - start_time))
+			# # Reformat image to convnet shape
+			# start_time = time.time()
+			valid_dataset, _ = make_arrays(len(self.data), image_size)
+			for k,valid_data in enumerate(self.data):
+				valid_dataset[k:(k+image_size),: :] = valid_data
+			image_dataset, _ = reformat(valid_dataset, labels=None)
+			# print("reformating %s seconds ---" % (time.time() - start_time))
+			# # Define data constant ####
+			# start_time = time.time()
+			X = tf.constant(image_dataset)
+			# print("tf.constant %s seconds ---" % (time.time() - start_time))
+			# # Pred run
+			# #image_pred = tf.nn.softmax(convnet_model(X, weights, biases))
+			# start_time = time.time()
+			image_pred = tf.nn.softmax(convnet_model(X, weights, biases, keep_prob=1.0))
 
+			# print("tf.nn.softmax %s seconds ---" % (time.time() - start_time))
+			# start_time = time.time()
+			with tf.Session() as sess:
+			# 	start_time = time.time()
+				sess.run(tf.global_variables_initializer())
+			#
+			# 	#print('Prediction initialized!')
+			#
+				preds_ = image_pred.eval()
+				pred_label = tf.argmax(preds_, 1)
+				pred_label_ = sess.run(pred_label)
+			# 	#print('Predicted value = %d' % sess.run(pred_label))
+			# 	#print(sess.run(pred_label), '->', chr(sess.run(pred_label)+ord('A')))
+			#
+			#
+			# 	#print('Total time: {0} seconds'.format(time.time() - start_time))
+			# 	#print('Testing Finished!')
+			#
+			# 	#image = image_data.reshape([32,32])
+			# 	#plt.title('Image - FSU')
+			# 	#plt.imshow(image, cmap=plt.cm.gray)
+			# 	#plt.show()
+			# print("with tf.session %s seconds ---" % (time.time() - start_time))
+				self.pred = pred_label_
+			print('Predichos: ',len(self.pred))
+	instance = None
+	def __new__(cls,arg = None): # __new__ always a classmethod
+		if not UniqueEngineDigit.instance:
+			UniqueEngineDigit.instance = UniqueEngineDigit.__UniqueEngineDigit(arg)
+		return UniqueEngineDigit.instance
+	def push(self, imageData):
+		return UniqueEngineDigit.instance.push(imageData)
+	def runEngine(self):
+		UniqueEngineDigit.instance.runEngine()
 
+def make_arrays(nb_rows, img_size):
+    if nb_rows:
+        dataset = np.ndarray((nb_rows, img_size, img_size), dtype=np.float32)
+        labels = np.ndarray(nb_rows, dtype=np.int32)
+    else:
+        dataset, labels = None, None
+    return dataset, labels
 
+class UniqueEngineLetter(object):
+	class __UniqueEngineLetter:
+		def __init__(self, arg):
+			param_file = os.path.join(arg, 'modeling/modelC3_param.pickle')
+			weights, biases = getModelParams(param_file)
+			print('opens it 2')
+			self.weights = weights
+			self.biases = biases
+			self.data = []
+			self.pred = []
+		def push(self, imageData):
+			self.data.append(imageData)
+			return len(self.data) - 1
+		def runEngine(self):
+			print('N Data: ',len(self.data))
+			weights = self.weights
+			biases = self.biases
+			# print("loading Weigths and Biases %s seconds ---" % (time.time() - start_time))
+			# # Reformat image to convnet shape
+			# start_time = time.time()
+			valid_dataset, _ = make_arrays(len(self.data), image_size)
+			for k,valid_data in enumerate(self.data):
+				valid_dataset[k:(k+image_size),: :] = valid_data
+			image_dataset, _ = reformat(valid_dataset, labels=None)
+			# print("reformating %s seconds ---" % (time.time() - start_time))
+			# # Define data constant ####
+			# start_time = time.time()
+			X = tf.constant(image_dataset)
+			# print("tf.constant %s seconds ---" % (time.time() - start_time))
+			# # Pred run
+			# #image_pred = tf.nn.softmax(convnet_model(X, weights, biases))
+			# start_time = time.time()
+			image_pred = tf.nn.softmax(convnet_model(X, weights, biases, keep_prob=1.0))
+
+			# print("tf.nn.softmax %s seconds ---" % (time.time() - start_time))
+			# start_time = time.time()
+			with tf.Session() as sess:
+			# 	start_time = time.time()
+				sess.run(tf.global_variables_initializer())
+			#
+			# 	#print('Prediction initialized!')
+			#
+				preds_ = image_pred.eval()
+				pred_label = tf.argmax(preds_, 1)
+				pred_label_ = sess.run(pred_label)
+			# 	#print('Predicted value = %d' % sess.run(pred_label))
+			# 	#print(sess.run(pred_label), '->', chr(sess.run(pred_label)+ord('A')))
+			#
+			#
+			# 	#print('Total time: {0} seconds'.format(time.time() - start_time))
+			# 	#print('Testing Finished!')
+			#
+			# 	#image = image_data.reshape([32,32])
+			# 	#plt.title('Image - FSU')
+			# 	#plt.imshow(image, cmap=plt.cm.gray)
+			# 	#plt.show()
+			# print("with tf.session %s seconds ---" % (time.time() - start_time))
+				self.pred = pred_label_
+			print('Predichos: ',len(self.pred))
+	instance = None
+
+	def __new__(cls, arg = None):  # __new__ always a classmethod
+		if not UniqueEngineLetter.instance:
+			UniqueEngineLetter.instance = UniqueEngineLetter.__UniqueEngineLetter(arg)
+		return UniqueEngineLetter.instance
+	def push(self, imageData):
+		return UniqueEngineDigit.instance.push(imageData)
+	def runEngine(self):
+		UniqueEngineDigit.instance.runEngine()
 
 # Trained models ####
 # Characters
@@ -166,42 +309,49 @@ def predictImage(image_data):
 
 	# Read model parameters ##
 	#param_file = os.path.join(model_path, 'modeling/modelC1_param.pickle')
-	param_file = os.path.join(model_path, 'modeling/modelC3_param.pickle')
-	
-	weights, biases = getModelParams(param_file)
-
-	# Reformat image to convnet shape
-	image_dataset, _ = reformat(image_data, labels=None)
-
-	# Define data constant ####
-	X = tf.constant(image_dataset)
-
-	# Pred run
-	#image_pred = tf.nn.softmax(convnet_model(X, weights, biases))
-	image_pred = tf.nn.softmax(convnet_model(X, weights, biases, keep_prob=1.0))
-
-	with tf.Session() as sess:
-		start_time = time.time()
-		sess.run(tf.global_variables_initializer())	
-
-		#print('Prediction initialized!')
-
-		preds_ = image_pred.eval()
-		pred_label = tf.argmax(preds_, 1)
-		pred_label_ = sess.run(pred_label)
-		#print('Predicted value = %d' % sess.run(pred_label))
-		#print(sess.run(pred_label), '->', chr(sess.run(pred_label)+ord('A')))
-		
-
-		#print('Total time: {0} seconds'.format(time.time() - start_time))
-		#print('Testing Finished!')
-		
-		#image = image_data.reshape([32,32])
-		#plt.title('Image - FSU')
-		#plt.imshow(image, cmap=plt.cm.gray)
-		#plt.show()
-
-	return pred_label_
+	# start_time = time.time()
+	LetterPredictor = UniqueEngineLetter(model_path)
+	return LetterPredictor.push(image_data)
+	#
+	# weights = LetterPredictor.weights
+	# biases = LetterPredictor.biases
+	# print("loading Weigths and Biases %s seconds ---" % (time.time() - start_time))
+	# # Reformat image to convnet shape
+	# start_time = time.time()
+	# image_dataset, _ = reformat(image_data, labels=None)
+	# print("reformating %s seconds ---" % (time.time() - start_time))
+	# # Define data constant ####
+	# start_time = time.time()
+	# X = tf.constant(image_dataset)
+	# print("tf.constant %s seconds ---" % (time.time() - start_time))
+	# # Pred run
+	# #image_pred = tf.nn.softmax(convnet_model(X, weights, biases))
+	# start_time = time.time()
+	# image_pred = tf.nn.softmax(convnet_model(X, weights, biases, keep_prob=1.0))
+	# print("tf.nn.softmax %s seconds ---" % (time.time() - start_time))
+	# start_time = time.time()
+	# with tf.Session() as sess:
+	# 	start_time = time.time()
+	# 	sess.run(tf.global_variables_initializer())
+	#
+	# 	#print('Prediction initialized!')
+	#
+	# 	preds_ = image_pred.eval()
+	# 	pred_label = tf.argmax(preds_, 1)
+	# 	pred_label_ = sess.run(pred_label)
+	# 	#print('Predicted value = %d' % sess.run(pred_label))
+	# 	#print(sess.run(pred_label), '->', chr(sess.run(pred_label)+ord('A')))
+	#
+	#
+	# 	#print('Total time: {0} seconds'.format(time.time() - start_time))
+	# 	#print('Testing Finished!')
+	#
+	# 	#image = image_data.reshape([32,32])
+	# 	#plt.title('Image - FSU')
+	# 	#plt.imshow(image, cmap=plt.cm.gray)
+	# 	#plt.show()
+	# print("with tf.session %s seconds ---" % (time.time() - start_time))
+	# return pred_label_
 	
 
 # Prediction of digits ####
@@ -211,39 +361,41 @@ def predictImageDigit(image_data):
 	# Read model parameters ##
 	#param_file = os.path.join(model_path, 'modeling/modelD1_param_.pickle')
 	#param_file = os.path.join(model_path, 'modeling/modelD1_param.pickle')
-	param_file = os.path.join(model_path, 'modeling/modelD2_param.pickle')
-	
-	weights, biases = getModelParams(param_file)
-
-	# Reformat image to convnet shape
-	image_dataset, _ = reformat(image_data, labels=None)
-
-	# Define data constant ####
-	X = tf.constant(image_dataset)
-
-	# Pred run
-	image_pred = tf.nn.softmax(convnet_model_d(X, weights, biases, keep_prob=1.0))
-
-	with tf.Session() as sess:
-		start_time = time.time()
-		sess.run(tf.global_variables_initializer())	
-
-		#print('Prediction initialized!')
-
-		preds_ = image_pred.eval()
-		pred_label = tf.argmax(preds_, 1)
-		pred_label_ = sess.run(pred_label)
-		#print('Predicted value = %d' % sess.run(pred_label))
-		#print(sess.run(pred_label), '->', chr(sess.run(pred_label)+ord('A')))
-		
-
-		#print('Total time: {0} seconds'.format(time.time() - start_time))
-		#print('Testing Finished!')
-		
-		#image = image_data.reshape([32,32])
-		#plt.title('Image - FSU')
-		#plt.imshow(image, cmap=plt.cm.gray)
-		#plt.show()
-
-	return pred_label_
+	DigitPredictor = UniqueEngineDigit(model_path)
+	return DigitPredictor.push(image_data)
+	# weights  = DigitPredictor.weights
+	# biases = DigitPredictor.biases
+	#
+	# # Reformat image to convnet shape
+	# image_dataset, _ = reformat(image_data, labels=None)
+	#
+	# # Define data constant ####
+	# X = tf.constant(image_dataset)
+	#
+	# # Pred run
+	# image_pred = tf.nn.softmax(convnet_model_d(X, weights, biases, keep_prob=1.0))
+	#
+	# with tf.Session() as sess:
+	# 	start_time = time.time()
+	# 	sess.run(tf.global_variables_initializer())
+	#
+	# 	#print('Prediction initialized!')
+	#
+	# 	preds_ = image_pred.eval()
+	# 	pred_label = tf.argmax(preds_, 1)
+	# 	pred_label_ = sess.run(pred_label)
+	# 	#print('Predicted value = %d' % sess.run(pred_label))
+	# 	#print(sess.run(pred_label), '->', chr(sess.run(pred_label)+ord('A')))
+	#
+	#
+	# 	#print('Total time: {0} seconds'.format(time.time() - start_time))
+	# 	#print('Testing Finished!')
+	#
+	# 	#image = image_data.reshape([32,32])
+	# 	#plt.title('Image - FSU')
+	# 	#plt.imshow(image, cmap=plt.cm.gray)
+	# 	#plt.show()
+	#
+	# return pred_label_
+	#
 	

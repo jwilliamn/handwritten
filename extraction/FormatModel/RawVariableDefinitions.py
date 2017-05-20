@@ -32,11 +32,32 @@ class RawValue:
             self.nameSingleParser = nameSingleParser
             self.predictedValue = None
             self.arrayOfImages = None
+
         else:
-            self.predictedValue = value
+            if nameSingleParser is not None and nameSingleParser == 'digitPredictor':
+                self.predictedValue =[]
+                EngineDigit = engine.UniqueEngineDigit()
+                for v in value:
+                    if v is not None:
+                        self.predictedValue.append(chr(EngineDigit.pred[v] + ord('0')))
+                    else:
+                        self.predictedValue.append(' ')
+            elif nameSingleParser is not None and nameSingleParser == 'letterPredictor':
+                self.predictedValue = []
+                EngineLetter = engine.UniqueEngineLetter()
+                for v in value:
+
+                    if v is not None:
+                        self.predictedValue.append(chr(EngineLetter.pred[v] + ord('A')))
+                    else:
+                        self.predictedValue.append(' ')
+            else:
+                self.predictedValue = value
+
             self.nameParser = nameParser
             self.nameSingleParser = nameSingleParser
             self.countItems = -1
+
 
     def convert2ParsedValues(self):
         if self.nameParser == 'parserImage2ArrayChar':
@@ -88,7 +109,7 @@ class RawValue:
         arrayResult = []
         for singleImage in arrayOfImages:
             if singleImage is None:
-                predicted = ' '
+                predicted = None
             else:
                 predicted = self.singleParser(singleImage)
 
@@ -199,13 +220,13 @@ class RawValue:
         return self.predictedValue
 
     def letterPredictor(self, img):
-        pred_label = engine.predictImage(img)
-        return chr(pred_label + ord('A'))
+        indx = engine.predictImage(img)
+        return indx#chr(pred_label + ord('A'))
         #return 'A'
 
     def digitPredictor(self, img):
-        pred_label = engine.predictImageDigit(img)
-        return chr(pred_label + ord('0'))
+        indx = engine.predictImageDigit(img)
+        return indx#chr(pred_label + ord('0'))
         #return '0'
 
 class ArrayImageNumber(RawValue):
