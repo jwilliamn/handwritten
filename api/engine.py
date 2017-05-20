@@ -224,7 +224,7 @@ def convnet_model_d(X, weights, biases, keep_prob):  # 98.2% modelD2
 
 # Prediction of characters ####
 def predictImage(image_data):
-    print('Real image', image_data.shape, type(image_data))
+    #print('Real image', image_data.shape, type(image_data))
 
     # Read model parameters ##
     # param_file = os.path.join(model_path, 'modeling/modelC1_param.pickle')
@@ -277,7 +277,7 @@ def predictImage(image_data):
 
 # Prediction of digits ####
 def predictImageDigit(image_data):
-    print('Real digit image', image_data.shape, type(image_data))
+    #print('Real digit image', image_data.shape, type(image_data))
 
     # Read model parameters ##
     # param_file = os.path.join(model_path, 'modeling/modelD1_param_.pickle')

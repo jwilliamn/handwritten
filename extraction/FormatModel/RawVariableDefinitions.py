@@ -13,7 +13,7 @@
 
 import cv2
 
-from extraction.FormatModel import UtilFunctionsExtraction
+from extraction.FormatModel import UtilFunctionsExtraction, UtilDebug
 from api import engine
 
 
@@ -99,7 +99,12 @@ class RawValue:
         cv2.rectangle(img, TL, BR, (0, 255, 0), 2)
 
     def parserImage2ArrayChar(self, arg):
+        if self.singleParser == self.letterPredictor:
+            charArray_timer = UtilDebug.ArrayLetterTimer()
+        else:
+            charArray_timer = UtilDebug.ArrayDigitTimer()
 
+        charArray_timer.startTimer(1) #self.count
         img = arg[0]
         onlyUserMarks = arg[1]
         TL = self.position[0]
@@ -117,6 +122,7 @@ class RawValue:
         #UtilFunctionsExtraction.plotImagesWithPrediction(arrayResult,arrayOfImages)
         self.predictedValue = arrayResult
         self.arrayOfImages = arrayOfImages
+        charArray_timer.endTimer()
         return self.predictedValue
 
     def getFinalValue(self, arg):
@@ -124,7 +130,10 @@ class RawValue:
 
     def parserImage2Categoric(self,arg):
         if self.singleParser is not None:
-            return self.singleParser(arg)
+            categoric_timer = UtilDebug.CategoryTimer()
+            categoric_timer.startTimer(1)
+            ret = self.singleParser(arg)
+            categoric_timer.endTimer()
         else:
             self.arrayOfImages = None
             self.predictedValue = ['unknow']

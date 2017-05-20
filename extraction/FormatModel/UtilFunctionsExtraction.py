@@ -112,7 +112,7 @@ def filterSingleCharacter_new(letter_original_and_mask):
     cosl = []
     edgesLength = []
     debugThisCharacter = False
-    print('Letter')
+
     for label in range(num_labels):
         Width = labelStats[label, cv2.CC_STAT_WIDTH]
         Height = labelStats[label, cv2.CC_STAT_HEIGHT]

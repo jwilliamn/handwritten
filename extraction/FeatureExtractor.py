@@ -22,7 +22,7 @@ import json
 from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
 from extraction.FormatModel.VariableDefinitions import *
 from extraction.FormatModel.RawVariableDefinitions import *
-from extraction.FormatModel.UtilDebug import * 
+from extraction.FormatModel import UtilDebug
 from modeling import GenerateTrainDataAZ
 
 from api import engine
@@ -99,19 +99,22 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
 
     for category in R:
         if category[1].value is not None:
-            print(category[0])
-            print(category[1].value)
+            print('Parsing category: ',category[0])
+            print('Value: ',category[1].value)
             parsed = category[1].value.parse([img, Ifp2])
-            print(parsed)
+            print('Parsed value: ',parsed)
 
+    timer_predictor =UtilDebug.PredictorTimer()
     DigitPredictor = engine.UniqueEngineDigit()
     LetterPredictor = engine.UniqueEngineLetter()
+    timer_predictor.startTimer(2)
     DigitPredictor.runEngine()
     LetterPredictor.runEngine()
+    timer_predictor.endTimer()
 
     Page_parsed = Page.convert2ParsedValues()
     if Page_parsed is not None or Page is not None:
-        plotearCategoriasPosicionesImagenes(img, Page, Page_parsed)
+        UtilDebug.plotearCategoriasPosicionesImagenes(img, Page, Page_parsed)
     cv2.imwrite('output/'+page_name+'_resultImage.png', img)
     with open('output/predictedValues_pag'+str_number+'.json', 'w') as output:
         json.dump(Page_parsed, output, default=jsonDefault, indent=4)

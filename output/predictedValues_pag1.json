@@ -1,91 +1,100 @@
 {
     "name": "page1",
     "value": null,
+    "hasValue": false,
+    "description": "pagina 1",
     "subTypes": [
         {
             "name": "localizacion_de_la_vivienda",
             "value": null,
+            "hasValue": false,
+            "description": "Localizacion de la vivienda I",
             "subTypes": [
                 {
                     "name": "ubicacion_geografica",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Ubicacion Geografica",
                     "subTypes": [
                         {
                             "name": "departamento",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Departamento",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "4"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Departamento",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "provincia",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Provincia",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Provincia",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "distrito",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Distrito",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "1",
                                             "2"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Distrito",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "centro_poblado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Centro Poblado",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "P",
                                             "A",
@@ -114,24 +123,24 @@
                                             " "
                                         ],
                                         "nameSingleParser": "letterPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Centro Poblado",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "codigo_cp",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Codigo Centro Poblado",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "0",
@@ -139,47 +148,47 @@
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Codigo Centro Poblado",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "categoria_cp",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Categoria Centro Poblado",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "4"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Categoria Centro Poblado",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "nucleo_urbano",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Nucleo Urbano",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "M",
                                             "A",
@@ -212,55 +221,55 @@
                                             " "
                                         ],
                                         "nameSingleParser": "letterPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Nucleo Urbano",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "categoria_nu",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Categoria Nucleo Urbano",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "3"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Categoria Nucleo Urbano",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Ubicacion Geografica",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "ubicacion_censal",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Ubicacion Censal",
                     "subTypes": [
                         {
                             "name": "congN",
                             "value": null,
+                            "hasValue": false,
+                            "description": "CONG. N",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             "4",
@@ -270,123 +279,123 @@
                                             "9"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "CONG. N",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "ZonaN",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Zona. N",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR_01",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "0",
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 },
                                 {
                                     "name": "pos_TL_BR_02",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Zona. N",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "ManzanaN",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Manzana Numero",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR_01",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "2",
                                             "3"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 },
                                 {
                                     "name": "pos_TL_BR_02",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Manzana Numero",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "NFrente",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Numero de frente de manzana",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             "2"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Numero de frente de manzana",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "ViviendaN",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Vivienda numero",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -395,82 +404,82 @@
                                             "2"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Vivienda numero",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "NHogares",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Numero de hogares",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Numero de hogares",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "HogarN",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Hogar Numero",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR_01",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 },
                                 {
                                     "name": "pos_TL_BR_02",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Hogar Numero",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "informante",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Apellidos y nombres del informante",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "M",
                                             "A",
@@ -503,47 +512,47 @@
                                             "Z"
                                         ],
                                         "nameSingleParser": "letterPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Apellidos y nombres del informante",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "num_orden",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Numero de orden",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "0",
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Numero de orden",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tipo_via",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Tipode via",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "?",
                                             "?",
@@ -553,24 +562,24 @@
                                             "?"
                                         ],
                                         "nameSingleParser": null,
-                                        "nameParser": "parserImage2Categoric",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2Categoric"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Tipode via",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "nombre_via",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Nombre de la via",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "G",
                                             "E",
@@ -599,24 +608,24 @@
                                             " "
                                         ],
                                         "nameSingleParser": "letterPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Nombre de la via",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "numero_puerta",
                             "value": null,
+                            "hasValue": false,
+                            "description": "numero de puerta",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR_01",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             "3",
@@ -624,157 +633,157 @@
                                             "2"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 },
                                 {
                                     "name": "pos_TL_BR_02",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "numero de puerta",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "block",
                             "value": null,
+                            "hasValue": false,
+                            "description": "block",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "block",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "piso",
                             "value": null,
+                            "hasValue": false,
+                            "description": "piso",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "piso",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "interior",
                             "value": null,
+                            "hasValue": false,
+                            "description": "interior",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "interior",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "manzana",
                             "value": null,
+                            "hasValue": false,
+                            "description": "manzana",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "manzana",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "lote",
                             "value": null,
+                            "hasValue": false,
+                            "description": "lote",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "lote",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "km",
                             "value": null,
+                            "hasValue": false,
+                            "description": "km",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -782,24 +791,24 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "km",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "telefono_domicilio",
                             "value": null,
+                            "hasValue": false,
+                            "description": "telefono_domicilio",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             "4",
@@ -810,36 +819,34 @@
                                             "9"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "telefono_domicilio",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Ubicacion Censal",
-                    "hasValue": false
+                    ]
                 }
-            ],
-            "description": "Localizacion de la vivienda I",
-            "hasValue": false
+            ]
         },
         {
             "name": "personal_responsable",
             "value": null,
+            "hasValue": false,
+            "description": "Personal Responsable",
             "subTypes": [
                 {
                     "name": "dni_empadronador",
                     "value": null,
+                    "hasValue": false,
+                    "description": "DNI del empadronador(a)",
                     "subTypes": [
                         {
                             "name": "pos_TL_BR",
                             "value": {
+                                "countItems": -1,
                                 "predictedValue": [
                                     "4",
                                     "0",
@@ -851,24 +858,24 @@
                                     "3"
                                 ],
                                 "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
-                                "countItems": -1
+                                "nameParser": "parserImage2ArrayChar"
                             },
-                            "subTypes": [],
+                            "hasValue": true,
                             "description": "Valor predicho",
-                            "hasValue": true
+                            "subTypes": []
                         }
-                    ],
-                    "description": "DNI del empadronador(a)",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "dni_jefe_brigada",
                     "value": null,
+                    "hasValue": false,
+                    "description": "DNI del jefe(a) de brigada",
                     "subTypes": [
                         {
                             "name": "pos_TL_BR",
                             "value": {
+                                "countItems": -1,
                                 "predictedValue": [
                                     "2",
                                     "9",
@@ -880,24 +887,24 @@
                                     "7"
                                 ],
                                 "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
-                                "countItems": -1
+                                "nameParser": "parserImage2ArrayChar"
                             },
-                            "subTypes": [],
+                            "hasValue": true,
                             "description": "Valor predicho",
-                            "hasValue": true
+                            "subTypes": []
                         }
-                    ],
-                    "description": "DNI del jefe(a) de brigada",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "dni_revisor",
                     "value": null,
+                    "hasValue": false,
+                    "description": "DNI del revisor(a)",
                     "subTypes": [
                         {
                             "name": "pos_TL_BR",
                             "value": {
+                                "countItems": -1,
                                 "predictedValue": [
                                     "4",
                                     "6",
@@ -909,24 +916,24 @@
                                     "4"
                                 ],
                                 "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
-                                "countItems": -1
+                                "nameParser": "parserImage2ArrayChar"
                             },
-                            "subTypes": [],
+                            "hasValue": true,
                             "description": "Valor predicho",
-                            "hasValue": true
+                            "subTypes": []
                         }
-                    ],
-                    "description": "DNI del revisor(a)",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "dni_supervisor",
                     "value": null,
+                    "hasValue": false,
+                    "description": "DNI del supervisor(a)",
                     "subTypes": [
                         {
                             "name": "pos_TL_BR",
                             "value": {
+                                "countItems": -1,
                                 "predictedValue": [
                                     " ",
                                     " ",
@@ -938,36 +945,38 @@
                                     " "
                                 ],
                                 "nameSingleParser": "digitPredictor",
-                                "nameParser": "parserImage2ArrayChar",
-                                "countItems": -1
+                                "nameParser": "parserImage2ArrayChar"
                             },
-                            "subTypes": [],
+                            "hasValue": true,
                             "description": "Valor predicho",
-                            "hasValue": true
+                            "subTypes": []
                         }
-                    ],
-                    "description": "DNI del supervisor(a)",
-                    "hasValue": false
+                    ]
                 }
-            ],
-            "description": "Personal Responsable",
-            "hasValue": false
+            ]
         },
         {
             "name": "entrevista_supervision",
             "value": null,
+            "hasValue": false,
+            "description": "Entrevista y supervision",
             "subTypes": [
                 {
                     "name": "empadronador",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Visitas del empadronador",
                     "subTypes": [
                         {
                             "name": "primera",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Primera Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "3",
                                             "0",
@@ -975,46 +984,46 @@
                                             "5"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Primera Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "primera_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la primera visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la primera visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "segunda",
                             "value": null,
+                            "hasValue": false,
+                            "description": "segunda Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1022,46 +1031,46 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "segunda Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "segunda_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la segunda visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la segunda visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tercera",
                             "value": null,
+                            "hasValue": false,
+                            "description": "tercera Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1069,54 +1078,54 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "tercera Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tercera_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la tercera visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la tercera visita",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Visitas del empadronador",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "jefe_brigada",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Visitas del jefe de brigada",
                     "subTypes": [
                         {
                             "name": "primera",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Primera Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1124,46 +1133,46 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Primera Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "primera_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la primera visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la primera visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "segunda",
                             "value": null,
+                            "hasValue": false,
+                            "description": "segunda Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1171,46 +1180,46 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "segunda Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "segunda_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la segunda visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la segunda visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tercera",
                             "value": null,
+                            "hasValue": false,
+                            "description": "tercera Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1218,54 +1227,54 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "tercera Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tercera_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la tercera visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la tercera visita",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Visitas del jefe de brigada",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "revisor",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Revisor",
                     "subTypes": [
                         {
                             "name": "primera",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Primera Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             "4",
@@ -1273,47 +1282,47 @@
                                             "6"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Primera Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "primera_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la primera visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "Si",
                                             "?"
                                         ],
                                         "nameSingleParser": null,
-                                        "nameParser": "parserImage2Categoric",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2Categoric"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la primera visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "segunda",
                             "value": null,
+                            "hasValue": false,
+                            "description": "segunda Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1321,47 +1330,47 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "segunda Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "segunda_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la segunda visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "?",
                                             "?"
                                         ],
                                         "nameSingleParser": null,
-                                        "nameParser": "parserImage2Categoric",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2Categoric"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la segunda visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tercera",
                             "value": null,
+                            "hasValue": false,
+                            "description": "tercera Visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1369,55 +1378,55 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "tercera Visita",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "tercera_resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Resultado de la tercera visita",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "?",
                                             "?"
                                         ],
                                         "nameSingleParser": null,
-                                        "nameParser": "parserImage2Categoric",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2Categoric"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Resultado de la tercera visita",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Revisor",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "resultado_final_empadronamiento",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Revisor",
                     "subTypes": [
                         {
                             "name": "fecha",
                             "value": null,
+                            "hasValue": false,
+                            "description": "Fecha del resultado final de empadronamiento",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "3",
                                             "0",
@@ -1429,54 +1438,54 @@
                                             "3"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "Fecha del resultado final de empadronamiento",
-                            "hasValue": false
+                            ]
                         },
                         {
                             "name": "resultado",
                             "value": null,
+                            "hasValue": false,
+                            "description": "resultado",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             "1"
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "resultado",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Revisor",
-                    "hasValue": false
+                    ]
                 },
                 {
                     "name": "codigo_de_resultado",
                     "value": null,
+                    "hasValue": false,
+                    "description": "Cpdogps de resultado",
                     "subTypes": [
                         {
                             "name": "codigo",
                             "value": null,
+                            "hasValue": false,
+                            "description": "codigo",
                             "subTypes": [
                                 {
                                     "name": "pos_TL_BR",
                                     "value": {
+                                        "countItems": -1,
                                         "predictedValue": [
                                             " ",
                                             " ",
@@ -1492,26 +1501,17 @@
                                             " "
                                         ],
                                         "nameSingleParser": "digitPredictor",
-                                        "nameParser": "parserImage2ArrayChar",
-                                        "countItems": -1
+                                        "nameParser": "parserImage2ArrayChar"
                                     },
-                                    "subTypes": [],
+                                    "hasValue": true,
                                     "description": "Valor predicho",
-                                    "hasValue": true
+                                    "subTypes": []
                                 }
-                            ],
-                            "description": "codigo",
-                            "hasValue": false
+                            ]
                         }
-                    ],
-                    "description": "Cpdogps de resultado",
-                    "hasValue": false
+                    ]
                 }
-            ],
-            "description": "Entrevista y supervision",
-            "hasValue": false
+            ]
         }
-    ],
-    "description": "pagina 1",
-    "hasValue": false
+    ]
 }
