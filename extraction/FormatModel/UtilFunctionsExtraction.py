@@ -443,84 +443,162 @@ def getBestRectangle_big(region, ratio_cols_over_rows):
 
 
 def getBestRectangle(region, ratio_cols_over_rows):
-    B = range(max(0, region.shape[1] - 20), region.shape[1])
+    # B = range(max(0, region.shape[1] - 20), region.shape[1])
+    # copia = region.copy()
+    #
+    # copia[copia >= 0] = 0
+    # rows, cols = region.shape
+    #
+    # bestValue = -1.0
+    # bestA = 0
+    # bestB = 0
+    # bestPos = (-1, -1)
+    #
+    # sumRows = np.zeros((rows, cols))
+    # sumCols = np.zeros((rows, cols))
+    # for i in range(rows):
+    #     for j in range(cols):
+    #         if j == 0:
+    #             sumRows[i, j] = (1 if region[i, j] > 0 else 0)
+    #         else:
+    #             sumRows[i, j] = (1 if region[i, j] > 0 else 0) + sumRows[i, j - 1]
+    #
+    #         if i == 0:
+    #             sumCols[i, j] = (1 if region[i, j] > 0 else 0)
+    #         else:
+    #             sumCols[i, j] = (1 if region[i, j] > 0 else 0) + sumCols[i - 1, j]
+    # # print(region)
+    # # print(sumRows)
+    # # print(sumCols)
+    #
+    #
+    # for b in B:
+    #     minA = int(round(b / (ratio_cols_over_rows + 0.1)))
+    #     maxA = int(round(b / (ratio_cols_over_rows - 0.1)))
+    #     for a in range(minA, maxA):
+    #         cum = np.zeros((rows, cols))
+    #         for i in range(rows):
+    #             if i + a >= rows:
+    #                 break
+    #             for j in range(cols):
+    #                 if j + b >= cols:
+    #                     break
+    #                 # copia[copia >= 0] = 0
+    #                 # pi = (j, i)
+    #                 # pf = (j + b, i + a)
+    #                 # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+    #                 # copia = cv2.bitwise_and(copia, region)
+    #                 # cantMatch = cv2.countNonZero(copia)
+    #                 # print('cant match: ', cantMatch)
+    #                 myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i + a, j + b))
+    #                 # print('cant mAtch: ', myCantMatch)
+    #                 cum[i, j] = myCantMatch / (2 * (a + b))
+    #                 # (I, J) = findMaxElement(cum)
+    #                 # print(I,J)
+    #                 # print('inicio', i, j)
+    #                 # print('longitudes', a, b)
+    #                 # print(cum)
+    #                 # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
+    #                 # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    #                 # plt.show()
+    #                 # cv2.rectangle(copia, pi, pf, 0, thickness=1)
+    #
+    #         (I, J) = findMaxElement(cum)
+    #         if cum[I, J] > bestValue:
+    #             bestValue = cum[I, J]
+    #             bestA = a
+    #             bestB = b
+    #             bestPos = (I, J)
+    #
+    # copia[copia >= 0] = 0
+    # pi = (bestPos[1], bestPos[0])
+    # pf = (bestPos[1] + bestB, bestPos[0] + bestA)
+    # # cv2.rectangle(copia, pi, pf, 255, thickness=1)
+    # # section = region[pi[1]:pf[1], pi[0]:pf[0]]
+    # # plt.subplot(1, 3, 1), plt.imshow(region, 'gray'), plt.title('region')
+    # # plt.subplot(1, 3, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
+    # # plt.subplot(1, 3, 3), plt.imshow(section, 'gray'), plt.title('best mark')
+    # # plt.show()
+    # ratioBuffer = UtilDebug.RatiosBuffer()
+    # ratioBuffer.append((bestA, bestB))
+    # retFirstAlgorithm = pi, pf
+
     copia = region.copy()
 
-    copia[copia >= 0] = 0
+    copia = copia > 0
     rows, cols = region.shape
-    print(region.shape)
+
     bestValue = -1.0
     bestA = 0
     bestB = 0
     bestPos = (-1, -1)
 
-    sumRows = np.zeros((rows, cols))
-    sumCols = np.zeros((rows, cols))
-    for i in range(rows):
-        for j in range(cols):
-            if j == 0:
-                sumRows[i, j] = (1 if region[i, j] > 0 else 0)
-            else:
-                sumRows[i, j] = (1 if region[i, j] > 0 else 0) + sumRows[i, j - 1]
+    acumSumRows = np.cumsum(copia, 1)
+    acumSumCols = np.cumsum(copia, 0)
 
-            if i == 0:
-                sumCols[i, j] = (1 if region[i, j] > 0 else 0)
-            else:
-                sumCols[i, j] = (1 if region[i, j] > 0 else 0) + sumCols[i - 1, j]
-    # print(region)
-    # print(sumRows)
-    # print(sumCols)
+    totSumRows = np.sum(copia, 1)
+    totSumCols = np.sum(copia, 0)
+    delta = 1
 
+    maxCols = filter_and_getMaxElements(totSumCols, 0, 100, minPercent=0.5)
+    maxRows = filter_and_getMaxElements(totSumRows, 0, 100, minPercent=0.5)
+    print('SS:', len(maxCols), len(maxRows))
+    bestValue = 0
+    bestA = None
+    bestB = None
 
-    for b in B:
-        minA = int(round(b / (ratio_cols_over_rows + 0.1)))
-        maxA = int(round(b / (ratio_cols_over_rows - 0.1)))
-        for a in range(minA, maxA):
-            cum = np.zeros((rows, cols))
-            for i in range(rows):
-                if i + a >= rows:
-                    break
-                for j in range(cols):
-                    if j + b >= cols:
-                        break
-                    # copia[copia >= 0] = 0
-                    # pi = (j, i)
-                    # pf = (j + b, i + a)
-                    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
-                    # copia = cv2.bitwise_and(copia, region)
-                    # cantMatch = cv2.countNonZero(copia)
-                    # print('cant match: ', cantMatch)
-                    myCantMatch = countNonZeros(sumRows, sumCols, (i, j), (i + a, j + b))
-                    # print('cant mAtch: ', myCantMatch)
-                    cum[i, j] = myCantMatch / (2 * (a + b))
-                    # (I, J) = findMaxElement(cum)
-                    # print(I,J)
-                    # print('inicio', i, j)
-                    # print('longitudes', a, b)
-                    # print(cum)
-                    # plt.subplot(1, 2, 1), plt.imshow(region, 'gray'), plt.title('region')
-                    # plt.subplot(1, 2, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
-                    # plt.show()
-                    # cv2.rectangle(copia, pi, pf, 0, thickness=1)
+    minB = region.shape[1] - 20
+    for p in range(len(maxRows)-1):
+        for q in range(p+1, len(maxRows)):
+            for m in range(len(maxCols)-1):
+                for n in range(m+1, len(maxCols)):
+                    i = min(maxRows[p], maxRows[q])
+                    a = max(maxRows[p], maxRows[q]) - i
+                    j = min(maxCols[m], maxCols[n])
+                    b = max(maxCols[m], maxCols[n]) - j
 
-            (I, J) = findMaxElement(cum)
-            if cum[I, J] > bestValue:
-                bestValue = cum[I, J]
-                bestA = a
-                bestB = b
-                bestPos = (I, J)
+                    if 0.5 < b/a < 1.0 and b>=minB:
+                        myCantMatch = countNonZeros(acumSumRows, acumSumCols, (i, j), (i + a, j + b))
+                        # print('cant mAtch: ', myCantMatch)
+                        cum = myCantMatch / (2 * (a + b))
+                        if cum > bestValue:
+                            bestValue = cum
+                            bestA = a
+                            bestB = b
+                            bestPos = (i, j)
 
-    copia[copia >= 0] = 0
     pi = (bestPos[1], bestPos[0])
     pf = (bestPos[1] + bestB, bestPos[0] + bestA)
-    # cv2.rectangle(copia, pi, pf, 255, thickness=1)
-    # section = region[pi[1]:pf[1], pi[0]:pf[0]]
-    # plt.subplot(1, 3, 1), plt.imshow(region, 'gray'), plt.title('region')
-    # plt.subplot(1, 3, 2), plt.imshow(copia, 'gray'), plt.title('copia con rect de 255')
-    # plt.subplot(1, 3, 3), plt.imshow(section, 'gray'), plt.title('best mark')
-    # plt.show()
-    return pi, pf
+    retSecondtAlgorithm = (pi,pf)
+    # print(retFirstAlgorithm, retSecondtAlgorithm)
+    return retSecondtAlgorithm
 
+
+def filter_and_getMaxElements(A, delta, cantMax, minPercent=0.5):
+    filtered = np.zeros(len(A))
+    for i in range(delta, len(A) - delta):
+        k = max(A[i - delta:i + delta + 1])
+        if k == A[i]:
+            filtered[i] = k
+
+    b = enumerate(filtered)
+    c = sorted(b, key=lambda p: -p[1])
+
+    ret = []
+    count = 0
+    for k in c:
+        if count < cantMax and k[1] > minPercent*c[0][1]:
+            ret.append(k[0])
+            count += 1
+    if 0 not in ret:
+        ret.append(0)
+    if len(A)-1 not in ret:
+        ret.append(len(A)-1)
+
+    # plt.bar(range(len(filtered)), filtered, 1)
+    # print(ret)
+    # plt.show()
+    return ret
 
 def predictCategoric_column_labels_inside(column, labels):
     sumRows = np.asarray(np.sum(column, 1) // 255)
@@ -540,7 +618,6 @@ def predictCategoric_column_labels_documento(column, labels):
     sumRows = np.asarray(np.sum(column, 1) // 255)
     resp = extractLabelsBySquaresDocument(column, sumRows, labels)
     return resp
-
 
 
 def predictCategoric_column_labels_SingleButton(column, labels):
@@ -920,6 +997,7 @@ def extractColumnsBySquares(If, cantColumns):
     else:
         return [None] * cantColumns
 
+
 def extractSimpleButton(img):
     ret, If = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     If = cv2.bitwise_not(If)
@@ -942,14 +1020,15 @@ def extractSimpleButton(img):
     max_indx_12, max_value_12 = max(enumerate(acumBy12), key=lambda p: p[1])
     max_indx_19, max_value_19 = max(enumerate(acumBy19), key=lambda p: p[1])
 
-    return If[max_indx_12-11:max_indx_12+1,max_indx_19-18:max_indx_19+1]
+    return If[max_indx_12 - 11:max_indx_12 + 1, max_indx_19 - 18:max_indx_19 + 1]
+
 
 def extractCategory_extractColumnLabelsTipoSiNo(img, TL, BR, cantColumns):
     deltaAmpliacion = 5
     ROI_base = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
     cols = ROI_base.shape[1]
-    left = extractSimpleButton(ROI_base[:, :cols//2])
-    right = extractSimpleButton(ROI_base[:, cols // 2 :])
+    left = extractSimpleButton(ROI_base[:, :cols // 2])
+    right = extractSimpleButton(ROI_base[:, cols // 2:])
     # plt.subplot(3, 1, 1), plt.imshow(ROI_base, 'gray'), plt.title('ROIS')
     # plt.subplot(3, 1, 2), plt.imshow(left, 'gray'), plt.title('left')
     # plt.subplot(3, 1, 3), plt.imshow(right, 'gray'), plt.title('right')
@@ -1070,8 +1149,6 @@ def extractCategory_extractColumnLabelsTipoSuministro(img, TL, BR, cantColumns):
         globe = If[(i - d_i):(i + d_i), (j - d_j):(j + d_j)]
         arrayResult.append(globe)
 
-
-
     print(I_J)
     plt.subplot(2, 2, 1), plt.imshow(ROI_base, 'gray'), plt.title('img')
     plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
@@ -1093,7 +1170,6 @@ def extractCategory_extractColumnLabelsTipoVia(img, TL, BR, cantColumns):
 
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     If = cv2.bitwise_not(If)
-
 
     # CARRETERA = If[8:19, 523:589]
     # cv2.imwrite('CARRETERA.png',CARRETERA)
@@ -1127,7 +1203,7 @@ def extractCategory_extractColumnLabelsTipoVia(img, TL, BR, cantColumns):
     d_j = 8
     d_i = 3
     for k in range(6):
-        j = I_J[1] - 500 + 122*k
+        j = I_J[1] - 500 + 122 * k
         i = I_J[0] + 4
         globe = If[(i - d_i):(i + d_i), (j - d_j):(j + d_j)]
         arrayResult.append(globe)

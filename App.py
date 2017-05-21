@@ -179,4 +179,10 @@ if __name__ == '__main__':
         sys.stdout.write(UtilDebug.bcolors.ENDC)
     sys.stdout.flush()
 
+    ratioBuffer = UtilDebug.RatiosBuffer()
+    for p in ratioBuffer:
+        bestA = p[0]
+        bestB = p[1]
+        print(UtilDebug.bcolors.OKGREEN + str(bestA) + '\t' + str(bestB) + UtilDebug.bcolors.ENDC)
+
 

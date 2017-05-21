@@ -54,7 +54,7 @@ def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
             pixel_y = int(round(position[0][1]))
             pixel_x = int(round((position[0][0] * (countItems - k) + position[1][0] * k) / countItems))
 
-            #print('ploteando la imagen ', k, ' en ', position, ' valor predicho: ', arrayPredictedValues[k])
+            # print('ploteando la imagen ', k, ' en ', position, ' valor predicho: ', arrayPredictedValues[k])
             if arrayOfImages[k] is not None:
 
                 # print(arrayOfImages[k].dtype)
@@ -110,16 +110,16 @@ class ProcessTimer:
         self.secs += self.end_time - self.start_time
 
     def __str__(self):
-        secs = round((self.secs*1000.0))/1000.0
+        secs = round((self.secs * 1000.0)) / 1000.0
         str_secs = '%.3f' % secs
         while len(str_secs) < 8:
-            str_secs = ' '+str_secs
+            str_secs = ' ' + str_secs
         name = self.name
         while len(name) < 40:
             name += ' '
         str_count = str(self.count)
         while len(str_count) < 4:
-            str_count = ' '+str_count
+            str_count = ' ' + str_count
 
         return name + ': ' + str_secs + ' secs for ' + str_count + ' elements'
 
@@ -167,6 +167,16 @@ class PredictorTimer(ProcessTimer):
         if not PredictorTimer.instance:
             PredictorTimer.instance = ProcessTimer('Predictor de letras y digitos')
         return PredictorTimer.instance
+
+
+class RatiosBuffer:
+    instance = None
+
+    def __new__(cls):
+        if not RatiosBuffer.instance:
+            RatiosBuffer.instance = []
+        return RatiosBuffer.instance
+
 
 if __name__ == '__main__':
     timer_A = CategoryTimer()
