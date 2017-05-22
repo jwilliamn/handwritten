@@ -557,7 +557,7 @@ def getBestRectangle(region, ratio_cols_over_rows):
                     j = min(maxCols[m], maxCols[n])
                     b = max(maxCols[m], maxCols[n]) - j
 
-                    if 0.5 < b/a < 1.0 and b>=minB:
+                    if 0.75 < b/a < 0.95 and b>=minB:
                         myCantMatch = countNonZeros(acumSumRows, acumSumCols, (i, j), (i + a, j + b))
                         # print('cant mAtch: ', myCantMatch)
                         cum = myCantMatch / (2 * (a + b))
@@ -1363,14 +1363,14 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     possibleBestLeft = If[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
     possibleBestRight = If[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
 
-    # plt.subplot(1,8,1), plt.imshow(If)
-    # plt.subplot(1, 8, 2), plt.imshow(template)
-    # plt.subplot(1, 8, 3), plt.imshow(leftPart)
-    # plt.subplot(1, 8, 4), plt.imshow(rightPart)
-    # plt.subplot(1, 8, 5), plt.imshow(bestLeft)
-    # plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft)
-    # plt.subplot(1, 8, 7), plt.imshow(bestRight)
-    # plt.subplot(1, 8, 8), plt.imshow(possibleBestRight)
+    # plt.subplot(1,8,1), plt.imshow(If), plt.title('If')
+    # plt.subplot(1, 8, 2), plt.imshow(template), plt.title('template')
+    # plt.subplot(1, 8, 3), plt.imshow(leftPart), plt.title('leftPart')
+    # plt.subplot(1, 8, 4), plt.imshow(rightPart), plt.title('rightPart')
+    # plt.subplot(1, 8, 5), plt.imshow(bestLeft), plt.title('bestLeft')
+    # plt.subplot(1, 8, 6), plt.imshow(possibleBestLeft), plt.title('possibleBestLeft')
+    # plt.subplot(1, 8, 7), plt.imshow(bestRight), plt.title('bestRight')
+    # plt.subplot(1, 8, 8), plt.imshow(possibleBestRight), plt.title('possbielBestRight')
     # plt.show()
 
     pointA = (top_left_L[1], top_left_L[0])

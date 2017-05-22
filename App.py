@@ -163,7 +163,7 @@ if __name__ == '__main__':
 
     print(UtilDebug.bcolors.BOLD + 'Total time controlled: ' + str(totalTime_controlled) + ' secs' + UtilDebug.bcolors.ENDC)
 
-    total_length = 200
+    total_length = 100
     barra_length = []
 
     colors = [UtilDebug.bcolors.HEADER, UtilDebug.bcolors.OKGREEN, UtilDebug.bcolors.WARNING, UtilDebug.bcolors.FAIL,
@@ -178,11 +178,7 @@ if __name__ == '__main__':
             sys.stdout.write('#')
         sys.stdout.write(UtilDebug.bcolors.ENDC)
     sys.stdout.flush()
+    print('')
 
-    ratioBuffer = UtilDebug.RatiosBuffer()
-    for p in ratioBuffer:
-        bestA = p[0]
-        bestB = p[1]
-        print(UtilDebug.bcolors.OKGREEN + str(bestA) + '\t' + str(bestB) + UtilDebug.bcolors.ENDC)
 
 

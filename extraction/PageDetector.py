@@ -15,9 +15,10 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 import math
+from os import listdir
+from os.path import isfile, join
 
 from extraction import FeatureExtractor
-
 
 # Global settings ####
 dx = [-1, 1, 0, 0]
@@ -32,6 +33,112 @@ def sortSquareCenters(L):
     return L
 
 
+def getSingleSquare(image_original, corner, iterations=1):
+    ret3, th3 = cv2.threshold(image_original, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    thIMor = cv2.morphologyEx(th3, cv2.MORPH_CLOSE, se)
+    maxShape = max(image_original.shape)
+
+    k_left = int(round(5 * maxShape / 900))  # componentes >= 4
+    k_right = int(round(80 * maxShape / 900))  # componentes < 4
+
+    while k_left + +1 < k_right:
+        k = (k_left + k_right) // 2
+        onlySquares = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)), iterations=1)
+        onlySquares = cv2.dilate(onlySquares, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)), iterations=1)
+        # Connected compoent labling
+        stats = cv2.connectedComponentsWithStats(onlySquares, connectivity=4)
+        # print('with ', k, ' we got: ', stats[0])
+        if stats[0] >= 2:
+            k_left = k
+        else:
+            k_right = k
+
+        # plt.subplot(1, 2, 1), plt.imshow(onlySquares, 'gray'), plt.title(str(k_left) + '::' + str(stats[0]))
+        # plt.subplot(1, 2, 2), plt.imshow(thIMor, 'gray'), plt.title('th3')
+        # plt.show()
+
+    # print('k_left final: ', k_left)
+    thIMor = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
+    thIMor = cv2.dilate(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
+    # Connected component labling
+    stats = cv2.connectedComponentsWithStats(thIMor, connectivity=4)
+    num_labels = stats[0]
+    print('num labels:', num_labels)
+    if num_labels != 2:
+        return None
+
+    labels = stats[1]
+    labelStats = stats[2]
+    centroides = stats[3]
+    c = int(round(centroides[1][1])), int(round(centroides[1][0]))
+    W = labelStats[1, cv2.CC_STAT_WIDTH]
+    H = labelStats[1, cv2.CC_STAT_HEIGHT]
+    Top = labelStats[1, cv2.CC_STAT_TOP]
+    Left = labelStats[1, cv2.CC_STAT_LEFT]
+    corners = []
+    corners.append([Top + H, Left + W])
+    corners.append([Top, Left + W])
+    corners.append([Top + H, Left])
+    corners.append([Top, Left])
+    # print(corners)
+    # plt.subplot(1,2,1), plt.imshow(thIMor,'gray'), plt.title(str(k_left) + '::' + str(num_labels))
+    # plt.subplot(1, 2, 2), plt.imshow(image_original, 'gray'), plt.title(str(k_left) + '::' + str(num_labels))
+    # plt.show()
+
+    # if iterations <= 1:
+    #     print('it will return ', k_left)
+    #     return k_left, [corners[corner][1],corners[corner][0]]
+    print('it will return ', k_left)
+    return k_left, [corners[corner][0], corners[corner][1]]
+    # rows,cols = image_original.shape
+    # L = (k_left+9)//2
+    # i_1 = max(0,c[0]-L)
+    # i_2 = min(c[0]+L, rows)
+    # j_1 = max(0,c[1]-L)
+    # j_2 = min(c[1]+L, cols)
+    # ROI = image_original[i_1:i_2, j_1:j_2]
+    #
+    # new_k_left, corner = getSingleSquare(ROI, corner, iterations=1)
+    # return new_k_left, [corner[0]+i_1,corner[1]+j_1]
+
+
+def getSquares_newAlgorithm(image_original):
+    rows, cols = image_original.shape
+    A = getSingleSquare(image_original[:rows // 2, : cols // 2], 0, iterations=2)
+    B = getSingleSquare(image_original[rows // 2:, : cols // 2], 1, iterations=2)
+    X = getSingleSquare(image_original[:rows // 2, cols // 2:], 2, iterations=2)
+    Y = getSingleSquare(image_original[rows // 2:, cols // 2:], 3, iterations=2)
+
+    if A is None or B is None or X is None or Y is None:
+        return None
+    P = [A[0], B[0], X[0], Y[0]]
+    print('P: ', P)
+    k = max(P)
+    L = k
+    A = A[1]
+    B = B[1][0] + rows // 2, B[1][1]
+    X = X[1][0], X[1][1] + cols // 2
+    Y = Y[1][0] + rows // 2, Y[1][1] + cols // 2
+
+    cA = A[0] - L, A[1] - L
+    cB = B[0] + L, B[1] - L
+    cX = X[0] - L, X[1] + L
+    cY = Y[0] + L, Y[1] + L
+
+    cA = cA[1], cA[0]
+    cB = cB[1], cB[0]
+    cX = cX[1], cX[0]
+    cY = cY[1], cY[0]
+    centers = [cA, cB, cX, cY]
+    centers = sortSquareCenters(centers)
+    # print(centers)
+    # plt.imshow(image_original, 'gray')
+    # plt.show()
+    return centers,k
+
+
 def getSquares(image_original):
     """Detecta la orientación de la imagen y la orienta.
     Args:
@@ -39,77 +146,82 @@ def getSquares(image_original):
     Returns:
         cosl: ....
     """
-    ret3, th3 = cv2.threshold(image_original, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    #
+    # ret3, th3 = cv2.threshold(image_original, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    #
+    # se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (1, 1))
+    # thIMor = cv2.morphologyEx(th3, cv2.MORPH_CLOSE, se)
+    #
+    # maxShape = max(image_original.shape)
+    # toleranciaCuadrado = int(round(20 * maxShape / 1750))
+    #
+    # print('ToleranciaCuadrado: ', toleranciaCuadrado)
+    # k_left = int(round(5 * maxShape / 1750))  # componentes >= 4
+    # k_right = int(round(80 * maxShape / 1750))  # componentes < 4
+    #
+    # while k_left + +1 < k_right:
+    #     k = (k_left + k_right) // 2
+    #     onlySquares = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)), iterations=1)
+    #     onlySquares = cv2.dilate(onlySquares, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)), iterations=1)
+    #     # Connected compoent labling
+    #     stats = cv2.connectedComponentsWithStats(onlySquares, connectivity=8)
+    #     print('with ', k, ' we got: ', stats[0])
+    #     if stats[0] >= 5:
+    #         k_left = k
+    #     else:
+    #         k_right = k
+    #         # plt.imshow(onlySquares), plt.title(str(k)+'::'+str(stats[0]))
+    #         # plt.show()
+    #
+    # print('k_left final: ', k_left)
+    # thIMor = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
+    # thIMor = cv2.dilate(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
+    # # Connected component labling
+    # stats = cv2.connectedComponentsWithStats(thIMor, connectivity=8)
+    # num_labels = stats[0]
+    # print('num labels:', num_labels)
+    # labels = stats[1]
+    # labelStats = stats[2]
+    # centroides = stats[3]
+    # # We expect the connected component of the numbers to be more or less with a constats ratio
+    # # So we find the medina ratio of all the comeonets because the majorty of connected compoent are numbers
+    # cosl = []
+    # edgesLength = []
+    # for label in range(num_labels):
+    #     connectedCompoentWidth = labelStats[label, cv2.CC_STAT_WIDTH]
+    #     connectedCompoentHeight = labelStats[label, cv2.CC_STAT_HEIGHT]
+    #     area = labelStats[label, cv2.CC_STAT_AREA]
+    #     print(area, connectedCompoentHeight * connectedCompoentHeight, connectedCompoentHeight, connectedCompoentWidth)
+    #     if abs(connectedCompoentHeight - connectedCompoentWidth) < toleranciaCuadrado \
+    #             and connectedCompoentWidth * connectedCompoentHeight * 0.6 < area:
+    #         cosl.append((int(round(centroides[label][0])), int(round(centroides[label][1])),  # ,
+    #                      connectedCompoentWidth, connectedCompoentHeight))
+    #         # min(connectedCompoentHeight , connectedCompoentWidth)])
+    #         edgesLength.append(min(connectedCompoentHeight, connectedCompoentWidth) // 2)
+    #
+    # delta = sum(edgesLength) // 4
+    # cosl = sortSquareCenters(cosl)
+    # cosl[0] = (cosl[0][0] - cosl[0][2] // 2, cosl[0][1] - cosl[0][3] // 2)
+    # if cosl[1][0] < cosl[1][1]:
+    #     cosl[1] = (cosl[1][0] - cosl[1][2] // 2, cosl[1][1] + cosl[1][3] // 2)
+    #     cosl[2] = (cosl[2][0] + cosl[2][2] // 2, cosl[2][1] - cosl[2][3] // 2)
+    # else:
+    #     cosl[1] = (cosl[1][0] + cosl[1][2] // 2, cosl[1][1] - cosl[1][3] // 2)
+    #     cosl[2] = (cosl[2][0] - cosl[2][2] // 2, cosl[2][1] + cosl[2][3] // 2)
+    #
+    # cosl[3] = (cosl[3][0] + cosl[3][2] // 2, cosl[3][1] + cosl[3][3] // 2)
+    # print('cosl', cosl)
 
-    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (1, 1))
-    thIMor = cv2.morphologyEx(th3, cv2.MORPH_CLOSE, se)
-
-    maxShape = max(image_original.shape)
-    toleranciaCuadrado = int(round(20*maxShape/1750))
-
-    print('ToleranciaCuadrado: ',toleranciaCuadrado)
-    k_left = int(round(5*maxShape/1750)) # componentes >= 4
-    k_right = int(round(80*maxShape/1750)) # componentes < 4
-
-    while k_left + +1 < k_right:
-        k = (k_left+k_right)//2
-        onlySquares = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)), iterations=1)
-        onlySquares = cv2.dilate(onlySquares, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)), iterations=1)
-        # Connected compoent labling
-        stats = cv2.connectedComponentsWithStats(onlySquares, connectivity=8)
-        print('with ', k, ' we got: ', stats[0])
-        if stats[0] >= 5:
-            k_left = k
-        else:
-            k_right = k
-        #plt.imshow(onlySquares), plt.title(str(k)+'::'+str(stats[0]))
-        #plt.show()
-
-    print('k_left final: ', k_left)
-    thIMor = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
-    thIMor = cv2.dilate(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
-    # Connected component labling
-    stats = cv2.connectedComponentsWithStats(thIMor, connectivity=8)
-    num_labels = stats[0]
-    print('num labels:', num_labels)
-    labels = stats[1]
-    labelStats = stats[2]
-    centroides = stats[3]
-    # We expect the connected component of the numbers to be more or less with a constats ratio
-    # So we find the medina ratio of all the comeonets because the majorty of connected compoent are numbers
-    cosl = []
-    edgesLength = []
-    for label in range(num_labels):
-        connectedCompoentWidth = labelStats[label, cv2.CC_STAT_WIDTH]
-        connectedCompoentHeight = labelStats[label, cv2.CC_STAT_HEIGHT]
-        area = labelStats[label,cv2.CC_STAT_AREA]
-        print(area, connectedCompoentHeight*connectedCompoentHeight, connectedCompoentHeight, connectedCompoentWidth)
-        if abs(connectedCompoentHeight-connectedCompoentWidth) < toleranciaCuadrado \
-                and connectedCompoentWidth*connectedCompoentHeight * 0.6 < area:
-            cosl.append((int(round(centroides[label][0])), int(round(centroides[label][1])),  #,
-                         connectedCompoentWidth, connectedCompoentHeight))
-                                         # min(connectedCompoentHeight , connectedCompoentWidth)])
-            edgesLength.append(min(connectedCompoentHeight,connectedCompoentWidth)//2)
-
-    delta = sum(edgesLength)//4
-    cosl = sortSquareCenters(cosl)
-    cosl[0] = (cosl[0][0] - cosl[0][2]//2, cosl[0][1] - cosl[0][3]//2)
-    if cosl[1][0] < cosl[1][1]:
-        cosl[1] = (cosl[1][0] - cosl[1][2]//2, cosl[1][1] + cosl[1][3]//2)
-        cosl[2] = (cosl[2][0] + cosl[2][2]//2, cosl[2][1] - cosl[2][3]//2)
-    else:
-        cosl[1] = (cosl[1][0] + cosl[1][2]//2, cosl[1][1] - cosl[1][3]//2)
-        cosl[2] = (cosl[2][0] - cosl[2][2]//2, cosl[2][1] + cosl[2][3]//2)
-
-    cosl[3] = (cosl[3][0] + cosl[3][2]//2, cosl[3][1] + cosl[3][3]//2)
-    print('cosl',cosl)
-
-    #plt.subplot(1, 3, 1), plt.imshow(image_original,'gray')
-    #plt.subplot(1, 3, 2), plt.imshow(th3, 'gray')
-    #plt.subplot(1, 3, 3), plt.imshow(thIMor, 'gray')
-
-    #plt.show()
-    return cosl
+    center_of_squares,var = getSquares_newAlgorithm(image_original)
+    # print('new algorithm: ', center_of_squares)
+    # print('old algorithm: ', cosl)
+    # plt.subplot(1, 3, 1), plt.imshow(image_original, 'gray')
+    # plt.subplot(1, 3, 2), plt.imshow(th3, 'gray')
+    # plt.subplot(1, 3, 3), plt.imshow(thIMor, 'gray')
+    #
+    # plt.show()
+    # return cosl
+    return center_of_squares,var
 
 
 def enderezarImagen(image):
@@ -119,16 +231,17 @@ def enderezarImagen(image):
     Returns:
         rotatedImg: Rotated image.
     """
-    squaresCenters = getSquares(image)
+    squaresCenters, _ = getSquares(image)
     if len(squaresCenters) != 4:
         raise Exception('There is no 4 centers')
     print('First squares: ', squaresCenters)
     dI = squaresCenters[2][0] - squaresCenters[0][0]
     dJ = squaresCenters[2][1] - squaresCenters[0][1]
     theta = np.arctan2(dJ, dI)
-    thetaDegrees = theta*180/np.pi
+    thetaDegrees = theta * 180 / np.pi
     (oldY, oldX) = image.shape
-    M = cv2.getRotationMatrix2D(center=(oldX / 2, oldY / 2), angle=thetaDegrees, scale=1)  # rotate about center of image.
+    M = cv2.getRotationMatrix2D(center=(oldX / 2, oldY / 2), angle=thetaDegrees,
+                                scale=1)  # rotate about center of image.
     newX, newY = oldX * 1, oldY * 1
     r = np.deg2rad(thetaDegrees)
     newX, newY = (abs(np.sin(r) * newY) + abs(np.cos(r) * newX), abs(np.sin(r) * newX) + abs(np.cos(r) * newY))
@@ -157,15 +270,16 @@ def getCenterZone(img, center, delta):
     """
     K = img[center[1] - delta:center[1] + delta, center[0] - delta:center[0] + delta].copy()
     # K = img[squaresCenters[0][1]:squaresCenters[3][1],squaresCenters[0][0]:squaresCenters[3][0]].copy()
-    #ret3, th3 = cv2.threshold(K, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    # ret3, th3 = cv2.threshold(K, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
     ret3, th3 = cv2.threshold(K, 240, 255, cv2.THRESH_BINARY_INV)
     K = cv2.dilate(th3, cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3)), iterations=1)
-    centerZone = cv2.resize(K,(750,750))
-    centerZone[centerZone>125] = 255
+    centerZone = cv2.resize(K, (750, 750))
+    centerZone[centerZone > 125] = 255
     centerZone[centerZone <= 125] = 0
     return centerZone
 
-def getPercentMatched(baseImage,testImage):
+
+def getPercentMatched(baseImage, testImage):
     if baseImage.shape != testImage.shape:
         print('shapeBase ', baseImage.shape)
         print('testBase ', testImage.shape)
@@ -180,13 +294,16 @@ def percentPage1Normal(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page1.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
+
 def percentPage2Normal(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page2.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
+
 def percentPage3Normal(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page3.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
+
 
 def percentPage4Normal(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page4.png', 0)
@@ -197,13 +314,16 @@ def percentPage1Inversa(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page1inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
+
 def percentPage2Inversa(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page2inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
 
+
 def percentPage3Inversa(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page3inv.png', 0)
     return getPercentMatched(centerZone_Base, centerZone)
+
 
 def percentPage4Inversa(centerZone):
     centerZone_Base = cv2.imread('resources/centerZone_page4inv.png', 0)
@@ -217,26 +337,24 @@ def detectPage(img):
     Returns:
         _: Rotated image.
     """
-    squaresCenters = getSquares(img)
+    squaresCenters, _ = getSquares(img)
     print('Second squares: ', squaresCenters)
     if len(squaresCenters) != 4:
         raise Exception('There is no 4 centers')
 
-    #supuestamente esta horizontal
-    distCols = squaresCenters[3][1]-squaresCenters[0][1]
-    distRows = squaresCenters[3][0]-squaresCenters[0][0]
+    # supuestamente esta horizontal
+    distCols = squaresCenters[3][1] - squaresCenters[0][1]
+    distRows = squaresCenters[3][0] - squaresCenters[0][0]
 
-
-
-    print('Ratio: ', (distRows/distCols))
+    print('Ratio: ', (distRows / distCols))
     sumX = 0
     sumY = 0
     for sqCenters in squaresCenters:
         sumX += sqCenters[0]
         sumY += sqCenters[1]
 
-    delta = distRows//4
-    center = (sumX//4, sumY//4)
+    delta = distRows // 4
+    center = (sumX // 4, sumY // 4)
 
     centerZone = getCenterZone(img, center, delta)
 
@@ -263,7 +381,26 @@ def detectPage(img):
 
     for detector in detectors:
         percent.append(detector(centerZone))
-    print('Percents: ',percent)
+    print('Percents: ', percent)
     max_indx, max_value = max(enumerate(percent), key=lambda p: p[1])
     newImage = img[squaresCenters[0][1]:squaresCenters[3][1], squaresCenters[0][0]:squaresCenters[3][0]]
-    return (newImage,page[max_indx])
+    return (newImage, page[max_indx])
+
+if __name__ == '__main__':
+    onlyfiles = [f for f in listdir('../input') if isfile(join('../input', f))]
+    for filename in onlyfiles:
+        if '2017' in filename:
+            img = cv2.imread(join('../input',filename), 0)
+            print('Processing: ',filename)
+            img = enderezarImagen(img)
+            squaresCenters,k = getSquares(img)
+            backtorgb = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+            TL = squaresCenters[0]
+            BR = squaresCenters[0][0]+k,squaresCenters[0][1]+k
+            cv2.rectangle(backtorgb, TL, BR, (0, 255, 0), 2)
+
+            TL = squaresCenters[3][0] - k, squaresCenters[3][1] - k
+            BR = squaresCenters[3]
+            cv2.rectangle(backtorgb, TL, BR, (0, 255, 0), 2)
+
+            cv2.imwrite(join('../output',filename),backtorgb)
