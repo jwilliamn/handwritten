@@ -14,9 +14,9 @@ import statistics
 
 import numpy as np
 import cv2
-import modeling
 from matplotlib import pyplot as plt
 
+import modeling
 from extraction.FormatModel import UtilDebug
 
 dx = [-1, 1, 0, 0]
