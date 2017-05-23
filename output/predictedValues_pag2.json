@@ -1,0 +1,832 @@
+{
+    "value": null,
+    "hasValue": false,
+    "subTypes": [
+        {
+            "value": null,
+            "hasValue": false,
+            "subTypes": [
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al tipo de vivienda",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otr Tipo de Vivienda",
+                            "name": "tipo_vivienda_otro"
+                        }
+                    ],
+                    "description": "Tipo de Vivienda",
+                    "name": "tipo_vivienda"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "3"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al su vivienda es",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otro Su vivienda es",
+                            "name": "vivienda_es_otro"
+                        }
+                    ],
+                    "description": "Su vivienda es",
+                    "name": "vivienda_es"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al material predominante en paredes exteriores",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Otro material predominante en paredes exteriores",
+                            "name": "material_predominante_paredes_otro"
+                        }
+                    ],
+                    "description": "Material predominante en las paredes exteriores",
+                    "name": "material_predominante_paredes"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al Material predominante en los techos",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otro Material predominante en los techos",
+                            "name": "material_predominante_techos_otro"
+                        }
+                    ],
+                    "description": "Material predominante en los techos",
+                    "name": "material_predominante_techos"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al Material predominante en los pisos",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otro Material predominante en los pisos",
+                            "name": "material_predominante_pisos_otro"
+                        }
+                    ],
+                    "description": "Material predominante en los pisos",
+                    "name": "material_predominante_pisos"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al Alumbrado que tiene la vivienda",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otro Alumbrado que tiene la vivienda",
+                            "name": "alumbrado_vivienda_otro"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "?"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "no tiene alumbrado en la vivienda",
+                            "name": "alumbrado_vivienda_no_tiene"
+                        }
+                    ],
+                    "description": "Alumbrado que tiene la vivienda",
+                    "name": "alumbrado_vivienda"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente a El abastecimiento de agua procede de",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otro El abastecimiento de agua procede de",
+                            "name": "abastecimiento_agua_otro"
+                        }
+                    ],
+                    "description": "El abastecimiento de agua procede de",
+                    "name": "abastecimiento_agua"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente a El servicio higienico conectado a",
+                            "name": "num"
+                        }
+                    ],
+                    "description": "El servicio higienico conectado a",
+                    "name": "servicio_higienico"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "digitPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            "0",
+                                            "0"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Horas",
+                            "name": "horas"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "?"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Opciones 1 o 2, mas de 24 horas o vive en la capital distrital",
+                            "name": "mas24_vive_capital"
+                        }
+                    ],
+                    "description": "Cuantas horas demoran en llegar desde su vivienda a la capital distrital",
+                    "name": "horas_a_capital_distrital"
+                }
+            ],
+            "description": "Caracteristicas de la vivienda",
+            "name": "caracteristicas_vivienda"
+        },
+        {
+            "value": null,
+            "hasValue": false,
+            "subTypes": [
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": {
+                                "countItems": -1,
+                                "nameSingleParser": "digitPredictor",
+                                "nameParser": "parserImage2ArrayChar",
+                                "predictedValue": [
+                                    "5",
+                                    "3"
+                                ]
+                            },
+                            "hasValue": true,
+                            "subTypes": [],
+                            "description": "Valor predicho",
+                            "name": "pos_TL_BR"
+                        }
+                    ],
+                    "description": "Numero de habitaciones",
+                    "name": "num_habitaciones"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "2"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente al Combustible que se usa en el hogar para cocinar",
+                            "name": "num"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "letterPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "otro Combustible que se usa en el hogar para cocinar",
+                            "name": "combustible_cocinar_otro"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "?"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "no cocina",
+                            "name": "combustible_cocinar_no_cocina"
+                        }
+                    ],
+                    "description": "Combustible que se usa en el hogar para cocinar",
+                    "name": "combustible_cocinar"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "5;8"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero correspondiente a El hogar tiene",
+                            "name": "num"
+                        }
+                    ],
+                    "description": "El hogar tiene (artefactos)",
+                    "name": "su_hogar_tiene"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": null,
+                                        "nameParser": "parserImage2Categoric",
+                                        "predictedValue": [
+                                            "1",
+                                            "?",
+                                            "?"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "tipo de suministro",
+                            "name": "tipo_suministro"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "digitPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            "7",
+                                            "5",
+                                            "5",
+                                            "1",
+                                            "1",
+                                            "3",
+                                            "1",
+                                            " ",
+                                            " ",
+                                            " "
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Numero de suministro",
+                            "name": "numero_suministro"
+                        }
+                    ],
+                    "description": "Numero de suministro, de luz, agua o no tiene",
+                    "name": "numero_suministro"
+                },
+                {
+                    "value": null,
+                    "hasValue": false,
+                    "subTypes": [
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "digitPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            "0",
+                                            "3"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Total",
+                            "name": "total"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "digitPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            "5",
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Hombres",
+                            "name": "cantidad_hombres"
+                        },
+                        {
+                            "value": null,
+                            "hasValue": false,
+                            "subTypes": [
+                                {
+                                    "value": {
+                                        "countItems": -1,
+                                        "nameSingleParser": "digitPredictor",
+                                        "nameParser": "parserImage2ArrayChar",
+                                        "predictedValue": [
+                                            "0",
+                                            "1"
+                                        ]
+                                    },
+                                    "hasValue": true,
+                                    "subTypes": [],
+                                    "description": "Valor predicho",
+                                    "name": "pos_TL_BR"
+                                }
+                            ],
+                            "description": "Mujeres",
+                            "name": "cantidad_mujeres"
+                        }
+                    ],
+                    "description": "Cantidad de personas que viven permanentemente en el hogar",
+                    "name": "personas_hogar"
+                }
+            ],
+            "description": "Datos del hogar",
+            "name": "datos_del_hogar"
+        }
+    ],
+    "description": "pagina 2",
+    "name": "page2"
+}

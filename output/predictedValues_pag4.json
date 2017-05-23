@@ -1,0 +1,2868 @@
+{
+    "name": "page4",
+    "subTypes": [
+        {
+            "name": "P06",
+            "subTypes": [
+                {
+                    "name": "apellido_paterno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido paterno"
+                },
+                {
+                    "name": "apellido_materno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido materno"
+                },
+                {
+                    "name": "nombres",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nombres"
+                },
+                {
+                    "name": "fecha_nacimiento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Fecha de nacimiento"
+                },
+                {
+                    "name": "edad_anhos",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_anios"
+                },
+                {
+                    "name": "edad_meses",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_meses"
+                },
+                {
+                    "name": "tipo_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_documento"
+                },
+                {
+                    "name": "numero_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    "2",
+                                    "0",
+                                    " ",
+                                    " ",
+                                    "2"
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "numero_documento"
+                },
+                {
+                    "name": "parentesco_jefe_hogar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "parentesco_jefe_hogar"
+                },
+                {
+                    "name": "num_nucleo_familiar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "num_nucleo_familiar"
+                },
+                {
+                    "name": "sexo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sexo"
+                },
+                {
+                    "name": "estado_civil",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "estado_civil"
+                },
+                {
+                    "name": "tipo_seguro",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_seguro"
+                },
+                {
+                    "name": "lengua_materna",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "lengua_materna"
+                },
+                {
+                    "name": "sabe_leer_escribir",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sabe_leer_escribir"
+                },
+                {
+                    "name": "nivel_educativo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nivel_educativo"
+                },
+                {
+                    "name": "ultimo_grado_aprobado",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_grado_aprobado"
+                },
+                {
+                    "name": "ultimo_mes_era_un",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_mes_era_un"
+                },
+                {
+                    "name": "sector_desempenho",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sector_desempenho"
+                },
+                {
+                    "name": "presenta_discapacidad",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "presenta_discapacidad"
+                },
+                {
+                    "name": "programa_social_beneficiario",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "programa_social_beneficiario"
+                }
+            ],
+            "hasValue": false,
+            "value": null,
+            "description": "Persona 06"
+        },
+        {
+            "name": "P07",
+            "subTypes": [
+                {
+                    "name": "apellido_paterno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido paterno"
+                },
+                {
+                    "name": "apellido_materno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido materno"
+                },
+                {
+                    "name": "nombres",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nombres"
+                },
+                {
+                    "name": "fecha_nacimiento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Fecha de nacimiento"
+                },
+                {
+                    "name": "edad_anhos",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_anios"
+                },
+                {
+                    "name": "edad_meses",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_meses"
+                },
+                {
+                    "name": "tipo_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_documento"
+                },
+                {
+                    "name": "numero_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "numero_documento"
+                },
+                {
+                    "name": "parentesco_jefe_hogar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "parentesco_jefe_hogar"
+                },
+                {
+                    "name": "num_nucleo_familiar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "num_nucleo_familiar"
+                },
+                {
+                    "name": "sexo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sexo"
+                },
+                {
+                    "name": "estado_civil",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "estado_civil"
+                },
+                {
+                    "name": "tipo_seguro",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_seguro"
+                },
+                {
+                    "name": "lengua_materna",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "lengua_materna"
+                },
+                {
+                    "name": "sabe_leer_escribir",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sabe_leer_escribir"
+                },
+                {
+                    "name": "nivel_educativo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nivel_educativo"
+                },
+                {
+                    "name": "ultimo_grado_aprobado",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_grado_aprobado"
+                },
+                {
+                    "name": "ultimo_mes_era_un",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_mes_era_un"
+                },
+                {
+                    "name": "sector_desempenho",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sector_desempenho"
+                },
+                {
+                    "name": "presenta_discapacidad",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "presenta_discapacidad"
+                },
+                {
+                    "name": "programa_social_beneficiario",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "programa_social_beneficiario"
+                }
+            ],
+            "hasValue": false,
+            "value": null,
+            "description": "Persona 07"
+        },
+        {
+            "name": "P08",
+            "subTypes": [
+                {
+                    "name": "apellido_paterno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido paterno"
+                },
+                {
+                    "name": "apellido_materno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido materno"
+                },
+                {
+                    "name": "nombres",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nombres"
+                },
+                {
+                    "name": "fecha_nacimiento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Fecha de nacimiento"
+                },
+                {
+                    "name": "edad_anhos",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "2",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_anios"
+                },
+                {
+                    "name": "edad_meses",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_meses"
+                },
+                {
+                    "name": "tipo_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_documento"
+                },
+                {
+                    "name": "numero_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "numero_documento"
+                },
+                {
+                    "name": "parentesco_jefe_hogar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "parentesco_jefe_hogar"
+                },
+                {
+                    "name": "num_nucleo_familiar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "num_nucleo_familiar"
+                },
+                {
+                    "name": "sexo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "No"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sexo"
+                },
+                {
+                    "name": "estado_civil",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "estado_civil"
+                },
+                {
+                    "name": "tipo_seguro",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_seguro"
+                },
+                {
+                    "name": "lengua_materna",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "lengua_materna"
+                },
+                {
+                    "name": "sabe_leer_escribir",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sabe_leer_escribir"
+                },
+                {
+                    "name": "nivel_educativo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nivel_educativo"
+                },
+                {
+                    "name": "ultimo_grado_aprobado",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_grado_aprobado"
+                },
+                {
+                    "name": "ultimo_mes_era_un",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_mes_era_un"
+                },
+                {
+                    "name": "sector_desempenho",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sector_desempenho"
+                },
+                {
+                    "name": "presenta_discapacidad",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "presenta_discapacidad"
+                },
+                {
+                    "name": "programa_social_beneficiario",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "programa_social_beneficiario"
+                }
+            ],
+            "hasValue": false,
+            "value": null,
+            "description": "Persona 08"
+        },
+        {
+            "name": "P09",
+            "subTypes": [
+                {
+                    "name": "apellido_paterno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido paterno"
+                },
+                {
+                    "name": "apellido_materno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido materno"
+                },
+                {
+                    "name": "nombres",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nombres"
+                },
+                {
+                    "name": "fecha_nacimiento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Fecha de nacimiento"
+                },
+                {
+                    "name": "edad_anhos",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_anios"
+                },
+                {
+                    "name": "edad_meses",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_meses"
+                },
+                {
+                    "name": "tipo_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_documento"
+                },
+                {
+                    "name": "numero_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "numero_documento"
+                },
+                {
+                    "name": "parentesco_jefe_hogar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "parentesco_jefe_hogar"
+                },
+                {
+                    "name": "num_nucleo_familiar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "num_nucleo_familiar"
+                },
+                {
+                    "name": "sexo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sexo"
+                },
+                {
+                    "name": "estado_civil",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "estado_civil"
+                },
+                {
+                    "name": "tipo_seguro",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_seguro"
+                },
+                {
+                    "name": "lengua_materna",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "lengua_materna"
+                },
+                {
+                    "name": "sabe_leer_escribir",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sabe_leer_escribir"
+                },
+                {
+                    "name": "nivel_educativo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nivel_educativo"
+                },
+                {
+                    "name": "ultimo_grado_aprobado",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_grado_aprobado"
+                },
+                {
+                    "name": "ultimo_mes_era_un",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_mes_era_un"
+                },
+                {
+                    "name": "sector_desempenho",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sector_desempenho"
+                },
+                {
+                    "name": "presenta_discapacidad",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "presenta_discapacidad"
+                },
+                {
+                    "name": "programa_social_beneficiario",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "programa_social_beneficiario"
+                }
+            ],
+            "hasValue": false,
+            "value": null,
+            "description": "Persona 09"
+        },
+        {
+            "name": "P10",
+            "subTypes": [
+                {
+                    "name": "apellido_paterno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido paterno"
+                },
+                {
+                    "name": "apellido_materno",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Apellido materno"
+                },
+                {
+                    "name": "nombres",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "letterPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nombres"
+                },
+                {
+                    "name": "fecha_nacimiento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "Fecha de nacimiento"
+                },
+                {
+                    "name": "edad_anhos",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "5",
+                                    "7"
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_anios"
+                },
+                {
+                    "name": "edad_meses",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "2",
+                                    "1"
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "edad_meses"
+                },
+                {
+                    "name": "tipo_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_documento"
+                },
+                {
+                    "name": "numero_documento",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " ",
+                                    " "
+                                ],
+                                "nameParser": "parserImage2ArrayChar",
+                                "nameSingleParser": "digitPredictor",
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "numero_documento"
+                },
+                {
+                    "name": "parentesco_jefe_hogar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "parentesco_jefe_hogar"
+                },
+                {
+                    "name": "num_nucleo_familiar",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "num_nucleo_familiar"
+                },
+                {
+                    "name": "sexo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sexo"
+                },
+                {
+                    "name": "estado_civil",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "estado_civil"
+                },
+                {
+                    "name": "tipo_seguro",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "tipo_seguro"
+                },
+                {
+                    "name": "lengua_materna",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "lengua_materna"
+                },
+                {
+                    "name": "sabe_leer_escribir",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sabe_leer_escribir"
+                },
+                {
+                    "name": "nivel_educativo",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "nivel_educativo"
+                },
+                {
+                    "name": "ultimo_grado_aprobado",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_grado_aprobado"
+                },
+                {
+                    "name": "ultimo_mes_era_un",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "ultimo_mes_era_un"
+                },
+                {
+                    "name": "sector_desempenho",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "sector_desempenho"
+                },
+                {
+                    "name": "presenta_discapacidad",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "presenta_discapacidad"
+                },
+                {
+                    "name": "programa_social_beneficiario",
+                    "subTypes": [
+                        {
+                            "name": "pos_TL_BR",
+                            "subTypes": [],
+                            "hasValue": true,
+                            "value": {
+                                "predictedValue": [
+                                    "?",
+                                    "?"
+                                ],
+                                "nameParser": "parserImage2Categoric",
+                                "nameSingleParser": null,
+                                "countItems": -1
+                            },
+                            "description": "Valor predicho"
+                        }
+                    ],
+                    "hasValue": false,
+                    "value": null,
+                    "description": "programa_social_beneficiario"
+                }
+            ],
+            "hasValue": false,
+            "value": null,
+            "description": "Persona 10"
+        }
+    ],
+    "hasValue": false,
+    "value": null,
+    "description": "pagina 4"
+}

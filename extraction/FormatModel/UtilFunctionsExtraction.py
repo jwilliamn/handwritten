@@ -1149,13 +1149,13 @@ def extractCategory_extractColumnLabelsTipoSuministro(img, TL, BR, cantColumns):
         globe = If[(i - d_i):(i + d_i), (j - d_j):(j + d_j)]
         arrayResult.append(globe)
 
-    print(I_J)
-    plt.subplot(2, 2, 1), plt.imshow(ROI_base, 'gray'), plt.title('img')
-    plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
-    plt.subplot(2, 2, 3), plt.bar(range(len(sumRows)), sumRows, width=1), plt.title('sumRows')
-    plt.subplot(2, 2, 4), plt.bar(range(len(sumCols)), sumCols, width=1), plt.title('sumCols')
-    # plt.subplot(2, 2, 4), plt.imshow(right, 'gray'), plt.title('bot')
-    plt.show()
+    # print(I_J)
+    # plt.subplot(2, 2, 1), plt.imshow(ROI_base, 'gray'), plt.title('img')
+    # plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
+    # plt.subplot(2, 2, 3), plt.bar(range(len(sumRows)), sumRows, width=1), plt.title('sumRows')
+    # plt.subplot(2, 2, 4), plt.bar(range(len(sumCols)), sumCols, width=1), plt.title('sumCols')
+    # # plt.subplot(2, 2, 4), plt.imshow(right, 'gray'), plt.title('bot')
+    # plt.show()
 
     return arrayResult
 

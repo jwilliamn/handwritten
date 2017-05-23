@@ -19,6 +19,7 @@ import random
 from matplotlib import pyplot as plt
 import json
 
+
 from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
 from extraction.FormatModel.VariableDefinitions import *
 from extraction.FormatModel.RawVariableDefinitions import *
@@ -95,6 +96,8 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
         print(Page)
 
     Page.describe(True)
+
+    engine.initEngines()
     R = Page.getAllWithValue()
 
     for category in R:
@@ -108,6 +111,7 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     DigitPredictor = engine.UniqueEngineDigit()
     LetterPredictor = engine.UniqueEngineLetter()
     timer_predictor.startTimer(2)
+
     DigitPredictor.runEngine()
     LetterPredictor.runEngine()
     timer_predictor.endTimer()

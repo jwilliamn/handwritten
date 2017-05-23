@@ -65,7 +65,7 @@ def getSingleSquare(image_original, corner, iterations=1):
     # Connected component labling
     stats = cv2.connectedComponentsWithStats(thIMor, connectivity=4)
     num_labels = stats[0]
-    print('num labels:', num_labels)
+    # print('num labels:', num_labels)
     if num_labels != 2:
         return None
 
@@ -90,7 +90,7 @@ def getSingleSquare(image_original, corner, iterations=1):
     # if iterations <= 1:
     #     print('it will return ', k_left)
     #     return k_left, [corners[corner][1],corners[corner][0]]
-    print('it will return ', k_left)
+    # print('it will return ', k_left)
     return k_left, [corners[corner][0], corners[corner][1]]
     # rows,cols = image_original.shape
     # L = (k_left+9)//2
@@ -337,11 +337,43 @@ def detectPage(img):
     Returns:
         _: Rotated image.
     """
-    squaresCenters, _ = getSquares(img)
+    squaresCenters, L_edge_square = getSquares(img)
     print('Second squares: ', squaresCenters)
     if len(squaresCenters) != 4:
         raise Exception('There is no 4 centers')
+    TL_0 = squaresCenters[0]
+    BR_0 = squaresCenters[0][0] + L_edge_square, squaresCenters[0][1] + L_edge_square
 
+    TL_3 = squaresCenters[3][0] - L_edge_square, squaresCenters[3][1] - L_edge_square
+    BR_3 = squaresCenters[3]
+
+    colsToAddLeft = max(0, -TL_0[0])
+    colsToAddRight = max(0, BR_3[0] - img.shape[1])
+
+    rowsToAddTop = max(0, -TL_0[1])
+    rowsToAddBottom = max(0, BR_3[1] - img.shape[0])
+
+    completeImage = np.append(np.full((img.shape[0], colsToAddLeft), 255, dtype=img.dtype), img, axis=1)
+    #print('shape after adding: ', colsToAddLeft, ' cols to left ', completeImage.shape)
+    completeImage = np.append(completeImage, np.full((img.shape[0], colsToAddRight), 255, dtype=img.dtype), axis=1)
+    #print('shape after adding: ', colsToAddRight, ' cols to right  ', completeImage.shape)
+
+    completeImage = np.append(np.full((rowsToAddTop, completeImage.shape[1]), 255, dtype=img.dtype), completeImage,
+                              axis=0)
+    #print('shape after adding: ', rowsToAddTop, ' rows to top  ', completeImage.shape)
+
+    completeImage = np.append(completeImage, np.full((rowsToAddBottom, completeImage.shape[1]), 255, dtype=img.dtype),
+                              axis=0)
+
+    img = completeImage.copy()
+
+    sq0 = squaresCenters[0][0] + colsToAddLeft, squaresCenters[0][1] + rowsToAddTop
+    sq1 = squaresCenters[1][0] + colsToAddLeft, squaresCenters[1][1] + rowsToAddTop
+    sq2 = squaresCenters[2][0] + colsToAddLeft, squaresCenters[2][1] + rowsToAddTop
+    sq3 = squaresCenters[3][0] + colsToAddLeft, squaresCenters[3][1] + rowsToAddTop
+
+    squaresCenters = [sq0, sq1, sq2, sq3]
+    print('shape after adding: ', rowsToAddBottom, ' rows to bottom  ', completeImage.shape)
     # supuestamente esta horizontal
     distCols = squaresCenters[3][1] - squaresCenters[0][1]
     distRows = squaresCenters[3][0] - squaresCenters[0][0]
@@ -394,13 +426,46 @@ if __name__ == '__main__':
             print('Processing: ',filename)
             img = enderezarImagen(img)
             squaresCenters,k = getSquares(img)
-            backtorgb = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
-            TL = squaresCenters[0]
-            BR = squaresCenters[0][0]+k,squaresCenters[0][1]+k
-            cv2.rectangle(backtorgb, TL, BR, (0, 255, 0), 2)
+            TL_0 = squaresCenters[0]
+            BR_0 = squaresCenters[0][0] + k, squaresCenters[0][1] + k
 
-            TL = squaresCenters[3][0] - k, squaresCenters[3][1] - k
-            BR = squaresCenters[3]
-            cv2.rectangle(backtorgb, TL, BR, (0, 255, 0), 2)
+            TL_3 = squaresCenters[3][0] - k, squaresCenters[3][1] - k
+            BR_3 = squaresCenters[3]
+
+            print('BR_3: ',BR_3)
+            print('img.shape: ', img.shape)
+            colsToAddLeft = max(0, -TL_0[0])
+            colsToAddRight = max(0, BR_3[0] - img.shape[1])
+
+            rowsToAddTop = max(0, -TL_0[1])
+            rowsToAddBottom = max(0, BR_3[1] - img.shape[0])
+            print('shape of image', img.shape)
+            completeImage = np.append(np.full((img.shape[0],colsToAddLeft),255,dtype=img.dtype),img, axis=1)
+            print('shape after adding: ',colsToAddLeft,' cols to left ', completeImage.shape)
+            completeImage = np.append(completeImage,np.full((img.shape[0],colsToAddRight),255, dtype=img.dtype), axis=1)
+            print('shape after adding: ', colsToAddRight, ' cols to right  ', completeImage.shape)
+
+            completeImage = np.append(np.full((rowsToAddTop, completeImage.shape[1]), 255,dtype=img.dtype), completeImage, axis=0)
+            print('shape after adding: ', rowsToAddTop, ' rows to top  ', completeImage.shape)
+
+            completeImage = np.append(completeImage,np.full((rowsToAddBottom, completeImage.shape[1]),255, dtype=img.dtype),  axis=0)
+            print('shape after adding: ', rowsToAddBottom, ' rows to bottom  ', completeImage.shape)
+
+
+            print('To Add cols: ', colsToAddLeft,colsToAddRight)
+            print('To Add rows: ', rowsToAddTop, rowsToAddTop)
+
+            TL_0 = TL_0[0] + colsToAddLeft, TL_0[1] + rowsToAddTop
+            BR_0 = BR_0[0] + colsToAddLeft, BR_0[1] + rowsToAddTop
+
+            TL_3 = TL_3[0] + colsToAddLeft, TL_3[1] + rowsToAddTop
+            BR_3 = BR_3[0] + colsToAddLeft, BR_3[1] + rowsToAddTop
+
+
+
+            backtorgb = cv2.cvtColor(completeImage, cv2.COLOR_GRAY2RGB)
+
+            cv2.rectangle(backtorgb, TL_0, BR_0, (0, 255, 0), 2)
+            cv2.rectangle(backtorgb, TL_3, BR_3, (0, 255, 0), 2)
 
             cv2.imwrite(join('../output',filename),backtorgb)
