@@ -75,6 +75,9 @@ class Engine:
 
     def runEngine(self):
         print('N Data: ', len(self.data))
+        if len(self.data) == 0:
+            print('Predichos: ', len(self.pred))
+            return
         weights = self.weights
         biases = self.biases
         valid_dataset, _ = make_arrays(len(self.data), image_size)
@@ -274,7 +277,9 @@ def predictImage(image_data):
 # print("with tf.session %s seconds ---" % (time.time() - start_time))
 # return pred_label_
 
-
+def initEngines():
+    LetterPredictor = UniqueEngineLetter([model_path, 'modeling/modelC3_param.pickle'])
+    DigitPredictor = UniqueEngineDigit([model_path, 'modeling/modelD2_param.pickle'])
 # Prediction of digits ####
 def predictImageDigit(image_data):
     #print('Real digit image', image_data.shape, type(image_data))

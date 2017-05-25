@@ -50,6 +50,27 @@ from extraction.FormatModel import UtilDebug
 def processPdf(originalPdf):
     inputPdf = PdfFileReader(open(originalPdf, 'rb'))
 
+    pdfname = os.path.basename(originalPdf)
+    pdfname = pdfname.split('.')
+    pdfname = pdfname[len(pdfname) - 2]
+
+    """
+    if len(originalPdf.split('\\')) == 1:
+        if len(originalPdf.split('/')) == 1:
+            pdfname = originalPdf.split('.')
+            pdfname = pdfname[len(pdfname) - 2]
+        else:
+            pdfname = originalPdf.split('/')
+            pdfname = pdfname[len(pdfname) - 1]
+            pdfname = pdfname.split('.')
+            pdfname = pdfname[len(pdfname) - 2]
+    else:
+        pdfname = originalPdf.split('\\')
+        pdfname = pdfname[len(pdfname) - 1]
+        pdfname = pdfname.split('.')
+        pdfname = pdfname[len(pdfname) - 2]
+    """
+
     if not os.path.exists('input/tmp/'):
         os.makedirs('input/tmp/')
 
@@ -59,7 +80,7 @@ def processPdf(originalPdf):
         outputPdf = PdfFileWriter()
         outputPdf.addPage(p)
 
-        with open('input/tmp/page_%1d.pdf' % (i + 1), 'wb') as f:
+        with open('input/tmp/' + pdfname + '_%1d.pdf' % (i + 1), 'wb') as f:
             outputPdf.write(f)
             outputPath.append(f.name)
 
@@ -74,6 +95,7 @@ def convert_pdf_png(filePath, numPages):
         path = filePath[i]
         pathName = path.split('.')
 
+        print('Converting page %d' % (i + 1))
         try:
             with Image(filename=path, resolution=600) as img:
                 with Image(width=img.width, height=img.height, background=Color('white')) as bg:
@@ -84,7 +106,7 @@ def convert_pdf_png(filePath, numPages):
             raise
 
         imagePath.append(pathName[0] + '.png')
-        print('Converting page %d' % (i + 1))
+    
     imagePath = np.array(imagePath)
     return imagePath
 
@@ -107,6 +129,7 @@ if __name__ == '__main__':
     arg = sys.argv[1]
     print('arg', arg)
     splitArg = arg.split('.')
+
 
     if splitArg[1] == 'png' or splitArg[1] == 'jpeg' or splitArg[1] == 'jpg':
         print("File is a picture!")

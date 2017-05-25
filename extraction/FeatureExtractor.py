@@ -19,6 +19,7 @@ import random
 from matplotlib import pyplot as plt
 import json
 
+
 from extraction.FormatModel.UtilFunctionsLoadTemplates import loadCategory
 from extraction.FormatModel.VariableDefinitions import *
 from extraction.FormatModel.RawVariableDefinitions import *
@@ -95,6 +96,8 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
         print(Page)
 
     Page.describe(True)
+
+    engine.initEngines()
     R = Page.getAllWithValue()
 
     for category in R:
@@ -108,6 +111,7 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     DigitPredictor = engine.UniqueEngineDigit()
     LetterPredictor = engine.UniqueEngineLetter()
     timer_predictor.startTimer(2)
+
     DigitPredictor.runEngine()
     LetterPredictor.runEngine()
     timer_predictor.endTimer()
@@ -115,8 +119,10 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     Page_parsed = Page.convert2ParsedValues()
     if Page_parsed is not None or Page is not None:
         UtilDebug.plotearCategoriasPosicionesImagenes(img, Page, Page_parsed)
-    cv2.imwrite('output/'+page_name+'_resultImage.png', img)
-    with open('output/predictedValues_pag'+str_number+'.json', 'w') as output:
+    #cv2.imwrite('output/'+page_name+'_resultImage.png', img)
+    cv2.imwrite('output/'+page_name, img)
+    page_name = page_name.split('.')
+    with open('output/'+ page_name[len(page_name) - 2] + '_' + str_number+'.json', 'w') as output:
         json.dump(Page_parsed, output, default=jsonDefault, indent=4)
 
 
