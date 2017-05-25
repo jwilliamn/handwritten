@@ -61,7 +61,7 @@ def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
                 # print(img.dtype)
                 if len(position) == 2:
                     img32x32 = arrayOfImages[k] * 255.0 + 255.0 / 2.0
-                    print(img32x32.dtype)
+
                     img32x32 = (img32x32.astype(img.dtype))
 
                     resized = cv2.resize(img32x32, (20, 20))

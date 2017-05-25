@@ -16,7 +16,7 @@ import numpy as np
 import cv2
 import modeling
 from matplotlib import pyplot as plt
-
+import math
 from extraction.FormatModel import UtilDebug
 
 dx = [-1, 1, 0, 0]
@@ -80,7 +80,8 @@ def closestNonZero(img, p, maxSize=21):
 
 def filterSingleCharacter_new(letter_original_and_mask):
     letter_original = letter_original_and_mask[0]
-    mask = letter_original_and_mask[1]
+    mask = letter_original_and_mask[1][0]
+    threshold_border = letter_original_and_mask[1][1]
     img = letter_original.copy()
     img[img > 230] = 255
     ret3, resaltado = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -91,7 +92,7 @@ def filterSingleCharacter_new(letter_original_and_mask):
     borde[borde >= 0] = 255
     gb = 2  # grosor del borde
     borde[gb:borde.shape[0] - gb, gb:borde.shape[1] - gb] = 0
-
+    borde[img < threshold_border] = 0
     pppb = cv2.bitwise_and(resaltado, borde)  # posible_pre_printed_borders
     wob = cv2.bitwise_and(resaltado, cv2.bitwise_not(borde))  # sin borders
     dilatado = cv2.dilate(wob, cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3)), iterations=1)
@@ -114,6 +115,7 @@ def filterSingleCharacter_new(letter_original_and_mask):
     debugThisCharacter = False
 
     for label in range(num_labels):
+
         Width = labelStats[label, cv2.CC_STAT_WIDTH]
         Height = labelStats[label, cv2.CC_STAT_HEIGHT]
         area = labelStats[label, cv2.CC_STAT_AREA]
@@ -165,7 +167,8 @@ def filterSingleCharacter_new(letter_original_and_mask):
         # print('error filtering: ', e)
         imgResult = None
 
-    if debugThisCharacter:
+    if debugThisCharacter and imgResult is not None:
+        print('th ', threshold_border)
         plt.subplot(1, 7, 1), plt.imshow(img, 'gray'), plt.title('Original')
         plt.subplot(1, 7, 2), plt.imshow(resaltado, 'gray'), plt.title('Resaltado')
         plt.subplot(1, 7, 3), plt.imshow(borde, 'gray'), plt.title('Borde')
@@ -1325,6 +1328,27 @@ def extractCategory_extractColumnLabelsLeft(img, TL, BR, cantColumns):
 def extractCategory_extractColumnLabelsSex(img, TL, BR, cantColumns):
     return extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns)
 
+def getPixels(img, P, Q):
+    minX = min(P[0],Q[0])-2
+    maxX = max(P[0], Q[0])+2
+    minY = min(P[1], Q[1])-2
+    maxY = max(P[1], Q[1])+2
+
+    roi = img[minX:maxX, minY:maxY]
+    # print('getting:',P,Q)
+    # plt.imshow(img,'gray')
+    # plt.show()
+    dx = Q[0] - P[0]
+    dy = Q[1] - P[1]
+    D = math.sqrt(dx*dx+dy*dy)
+    res = []
+    for d in np.arange(0, D, step=1.0):
+        a = d
+        b = D-a
+        q = getPointProportion(P,Q,a,b)
+        res.append(img[q])
+    return res
+
 
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
     numRows = (BR[0] - TL[0]) / count
@@ -1379,6 +1403,20 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     pointB = (pointY[0], pointA[1])
     pointX = (pointA[0], pointY[1])
 
+    res = []
+    TL = pointA
+    BR = pointY
+    BL = (bottom_right_L[1], top_left_L[0])
+    TR = (top_left_R[1],bottom_right_R[0])
+    res.extend(getPixels(ROI, TL, TR))
+    res.extend(getPixels(ROI, BL, BR))
+    for k in range(0, count):
+        s = getPointProportion(TL,TR,k,count-k)
+        t = getPointProportion(BL, BR, k, count - k)
+        res.extend(getPixels(ROI, s, t))
+    res.extend(getPixels(ROI, TR,BR))
+    np_mean = int(np.mean(res))
+    np_stdv = int(np.std(res))
     # print(pointA,pointB,pointX,pointY,ROI.shape)
     ROI_2 = ROI[pointA[0]:pointY[0], pointA[1]:pointY[1]]
 
@@ -1399,7 +1437,7 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
         minY = min(bottomLeft[1], bottomRight[1])
         maxY = max(upperLeft[1], upperRight[1])
 
-        singleCharacter = (ROI[minX:maxX, minY:maxY], ROI_onlyUserMarks[minX:maxX, minY:maxY])
+        singleCharacter = (ROI[minX:maxX, minY:maxY], (ROI_onlyUserMarks[minX:maxX, minY:maxY],np_mean-2*np_stdv))
         letters.append(singleCharacter)
 
     filteredLetters = []
