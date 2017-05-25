@@ -18,8 +18,6 @@ import math
 from os import listdir
 from os.path import isfile, join
 
-from extraction import FeatureExtractor
-
 # Global settings ####
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
@@ -55,9 +53,9 @@ def getSingleSquare(image_original, corner, iterations=1):
         else:
             k_right = k
 
-        # plt.subplot(1, 2, 1), plt.imshow(onlySquares, 'gray'), plt.title(str(k_left) + '::' + str(stats[0]))
-        # plt.subplot(1, 2, 2), plt.imshow(thIMor, 'gray'), plt.title('th3')
-        # plt.show()
+        plt.subplot(1, 2, 1), plt.imshow(onlySquares, 'gray'), plt.title(str(k_left) + '::' + str(stats[0]))
+        plt.subplot(1, 2, 2), plt.imshow(thIMor, 'gray'), plt.title('th3')
+        plt.show()
 
     # print('k_left final: ', k_left)
     thIMor = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
@@ -419,10 +417,10 @@ def detectPage(img):
     return (newImage, page[max_indx])
 
 if __name__ == '__main__':
-    onlyfiles = [f for f in listdir('../input') if isfile(join('../input', f))]
+    onlyfiles = [f for f in listdir('../input/tmp') if isfile(join('../input/tmp', f))]
     for filename in onlyfiles:
-        if '2017' in filename:
-            img = cv2.imread(join('../input',filename), 0)
+        if 'im1_1.png' in filename:
+            img = cv2.imread(join('../input/tmp',filename), 0)
             print('Processing: ',filename)
             img = enderezarImagen(img)
             squaresCenters,k = getSquares(img)
@@ -467,5 +465,6 @@ if __name__ == '__main__':
 
             cv2.rectangle(backtorgb, TL_0, BR_0, (0, 255, 0), 2)
             cv2.rectangle(backtorgb, TL_3, BR_3, (0, 255, 0), 2)
-
+			
+            
             cv2.imwrite(join('../output',filename),backtorgb)

@@ -97,7 +97,7 @@ def convert_pdf_png(filePath, numPages):
 
         print('Converting page %d' % (i + 1))
         try:
-            with Image(filename=path, resolution=600) as img:
+            with Image(filename=path, resolution=300) as img:
                 with Image(width=img.width, height=img.height, background=Color('white')) as bg:
                     bg.composite(img, 0, 0)
                     bg.save(filename=pathName[0] + '.png')

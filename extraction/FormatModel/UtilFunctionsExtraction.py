@@ -91,7 +91,7 @@ def filterSingleCharacter_new(letter_original_and_mask):
     # creating border
     borde = resaltado.copy()
     borde[borde >= 0] = 255
-    gb = 2  # grosor del borde
+    gb = 3  # grosor del borde
     borde[gb:borde.shape[0] - gb, gb:borde.shape[1] - gb] = 0
     borde[img < threshold_border] = 0
     pppb = cv2.bitwise_and(resaltado, borde)  # posible_pre_printed_borders
@@ -811,7 +811,7 @@ def isOn(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
         r = sum(sumRows[row_i - buttonHeight // 2:row_i + buttonHeight // 2])
         print(UtilDebug.bcolors.OKBLUE + "Recieving data w: " + str(width) + " buttonHeight:" + str(buttonHeight) +
               " r: " + str(r) + " " + str(r * 100.0 / (buttonHeight * width)) + "% " + UtilDebug.bcolors.ENDC)
-        return 0.6 * buttonHeight * width < r
+        return 0.25 * buttonHeight * width < r
     else:
         width = img.shape[1]
         sumRows = np.asarray(np.sum(img, 1) / 255.0)
