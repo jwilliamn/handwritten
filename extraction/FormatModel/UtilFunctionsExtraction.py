@@ -83,6 +83,15 @@ def filterSingleCharacter_new(letter_original_and_mask):
     letter_original = letter_original_and_mask[0]
     mask = letter_original_and_mask[1][0]
     threshold_border = letter_original_and_mask[1][1]
+
+    If = cv2.GaussianBlur(letter_original, (3, 3), 0)
+    If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
+    If = cv2.bitwise_not(If)
+
+    top_left_L, bottom_right_L = getBestRectangle(If)
+    letter_original = letter_original[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
+    mask = mask[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
+
     img = letter_original.copy()
     img[img > 230] = 255
     ret3, resaltado = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -180,6 +189,8 @@ def filterSingleCharacter_new(letter_original_and_mask):
             plt.subplot(1, 7, 7), plt.imshow(imgResult, 'gray'), plt.title('imgResult resized to 32x32')
         plt.show()
 
+    characterDebugger = UtilDebug.CharacterDebugger()
+    characterDebugger.add((letter_original, imgResult))
     return imgResult
 
 
@@ -446,7 +457,7 @@ def getBestRectangle_big(region, ratio_cols_over_rows):
     return (0, 0), (20, 20)
 
 
-def getBestRectangle(region, ratio_cols_over_rows):
+def getBestRectangle(region):
     # B = range(max(0, region.shape[1] - 20), region.shape[1])
     # copia = region.copy()
     #
@@ -544,37 +555,104 @@ def getBestRectangle(region, ratio_cols_over_rows):
     totSumCols = np.sum(copia, 0)
     delta = 1
 
-    maxCols = filter_and_getMaxElements(totSumCols, 0, 100, minPercent=0.5)
-    maxRows = filter_and_getMaxElements(totSumRows, 0, 100, minPercent=0.5)
-    print('SS:', len(maxCols), len(maxRows))
+    cb = CuadroBuffer()
+
+    if not cb.calculated:
+        threshold_minPercent = 0.5
+    else:
+        threshold_minPercent = 0.3
+
+    maxCols = filter_and_getMaxElements(totSumCols, 0, 100, minPercent=threshold_minPercent)
+    maxRows = filter_and_getMaxElements(totSumRows, 0, 100, minPercent=threshold_minPercent)
+    # print('SS:', len(maxCols), len(maxRows))
     bestValue = 0
     bestA = None
     bestB = None
 
     minB = region.shape[1] - 20
-    for p in range(len(maxRows)-1):
-        for q in range(p+1, len(maxRows)):
-            for m in range(len(maxCols)-1):
-                for n in range(m+1, len(maxCols)):
-                    i = min(maxRows[p], maxRows[q])
-                    a = max(maxRows[p], maxRows[q]) - i
-                    j = min(maxCols[m], maxCols[n])
-                    b = max(maxCols[m], maxCols[n]) - j
 
-                    if 0.75 < b/a < 0.95 and b>=minB:
-                        myCantMatch = countNonZeros(acumSumRows, acumSumCols, (i, j), (i + a, j + b))
-                        # print('cant mAtch: ', myCantMatch)
-                        cum = myCantMatch / (2 * (a + b))
-                        if cum > bestValue:
-                            bestValue = cum
-                            bestA = a
-                            bestB = b
-                            bestPos = (i, j)
+    if not cb.calculated:
+        for p in range(len(maxRows) - 1):
+            for q in range(p + 1, len(maxRows)):
+                for m in range(len(maxCols) - 1):
+                    for n in range(m + 1, len(maxCols)):
+                        i = min(maxRows[p], maxRows[q])
+                        a = max(maxRows[p], maxRows[q]) - i
+                        j = min(maxCols[m], maxCols[n])
+                        b = max(maxCols[m], maxCols[n]) - j
+
+                        if 0.75 < b / a < 0.95 and b >= minB:
+
+                            myCantMatch = countNonZeros(acumSumRows, acumSumCols, (i, j), (i + a, j + b))
+                            # print('cant mAtch: ', myCantMatch)
+                            cum = myCantMatch / (2 * (a + b))
+                            if cum > bestValue:
+                                bestValue = cum
+                                bestA = a
+                                bestB = b
+                                bestPos = (i, j)
+    else:
+        maxCols = sorted(maxCols)
+        maxRows = sorted(maxRows)
+
+        bestA_calc = cb.A_predicted
+        bestB_calc = cb.B_predicted
+
+        exists_cols = [False]*(max(maxCols)+1)
+        for k in maxCols:
+            exists_cols[k] = True
+
+        exists_rows = [False]*(max(maxRows) + 1)
+        for k in maxRows:
+            exists_rows[k] = True
+
+        for i in maxRows:
+            for a in (range(bestA_calc - 5, bestA_calc + 5)):
+                end_row = i + a
+                if end_row >= 0 and end_row < len(exists_rows) and exists_rows[end_row]:
+
+                    for j in maxCols:
+                        for b in (range(bestB_calc - 5, bestB_calc + 5)):
+                            end_col = j + b
+                            if end_col >= 0 and end_col < len(exists_cols) and exists_cols[end_col]:
+
+                                myCantMatch = countNonZeros(acumSumRows, acumSumCols, (i, j), (i + a, j + b))
+                                # print('cant mAtch: ', myCantMatch)
+                                cum = myCantMatch / (2 * (a + b))
+                                if cum > bestValue:
+                                    bestValue = cum
+                                    bestA = a
+                                    bestB = b
+                                    bestPos = (i, j)
+
+        # print(maxCols)
+        # print(exists_cols)
+        # print(maxRows)
+        # print(exists_rows)
+        # print(bestA,bestB,bestPos)
+        # plt.imshow(region)
+        # plt.show()
+
+
 
     pi = (bestPos[1], bestPos[0])
+
+    if pi[0] == -1:
+        print('SS:', len(maxCols), len(maxRows))
+
+        print(maxCols)
+        print(maxRows)
+
+        plt.imshow(region)
+        plt.show()
+
     pf = (bestPos[1] + bestB, bestPos[0] + bestA)
-    retSecondtAlgorithm = (pi,pf)
+    retSecondtAlgorithm = (pi, pf)
     # print(retFirstAlgorithm, retSecondtAlgorithm)
+
+
+    if not cb.calculated:
+        cb.add((bestA, bestB))
     return retSecondtAlgorithm
 
 
@@ -591,18 +669,19 @@ def filter_and_getMaxElements(A, delta, cantMax, minPercent=0.5):
     ret = []
     count = 0
     for k in c:
-        if count < cantMax and k[1] > minPercent*c[0][1]:
+        if count < cantMax and k[1] > minPercent * c[0][1]:
             ret.append(k[0])
             count += 1
     if 0 not in ret:
         ret.append(0)
-    if len(A)-1 not in ret:
-        ret.append(len(A)-1)
+    if len(A) - 1 not in ret:
+        ret.append(len(A) - 1)
 
     # plt.bar(range(len(filtered)), filtered, 1)
     # print(ret)
     # plt.show()
     return ret
+
 
 def predictCategoric_column_labels_inside(column, labels):
     sumRows = np.asarray(np.sum(column, 1) // 255)
@@ -1329,11 +1408,12 @@ def extractCategory_extractColumnLabelsLeft(img, TL, BR, cantColumns):
 def extractCategory_extractColumnLabelsSex(img, TL, BR, cantColumns):
     return extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns)
 
+
 def getPixels(img, P, Q):
-    minX = min(P[0],Q[0])-2
-    maxX = max(P[0], Q[0])+2
-    minY = min(P[1], Q[1])-2
-    maxY = max(P[1], Q[1])+2
+    minX = min(P[0], Q[0]) - 2
+    maxX = max(P[0], Q[0]) + 2
+    minY = min(P[1], Q[1]) - 2
+    maxY = max(P[1], Q[1]) + 2
 
     roi = img[minX:maxX, minY:maxY]
     # print('getting:',P,Q)
@@ -1341,14 +1421,74 @@ def getPixels(img, P, Q):
     # plt.show()
     dx = Q[0] - P[0]
     dy = Q[1] - P[1]
-    D = math.sqrt(dx*dx+dy*dy)
+    D = math.sqrt(dx * dx + dy * dy)
     res = []
     for d in np.arange(0, D, step=1.0):
         a = d
-        b = D-a
-        q = getPointProportion(P,Q,a,b)
+        b = D - a
+        q = getPointProportion(P, Q, a, b)
         res.append(img[q])
     return res
+
+
+def predictCuadros(img, TL, BR, count):
+    numRows = (BR[0] - TL[0]) / count
+    numCols = BR[1] - TL[1]
+    # print('finding ratio nr/nc : ' + str(numRows)+' / ' + str(numCols)+'  divided by '+ str(count))
+    template = findApropiateTemplate(numRows / numCols)
+
+    deltaAmpliacion = 5
+
+    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+
+    If = cv2.GaussianBlur(ROI, (3, 3), 0)
+    If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
+    If = cv2.bitwise_not(If)
+
+    leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
+    rightPart = If[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
+
+    top_left_L, bottom_right_L = getBestRectangle(leftPart)
+    delta_L = (bottom_right_L[0] - top_left_L[0], bottom_right_L[1] - top_left_L[1])
+
+    top_left_R, bottom_right_R = getBestRectangle(rightPart)
+    delta_R = (bottom_right_R[0] - top_left_R[0], bottom_right_R[1] - top_left_R[1])
+
+    top_left_R = (top_left_R[0] + If.shape[1] - (template.shape[1] + ((deltaAmpliacion * 2 - 1))), top_left_R[1])
+    bottom_right_R = (top_left_R[0] + delta_R[0], top_left_R[1] + delta_R[1])
+
+    pointA = (top_left_L[1], top_left_L[0])
+    pointY = (bottom_right_R[1], bottom_right_R[0])
+
+    pointB = (pointY[0], pointA[1])
+    pointX = (pointA[0], pointY[1])
+
+    res = []
+    TL = pointA
+    BR = pointY
+    BL = (bottom_right_L[1], top_left_L[0])
+    TR = (top_left_R[1], bottom_right_R[0])
+    res.extend(getPixels(ROI, TL, TR))
+    res.extend(getPixels(ROI, BL, BR))
+    for k in range(0, count):
+        s = getPointProportion(TL, TR, k, count - k)
+        t = getPointProportion(BL, BR, k, count - k)
+        res.extend(getPixels(ROI, s, t))
+    res.extend(getPixels(ROI, TR, BR))
+
+    for k in range(0, count):
+        upperLeft = getPointProportion(pointA, pointX, k, count - k)
+        bottomLeft = getPointProportion(pointB, pointY, k, count - k)
+        upperRight = getPointProportion(pointA, pointX, k + 1, count - (k + 1))
+        bottomRight = getPointProportion(pointB, pointY, k + 1, count - (k + 1))
+        delta = 2
+        minX = max(0, min(upperLeft[0], bottomLeft[0]) - delta)
+        maxX = min(ROI.shape[0], max(upperRight[0], bottomRight[0]) + delta)
+
+        minY = max(0, min(bottomLeft[1], bottomRight[1]) - delta)
+        maxY = min(ROI.shape[1], max(upperLeft[1], upperRight[1]) + delta)
+
+        getBestRectangle(If[minX:maxX, minY:maxY])
 
 
 def extractCharacters(img, onlyUserMarks, TL, BR, count):
@@ -1370,10 +1510,10 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
     rightPart = If[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
 
-    top_left_L, bottom_right_L = getBestRectangle(leftPart, 0.8)
+    top_left_L, bottom_right_L = getBestRectangle(leftPart)
     delta_L = (bottom_right_L[0] - top_left_L[0], bottom_right_L[1] - top_left_L[1])
 
-    top_left_R, bottom_right_R = getBestRectangle(rightPart, 0.8)
+    top_left_R, bottom_right_R = getBestRectangle(rightPart)
     delta_R = (bottom_right_R[0] - top_left_R[0], bottom_right_R[1] - top_left_R[1])
 
     bestLeft = leftPart[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
@@ -1408,14 +1548,14 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     TL = pointA
     BR = pointY
     BL = (bottom_right_L[1], top_left_L[0])
-    TR = (top_left_R[1],bottom_right_R[0])
+    TR = (top_left_R[1], bottom_right_R[0])
     res.extend(getPixels(ROI, TL, TR))
     res.extend(getPixels(ROI, BL, BR))
     for k in range(0, count):
-        s = getPointProportion(TL,TR,k,count-k)
+        s = getPointProportion(TL, TR, k, count - k)
         t = getPointProportion(BL, BR, k, count - k)
         res.extend(getPixels(ROI, s, t))
-    res.extend(getPixels(ROI, TR,BR))
+    res.extend(getPixels(ROI, TR, BR))
     np_mean = int(np.mean(res))
     np_stdv = int(np.std(res))
     # print(pointA,pointB,pointX,pointY,ROI.shape)
@@ -1431,14 +1571,14 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
         bottomLeft = getPointProportion(pointB, pointY, k, count - k)
         upperRight = getPointProportion(pointA, pointX, k + 1, count - (k + 1))
         bottomRight = getPointProportion(pointB, pointY, k + 1, count - (k + 1))
+        delta = 2
+        minX = max(0, min(upperLeft[0], bottomLeft[0]) - delta)
+        maxX = min(ROI.shape[0], max(upperRight[0], bottomRight[0]) + delta)
 
-        minX = min(upperLeft[0], bottomLeft[0])
-        maxX = max(upperRight[0], bottomRight[0])
+        minY = max(0, min(bottomLeft[1], bottomRight[1]) - delta)
+        maxY = min(ROI.shape[1], max(upperLeft[1], upperRight[1]) + delta)
 
-        minY = min(bottomLeft[1], bottomRight[1])
-        maxY = max(upperLeft[1], upperRight[1])
-
-        singleCharacter = (ROI[minX:maxX, minY:maxY], (ROI_onlyUserMarks[minX:maxX, minY:maxY],np_mean-2*np_stdv))
+        singleCharacter = (ROI[minX:maxX, minY:maxY], (ROI_onlyUserMarks[minX:maxX, minY:maxY], np_mean - 2 * np_stdv))
         letters.append(singleCharacter)
 
     filteredLetters = []
@@ -1557,3 +1697,37 @@ def extractCharacters_old(img, onlyUserMarks, TL, BR, count):
         singleLetterFiltered = filterSingleCharacter(letter)
         filteredLetters.append(singleLetterFiltered)
     return filteredLetters
+
+
+class CuadroCharacter(object):
+    def __init__(self):
+        self.A = []
+        self.B = []
+        self.A_predicted = 0
+        self.B_predicted = 0
+        self.calculated = False
+
+    def calc(self):
+        print('A')
+        print(self.A)
+        print('B')
+        print(self.B)
+        self.A_predicted = int(np.mean(self.A))
+        self.B_predicted = int(np.mean(self.B))
+        self.calculated = True
+
+    def add(self, A_B):
+        # print('appended')
+        if A_B[0] is None or A_B[1] is None:
+            print('A_B is None ', A_B)
+        self.A.append(A_B[0])
+        self.B.append(A_B[1])
+
+
+class CuadroBuffer(CuadroCharacter):
+    instance = None
+
+    def __new__(cls):
+        if not CuadroBuffer.instance:
+            CuadroBuffer.instance = CuadroCharacter()
+        return CuadroBuffer.instance

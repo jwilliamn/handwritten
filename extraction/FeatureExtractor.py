@@ -100,6 +100,10 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     engine.initEngines()
     R = Page.getAllWithValue()
 
+    Page.calcCuadro(img)
+    cb = UtilFunctionsExtraction.CuadroBuffer()
+    cb.calc()
+    print('calculated values:', cb.A_predicted, cb.B_predicted)
     for category in R:
         if category[1].value is not None:
             print('Parsing category: ',category[0])
@@ -122,6 +126,10 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     #cv2.imwrite('output/'+page_name+'_resultImage.png', img)
     cv2.imwrite('output/'+page_name, img)
     page_name = page_name.split('.')
+
+    characterDebugger = UtilDebug.CharacterDebugger()
+    characterDebugger.printOnDisk('output/testingCharacters.png')
+
     with open('output/'+ page_name[len(page_name) - 2] + '_' + str_number+'.json', 'w') as output:
         json.dump(Page_parsed, output, default=jsonDefault, indent=4)
 

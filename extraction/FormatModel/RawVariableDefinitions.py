@@ -125,6 +125,22 @@ class RawValue:
         charArray_timer.endTimer()
         return self.predictedValue
 
+    def calcCuadroArrayChar(self, arg):
+        if self.singleParser == self.letterPredictor:
+            charArray_timer = UtilDebug.ArrayLetterTimer()
+        else:
+            charArray_timer = UtilDebug.ArrayDigitTimer()
+
+        charArray_timer.startTimer(1) #self.count
+        img = arg
+
+        TL = self.position[0]
+        BR = self.position[1]
+        count = self.countItems
+        UtilFunctionsExtraction.predictCuadros(img, TL, BR, count)
+        charArray_timer.endTimer()
+
+
     def getFinalValue(self, arg):
         return self.predictedValue
 

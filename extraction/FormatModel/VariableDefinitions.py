@@ -64,6 +64,14 @@ class Category:
                 withValue.extend(subtype_withvalues)
         return withValue
 
+    def calcCuadro(self, arg):
+        if self.hasValue:
+            if self.value.nameParser == 'parserImage2ArrayChar':
+                self.value.calcCuadroArrayChar(arg)
+        else:
+            for subtype in self.subTypes:
+                subtype.calcCuadro(arg)
+
     def __getitem__(self, key):
         for subtype in self.subTypes:
             if subtype.name == key:

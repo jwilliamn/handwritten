@@ -72,10 +72,10 @@ def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
                 # plt.subplot(2, 1, 2), plt.imshow(img32x32, 'gray')
                 # plt.show()
                 img[pixel_y:(pixel_y + resized.shape[0]), pixel_x:(pixel_x + resized.shape[1])] = resized
-                cv2.rectangle(img, (pixel_x-1, pixel_y-1), (pixel_x+20, pixel_y+20), color=0, thickness=1)
+                cv2.rectangle(img, (pixel_x - 1, pixel_y - 1), (pixel_x + 20, pixel_y + 20), color=0, thickness=1)
                 cv2.putText(img, str(arrayPredictedValues[k]), (pixel_x, pixel_y + 5),
                             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                           fontScale=0.8, color=0, thickness=2)
+                            fontScale=0.8, color=0, thickness=2)
                 # plt.subplot(3, 1, 1), plt.imshow(img, 'gray')
                 # plt.subplot(3, 1, 2), plt.imshow(img32x32, 'gray')
                 #
@@ -90,6 +90,65 @@ def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
                 # print('pixel X', pixel_x)
                 # background.paste(arrayOfImages[k], position, arrayOfImages[k])
                 # background.show()
+
+
+class ExtractorDebuger(object):
+    def __init__(self):
+        self.count = 0
+        self.cols = 32
+        self.nextCol = 0
+        self.nextRow = 0
+        self.rows = 1
+        self.maxElements = self.cols * self.rows
+        self.H = 32
+        self.W = 32
+        self.size = (self.H, self.W)
+        self.image = np.zeros((self.rows * self.H, self.cols * self.W * 2), np.uint8)
+
+    def add(self, image_2):
+        L = image_2[0]
+        L = cv2.resize(L, self.size)
+        ini_row = self.nextRow * self.H
+        end_row = self.nextRow * self.H + self.H
+
+        ini_col = self.nextCol * self.W * 2
+        mid_col = self.nextCol * self.W * 2 + self.W
+        end_col = self.nextCol * self.W * 2 + self.W * 2
+        self.image[ini_row:end_row, ini_col:mid_col] = L
+
+        R = image_2[1]
+
+        if R is not None:
+            R = R * 255.0 + 255.0 / 2.0
+            R = cv2.resize(R, self.size)
+            R = (R.astype(np.uint8))
+            self.image[ini_row:end_row, mid_col:end_col] = R
+
+        self.nextCol += 1
+        if self.nextCol == self.cols:
+            self.nextCol = 0
+            self.nextRow += 1
+
+            if self.nextRow == self.rows:
+                tmp = np.zeros((self.rows*2*self.H, self.cols*2*self.W), np.uint8)
+
+                tmp[:self.rows * self.H, :] = self.image
+                self.image = tmp
+                self.rows *= 2
+
+    def printOnDisk(self, name):
+        print('writting', name, self.image.shape)
+        cv2.imwrite(name, self.image)
+
+
+
+class CharacterDebugger(ExtractorDebuger):
+    instance = None
+
+    def __new__(cls):
+        if not CharacterDebugger.instance:
+            CharacterDebugger.instance = ExtractorDebuger()
+        return CharacterDebugger.instance
 
 
 class ProcessTimer:

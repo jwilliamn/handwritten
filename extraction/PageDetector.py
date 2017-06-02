@@ -53,9 +53,9 @@ def getSingleSquare(image_original, corner, iterations=1):
         else:
             k_right = k
 
-        plt.subplot(1, 2, 1), plt.imshow(onlySquares, 'gray'), plt.title(str(k_left) + '::' + str(stats[0]))
-        plt.subplot(1, 2, 2), plt.imshow(thIMor, 'gray'), plt.title('th3')
-        plt.show()
+        # plt.subplot(1, 2, 1), plt.imshow(onlySquares, 'gray'), plt.title(str(k_left) + '::' + str(stats[0]))
+        # plt.subplot(1, 2, 2), plt.imshow(thIMor, 'gray'), plt.title('th3')
+        # plt.show()
 
     # print('k_left final: ', k_left)
     thIMor = cv2.erode(thIMor, cv2.getStructuringElement(cv2.MORPH_RECT, (k_left, k_left)), iterations=1)
