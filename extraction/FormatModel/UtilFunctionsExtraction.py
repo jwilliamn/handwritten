@@ -83,6 +83,20 @@ def filterSingleCharacter_new(letter_original_and_mask):
     letter_original = letter_original_and_mask[0]
     mask = letter_original_and_mask[1][0]
     threshold_border = letter_original_and_mask[1][1]
+    #
+    # img = cv2.medianBlur(letter_original, 3)
+    # to_find_border = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
+    # blur = cv2.GaussianBlur(letter_original, (3, 3), 0)
+    # ret5, to_extract_letters = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    #
+    # plt.subplot(1, 3, 1), plt.imshow(letter_original), plt.title('letter_original')
+    # plt.subplot(1, 3, 2), plt.imshow(to_find_border), plt.title('to_find_border')
+    # plt.subplot(1, 3, 3), plt.imshow(to_extract_letters), plt.title('to_extract_letters')
+    # plt.show()
+    #
+    # #
+    # to_find_border = cv2.bitwise_not(to_find_border)
+    # to_extract_letters = cv2.bitwise_not(to_extract_letters)
 
     If = cv2.GaussianBlur(letter_original, (3, 3), 0)
     If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
@@ -598,11 +612,11 @@ def getBestRectangle(region):
         bestA_calc = cb.A_predicted
         bestB_calc = cb.B_predicted
 
-        exists_cols = [False]*(max(maxCols)+1)
+        exists_cols = [False] * (max(maxCols) + 1)
         for k in maxCols:
             exists_cols[k] = True
 
-        exists_rows = [False]*(max(maxRows) + 1)
+        exists_rows = [False] * (max(maxRows) + 1)
         for k in maxRows:
             exists_rows[k] = True
 
@@ -625,15 +639,13 @@ def getBestRectangle(region):
                                     bestB = b
                                     bestPos = (i, j)
 
-        # print(maxCols)
-        # print(exists_cols)
-        # print(maxRows)
-        # print(exists_rows)
-        # print(bestA,bestB,bestPos)
-        # plt.imshow(region)
-        # plt.show()
-
-
+                                    # print(maxCols)
+                                    # print(exists_cols)
+                                    # print(maxRows)
+                                    # print(exists_rows)
+                                    # print(bestA,bestB,bestPos)
+                                    # plt.imshow(region)
+                                    # plt.show()
 
     pi = (bestPos[1], bestPos[0])
 

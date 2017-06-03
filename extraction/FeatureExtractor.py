@@ -98,11 +98,14 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     Page.describe(True)
 
     engine.initEngines()
+
     R = Page.getAllWithValue()
 
     Page.calcCuadro(img)
     cb = UtilFunctionsExtraction.CuadroBuffer()
     cb.calc()
+
+
     print('calculated values:', cb.A_predicted, cb.B_predicted)
     for category in R:
         if category[1].value is not None:

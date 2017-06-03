@@ -21,7 +21,7 @@ def loadValue(dict_current):
         return None
     if dict_current['nameParser'] == 'parserImage2ArrayChar':
         if dict_current['nameSingleParser'] == 'letterPredictor':
-            print(dict_current['position'])
+            # print(dict_current['position'])
             return ArrayImageChar(dict_current['position'], dict_current['countItems'])
         if dict_current['nameSingleParser'] == 'digitPredictor':
             return ArrayImageNumber(dict_current['position'], dict_current['countItems'])
@@ -51,7 +51,7 @@ def loadCategory(dict_current):
     cat.value = loadValue(dict_current['value'])
     cat.hasValue = dict_current['hasValue']
     for sub in dict_current['subTypes']:
-        print(sub)
+        # print(sub)
         r = loadCategory(sub)
         cat.addSubType(r)
     return cat
