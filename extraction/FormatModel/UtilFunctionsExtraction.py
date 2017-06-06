@@ -79,15 +79,14 @@ def closestNonZero(img, p, maxSize=21):
     return copyP
 
 
-def filterSingleCharacter_new(letter_original_and_mask):
-    letter_original = letter_original_and_mask[0]
-    mask = letter_original_and_mask[1][0]
-    threshold_border = letter_original_and_mask[1][1]
+def filterSingleCharacter_new(letter_original_and_thersh):
+    letter_original = letter_original_and_thersh[0]
+
+    threshold_border = letter_original_and_thersh[1]
     #
-    # img = cv2.medianBlur(letter_original, 3)
-    # to_find_border = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
-    # blur = cv2.GaussianBlur(letter_original, (3, 3), 0)
-    # ret5, to_extract_letters = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    blur = cv2.GaussianBlur(letter_original, (1, 1), 0)
+    ret5, to_extract_letters = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     #
     # plt.subplot(1, 3, 1), plt.imshow(letter_original), plt.title('letter_original')
     # plt.subplot(1, 3, 2), plt.imshow(to_find_border), plt.title('to_find_border')
@@ -95,113 +94,188 @@ def filterSingleCharacter_new(letter_original_and_mask):
     # plt.show()
     #
     # #
-    # to_find_border = cv2.bitwise_not(to_find_border)
-    # to_extract_letters = cv2.bitwise_not(to_extract_letters)
+
+    to_extract_letters = cv2.bitwise_not(to_extract_letters)
 
     If = cv2.GaussianBlur(letter_original, (3, 3), 0)
     If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
     If = cv2.bitwise_not(If)
 
-    top_left_L, bottom_right_L = getBestRectangle(If)
-    letter_original = letter_original[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
-    mask = mask[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
+    top_left_L, bottom_right_L = getBestRectangle(letter_original)
 
-    img = letter_original.copy()
-    img[img > 230] = 255
-    ret3, resaltado = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-    rows, cols = resaltado.shape
+    # letter_original_copy = letter_original.copy()
+    # letter_original = letter_original[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
 
-    # creating border
-    borde = resaltado.copy()
-    borde[borde >= 0] = 255
-    gb = 3  # grosor del borde
-    borde[gb:borde.shape[0] - gb, gb:borde.shape[1] - gb] = 0
-    borde[img < threshold_border] = 0
-    pppb = cv2.bitwise_and(resaltado, borde)  # posible_pre_printed_borders
-    wob = cv2.bitwise_and(resaltado, cv2.bitwise_not(borde))  # sin borders
-    dilatado = cv2.dilate(wob, cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3)), iterations=1)
-    pdof = cv2.bitwise_and(dilatado, pppb)  # parte de la letra borrada
-    result = cv2.bitwise_or(wob, pdof)
+    delta_inside = 3
+    centro = to_extract_letters[top_left_L[1] + delta_inside:bottom_right_L[1] - delta_inside,
+             top_left_L[0] + delta_inside:bottom_right_L[0] - delta_inside]
 
-    onlyMatch = cv2.morphologyEx(result, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2)))
-    # onlyMatch = expandOnlyIntersections(result, mask)
-    onlyMatch = result
+    th_macha_grande = 25
 
-    stats = cv2.connectedComponentsWithStats(onlyMatch, connectivity=8)
-    num_labels = stats[0]
-    labels = stats[1]
-    labelStats = stats[2]
-    centroides = stats[3]
-    # We expect the connected component of the numbers to be more or less with a constats ratio
-    # So we find the medina ratio of all the comeonets because the majorty of connected compoent are numbers
-    cosl = []
-    edgesLength = []
-    debugThisCharacter = False
+    stats_centro = cv2.connectedComponentsWithStats(centro, connectivity=8)
+    num_labels_centro = stats_centro[0]
+    labelStats_centro = stats_centro[2]
+    empty_square = True
+    for label in range(num_labels_centro):
+        if label == 0:  # background
+            continue
+        area = labelStats_centro[label, cv2.CC_STAT_AREA]
+        if area > th_macha_grande:
+            empty_square = False
 
-    for label in range(num_labels):
+    if empty_square:
+        imgResult = None
+    else:
 
-        Width = labelStats[label, cv2.CC_STAT_WIDTH]
-        Height = labelStats[label, cv2.CC_STAT_HEIGHT]
-        area = labelStats[label, cv2.CC_STAT_AREA]
-        # print(area, connectedCompoentHeight * connectedCompoentHeight, connectedCompoentHeight, connectedCompoentWidth)
-        deleteGroup = False
-        if centroides[label][0] < 0.1 * onlyMatch.shape[1] or \
-                        centroides[label][1] < 0.1 * onlyMatch.shape[0] or \
-                        centroides[label][0] > 0.9 * onlyMatch.shape[1] or \
-                        centroides[label][1] > 0.9 * onlyMatch.shape[0]:
-            if Width * Height * 0.5 < area:
+        gb = 3  # grosor del borde
+
+        borde = np.zeros(letter_original.shape, np.uint8)
+        borde[top_left_L[1] - gb // 2:top_left_L[1] + (gb - gb // 2), :] = 255
+        borde[bottom_right_L[1] - (gb // 2):bottom_right_L[1] + (gb - (gb // 2)), :] = 255
+        borde[:, top_left_L[0] - gb // 2:top_left_L[0] + (gb - gb // 2)] = 255
+        borde[:, bottom_right_L[0] - gb // 2:bottom_right_L[0] + (gb - (gb // 2))] = 255
+
+        borde[letter_original < threshold_border] = 0
+        letter_no_borders = to_extract_letters.copy()
+        letter_no_borders[borde > 125] = 0
+
+        stats_sin_bordes = cv2.connectedComponentsWithStats(letter_no_borders, connectivity=8)
+        num_labels_sin_bordes = stats_sin_bordes[0]
+        labelStats_sin_bordes = stats_sin_bordes[2]
+        centroides_sin_bordes = stats_sin_bordes[3]
+
+        foreground = []
+        background = []
+        area_th = 5
+        centro_vertical = (bottom_right_L[1] + top_left_L[1]) // 2
+        for label in range(num_labels_sin_bordes):
+            if label == 0:  # background
+                continue
+            area = labelStats_sin_bordes[label, cv2.CC_STAT_AREA]
+            cy = centroides_sin_bordes[label][0]
+            cx = centroides_sin_bordes[label][1]
+            outsideOfY = cy <= top_left_L[0] + (gb - (gb // 2)) or cy >= bottom_right_L[0] - (gb - (gb // 2))
+            outsideOfX = cx <= top_left_L[1] + (gb - (gb // 2)) or cx >= bottom_right_L[1] - (gb - (gb // 2))
+            deleteGroup = False
+            if outsideOfX or outsideOfY:
                 deleteGroup = True
 
-        if area < 4:
-            deleteGroup = True
+            Left = labelStats_sin_bordes[label, cv2.CC_STAT_LEFT]
+            Top = labelStats_sin_bordes[label, cv2.CC_STAT_TOP]
+            Right = Left + labelStats_sin_bordes[label, cv2.CC_STAT_WIDTH]
+            Bottom = Top + labelStats_sin_bordes[label, cv2.CC_STAT_HEIGHT]
 
-        if deleteGroup:
-            Left = labelStats[label, cv2.CC_STAT_LEFT]
-            Top = labelStats[label, cv2.CC_STAT_TOP]
-            Right = Left + Width
-            Bottom = Top + Height
-            onlyMatch[Top:Bottom, Left:Right] = 0
+            if centro_vertical - 2 < cx < centro_vertical + 2:
+                if area < 10 and (cy <= top_left_L[0] + gb // 2 or cy >= bottom_right_L[0] - gb // 2):
+                    deleteGroup = True
+
+            if deleteGroup:
+                letter_no_borders[Top:Bottom, Left:Right] = 0
+            else:
+                if area > area_th:
+                    foreground.append([(Left, Top), (Right, Bottom)])
+                else:
+                    background.append([(Left, Top), (Right, Bottom)])
+
+        def isNearForegraound(tl_br):
+
+            def pointIsNearForeGround(xy):
+                x = xy[0]
+                y = xy[1]
+                dist_th = 5
+                minDistance_global = dist_th + 1
+                for sq in foreground:
+                    sq_x1 = sq[0][0]
+                    sq_x2 = sq[1][0]
+
+                    sq_y1 = sq[0][1]
+                    sq_y2 = sq[1][1]
+                    if sq_x1 <= x <= sq_x2:
+                        if sq_y1 <= y <= sq_y2:
+                            return True
+                        else:
+                            minDist_local = min(abs(sq_y1 - y), abs(y - sq_y2))
+
+                    else:
+                        if sq_y1 <= y <= sq_y2:
+                            minDist_local = min(abs(sq_x1 - x), abs(x - sq_x2))
+                        else:
+                            minDist_local_1 = min(abs(sq_x1 - x), abs(x - sq_x2))
+                            minDist_local_2 = min(abs(sq_y1 - y), abs(y - sq_y2))
+                            minDist_local = minDist_local_1 + minDist_local_2
+
+                    if minDist_local <= dist_th:
+                        return True
+
+                return False
+
+            x1 = tl_br[0][0]
+            x2 = tl_br[1][0]
+
+            y1 = tl_br[0][1]
+            y2 = tl_br[1][1]
+
+            a = pointIsNearForeGround((x1, y1))
+            b = pointIsNearForeGround((x1, y2))
+            c = pointIsNearForeGround((x2, y1))
+            d = pointIsNearForeGround((x2, y2))
+
+            return a or b or c or d
+
+            # letter_original_no_borders[top_left_L[1] -gb//2:top_left_L[1] +gb//2, :]
+
+
+        background = sorted(background, key=lambda p: p[1][0] - p[0][0] + p[1][1] - p[0][1])
+
+        for bk in background:
+            if isNearForegraound(bk):
+                foreground.append(bk)
+            else:
+                Left = bk[0][0]
+                Top = bk[0][1]
+                Right = bk[1][0]
+                Bottom = bk[1][1]
+                letter_no_borders[Top:Bottom, Left:Right] = 0
+
+        if len(foreground) == 0:
+            imgResult = None
+        else:
+            img_copy = letter_original.copy()
+
+            img_copy[letter_no_borders < 125] = 255  # lo que es negro en only match, ahora sera blanco en img_copy
+            img_copy[letter_no_borders >= 125] = 0  # to_do lo que no es absolutamente blanco, pasa a ser negro
+
+            if cv2.countNonZero(letter_no_borders) == 0:
+                img_copy[letter_no_borders >= 0] = 255
             debugThisCharacter = False
-            print('centroide: ', centroides[label])
 
-    img_copy = img.copy()
+            try:
 
-    img_copy[onlyMatch < 125] = 255  # lo que es negro en only match, ahora sera blanco en img_copy
-    img_copy[onlyMatch >= 125] = 0  # to_do lo que no es absolutamente blanco, pasa a ser negro
+                # imgResult = GenerateData.myImResize_20x20_32x32(img_copy)
+                imgResult = modeling.GenerateTrainDataAZ.myImResize_forDataTraining(img_copy, None)
 
-    if cv2.countNonZero(onlyMatch) == 0:
-        img_copy[mask >= 0] = 255
+                # for i in range(0,32):
+                #     for j in range(0, 32):
+                #         if shouldFill(imgResult, (i,j)):
+                #             imgResult[i, j] = 0
+                #         if shouldClear(imgResult, (i, j)):
+                #             imgResult[i, j] = 255
 
-    try:
+                imgResult = (imgResult -
+                             255.0 / 2) / 255.0
 
-        # imgResult = GenerateData.myImResize_20x20_32x32(img_copy)
-        imgResult = modeling.GenerateTrainDataAZ.myImResize_forDataTraining(img_copy, None)
+            except Exception as e:
+                print('error filtering: ', e)
+                imgResult = None
 
-        # for i in range(0,32):
-        #     for j in range(0, 32):
-        #         if shouldFill(imgResult, (i,j)):
-        #             imgResult[i, j] = 0
-        #         if shouldClear(imgResult, (i, j)):
-        #             imgResult[i, j] = 255
+            if debugThisCharacter:
+                plt.subplot(1, 4, 1), plt.imshow(letter_original, 'gray'), plt.title('letter_original_copy')
+                plt.subplot(1, 4, 2), plt.imshow(to_extract_letters, 'gray'), plt.title('letter_original')
+                plt.subplot(1, 4, 3), plt.imshow(letter_no_borders, 'gray'), plt.title('letter_no_borders')
 
-        imgResult = (imgResult -
-                     255.0 / 2) / 255.0
-
-    except Exception as e:
-        # print('error filtering: ', e)
-        imgResult = None
-
-    if debugThisCharacter and imgResult is not None:
-        print('th ', threshold_border)
-        plt.subplot(1, 7, 1), plt.imshow(img, 'gray'), plt.title('Original')
-        plt.subplot(1, 7, 2), plt.imshow(resaltado, 'gray'), plt.title('Resaltado')
-        plt.subplot(1, 7, 3), plt.imshow(borde, 'gray'), plt.title('Borde')
-        plt.subplot(1, 7, 4), plt.imshow(result, 'gray'), plt.title('SinBordes')
-        plt.subplot(1, 7, 5), plt.imshow(mask, 'gray'), plt.title('Mask')
-        plt.subplot(1, 7, 6), plt.imshow(img_copy, 'gray'), plt.title('To myImResize')
-        if imgResult is not None:
-            plt.subplot(1, 7, 7), plt.imshow(imgResult, 'gray'), plt.title('imgResult resized to 32x32')
-        plt.show()
+                if imgResult is not None:
+                    plt.subplot(1, 4, 4), plt.imshow(imgResult, 'gray'), plt.title('imgResult resized to 32x32')
+                plt.show()
 
     characterDebugger = UtilDebug.CharacterDebugger()
     characterDebugger.add((letter_original, imgResult))
@@ -471,7 +545,8 @@ def getBestRectangle_big(region, ratio_cols_over_rows):
     return (0, 0), (20, 20)
 
 
-def getBestRectangle(region):
+# recibe como parametro una region en escala de grises
+def getBestRectangle(region, default_th=0.5):
     # B = range(max(0, region.shape[1] - 20), region.shape[1])
     # copia = region.copy()
     #
@@ -552,9 +627,17 @@ def getBestRectangle(region):
     # ratioBuffer.append((bestA, bestB))
     # retFirstAlgorithm = pi, pf
 
-    copia = region.copy()
+    img = cv2.medianBlur(region, 1)
+    to_find_border = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
 
-    copia = copia > 0
+    # plt.subplot(1, 3, 1), plt.imshow(region,'gray'), plt.title('region')
+    # plt.subplot(1, 3, 2), plt.imshow(img,'gray'), plt.title('img')
+    # plt.subplot(1, 3, 3), plt.imshow(to_find_border,'gray'), plt.title('to_find_border')
+    # plt.show()
+
+    #
+    to_find_border = cv2.bitwise_not(to_find_border)
+
     rows, cols = region.shape
 
     bestValue = -1.0
@@ -562,17 +645,17 @@ def getBestRectangle(region):
     bestB = 0
     bestPos = (-1, -1)
 
-    acumSumRows = np.cumsum(copia, 1)
-    acumSumCols = np.cumsum(copia, 0)
+    acumSumRows = np.cumsum(to_find_border, 1)
+    acumSumCols = np.cumsum(to_find_border, 0)
 
-    totSumRows = np.sum(copia, 1)
-    totSumCols = np.sum(copia, 0)
+    totSumRows = np.sum(to_find_border, 1)
+    totSumCols = np.sum(to_find_border, 0)
     delta = 1
 
     cb = CuadroBuffer()
 
     if not cb.calculated:
-        threshold_minPercent = 0.5
+        threshold_minPercent = default_th
     else:
         threshold_minPercent = 0.3
 
@@ -650,13 +733,15 @@ def getBestRectangle(region):
     pi = (bestPos[1], bestPos[0])
 
     if pi[0] == -1:
-        print('SS:', len(maxCols), len(maxRows))
+        return getBestRectangle(region, default_th / 2.0)
 
-        print(maxCols)
-        print(maxRows)
-
-        plt.imshow(region)
-        plt.show()
+        # print('SS:', len(maxCols), len(maxRows), ' calculated: ', cb.calculated)
+        #
+        # print(maxCols)
+        # print(maxRows)
+        #
+        # plt.imshow(region)
+        # plt.show()
 
     pf = (bestPos[1] + bestB, bestPos[0] + bestA)
     retSecondtAlgorithm = (pi, pf)
@@ -1453,12 +1538,8 @@ def predictCuadros(img, TL, BR, count):
 
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
 
-    If = cv2.GaussianBlur(ROI, (3, 3), 0)
-    If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
-    If = cv2.bitwise_not(If)
-
-    leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
-    rightPart = If[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
+    leftPart = ROI[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
+    rightPart = ROI[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
 
     top_left_L, bottom_right_L = getBestRectangle(leftPart)
     delta_L = (bottom_right_L[0] - top_left_L[0], bottom_right_L[1] - top_left_L[1])
@@ -1466,7 +1547,7 @@ def predictCuadros(img, TL, BR, count):
     top_left_R, bottom_right_R = getBestRectangle(rightPart)
     delta_R = (bottom_right_R[0] - top_left_R[0], bottom_right_R[1] - top_left_R[1])
 
-    top_left_R = (top_left_R[0] + If.shape[1] - (template.shape[1] + ((deltaAmpliacion * 2 - 1))), top_left_R[1])
+    top_left_R = (top_left_R[0] + ROI.shape[1] - (template.shape[1] + ((deltaAmpliacion * 2 - 1))), top_left_R[1])
     bottom_right_R = (top_left_R[0] + delta_R[0], top_left_R[1] + delta_R[1])
 
     pointA = (top_left_L[1], top_left_L[0])
@@ -1500,10 +1581,10 @@ def predictCuadros(img, TL, BR, count):
         minY = max(0, min(bottomLeft[1], bottomRight[1]) - delta)
         maxY = min(ROI.shape[1], max(upperLeft[1], upperRight[1]) + delta)
 
-        getBestRectangle(If[minX:maxX, minY:maxY])
+        getBestRectangle(ROI[minX:maxX, minY:maxY])
 
 
-def extractCharacters(img, onlyUserMarks, TL, BR, count):
+def extractCharacters(img, TL, BR, count):
     numRows = (BR[0] - TL[0]) / count
     numCols = BR[1] - TL[1]
     # print('finding ratio nr/nc : ' + str(numRows)+' / ' + str(numCols)+'  divided by '+ str(count))
@@ -1512,15 +1593,21 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     deltaAmpliacion = 5
 
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
-    ROI_onlyUserMarks = onlyUserMarks[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion,
-                        TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
 
-    If = cv2.GaussianBlur(ROI, (3, 3), 0)
-    If = cv2.adaptiveThreshold(If, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 2)
-    If = cv2.bitwise_not(If)
+    #
+    # plt.imshow(ROI,'gray')
+    # plt.show()
 
-    leftPart = If[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
-    rightPart = If[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
+    # TODO revisar ampliacion de imagen si es necesario
+
+
+    leftPart = ROI[:, 0:(template.shape[1] + (deltaAmpliacion * 2 - 1))]
+    rightPart = ROI[:, -(template.shape[1] + (deltaAmpliacion * 2 - 1)):]
+
+    # plt.subplot(2, 2, 1), plt.imshow(ROI, 'gray')
+    # plt.subplot(2, 2, 3), plt.imshow(leftPart, 'gray')
+    # plt.subplot(2, 2, 4), plt.imshow(rightPart, 'gray')
+    # plt.show()
 
     top_left_L, bottom_right_L = getBestRectangle(leftPart)
     delta_L = (bottom_right_L[0] - top_left_L[0], bottom_right_L[1] - top_left_L[1])
@@ -1534,11 +1621,11 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
     # print('If shape: ', If.shape)
     # print('template shape: ', template.shape)
     # print('current top_left_R', top_left_R)
-    top_left_R = (top_left_R[0] + If.shape[1] - (template.shape[1] + ((deltaAmpliacion * 2 - 1))), top_left_R[1])
+    top_left_R = (top_left_R[0] + ROI.shape[1] - (template.shape[1] + ((deltaAmpliacion * 2 - 1))), top_left_R[1])
     bottom_right_R = (top_left_R[0] + delta_R[0], top_left_R[1] + delta_R[1])
     # print('after top_left_R', top_left_R)
-    possibleBestLeft = If[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
-    possibleBestRight = If[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
+    possibleBestLeft = ROI[top_left_L[1]:bottom_right_L[1], top_left_L[0]:bottom_right_L[0]]
+    possibleBestRight = ROI[top_left_R[1]:bottom_right_R[1], top_left_R[0]:bottom_right_R[0]]
 
     # plt.subplot(1,8,1), plt.imshow(If), plt.title('If')
     # plt.subplot(1, 8, 2), plt.imshow(template), plt.title('template')
@@ -1590,7 +1677,7 @@ def extractCharacters(img, onlyUserMarks, TL, BR, count):
         minY = max(0, min(bottomLeft[1], bottomRight[1]) - delta)
         maxY = min(ROI.shape[1], max(upperLeft[1], upperRight[1]) + delta)
 
-        singleCharacter = (ROI[minX:maxX, minY:maxY], (ROI_onlyUserMarks[minX:maxX, minY:maxY], np_mean - 2 * np_stdv))
+        singleCharacter = (ROI[minX:maxX, minY:maxY], (np_mean - 2 * np_stdv))
         letters.append(singleCharacter)
 
     filteredLetters = []

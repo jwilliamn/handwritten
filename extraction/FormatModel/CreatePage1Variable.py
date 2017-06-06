@@ -8,6 +8,8 @@ def jsonDefault(object):
     return object.__dict__
 if __name__ == '__main__':
     Page1 = Category('page1','pagina 1')
+
+
     ############
     Localizacion_vivienda = Category('localizacion_de_la_vivienda','Localizacion de la vivienda I')
     #########################

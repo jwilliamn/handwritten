@@ -41,9 +41,10 @@ class Category:
     def isLeaf(self):
         return len(self.subTypes) == 0
 
+
     def describe(self, explicit, ident = None):
         if ident is None:
-            return self.describe(explicit, 0)
+            ident = 0
 
         if explicit:
             print(('\t' * ident) + '['+self.description+'] hasValue: ' + str(self.hasValue))

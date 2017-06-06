@@ -105,12 +105,12 @@ class RawValue:
             charArray_timer = UtilDebug.ArrayDigitTimer()
 
         charArray_timer.startTimer(1) #self.count
-        img = arg[0]
-        onlyUserMarks = arg[1]
+        img = arg
+
         TL = self.position[0]
         BR = self.position[1]
         count = self.countItems
-        arrayOfImages = UtilFunctionsExtraction.extractCharacters(img, onlyUserMarks, TL, BR, count)
+        arrayOfImages = UtilFunctionsExtraction.extractCharacters(img, TL, BR, count)
         arrayResult = []
         for singleImage in arrayOfImages:
             if singleImage is None:
@@ -157,7 +157,7 @@ class RawValue:
 
 
     def parserCategoricLabelsInside(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
@@ -169,7 +169,7 @@ class RawValue:
             self.predictedValue.append(r)
         return self.predictedValue
     def parserCategoricLabelsLeft(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
@@ -181,7 +181,7 @@ class RawValue:
             self.predictedValue.append(r)
         return self.predictedValue
     def parserCategoricLabelsSex(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
@@ -194,7 +194,7 @@ class RawValue:
         return self.predictedValue
 
     def parserCategoricLabelsDocumento(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
@@ -206,7 +206,7 @@ class RawValue:
             self.predictedValue.append(r)
         return self.predictedValue
     def parserCategoricLabelsTipoSuministro(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
@@ -219,7 +219,7 @@ class RawValue:
         return self.predictedValue
 
     def parserCategoricLabelsTipoVia(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]
@@ -232,7 +232,7 @@ class RawValue:
         return self.predictedValue
 
     def parserCategoricLabelsSiNo(self, arg):
-        img = arg[0]
+        img = arg
         TL = self.position[0]
         BR = self.position[1]
         labels = self.position[2]

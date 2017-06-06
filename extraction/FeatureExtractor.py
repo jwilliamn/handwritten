@@ -106,12 +106,14 @@ def extractPageData_numberX(img_original, baseL, str_number, page_name = 'image_
     cb.calc()
 
 
+    # Page.parse()
+
     print('calculated values:', cb.A_predicted, cb.B_predicted)
     for category in R:
         if category[1].value is not None:
             print('Parsing category: ',category[0])
             print('Value: ',category[1].value)
-            parsed = category[1].value.parse([img, Ifp2])
+            parsed = category[1].value.parse(img)
             print('Parsed value: ',parsed)
 
     timer_predictor =UtilDebug.PredictorTimer()
