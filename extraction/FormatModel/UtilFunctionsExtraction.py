@@ -240,6 +240,7 @@ def filterSingleCharacter_new(letter_original_and_thersh):
         if len(foreground) == 0:
             imgResult = None
         else:
+
             img_copy = letter_original.copy()
 
             img_copy[letter_no_borders < 125] = 255  # lo que es negro en only match, ahora sera blanco en img_copy
@@ -250,7 +251,7 @@ def filterSingleCharacter_new(letter_original_and_thersh):
             debugThisCharacter = False
 
             try:
-
+                img_copy = cv2.GaussianBlur(img_copy, (3, 3), 0)
                 # imgResult = GenerateData.myImResize_20x20_32x32(img_copy)
                 imgResult = modeling.GenerateTrainDataAZ.myImResize_forDataTraining(img_copy, None)
 
