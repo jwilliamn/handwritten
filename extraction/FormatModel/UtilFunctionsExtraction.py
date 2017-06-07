@@ -85,7 +85,8 @@ def filterSingleCharacter_new(letter_original_and_thersh):
     threshold_border = letter_original_and_thersh[1]
     #
 
-    blur = cv2.GaussianBlur(letter_original, (1, 1), 0)
+    blur = cv2.GaussianBlur(letter_original, (3, 3
+                                              ), 0)
     ret5, to_extract_letters = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     #
     # plt.subplot(1, 3, 1), plt.imshow(letter_original), plt.title('letter_original')
@@ -224,7 +225,6 @@ def filterSingleCharacter_new(letter_original_and_thersh):
 
             # letter_original_no_borders[top_left_L[1] -gb//2:top_left_L[1] +gb//2, :]
 
-
         background = sorted(background, key=lambda p: p[1][0] - p[0][0] + p[1][1] - p[0][1])
 
         for bk in background:
@@ -251,7 +251,7 @@ def filterSingleCharacter_new(letter_original_and_thersh):
             debugThisCharacter = False
 
             try:
-                img_copy = cv2.GaussianBlur(img_copy, (3, 3), 0)
+
                 # imgResult = GenerateData.myImResize_20x20_32x32(img_copy)
                 imgResult = modeling.GenerateTrainDataAZ.myImResize_forDataTraining(img_copy, None)
 
@@ -809,7 +809,7 @@ def predictCategoric_column_labels_SingleButton(column, labels):
     button_height = column.shape[0]
     i = column.shape[0] // 2
 
-    if isOn(i, img=None, width=width, buttonHeight=button_height, sumRows=sumRows):
+    if isOn_number(i, img=None, width=width, buttonHeight=button_height, sumRows=sumRows):
         resp = labels[0]
     else:
         resp = '?'
@@ -996,34 +996,34 @@ def isOn(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
         return isOn(row_i, width=width, sumRows=sumRows, img=None, buttonHeight=buttonHeight)
 
 
+def isOn_number(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
+    if img is None:
+        if width is None or sumRows is None or buttonHeight is None:
+            raise Exception('img is None but widht or sumRows or buttonHeight are not defined')
+
+        r = sum(sumRows[row_i - buttonHeight // 2:row_i + buttonHeight // 2])
+        print(UtilDebug.bcolors.OKBLUE + "Recieving data w: " + str(width) + " buttonHeight:" + str(buttonHeight) +
+              " r: " + str(r) + " " + str(r * 100.0 / (buttonHeight * width)) + "% " + UtilDebug.bcolors.ENDC)
+        return 0.5 * buttonHeight * width < r
+    else:
+        width = img.shape[1]
+        sumRows = np.asarray(np.sum(img, 1) / 255.0)
+        print(UtilDebug.bcolors.OKBLUE + "Recieving data img.shape " + str(img.shape) + UtilDebug.bcolors.ENDC)
+        return isOn_number(row_i, width=width, sumRows=sumRows, img=None, buttonHeight=buttonHeight)
+
+
 def extractLabelsBySquares(column, sumRows, labels):
     cantRows = len(labels)
 
     sumRows = sumRows.copy()
     originalRows = sumRows.copy()
-    sumRows[sumRows < int(max(sumRows))] = 0
-    center = []
-    sc = sumRows.copy()
-    while True:
-        left, right = getFirstGroupLargerThan(sumRows, 1)
-
-        if left + right < 0:
-            break
-        sumRows[left:right] = 0
-        if left == right:
-            sumRows[left] = 0
-
-        center.append((left + right) // 2)
-
-    if len(center) < 2 or center[0] + 150 > center[-1]:
-        return '?'
-    i = center[0] + 17
+    i = 17
 
     results = ''
     widthColumn = column.shape[1]
     for k in range(cantRows):
-        j = i + 19 * k
-        if isOn(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
+        j = i + int(19.6 * k)
+        if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
@@ -1093,7 +1093,7 @@ def extractLabelsBySquaresSex(column, sumRows, labels):
     widthColumn = column.shape[1]
     for k, addJ in enumerate([18, 38, 116, 136]):
         j = i + addJ
-        if isOn(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
+        if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
@@ -1112,6 +1112,28 @@ def extractLabelsBySquaresSex(column, sumRows, labels):
 def extractColumnsBySquares(If, cantColumns):
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
     If = cv2.dilate(If, kernel)
+
+    sumRows = np.asarray(np.sum(If, 1) // 255)
+    maxRows = filter_and_getMaxElements(sumRows, 0, 100, minPercent=0.8)
+    if len(maxRows) > 2:
+        maxRows = maxRows[:-2]
+    maxDistance_rows = 0
+    for i in maxRows:
+        for j in maxRows:
+            if abs(i - j) > maxDistance_rows:
+                maxDistance_rows = abs(i - j)
+
+    baseDistanceRows = maxDistance_rows / 2
+    row_ini = 0
+    row_fin = len(sumRows) - 1
+    for i in maxRows:
+        for j in maxRows:
+            if abs(i - j) > baseDistanceRows:
+                if abs(i - j) < row_fin - row_ini:
+                    row_ini = min(i, j)
+                    row_fin = max(i,j)
+
+    # GG
     sumCols = np.asarray(np.sum(If, 0) // 255)
     sumCols = sumCols.copy()
 
@@ -1136,7 +1158,7 @@ def extractColumnsBySquares(If, cantColumns):
         center = []
         for k in range(0, 2):
             left, right = getFirstGroupLargerThan(sumCols, 1)
-            print('LR', left, right)
+
             if left + right < 0:
                 print('this shouldn be happening')
                 returnNone = True
@@ -1153,21 +1175,24 @@ def extractColumnsBySquares(If, cantColumns):
         if returnNone or len(center) < 2:
             return [None] * cantColumns
 
+        # print('maxRows:', maxRows)
+        # print('row ini:', row_ini)
+        # print('row fin:', row_fin)
         if cantColumns == 2:
             i = getPointProportion((center[0], 0), (center[1], 0), 20, 47)[0]
             j = getPointProportion((center[0], 0), (center[1], 0), 47, 20)[0]
-            importanColum_I = If[:, (i - 11):(i + 11)]
-            importanColum_J = If[:, (j - 11):(j + 11)]
+            importanColum_I = If[row_ini:row_fin, (i - 11):(i + 11)]
+            importanColum_J = If[row_ini:row_fin, (j - 11):(j + 11)]
             arrayResult.append(importanColum_I)
             arrayResult.append(importanColum_J)
             # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
-            # plt.subplot(1, 3, 2), plt.bar(range(len(sumCols)), sumCols, 1),plt.title('SumCols')
-            # plt.subplot(1, 3, 3), plt.imshow(importanColum_I), plt.title('FIrst Column')
+            # plt.subplot(1, 3, 2), plt.imshow(importanColum_I), plt.title('FIrst Column')
+            # plt.subplot(1, 3, 3), plt.imshow(importanColum_J), plt.title('Second Column')
             # plt.show()
 
         else:
             i = (center[0] + center[1]) // 2
-            importanColum_I = If[:, (i - 11):(i + 11)]
+            importanColum_I = If[row_ini:row_fin, (i - 11):(i + 11)]
             # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
             # plt.subplot(1, 3, 2), plt.imshow(importanColum_I), plt.title('Column')
             # plt.show()
@@ -1404,11 +1429,23 @@ def extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns):
     deltaAmpliacion = 10
     ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
     # If = cv2.GaussianBlur(ROI, (3, 3), 0)
+
+    # If = cv2.adaptiveThreshold(ROI, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 21, 2)
+
+    #
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+
     If = cv2.bitwise_not(If)
+
+
     rows, cols = If.shape
 
+    # plt.subplot(1, 2, 1), plt.imshow(ROI), plt.title('ROI')
+    # plt.subplot(1, 2, 2), plt.imshow(If), plt.title('If')
+    # plt.show()
     resp = extractColumnsBySquares(If, cantColumns)
+    #GG2
     #
     # sumCols = np.asarray(np.sum(If, 0) // 255)
     # sumCols = dropMinsTo0(sumCols, 11)
