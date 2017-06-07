@@ -1071,23 +1071,8 @@ def extractLabelsBySquaresSex(column, sumRows, labels):
 
     sumRows = sumRows.copy()
     originalRows = sumRows.copy()
-    sumRows[sumRows < int(max(sumRows))] = 0
-    center = []
-    sc = sumRows.copy()
-    while True:
-        left, right = getFirstGroupLargerThan(sumRows, 1)
-
-        if left + right < 0:
-            break
-        sumRows[left:right] = 0
-        if left == right:
-            sumRows[left] = 0
-
-        center.append((left + right) // 2)
-
-    if len(center) < 2 or center[0] + 150 > center[-1]:
-        return '?'
-    i = center[0]
+    
+    i = 1
 
     results = ''
     widthColumn = column.shape[1]
