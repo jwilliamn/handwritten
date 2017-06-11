@@ -821,46 +821,19 @@ def predictCategoric_column_labels_SingleButton(column, labels):
 
 
 def predictCategoric_column_labels_left(column, labels):
-    onlyLeftMarks = column[:, :-24]
-    sumRows = np.asarray(np.sum(onlyLeftMarks, 1) // 255)
-    rows = len(sumRows)
-    sumRows = sumRows - int(min(sumRows))
-    acumBy7 = sumRows.copy()
-    for i in range(len(acumBy7)):
-        if i > 0:
-            acumBy7[i] += acumBy7[i - 1]
-        if i >= 7:
-            acumBy7[i] -= sumRows[i - 7]
 
-    acumBy7[0:7] = 0
-    max_i_2 = 0
-    max_val_i = 0
     cantLabels = len(labels)
-    valid = False
-    for i in range(len(acumBy7)):
-        val = 0
-        local_valid = True
-        for k in range(cantLabels):
-            j = i + k * 21
-            if j < len(acumBy7):
-                val += acumBy7[j]
-            else:
-                local_valid = False
-
-        if val > max_val_i and local_valid:
-            max_val_i = val
-            valid = True
-            max_i_2 = i
-
-    if not valid:
-        return '?'
-
-    onlyGlobles = column[:, -24:-4]
+    onlyGlobles = column[:,:]
     sumRowsGlobes = np.asarray(np.sum(onlyGlobles, 1) // 255)
     results = ''
+    bHeight = 7
+    if cantLabels > 1:
+        space_betweenButtons = (column.shape[0]-cantLabels*bHeight)//(cantLabels-1)
+    else:
+        space_betweenButtons = 0
     for k in range(cantLabels):
-        j = max_i_2 - 3 + k * 21
-        if isOn(j, width=20, buttonHeight=6, sumRows=sumRowsGlobes):
+        j = 4 + k *(bHeight+space_betweenButtons)
+        if isOn(j, width=column.shape[1], buttonHeight=6, sumRows=sumRowsGlobes):
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
@@ -1071,7 +1044,7 @@ def extractLabelsBySquaresSex(column, sumRows, labels):
 
     sumRows = sumRows.copy()
     originalRows = sumRows.copy()
-    
+
     i = 1
 
     results = ''
@@ -1116,7 +1089,7 @@ def extractColumnsBySquares(If, cantColumns):
             if abs(i - j) > baseDistanceRows:
                 if abs(i - j) < row_fin - row_ini:
                     row_ini = min(i, j)
-                    row_fin = max(i,j)
+                    row_fin = max(i, j)
 
     # GG
     sumCols = np.asarray(np.sum(If, 0) // 255)
@@ -1238,57 +1211,57 @@ def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
     #
 
 
-
-    If = cv2.adaptiveThreshold(ROI, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
-    If = cv2.bitwise_not(If)
-
-    sumCols = np.asarray(np.sum(If, 0) // 255)
-    left = sumCols[:(len(sumCols) // 2)]
-    right = sumCols[(len(sumCols) // 2):]
-    max_indx_left, max_value_row = max(enumerate(left), key=lambda p: p[1])
-    max_indx_right, max_value_col = max(enumerate(right), key=lambda p: p[1])
-
-    i = max_indx_left
-    j = len(sumCols) // 2 + max_indx_right
-
-    ROI = ROI_base[:, i:(j + 1)]
-
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     If = cv2.bitwise_not(If)
-    sumRows = np.asarray(np.sum(If, 1) // 255)
-    sumRows[sumRows > 0.9 * ROI.shape[1]] = 0
-    acumBy5 = sumRows.copy()
-    for i in range(len(acumBy5)):
-        if i > 0:
-            acumBy5[i] += acumBy5[i - 1]
-        if i >= 5:
-            acumBy5[i] -= sumRows[i - 5]
 
-    print(sumRows)
-    print(acumBy5)
-    max_i_2 = 0
-    max_val_i = 0
-    for i in range(len(acumBy5)):
-        if i + 16 >= len(acumBy5):
-            break
-        val = acumBy5[i] + acumBy5[i + 16]
-        if val > max_val_i:
-            max_val_i = val
-            max_i_2 = i
-    i_1 = max_i_2 - 7
-    j_2 = max_i_2 + 18
 
-    left = If[i_1:j_2, 4:22]
-    right = If[i_1:j_2, 88:105]
 
-    # plt.subplot(2,2,1),plt.imshow(ROI_base,'gray'), plt.title('img')
-    # plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('Solo columna ancha importante')
-    # plt.subplot(2, 2, 3), plt.imshow(left, 'gray'), plt.title('top')
-    # plt.subplot(2, 2, 4), plt.imshow(right, 'gray'), plt.title('bot')
-    # plt.show()
+    # PART_NAC = If[26:33, 25:77]
+    # cv2.imwrite('resources/PART_NAC.png', PART_NAC)
+
+    PART_NAC = cv2.imread('resources/PART_NAC.png', 0)
+    neg_PART_NAC = cv2.bitwise_not(PART_NAC)
+    rows, cols = PART_NAC.shape
+    ROWS, COLS = If.shape
+    I_J = None
+    val = 0
+    for i in range(ROWS):
+        for j in range(COLS):
+            i_2 = i + rows
+            j_2 = j + cols
+            if i_2 >= ROWS or j_2 >= COLS:
+                break
+            pos_no_tiene = If[i:i_2, j:j_2]
+
+            c1 = cv2.countNonZero(cv2.bitwise_and(PART_NAC, pos_no_tiene))
+            c2 = cv2.countNonZero(cv2.bitwise_and(neg_PART_NAC, pos_no_tiene))
+            v = c1 - c2
+            if v > val:
+                val = v
+                I_J = (i, j)
+
+    if I_J is None or I_J[1] <= 12 or I_J[1]> If.shape[1]-72 or I_J[0] <= 11 or I_J[0]> If.shape[0]-5 :
+        return [None] * 2
     arrayResult = []
-    arrayResult.append(left)
-    arrayResult.append(right)
+    print('I_J',I_J)
+
+    for k in [-12, 72]:
+        left = I_J[1]+k-8
+        right = left + 16
+
+        top = I_J[0]-10-7
+        bot = I_J[0]+4+5
+        # print('left:right', left,right)
+        # print('top:bot', top, bot)
+        globe = If[top:bot,left:right]
+        arrayResult.append(globe)
+
+
+    # plt.subplot(2,2,1),plt.imshow(PART_NAC,'gray'), plt.title('PART_NAC')
+    # plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('If')
+    # plt.subplot(2, 2, 3), plt.imshow(arrayResult[0], 'gray'), plt.title('left')
+    # plt.subplot(2, 2, 4), plt.imshow(arrayResult[1], 'gray'), plt.title('right')
+    # plt.show()
 
     return arrayResult
 
@@ -1420,9 +1393,7 @@ def extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns):
     #
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-
     If = cv2.bitwise_not(If)
-
 
     rows, cols = If.shape
 
@@ -1430,7 +1401,7 @@ def extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns):
     # plt.subplot(1, 2, 2), plt.imshow(If), plt.title('If')
     # plt.show()
     resp = extractColumnsBySquares(If, cantColumns)
-    #GG2
+    # GG2
     #
     # sumCols = np.asarray(np.sum(If, 0) // 255)
     # sumCols = dropMinsTo0(sumCols, 11)
@@ -1497,30 +1468,86 @@ def extractCategory_extractColumnLabelsInside(img, TL, BR, cantColumns):
     return resp
 
 
-def extractCategory_extractColumnLabelsLeft(img, TL, BR, cantColumns):
+def extractCategory_extractColumnLabelsLeft(img, TL, BR, cantColumns, cantRows):
     deltaAmpliacion = 10
-    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion:BR[0] + deltaAmpliacion]
+    ROI = img[TL[1] - deltaAmpliacion:BR[1] + deltaAmpliacion, TL[0] - deltaAmpliacion - 5:BR[0] + deltaAmpliacion + 5]
     # If = cv2.GaussianBlur(ROI, (3, 3), 0)
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
     If = cv2.bitwise_not(If)
 
     sumCols = np.asarray(np.sum(If, 0) // 255)
+    cumSumCols = np.cumsum(sumCols)
+
     compCols = (sumCols * (-1)) + If.shape[0]
     max_j = 0
     max_value_j = 0
-    for j in range(0, len(sumCols) // 2):
-        val = sumCols[j] + compCols[j + 4]
+    for j in range(0, len(sumCols) - 44):
+        val = cumSumCols[j + 6] - cumSumCols[j] + cumSumCols[j + 43] - cumSumCols[j + 37]
+
         if val > max_value_j:
             max_value_j = val
             max_j = j
 
-    If2 = If[:, 0:max_j + 30]
+    leftPart = If[:, 0:max_j + 5]
+    rightPart = If[:, max_j + 37:]
+
+    sumRows_Left = np.asarray(np.sum(leftPart, 1) // 255)
+    sumRows_Right = np.asarray(np.sum(rightPart, 1) // 255)
+
+    sumRows = np.zeros(len(sumRows_Left))
+    for indx in range(0, len(sumRows_Left)):
+        sumRows[indx] = sumRows_Left[indx] + sumRows_Right[indx]
+    mean_rows = 4
+
+    important_rows = sumRows[:]
+
+    test_filter = important_rows < mean_rows
+
+    important_rows[important_rows < mean_rows] = 0
+    iniGroups = []
+    endGroups = []
+    for indx in range(0, len(important_rows)):
+        k = important_rows[indx]
+        if k > 0:
+            if len(iniGroups) == 0 or indx - iniGroups[-1] > 13:
+                iniGroups.append(indx)
+                endGroups.append(indx)
+            else:
+                endGroups[-1] = indx
+
+    # print('ini Groups:', iniGroups)
+    # print('fin Groups:', endGroups)
     arrayResult = []
-    arrayResult.append(If2)
-    # plt.subplot(2,2,1), plt.imshow(If,'gray')
-    # plt.subplot(2,2,2), plt.bar(range(len(sumCols)),sumCols,width=1)
-    # plt.subplot(2, 2, 3), plt.imshow(If2,'gray')
+
+    if len(iniGroups) < cantRows:
+        cumSumRows = np.cumsum(sumRows)
+
+        If2 =  If[:,max_j + 14:max_j + 32]
+
+        arrayResult.append(If2)
+
+    else:
+        while len(iniGroups)> cantRows:
+            indx_min_length = 322
+            min_length = 322
+            for indx in range(0,len(iniGroups)):
+                if min_length > endGroups[indx]-iniGroups[indx]:
+                    min_length = endGroups[indx] - iniGroups[indx]
+                    indx_min_length = indx
+
+            del iniGroups[indx_min_length]
+            del endGroups[indx_min_length]
+
+        If2 = If[iniGroups[0]:endGroups[-1]+1, max_j + 14:max_j + 32]
+
+        arrayResult.append(If2)
+
+    # print(max_j)
+    # plt.subplot(2, 2, 1), plt.imshow(If, 'gray')
+    # plt.subplot(2, 2, 2), plt.bar(range(len(sumCols)), sumCols, width=1)
+    # plt.subplot(2, 2, 3), plt.imshow(If2, 'gray')
+    # plt.subplot(2, 2, 4), plt.bar(range(len(important_rows)), important_rows, width=1)
     # plt.show()
     return arrayResult
 

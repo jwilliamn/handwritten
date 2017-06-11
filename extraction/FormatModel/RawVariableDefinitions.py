@@ -174,7 +174,7 @@ class RawValue:
         BR = self.position[1]
         labels = self.position[2]
         self.countItems = len(labels)
-        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsLeft(img, TL, BR, len(labels))
+        self.arrayOfImages = UtilFunctionsExtraction.extractCategory_extractColumnLabelsLeft(img, TL, BR, len(labels), len(labels[0]))
         results = UtilFunctionsExtraction.predictValuesCategory_labelsLeft(self.arrayOfImages, labels)
         self.predictedValue = []
         for r in results:

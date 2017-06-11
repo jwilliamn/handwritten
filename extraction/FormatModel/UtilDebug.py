@@ -65,17 +65,23 @@ def plotear(img, position, arrayOfImages, countItems, arrayPredictedValues):
                     img32x32 = (img32x32.astype(img.dtype))
 
                     resized = cv2.resize(img32x32, (20, 20))
+                    width_text = 2
+                    fScale = 0.8
                 else:
                     resized = cv2.resize(arrayOfImages[k], (0, 0), fx=0.8, fy=0.8)
                     resized = cv2.bitwise_not(resized)
+                    width_text = 2
+                    fScale = 0.6
                 # plt.subplot(2,1,1), plt.imshow(arrayOfImages[k], 'gray')
                 # plt.subplot(2, 1, 2), plt.imshow(img32x32, 'gray')
                 # plt.show()
-                img[pixel_y:(pixel_y + resized.shape[0]), pixel_x:(pixel_x + resized.shape[1])] = resized
-                cv2.rectangle(img, (pixel_x - 1, pixel_y - 1), (pixel_x + 20, pixel_y + 20), color=0, thickness=1)
+
+                # img[pixel_y:(pixel_y + resized.shape[0]), pixel_x:(pixel_x + resized.shape[1])] = resized
+                # cv2.rectangle(img, (pixel_x - 1, pixel_y - 1), (pixel_x + 20, pixel_y + 20), color=0, thickness=1)
+
                 cv2.putText(img, str(arrayPredictedValues[k]), (pixel_x, pixel_y + 5),
                             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                            fontScale=0.8, color=0, thickness=2)
+                            fontScale=fScale, color=0, thickness=width_text)
                 # plt.subplot(3, 1, 1), plt.imshow(img, 'gray')
                 # plt.subplot(3, 1, 2), plt.imshow(img32x32, 'gray')
                 #
