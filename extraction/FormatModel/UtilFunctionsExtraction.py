@@ -808,8 +808,8 @@ def predictCategoric_column_labels_SingleButton(column, labels):
     width = column.shape[1]
     button_height = column.shape[0]
     i = column.shape[0] // 2
-
-    if isOn_number(i, img=None, width=width, buttonHeight=button_height, sumRows=sumRows):
+    rth = getRatioOn_number(i, img=None, width=width, buttonHeight=button_height, sumRows=sumRows)
+    if rth > 0.5:
         resp = labels[0]
     else:
         resp = '?'
@@ -821,18 +821,17 @@ def predictCategoric_column_labels_SingleButton(column, labels):
 
 
 def predictCategoric_column_labels_left(column, labels):
-
     cantLabels = len(labels)
-    onlyGlobles = column[:,:]
+    onlyGlobles = column[:, :]
     sumRowsGlobes = np.asarray(np.sum(onlyGlobles, 1) // 255)
     results = ''
     bHeight = 7
     if cantLabels > 1:
-        space_betweenButtons = (column.shape[0]-cantLabels*bHeight)//(cantLabels-1)
+        space_betweenButtons = (column.shape[0] - cantLabels * bHeight) // (cantLabels - 1)
     else:
         space_betweenButtons = 0
     for k in range(cantLabels):
-        j = 4 + k *(bHeight+space_betweenButtons)
+        j = 4 + k * (bHeight + space_betweenButtons)
         if isOn(j, width=column.shape[1], buttonHeight=6, sumRows=sumRowsGlobes):
             if len(results) > 0:
                 results = results + ';' + labels[k]
@@ -969,7 +968,7 @@ def isOn(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
         return isOn(row_i, width=width, sumRows=sumRows, img=None, buttonHeight=buttonHeight)
 
 
-def isOn_number(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
+def getRatioOn_number(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
     if img is None:
         if width is None or sumRows is None or buttonHeight is None:
             raise Exception('img is None but widht or sumRows or buttonHeight are not defined')
@@ -977,12 +976,13 @@ def isOn_number(row_i, img=None, width=None, buttonHeight=None, sumRows=None):
         r = sum(sumRows[row_i - buttonHeight // 2:row_i + buttonHeight // 2])
         print(UtilDebug.bcolors.OKBLUE + "Recieving data w: " + str(width) + " buttonHeight:" + str(buttonHeight) +
               " r: " + str(r) + " " + str(r * 100.0 / (buttonHeight * width)) + "% " + UtilDebug.bcolors.ENDC)
-        return 0.5 * buttonHeight * width < r
+
+        return  r/(buttonHeight * width)
     else:
         width = img.shape[1]
         sumRows = np.asarray(np.sum(img, 1) / 255.0)
         print(UtilDebug.bcolors.OKBLUE + "Recieving data img.shape " + str(img.shape) + UtilDebug.bcolors.ENDC)
-        return isOn_number(row_i, width=width, sumRows=sumRows, img=None, buttonHeight=buttonHeight)
+        return getRatioOn_number(row_i, width=width, sumRows=sumRows, img=None, buttonHeight=buttonHeight)
 
 
 def extractLabelsBySquares(column, sumRows, labels):
@@ -990,26 +990,51 @@ def extractLabelsBySquares(column, sumRows, labels):
 
     sumRows = sumRows.copy()
     originalRows = sumRows.copy()
-    i = 17
+    i = 8
 
     results = ''
     widthColumn = column.shape[1]
+
+    ratios = []
     for k in range(cantRows):
-        j = i + int(19.6 * k)
-        if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
+        j = i + int(round(19.6 * k))
+        percent = 0.65
+        if k >= 9 or cantRows == 2:
+            if cantRows == 2 and k == 1:
+                percent = 0.9
+            else:
+                percent = 0.8
+        ratios.append(getRatioOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8))
+        #
+        # if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8, ratioTh=percent):
+        #     if len(results) > 0:
+        #         results = results + ';' + labels[k]
+        #     else:
+        #         results = labels[k]
+    max_ratio = max(ratios)
+    min_ratio = min(ratios)
+    th = (max_ratio + min_ratio) / 2.0
+    if max_ratio - min_ratio < 0.2:
+        th = 0.9
+    if cantRows == 1:
+        th = 0.6
+
+    # print(max_ratio, min_ratio, th, 'max min th')
+    for k in range(cantRows):
+        if ratios[k] > th:
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
                 results = labels[k]
 
+    # print(labels)
+    # print(results)
+    # plt.subplot(1, 2, 1), plt.imshow(column, 'gray')
+    # plt.subplot(1, 2, 2), plt.bar(range(len(originalRows)), originalRows, 1)
+    # plt.show()
     if len(results) == 0:
         results = '?'
     return results
-    # print(labels)
-    # print(results)
-    # plt.subplot(1,2,1), plt.imshow(column,'gray')
-    # plt.subplot(1,2,2), plt.bar(range(len(originalRows)),originalRows, 1)
-    # plt.show()
 
 
 def extractLabelsBySquaresDocument(column, sumRows, labels):
@@ -1020,9 +1045,29 @@ def extractLabelsBySquaresDocument(column, sumRows, labels):
 
     results = ''
     widthColumn = column.shape[1]
-    for k, j in enumerate([4, 20]):
 
-        if isOn(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=6):
+    # plt.subplot(1,2,1), plt.imshow(column,'gray')
+    # plt.subplot(1,2,2), plt.bar(range(len(originalRows)),originalRows, 1)
+    # plt.show()
+    ratios = []
+
+    for k, j in enumerate([8, 23]):
+        ratios.append(getRatioOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=6))
+        #
+        # if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=6, ratioTh=0.5):
+        #     if len(results) > 0:
+        #         results = results + ';' + labels[k]
+        #     else:
+        #         results = labels[k]
+    max_ratio = max(ratios)
+    min_ratio = min(ratios)
+    th = (max_ratio + min_ratio) / 2.0
+    if max_ratio - min_ratio < 0.2:
+        th = 0.9
+    if cantRows == 1:
+        th = 0.6
+    for k in range(cantRows):
+        if ratios[k] > th:
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
@@ -1033,9 +1078,7 @@ def extractLabelsBySquaresDocument(column, sumRows, labels):
 
     # print(labels)
     # print(results)
-    # plt.subplot(1,2,1), plt.imshow(column,'gray')
-    # plt.subplot(1,2,2), plt.bar(range(len(originalRows)),originalRows, 1)
-    # plt.show()
+
     return results
 
 
@@ -1045,13 +1088,32 @@ def extractLabelsBySquaresSex(column, sumRows, labels):
     sumRows = sumRows.copy()
     originalRows = sumRows.copy()
 
-    i = 1
-
     results = ''
     widthColumn = column.shape[1]
-    for k, addJ in enumerate([18, 38, 116, 136]):
-        j = i + addJ
-        if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8):
+
+    ratios = []
+    for k, addJ in enumerate([10, 30, 108, 128]):
+        j = addJ
+        percent = 0.7
+        if k >= 2:
+            percent = 0.85
+        print('debugging sex')
+        ratios.append(getRatioOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8))
+        # if isOn_number(j, img=None, width=widthColumn, sumRows=originalRows, buttonHeight=8, ratioTh=percent):
+        #     if len(results) > 0:
+        #         results = results + ';' + labels[k]
+        #     else:
+        #         results = labels[k]
+
+    max_ratio = max(ratios)
+    min_ratio = min(ratios)
+    th = (max_ratio + min_ratio) / 2.0
+    if max_ratio - min_ratio < 0.2:
+        th = 0.9
+    if cantRows == 1:
+        th = 0.6
+    for k in range(cantRows):
+        if ratios[k] > th:
             if len(results) > 0:
                 results = results + ';' + labels[k]
             else:
@@ -1068,6 +1130,7 @@ def extractLabelsBySquaresSex(column, sumRows, labels):
 
 
 def extractColumnsBySquares(If, cantColumns):
+    If_original = If.copy()
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
     If = cv2.dilate(If, kernel)
 
@@ -1092,6 +1155,7 @@ def extractColumnsBySquares(If, cantColumns):
                     row_fin = max(i, j)
 
     # GG
+    row_ini += 9
     sumCols = np.asarray(np.sum(If, 0) // 255)
     sumCols = sumCols.copy()
 
@@ -1139,8 +1203,8 @@ def extractColumnsBySquares(If, cantColumns):
         if cantColumns == 2:
             i = getPointProportion((center[0], 0), (center[1], 0), 20, 47)[0]
             j = getPointProportion((center[0], 0), (center[1], 0), 47, 20)[0]
-            importanColum_I = If[row_ini:row_fin, (i - 11):(i + 11)]
-            importanColum_J = If[row_ini:row_fin, (j - 11):(j + 11)]
+            importanColum_I = If_original[row_ini:row_fin, (i - 11):(i + 11)]
+            importanColum_J = If_original[row_ini:row_fin, (j - 11):(j + 11)]
             arrayResult.append(importanColum_I)
             arrayResult.append(importanColum_J)
             # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
@@ -1150,7 +1214,7 @@ def extractColumnsBySquares(If, cantColumns):
 
         else:
             i = (center[0] + center[1]) // 2
-            importanColum_I = If[row_ini:row_fin, (i - 11):(i + 11)]
+            importanColum_I = If_original[row_ini:row_fin, (i - 11):(i + 11)]
             # plt.subplot(1, 3, 1), plt.imshow(If), plt.title('If')
             # plt.subplot(1, 3, 2), plt.imshow(importanColum_I), plt.title('Column')
             # plt.show()
@@ -1214,8 +1278,6 @@ def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     If = cv2.bitwise_not(If)
 
-
-
     # PART_NAC = If[26:33, 25:77]
     # cv2.imwrite('resources/PART_NAC.png', PART_NAC)
 
@@ -1240,22 +1302,21 @@ def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
                 val = v
                 I_J = (i, j)
 
-    if I_J is None or I_J[1] <= 12 or I_J[1]> If.shape[1]-72 or I_J[0] <= 11 or I_J[0]> If.shape[0]-5 :
+    if I_J is None or I_J[1] <= 12 or I_J[1] > If.shape[1] - 72 or I_J[0] <= 11 or I_J[0] > If.shape[0] - 5:
         return [None] * 2
     arrayResult = []
-    print('I_J',I_J)
+    print('I_J', I_J)
 
     for k in [-12, 72]:
-        left = I_J[1]+k-8
-        right = left + 16
+        left = I_J[1] + k - 10
+        right = left + 17
 
-        top = I_J[0]-10-7
-        bot = I_J[0]+4+5
+        top = I_J[0] - 10 - 9
+        bot = I_J[0] + 4 + 7
         # print('left:right', left,right)
         # print('top:bot', top, bot)
-        globe = If[top:bot,left:right]
+        globe = If[top:bot, left:right]
         arrayResult.append(globe)
-
 
     # plt.subplot(2,2,1),plt.imshow(PART_NAC,'gray'), plt.title('PART_NAC')
     # plt.subplot(2, 2, 2), plt.imshow(If, 'gray'), plt.title('If')
@@ -1523,23 +1584,23 @@ def extractCategory_extractColumnLabelsLeft(img, TL, BR, cantColumns, cantRows):
     if len(iniGroups) < cantRows:
         cumSumRows = np.cumsum(sumRows)
 
-        If2 =  If[:,max_j + 14:max_j + 32]
+        If2 = If[:, max_j + 14:max_j + 32]
 
         arrayResult.append(If2)
 
     else:
-        while len(iniGroups)> cantRows:
+        while len(iniGroups) > cantRows:
             indx_min_length = 322
             min_length = 322
-            for indx in range(0,len(iniGroups)):
-                if min_length > endGroups[indx]-iniGroups[indx]:
+            for indx in range(0, len(iniGroups)):
+                if min_length > endGroups[indx] - iniGroups[indx]:
                     min_length = endGroups[indx] - iniGroups[indx]
                     indx_min_length = indx
 
             del iniGroups[indx_min_length]
             del endGroups[indx_min_length]
 
-        If2 = If[iniGroups[0]:endGroups[-1]+1, max_j + 14:max_j + 32]
+        If2 = If[iniGroups[0]:endGroups[-1] + 1, max_j + 14:max_j + 32]
 
         arrayResult.append(If2)
 
