@@ -79,22 +79,23 @@ def closestNonZero(img, p, maxSize=21):
     return copyP
 
 
+class MyClass:
+    count_letters = 290
+
 def filterSingleCharacter_new(letter_original_and_thersh):
     letter_original = letter_original_and_thersh[0]
 
     threshold_border = letter_original_and_thersh[1]
     #
 
-    blur = cv2.GaussianBlur(letter_original, (3, 3
-                                              ), 0)
+    blur = cv2.GaussianBlur(letter_original, (1, 1), 0)
     ret5, to_extract_letters = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    #
-    # plt.subplot(1, 3, 1), plt.imshow(letter_original), plt.title('letter_original')
-    # plt.subplot(1, 3, 2), plt.imshow(to_find_border), plt.title('to_find_border')
-    # plt.subplot(1, 3, 3), plt.imshow(to_extract_letters), plt.title('to_extract_letters')
+
+    # plt.subplot(1, 2, 1), plt.imshow(letter_original), plt.title('letter_original')
+    # plt.subplot(1, 2, 2), plt.imshow(to_extract_letters), plt.title('to_extract_letters')
     # plt.show()
+
     #
-    # #
 
     to_extract_letters = cv2.bitwise_not(to_extract_letters)
 
@@ -124,6 +125,14 @@ def filterSingleCharacter_new(letter_original_and_thersh):
         if area > th_macha_grande:
             empty_square = False
 
+    #
+    # if MyClass.count_letters < 0:
+    #     plt.subplot(1, 3, 1), plt.imshow(letter_original, 'gray'), plt.title('letter_original')
+    #     plt.subplot(1, 3, 2), plt.imshow(centro, 'gray'), plt.title('centro')
+    #     # plt.subplot(1, 3, 3), plt.imshow(letter_no_borders, 'gray'), plt.title('letter_no_borders')
+    #     plt.show()
+    # MyClass.count_letters -= 1
+
     if empty_square:
         imgResult = None
     else:
@@ -149,6 +158,10 @@ def filterSingleCharacter_new(letter_original_and_thersh):
         background = []
         area_th = 5
         centro_vertical = (bottom_right_L[1] + top_left_L[1]) // 2
+
+
+
+
         for label in range(num_labels_sin_bordes):
             if label == 0:  # background
                 continue
@@ -705,7 +718,7 @@ def getBestRectangle(region, default_th=0.5):
             exists_rows[k] = True
 
         for i in maxRows:
-            for a in (range(bestA_calc - 5, bestA_calc + 5)):
+            for a in (range(bestA_calc - 4, bestA_calc + 4)):
                 end_row = i + a
                 if end_row >= 0 and end_row < len(exists_rows) and exists_rows[end_row]:
 
@@ -1014,8 +1027,8 @@ def extractLabelsBySquares(column, sumRows, labels):
     max_ratio = max(ratios)
     min_ratio = min(ratios)
     th = (max_ratio + min_ratio) / 2.0
-    if max_ratio - min_ratio < 0.2:
-        th = 0.9
+    if max_ratio - min_ratio < 0.15:
+        th = 0.8
     if cantRows == 1:
         th = 0.6
 
@@ -1062,7 +1075,7 @@ def extractLabelsBySquaresDocument(column, sumRows, labels):
     max_ratio = max(ratios)
     min_ratio = min(ratios)
     th = (max_ratio + min_ratio) / 2.0
-    if max_ratio - min_ratio < 0.2:
+    if max_ratio - min_ratio < 0.15:
         th = 0.9
     if cantRows == 1:
         th = 0.6
@@ -1274,10 +1287,12 @@ def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
     ROI = ROI_base.copy()
     #
 
-
+    #GG_GG
     ret, If = cv2.threshold(ROI, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     If = cv2.bitwise_not(If)
 
+    If_marks = cv2.adaptiveThreshold(ROI, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 21, 2)
+    If_marks = cv2.bitwise_not(If_marks)
     # PART_NAC = If[26:33, 25:77]
     # cv2.imwrite('resources/PART_NAC.png', PART_NAC)
 
@@ -1315,7 +1330,7 @@ def extractCategory_extractColumnLabelsDocumento(img, TL, BR, cantColumns):
         bot = I_J[0] + 4 + 7
         # print('left:right', left,right)
         # print('top:bot', top, bot)
-        globe = If[top:bot, left:right]
+        globe = If_marks[top:bot, left:right]
         arrayResult.append(globe)
 
     # plt.subplot(2,2,1),plt.imshow(PART_NAC,'gray'), plt.title('PART_NAC')
@@ -1785,8 +1800,8 @@ def extractCharacters(img, TL, BR, count):
         minX = max(0, min(upperLeft[0], bottomLeft[0]) - delta)
         maxX = min(ROI.shape[0], max(upperRight[0], bottomRight[0]) + delta)
 
-        minY = max(0, min(bottomLeft[1], bottomRight[1]) - delta)
-        maxY = min(ROI.shape[1], max(upperLeft[1], upperRight[1]) + delta)
+        minY = max(0, min(bottomLeft[1], bottomRight[1]) - delta*2)
+        maxY = min(ROI.shape[1], max(upperLeft[1], upperRight[1]) + delta*2)
 
         singleCharacter = (ROI[minX:maxX, minY:maxY], (np_mean - 2 * np_stdv))
         letters.append(singleCharacter)
